@@ -14,6 +14,7 @@ class MusicManager: NSObject {
     //var collection: MPMediaItemCollection
     var songList: [MPMediaItem]
     var player: MPMusicPlayerController
+    var shuffleIsOn: Bool
     
     var itemNowPlaying: MPMediaItem? {
         get {
@@ -56,6 +57,7 @@ class MusicManager: NSObject {
         self.songList = [MPMediaItem]()
         self.player = MPMusicPlayerController.systemMusicPlayer()
         self.player.beginGeneratingPlaybackNotifications()
+        self.shuffleIsOn = player.shuffleMode == MPMusicShuffleMode.songs
         super.init()
         self.songList = self.originalSongList
     }

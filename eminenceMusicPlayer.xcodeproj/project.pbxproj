@@ -13,8 +13,6 @@
 		8BB108461D92F39500CD2238 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB108441D92F39500CD2238 /* LaunchScreen.storyboard */; };
 		8BB1084E1D92F3E700CD2238 /* SeekBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1084D1D92F3E700CD2238 /* SeekBar.swift */; };
 		8BB108501D92F3ED00CD2238 /* IconControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1084F1D92F3ED00CD2238 /* IconControl.swift */; };
-		8BB108631D92F4ED00CD2238 /* CalcuLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB108621D92F4E100CD2238 /* CalcuLayout.framework */; };
-		8BB108641D92F4ED00CD2238 /* CalcuLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB108621D92F4E100CD2238 /* CalcuLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8BB1086E1D92FF5100CD2238 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1086D1D92FF5100CD2238 /* MusicManager.swift */; };
 		8BB108731D9302B400CD2238 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB108721D9302B400CD2238 /* MusicViewController.swift */; };
 		8BB108751D9302D600CD2238 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB108741D9302D600CD2238 /* PlaylistsViewController.swift */; };
@@ -31,23 +29,6 @@
 		8BE7446A1D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE744691D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		8BB108611D92F4E100CD2238 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8BB1085D1D92F4E100CD2238 /* CalcuLayout.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8B51D53F1D82A08900167C5F;
-			remoteInfo = CalcuLayout;
-		};
-		8BB108651D92F4ED00CD2238 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8BB1085D1D92F4E100CD2238 /* CalcuLayout.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8B51D53E1D82A08900167C5F;
-			remoteInfo = CalcuLayout;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		8BB108671D92F4ED00CD2238 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -55,7 +36,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8BB108641D92F4ED00CD2238 /* CalcuLayout.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,7 +51,6 @@
 		8BB108471D92F39500CD2238 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BB1084D1D92F3E700CD2238 /* SeekBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBar.swift; sourceTree = "<group>"; };
 		8BB1084F1D92F3ED00CD2238 /* IconControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconControl.swift; sourceTree = "<group>"; };
-		8BB1085D1D92F4E100CD2238 /* CalcuLayout.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CalcuLayout.xcodeproj; path = "magfurulabeer-CalcuLayout-9181f0f/CalcuLayout.xcodeproj"; sourceTree = "<group>"; };
 		8BB1086D1D92FF5100CD2238 /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		8BB108721D9302B400CD2238 /* MusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		8BB108741D9302D600CD2238 /* PlaylistsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
@@ -93,7 +72,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BB108631D92F4ED00CD2238 /* CalcuLayout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +81,6 @@
 		8BB1082D1D92F39400CD2238 = {
 			isa = PBXGroup;
 			children = (
-				8BB1085D1D92F4E100CD2238 /* CalcuLayout.xcodeproj */,
 				8BB108381D92F39400CD2238 /* eminenceMusicPlayer */,
 				8BB108371D92F39400CD2238 /* Products */,
 			);
@@ -129,14 +106,6 @@
 				8BE7446B1D93CC070014DE31 /* Helpers */,
 			);
 			path = eminenceMusicPlayer;
-			sourceTree = "<group>";
-		};
-		8BB1085E1D92F4E100CD2238 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8BB108621D92F4E100CD2238 /* CalcuLayout.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		8BB1086F1D93014C00CD2238 /* UIControls */ = {
@@ -224,7 +193,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				8BB108661D92F4ED00CD2238 /* PBXTargetDependency */,
 			);
 			name = eminenceMusicPlayer;
 			productName = eminenceMusicPlayer;
@@ -259,28 +227,12 @@
 			mainGroup = 8BB1082D1D92F39400CD2238;
 			productRefGroup = 8BB108371D92F39400CD2238 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 8BB1085E1D92F4E100CD2238 /* Products */;
-					ProjectRef = 8BB1085D1D92F4E100CD2238 /* CalcuLayout.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				8BB108351D92F39400CD2238 /* eminenceMusicPlayer */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		8BB108621D92F4E100CD2238 /* CalcuLayout.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CalcuLayout.framework;
-			remoteRef = 8BB108611D92F4E100CD2238 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8BB108341D92F39400CD2238 /* Resources */ = {
@@ -321,14 +273,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		8BB108661D92F4ED00CD2238 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CalcuLayout;
-			targetProxy = 8BB108651D92F4ED00CD2238 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8BB1083F1D92F39400CD2238 /* Main.storyboard */ = {

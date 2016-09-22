@@ -36,6 +36,11 @@ class NowPlayingViewController: UIViewController {
         displayMediaData()
         playButton.isHidden = false
         pauseButton.isHidden = true
+        
+        // Shuffle is turned off whenever a cell is selected to ensure current song was picked
+        // This just turns it back on if needed
+        musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
+        
         displayReplayStatus()
         displayShuffleStatus()
         NotificationCenter.default.addObserver(self, selector: #selector(NowPlayingViewController.displayMediaData), name:NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
