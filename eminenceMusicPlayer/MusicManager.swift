@@ -55,6 +55,7 @@ class MusicManager: NSObject {
     override init() {
         self.songList = [MPMediaItem]()
         self.player = MPMusicPlayerController.systemMusicPlayer()
+        self.player.beginGeneratingPlaybackNotifications()
         super.init()
         self.songList = self.originalSongList
     }

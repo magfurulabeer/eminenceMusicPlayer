@@ -30,13 +30,44 @@ extension NowPlayingViewController {
         timer.invalidate()
     }
 
-    @IBAction func previousButtonTapped(_ sender: UIButton) {
-        musicManager.player.skipToPreviousItem()
-        displayMediaData()
+    @IBAction func repeatButtonTapped(_ sender: UIButton) {
+        let repeatMode = musicManager.player.repeatMode
+        if repeatMode == MPMusicRepeatMode.none {
+            musicManager.player.repeatMode = MPMusicRepeatMode.all
+        } else if repeatMode == MPMusicRepeatMode.all {
+            musicManager.player.repeatMode = MPMusicRepeatMode.one
+        } else if repeatMode == MPMusicRepeatMode.one {
+            musicManager.player.repeatMode = MPMusicRepeatMode.none
+        }
+        displayReplayStatus()
     }
     
-    @IBAction func nextButtonTapped(_ sender: UIButton) {
+    @IBAction func shuffleButtonTapped(_ sender: UIButton) {
+        let shuffleMode = musicManager.player.shuffleMode
+        if shuffleMode == MPMusicShuffleMode.off {
+            musicManager.player.shuffleMode = MPMusicShuffleMode.songs
+        } else {
+            musicManager.player.shuffleMode = MPMusicShuffleMode.off
+        }
+        displayShuffleStatus()
+    }
+    
+    
+    
+    @IBAction func rewindButtonTapped(_ sender: UIButton) {
+        musicManager.player.skipToPreviousItem()
+    }
+    
+    @IBAction func fastForwardButtonTapped(_ sender: UIButton) {
         musicManager.player.skipToNextItem()
-        displayMediaData()
+    }
+    
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
+        timer.invalidate()
+        let duration: Double = (musicManager.itemNowPlaying?.playbackDuration)!
+        let newTime: TimeInterval = Double(sender.value) * duration
+        musicManager.player.currentPlaybackTime = newTime
+        currentTimeLabel.text = musicManager.player.currentPlaybackTime.stringFormat()
+        startTimer()
     }
 }

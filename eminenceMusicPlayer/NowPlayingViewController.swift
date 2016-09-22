@@ -23,6 +23,8 @@ class NowPlayingViewController: UIViewController {
     @IBOutlet weak var controlsStackView: UIStackView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var repeatButton: UIButton!
+    @IBOutlet weak var shuffleButton: UIButton!
     
     var musicManager = MusicManager.sharedManager
     var timer = Timer()
@@ -32,7 +34,10 @@ class NowPlayingViewController: UIViewController {
         displayMediaData()
         playButton.isHidden = false
         pauseButton.isHidden = true
-       
+        displayReplayStatus()
+        displayShuffleStatus()
+        NotificationCenter.default.addObserver(self, selector: #selector(NowPlayingViewController.displayMediaData), name:NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,16 +50,6 @@ class NowPlayingViewController: UIViewController {
             pauseButton.isHidden = true
         }
     }
-    
-    @IBAction func sliderValueChanged(_ sender: UISlider) {
-        timer.invalidate()
-        let duration: Double = (musicManager.itemNowPlaying?.playbackDuration)!
-        let newTime: TimeInterval = Double(sender.value) * duration
-        musicManager.player.currentPlaybackTime = newTime
-        currentTimeLabel.text = musicManager.player.currentPlaybackTime.stringFormat()
-        startTimer()
-    }
-    
     
     func displayMediaData() {
         let song = musicManager.itemNowPlaying
@@ -81,4 +76,41 @@ class NowPlayingViewController: UIViewController {
             }
         })
     }
+    
+    func displayReplayStatus() {
+        func displayRepeatNone() {
+            repeatButton.imageView?.image = #imageLiteral(resourceName: "repeat")
+            repeatButton.setImage(#imageLiteral(resourceName: "repeat"), for: UIControlState.normal)
+            repeatButton.alpha = 0.5
+        }
+        func displayRepeatAll() {
+            repeatButton.alpha = 1
+        }
+        func displayRepeatOne() {
+            repeatButton.imageView?.image = #imageLiteral(resourceName: "repeat1")
+            repeatButton.setImage(#imageLiteral(resourceName: "repeat1"), for: UIControlState.normal)
+        }
+        
+        if musicManager.player.repeatMode == MPMusicRepeatMode.none {
+            displayRepeatNone()
+        } else if musicManager.player.repeatMode == MPMusicRepeatMode.all {
+            displayRepeatAll()
+        } else if musicManager.player.repeatMode == MPMusicRepeatMode.one {
+            displayRepeatOne()
+        }
+    }
+    
+    func displayShuffleStatus() {
+        if musicManager.player.shuffleMode == MPMusicShuffleMode.off {
+            shuffleButton.alpha = 0.5
+        } else if musicManager.player.shuffleMode == MPMusicShuffleMode.songs {
+            shuffleButton.alpha = 1.0
+        } else {
+            print("Shuffle mode is on albums??")
+        }
+    }
+    
+    
+    
+    
 }

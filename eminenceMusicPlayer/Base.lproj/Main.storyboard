@@ -35,6 +35,7 @@
         <!--Now Playing View Controller-->
         <scene sceneID="oH5-xl-sv0">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sK4-HU-uu3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="MBY-PI-pMD" customClass="NowPlayingViewController" customModule="eminenceMusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j1n-ab-ELF"/>
@@ -113,16 +114,22 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="MUJ-Fg-W9a">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MUJ-Fg-W9a">
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhK-e2-bU0">
-                                        <state key="normal" image="previous"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfr-9O-bcU">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="sfr-9O-bcU" secondAttribute="height" multiplier="1:1" id="9hC-df-lUn"/>
+                                        </constraints>
+                                        <state key="normal" image="repeat"/>
                                         <connections>
-                                            <action selector="previousButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="Xb1-bj-5Lj"/>
+                                            <action selector="repeatButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="WQg-rh-MR8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ng-c2-2Iu">
                                         <state key="normal" image="rewind"/>
+                                        <connections>
+                                            <action selector="rewindButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="MR5-Zq-j0R"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rii-ep-KZS">
                                         <state key="normal" image="play"/>
@@ -138,14 +145,24 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBx-Sh-Z0u">
                                         <state key="normal" image="fast-forward"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWE-pE-bn2">
-                                        <state key="normal" image="skip"/>
                                         <connections>
-                                            <action selector="nextButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="Tsq-WD-Ql8"/>
+                                            <action selector="fastForwardButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="9ZJ-ra-zm3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cK8-Qd-OuL">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="cK8-Qd-OuL" secondAttribute="height" multiplier="1:1" id="z2K-kC-UcM"/>
+                                        </constraints>
+                                        <state key="normal" image="shuffle"/>
+                                        <connections>
+                                            <action selector="shuffleButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="KvU-XW-mWn"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="cK8-Qd-OuL" firstAttribute="height" secondItem="gBx-Sh-Z0u" secondAttribute="height" multiplier="0.5" id="HyT-rt-Cjy"/>
+                                    <constraint firstItem="sfr-9O-bcU" firstAttribute="height" secondItem="4ng-c2-2Iu" secondAttribute="height" multiplier="0.5" id="oaC-FZ-sjq"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -187,13 +204,14 @@
                         <outlet property="durationLabel" destination="rXy-mu-yMH" id="cV0-Dz-EAZ"/>
                         <outlet property="pauseButton" destination="27c-bM-vw0" id="CRT-zs-kve"/>
                         <outlet property="playButton" destination="Rii-ep-KZS" id="EI4-sp-IQO"/>
+                        <outlet property="repeatButton" destination="sfr-9O-bcU" id="nMa-9i-uP0"/>
+                        <outlet property="shuffleButton" destination="cK8-Qd-OuL" id="4PQ-VQ-HzY"/>
                         <outlet property="slider" destination="Y1u-4h-xeD" id="fdz-4U-2b6"/>
                         <outlet property="titleLabel" destination="5SP-cS-dHy" id="iaH-L8-W9G"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sK4-HU-uu3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="170" y="81"/>
+            <point key="canvasLocation" x="168.80000000000001" y="80.50974512743629"/>
         </scene>
         <!--Playlists-->
         <scene sceneID="wg7-f3-ORb">
@@ -359,9 +377,9 @@
         <image name="left-arrow" width="38" height="64"/>
         <image name="pause" width="32" height="32"/>
         <image name="play" width="32" height="32"/>
-        <image name="previous" width="32" height="32"/>
+        <image name="repeat" width="32" height="32"/>
         <image name="rewind" width="32" height="32"/>
         <image name="second" width="30" height="30"/>
-        <image name="skip" width="32" height="32"/>
+        <image name="shuffle" width="32" height="32"/>
     </resources>
 </document>
