@@ -20,7 +20,7 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var savedRepeatMode: MPMusicRepeatMode?
     var savedPlayerIsPlaying: MPMusicPlaybackState?
     var quickBar: NowPlayingQuickBar?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
@@ -84,6 +84,8 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func startSamplingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
+        NotificationCenter.default.post(name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)        
+        musicManager.currentlySampling = true
         selectedIndexPath = indexPath
         
         // These will be needed when the touch ends
@@ -122,6 +124,8 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func endSamplingMusic() {
+        musicManager.currentlySampling = false
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidEnd"), object: nil)
         // Return visual to normal
         selectedCell?.backgroundColor = UIColor.clear
         

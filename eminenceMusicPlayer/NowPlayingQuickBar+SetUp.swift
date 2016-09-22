@@ -82,4 +82,17 @@ extension NowPlayingQuickBar {
         pauseButton.centerYAnchor.constraint(equalTo: self.playButton.centerYAnchor).isActive = true
         pauseButton.trailingAnchor.constraint(equalTo: self.playButton.trailingAnchor).isActive = true
     }
+    
+    func setUpBlackOverlay() {
+        blackOverlay.backgroundColor = UIColor.black
+        blackOverlay.alpha = 0
+        
+        addSubview(blackOverlay)
+        
+        blackOverlay.translatesAutoresizingMaskIntoConstraints = false
+        blackOverlay.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        blackOverlay.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        blackOverlay.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        blackOverlay.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
 }

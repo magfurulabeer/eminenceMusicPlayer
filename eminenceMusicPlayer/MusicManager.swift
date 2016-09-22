@@ -11,13 +11,11 @@ import MediaPlayer
 
 class MusicManager: NSObject {
     static let sharedManager = MusicManager()
-    //var collection: MPMediaItemCollection
     var songList: [MPMediaItem]
     var player: MPMusicPlayerController
-    //var sampler: MPMusicPlayerController
     var shuffleIsOn: Bool
-//    var repeatOneIsOn: Bool
     var volume = MPVolumeView().volumeSlider
+    var currentlySampling = false
     var itemNowPlaying: MPMediaItem? {
         get {
             return player.nowPlayingItem
