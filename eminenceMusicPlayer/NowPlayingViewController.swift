@@ -77,6 +77,30 @@ class NowPlayingViewController: UIViewController {
         })
     }
     
+    func startRewindTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
+            print("rewind")
+            var currentTime = self.musicManager.player.currentPlaybackTime
+            let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
+            currentTime = currentTime - 5 < 0 ? 0 : currentTime - 5
+            self.musicManager.player.currentPlaybackTime = currentTime
+            self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
+            self.slider.value = Float(currentTime/duration)
+        })
+    }
+    
+    func startFastForwardTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
+            print("rewind")
+            var currentTime = self.musicManager.player.currentPlaybackTime
+            let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
+            currentTime = currentTime + 5 > duration ? duration : currentTime + 5
+            self.musicManager.player.currentPlaybackTime = currentTime
+            self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
+            self.slider.value = Float(currentTime/duration)
+        })
+    }
+    
     func displayReplayStatus() {
         func displayRepeatNone() {
             repeatButton.imageView?.image = #imageLiteral(resourceName: "repeat")
@@ -107,6 +131,29 @@ class NowPlayingViewController: UIViewController {
             shuffleButton.alpha = 1.0
         } else {
             print("Shuffle mode is on albums??")
+        }
+    }
+    
+    // TODO: DRY the portion of the codes that overlap with the Timer block
+    @IBAction func rewindButtonLongPressed(_ sender: UILongPressGestureRecognizer) {
+        if (sender.state == UIGestureRecognizerState.began) {
+            timer.invalidate()
+            startRewindTimer()
+            timer.fire()
+        } else if (sender.state == UIGestureRecognizerState.ended) {
+            timer.invalidate()
+            startTimer()
+        }
+    }
+    
+    @IBAction func fastForwardButtonLongPressed(_ sender: UILongPressGestureRecognizer) {
+        if (sender.state == UIGestureRecognizerState.began) {
+            timer.invalidate()
+            startFastForwardTimer()
+            timer.fire()
+        } else if (sender.state == UIGestureRecognizerState.ended) {
+            timer.invalidate()
+            startTimer()
         }
     }
     

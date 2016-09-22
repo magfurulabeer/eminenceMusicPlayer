@@ -35,7 +35,6 @@
         <!--Now Playing View Controller-->
         <scene sceneID="oH5-xl-sv0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sK4-HU-uu3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="MBY-PI-pMD" customClass="NowPlayingViewController" customModule="eminenceMusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j1n-ab-ELF"/>
@@ -117,6 +116,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MUJ-Fg-W9a">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfr-9O-bcU">
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="sfr-9O-bcU" secondAttribute="height" multiplier="1:1" id="9hC-df-lUn"/>
                                         </constraints>
@@ -126,9 +126,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ng-c2-2Iu">
+                                        <gestureRecognizers/>
                                         <state key="normal" image="rewind"/>
                                         <connections>
                                             <action selector="rewindButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="MR5-Zq-j0R"/>
+                                            <outletCollection property="gestureRecognizers" destination="CDa-p0-yiN" appends="YES" id="L09-Mu-x1Z"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rii-ep-KZS">
@@ -144,9 +146,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBx-Sh-Z0u">
+                                        <gestureRecognizers/>
                                         <state key="normal" image="fast-forward"/>
                                         <connections>
                                             <action selector="fastForwardButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="9ZJ-ra-zm3"/>
+                                            <outletCollection property="gestureRecognizers" destination="dZc-8H-UXp" appends="YES" id="Fz7-ce-zy5"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cK8-Qd-OuL">
@@ -210,6 +214,17 @@
                         <outlet property="titleLabel" destination="5SP-cS-dHy" id="iaH-L8-W9G"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sK4-HU-uu3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="CDa-p0-yiN">
+                    <connections>
+                        <action selector="rewindButtonLongPressed:" destination="MBY-PI-pMD" id="Pod-6A-guT"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="dZc-8H-UXp">
+                    <connections>
+                        <action selector="fastForwardButtonLongPressed:" destination="MBY-PI-pMD" id="XdB-rQ-xGd"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="168.80000000000001" y="80.50974512743629"/>
         </scene>
