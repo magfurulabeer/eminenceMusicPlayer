@@ -26,6 +26,9 @@
 		8BB108851D932CEC00CD2238 /* SideKick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB108841D932CEC00CD2238 /* SideKick.swift */; };
 		8BB108871D93629100CD2238 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB108861D93629100CD2238 /* NowPlayingViewController.swift */; };
 		8BB108891D936A8000CD2238 /* NowPlayingViewController+IBActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB108881D936A8000CD2238 /* NowPlayingViewController+IBActions.swift */; };
+		8BE744641D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE744631D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift */; };
+		8BE744661D93B9CA0014DE31 /* NowPlayingViewController+DisplayMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE744651D93B9CA0014DE31 /* NowPlayingViewController+DisplayMethods.swift */; };
+		8BE7446A1D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE744691D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +83,9 @@
 		8BB108841D932CEC00CD2238 /* SideKick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideKick.swift; sourceTree = "<group>"; };
 		8BB108861D93629100CD2238 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		8BB108881D936A8000CD2238 /* NowPlayingViewController+IBActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NowPlayingViewController+IBActions.swift"; sourceTree = "<group>"; };
+		8BE744631D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NowPlayingViewController+TimerMethods.swift"; sourceTree = "<group>"; };
+		8BE744651D93B9CA0014DE31 /* NowPlayingViewController+DisplayMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NowPlayingViewController+DisplayMethods.swift"; sourceTree = "<group>"; };
+		8BE744691D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MPVolumeView+SliderAccess.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,13 +121,12 @@
 			isa = PBXGroup;
 			children = (
 				8BB108391D92F39400CD2238 /* AppDelegate.swift */,
-				8BB108841D932CEC00CD2238 /* SideKick.swift */,
 				8BB1086D1D92FF5100CD2238 /* MusicManager.swift */,
 				8BB108711D93016B00CD2238 /* View Controllers */,
 				8BB1086F1D93014C00CD2238 /* UIControls */,
+				8BE7446C1D93CC160014DE31 /* Cells */,
 				8BB108701D93015800CD2238 /* Assets */,
-				8BB1087D1D93084500CD2238 /* BasicSongCell.xib */,
-				8BB108801D93093C00CD2238 /* BasicSongCell.swift */,
+				8BE7446B1D93CC070014DE31 /* Helpers */,
 			);
 			path = eminenceMusicPlayer;
 			sourceTree = "<group>";
@@ -157,15 +162,51 @@
 		8BB108711D93016B00CD2238 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8BB108721D9302B400CD2238 /* MusicViewController.swift */,
-				8BB108821D930C7700CD2238 /* MusicViewController+TableViewDelegateDatasource.swift */,
-				8BB108861D93629100CD2238 /* NowPlayingViewController.swift */,
-				8BB108881D936A8000CD2238 /* NowPlayingViewController+IBActions.swift */,
+				8BE744681D93BA060014DE31 /* MusicViewController */,
+				8BE744671D93B9F60014DE31 /* NowPlayingViewController */,
 				8BB108741D9302D600CD2238 /* PlaylistsViewController.swift */,
 				8BB108761D9302E200CD2238 /* EqualizerViewController.swift */,
 				8BB108781D9302E900CD2238 /* SettingsViewController.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		8BE744671D93B9F60014DE31 /* NowPlayingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8BB108861D93629100CD2238 /* NowPlayingViewController.swift */,
+				8BE744631D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift */,
+				8BE744651D93B9CA0014DE31 /* NowPlayingViewController+DisplayMethods.swift */,
+				8BB108881D936A8000CD2238 /* NowPlayingViewController+IBActions.swift */,
+			);
+			name = NowPlayingViewController;
+			sourceTree = "<group>";
+		};
+		8BE744681D93BA060014DE31 /* MusicViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8BB108721D9302B400CD2238 /* MusicViewController.swift */,
+				8BB108821D930C7700CD2238 /* MusicViewController+TableViewDelegateDatasource.swift */,
+			);
+			name = MusicViewController;
+			sourceTree = "<group>";
+		};
+		8BE7446B1D93CC070014DE31 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8BE744691D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift */,
+				8BB108841D932CEC00CD2238 /* SideKick.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		8BE7446C1D93CC160014DE31 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8BB1087D1D93084500CD2238 /* BasicSongCell.xib */,
+				8BB108801D93093C00CD2238 /* BasicSongCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BE744661D93B9CA0014DE31 /* NowPlayingViewController+DisplayMethods.swift in Sources */,
 				8BB108731D9302B400CD2238 /* MusicViewController.swift in Sources */,
 				8BB1084E1D92F3E700CD2238 /* SeekBar.swift in Sources */,
 				8BB108771D9302E200CD2238 /* EqualizerViewController.swift in Sources */,
@@ -267,7 +309,9 @@
 				8BB108871D93629100CD2238 /* NowPlayingViewController.swift in Sources */,
 				8BB108891D936A8000CD2238 /* NowPlayingViewController+IBActions.swift in Sources */,
 				8BB108831D930C7700CD2238 /* MusicViewController+TableViewDelegateDatasource.swift in Sources */,
+				8BE744641D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift in Sources */,
 				8BB108501D92F3ED00CD2238 /* IconControl.swift in Sources */,
+				8BE7446A1D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift in Sources */,
 				8BB108751D9302D600CD2238 /* PlaylistsViewController.swift in Sources */,
 				8BB1086E1D92FF5100CD2238 /* MusicManager.swift in Sources */,
 				8BB108851D932CEC00CD2238 /* SideKick.swift in Sources */,

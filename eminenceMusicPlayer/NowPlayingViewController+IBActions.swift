@@ -70,4 +70,26 @@ extension NowPlayingViewController {
         currentTimeLabel.text = musicManager.player.currentPlaybackTime.stringFormat()
         startTimer()
     }
+    
+    @IBAction func rewindButtonLongPressed(_ sender: UILongPressGestureRecognizer) {
+        if (sender.state == UIGestureRecognizerState.began) {
+            timer.invalidate()
+            startRewindTimer()
+            timer.fire()
+        } else if (sender.state == UIGestureRecognizerState.ended) {
+            timer.invalidate()
+            startTimer()
+        }
+    }
+    
+    @IBAction func fastForwardButtonLongPressed(_ sender: UILongPressGestureRecognizer) {
+        if (sender.state == UIGestureRecognizerState.began) {
+            timer.invalidate()
+            startFastForwardTimer()
+            timer.fire()
+        } else if (sender.state == UIGestureRecognizerState.ended) {
+            timer.invalidate()
+            startTimer()
+        }
+    }
 }

@@ -28,6 +28,8 @@ class NowPlayingViewController: UIViewController {
     
     var musicManager = MusicManager.sharedManager
     var timer = Timer()
+    var lastLocation: CGPoint = CGPoint(x: 0, y: 0)
+    var volume = MPVolumeView().volumeSlider
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,28 @@ class NowPlayingViewController: UIViewController {
         displayShuffleStatus()
         NotificationCenter.default.addObserver(self, selector: #selector(NowPlayingViewController.displayMediaData), name:NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
         
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(NowPlayingViewController.detectDrag(sender:)))
+        view.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    func detectDrag(sender: UIPanGestureRecognizer) {
+        let translation  = sender.translation(in: view)
+        let distance = lastLocation.y - translation.y
+        var delta = Float(distance / 250)
+        if delta > 0.5 {
+            delta = 0.0
+        }
+        lastLocation = translation
+ 
+        let currentValue = volume.value
+        var newValue = currentValue + delta
+        if newValue > 1.0 {
+            newValue = 1.0
+        } else if newValue < 0.0 {
+            newValue = 0.0
+        }
+        
+        volume.value = newValue
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,113 +75,9 @@ class NowPlayingViewController: UIViewController {
         }
     }
     
-    func displayMediaData() {
-        let song = musicManager.itemNowPlaying
-        print(song?.title)
-        titleLabel.text = song?.title != nil ? song?.title! : "Unnamed"
-        artistLabel.text = song?.artist != nil ? song?.artist! : "Unknown Artist"
-        albumLabel.text = song?.albumTitle != nil ? song?.albumTitle! : "Unnamed Album"
-        durationLabel.text = song?.playbackDuration.stringFormat()
-        if let artwork = song?.artwork {
-            albumImageView.image = artwork.image(at: albumImageView.bounds.size)
-        } else {
-            albumImageView.image = #imageLiteral(resourceName: "NoAlbumImage")
-        }
-        print(song?.title)
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches[touches.startIndex]
+        self.lastLocation = touch.preciseLocation(in: view)
     }
-    
-    func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
-            OperationQueue.main.addOperation {
-                let currentTime: Double = self.musicManager.player.currentPlaybackTime
-                let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
-                self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
-                self.slider.value = Float(currentTime/duration)
-            }
-        })
-    }
-    
-    func startRewindTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
-            print("rewind")
-            var currentTime = self.musicManager.player.currentPlaybackTime
-            let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
-            currentTime = currentTime - 5 < 0 ? 0 : currentTime - 5
-            self.musicManager.player.currentPlaybackTime = currentTime
-            self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
-            self.slider.value = Float(currentTime/duration)
-        })
-    }
-    
-    func startFastForwardTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
-            print("rewind")
-            var currentTime = self.musicManager.player.currentPlaybackTime
-            let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
-            currentTime = currentTime + 5 > duration ? duration : currentTime + 5
-            self.musicManager.player.currentPlaybackTime = currentTime
-            self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
-            self.slider.value = Float(currentTime/duration)
-        })
-    }
-    
-    func displayReplayStatus() {
-        func displayRepeatNone() {
-            repeatButton.imageView?.image = #imageLiteral(resourceName: "repeat")
-            repeatButton.setImage(#imageLiteral(resourceName: "repeat"), for: UIControlState.normal)
-            repeatButton.alpha = 0.5
-        }
-        func displayRepeatAll() {
-            repeatButton.alpha = 1
-        }
-        func displayRepeatOne() {
-            repeatButton.imageView?.image = #imageLiteral(resourceName: "repeat1")
-            repeatButton.setImage(#imageLiteral(resourceName: "repeat1"), for: UIControlState.normal)
-        }
-        
-        if musicManager.player.repeatMode == MPMusicRepeatMode.none {
-            displayRepeatNone()
-        } else if musicManager.player.repeatMode == MPMusicRepeatMode.all {
-            displayRepeatAll()
-        } else if musicManager.player.repeatMode == MPMusicRepeatMode.one {
-            displayRepeatOne()
-        }
-    }
-    
-    func displayShuffleStatus() {
-        if musicManager.player.shuffleMode == MPMusicShuffleMode.off {
-            shuffleButton.alpha = 0.5
-        } else if musicManager.player.shuffleMode == MPMusicShuffleMode.songs {
-            shuffleButton.alpha = 1.0
-        } else {
-            print("Shuffle mode is on albums??")
-        }
-    }
-    
-    // TODO: DRY the portion of the codes that overlap with the Timer block
-    @IBAction func rewindButtonLongPressed(_ sender: UILongPressGestureRecognizer) {
-        if (sender.state == UIGestureRecognizerState.began) {
-            timer.invalidate()
-            startRewindTimer()
-            timer.fire()
-        } else if (sender.state == UIGestureRecognizerState.ended) {
-            timer.invalidate()
-            startTimer()
-        }
-    }
-    
-    @IBAction func fastForwardButtonLongPressed(_ sender: UILongPressGestureRecognizer) {
-        if (sender.state == UIGestureRecognizerState.began) {
-            timer.invalidate()
-            startFastForwardTimer()
-            timer.fire()
-        } else if (sender.state == UIGestureRecognizerState.ended) {
-            timer.invalidate()
-            startTimer()
-        }
-    }
-    
-    
-    
-    
 }

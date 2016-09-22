@@ -9,7 +9,7 @@
 
 
 import UIKit
-
+import MediaPlayer
 
 
 extension TimeInterval {
@@ -25,19 +25,9 @@ extension TimeInterval {
     }
 }
 
-/*
-slider.addTarget(self, action: #selector(self.sliderWasTouched(sender:withEvent:)), for: UIControlEvents.touchDown)
-func sliderWasTouched(sender: UISlider, withEvent event: UIEvent) {
-    print("\n\n\nWAS TOUCHED\n\n\n")
-    //UITouch *touch = [[event allTouches] anyObject];
-    guard let touch = event.allTouches?.first else {
-        return
-    }
-    let touchPoint = touch.preciseLocation(in: sender)
-    slider.value = Float(touchPoint.x / sender.bounds.width)
-}
 
-*/
+
+
 
 
 
