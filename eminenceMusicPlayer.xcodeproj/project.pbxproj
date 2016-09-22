@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B2C54D71D946307005E1481 /* NowPlayingQuickBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C54D61D946307005E1481 /* NowPlayingQuickBar.swift */; };
+		8B2C54D91D94645C005E1481 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C54D81D94645C005E1481 /* Constants.swift */; };
+		8B2C54DB1D94781F005E1481 /* NowPlayingQuickBar+SetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C54DA1D94781F005E1481 /* NowPlayingQuickBar+SetUp.swift */; };
 		8BB1083A1D92F39400CD2238 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB108391D92F39400CD2238 /* AppDelegate.swift */; };
 		8BB108411D92F39400CD2238 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB1083F1D92F39400CD2238 /* Main.storyboard */; };
 		8BB108431D92F39500CD2238 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BB108421D92F39500CD2238 /* Assets.xcassets */; };
@@ -43,6 +46,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B2C54D61D946307005E1481 /* NowPlayingQuickBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayingQuickBar.swift; sourceTree = "<group>"; };
+		8B2C54D81D94645C005E1481 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8B2C54DA1D94781F005E1481 /* NowPlayingQuickBar+SetUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NowPlayingQuickBar+SetUp.swift"; sourceTree = "<group>"; };
 		8BB108361D92F39400CD2238 /* eminenceMusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eminenceMusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB108391D92F39400CD2238 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BB108401D92F39400CD2238 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,6 +110,7 @@
 				8BE7446C1D93CC160014DE31 /* Cells */,
 				8BB108701D93015800CD2238 /* Assets */,
 				8BE7446B1D93CC070014DE31 /* Helpers */,
+				8B2C54D81D94645C005E1481 /* Constants.swift */,
 			);
 			path = eminenceMusicPlayer;
 			sourceTree = "<group>";
@@ -111,6 +118,8 @@
 		8BB1086F1D93014C00CD2238 /* UIControls */ = {
 			isa = PBXGroup;
 			children = (
+				8B2C54D61D946307005E1481 /* NowPlayingQuickBar.swift */,
+				8B2C54DA1D94781F005E1481 /* NowPlayingQuickBar+SetUp.swift */,
 				8BB1084F1D92F3ED00CD2238 /* IconControl.swift */,
 				8BB1084D1D92F3E700CD2238 /* SeekBar.swift */,
 			);
@@ -257,6 +266,7 @@
 				8BB108731D9302B400CD2238 /* MusicViewController.swift in Sources */,
 				8BB1084E1D92F3E700CD2238 /* SeekBar.swift in Sources */,
 				8BB108771D9302E200CD2238 /* EqualizerViewController.swift in Sources */,
+				8B2C54D71D946307005E1481 /* NowPlayingQuickBar.swift in Sources */,
 				8BB1083A1D92F39400CD2238 /* AppDelegate.swift in Sources */,
 				8BB108871D93629100CD2238 /* NowPlayingViewController.swift in Sources */,
 				8BB108891D936A8000CD2238 /* NowPlayingViewController+IBActions.swift in Sources */,
@@ -269,6 +279,8 @@
 				8BB108851D932CEC00CD2238 /* SideKick.swift in Sources */,
 				8BB108791D9302E900CD2238 /* SettingsViewController.swift in Sources */,
 				8BB108811D93093C00CD2238 /* BasicSongCell.swift in Sources */,
+				8B2C54D91D94645C005E1481 /* Constants.swift in Sources */,
+				8B2C54DB1D94781F005E1481 /* NowPlayingQuickBar+SetUp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

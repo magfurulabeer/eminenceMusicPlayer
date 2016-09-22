@@ -19,28 +19,43 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var savedTime: TimeInterval?
     var savedRepeatMode: MPMusicRepeatMode?
     var savedPlayerIsPlaying: MPMusicPlaybackState?
+    var quickBar: NowPlayingQuickBar?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
+        setUpQuickBar()
+        setUpTableView()
+    }
+    
+    func setUpQuickBar() {
+        quickBar = NowPlayingQuickBar(frame: CGRect(x: 0, y: view.frame.height - tabBarHeight - quickBarHeight, width: view.frame.width, height: quickBarHeight))
+        quickBar!.backgroundColor = UIColor.red
+        view.addSubview(quickBar!)
+        quickBar!.translatesAutoresizingMaskIntoConstraints = false
+        quickBar!.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
+        quickBar!.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        quickBar!.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        quickBar!.heightAnchor.constraint(equalToConstant: quickBarHeight).isActive = true
+    }
+    
+    func setUpTableView() {
         tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
-        
-        view.backgroundColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
         view.addSubview(tableView)
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MusicViewController.handleLongPress(sender:)))
+        tableView.addGestureRecognizer(longPressGestureRecognizer)
+        tableView.register(UINib(nibName: "BasicSongCell", bundle: Bundle.main), forCellReuseIdentifier: "BasicCell")
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
-        tableView.register(UINib(nibName: "BasicSongCell", bundle: Bundle.main), forCellReuseIdentifier: "BasicCell")
-        
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MusicViewController.handleLongPress(sender:)))
-        tableView.addGestureRecognizer(longPressGestureRecognizer)
+        //tableView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: quickBar!.topAnchor).isActive = true
+        tableView.reloadData()
     }
-    
     func handleLongPress(sender: UILongPressGestureRecognizer) {
         if sender.state == UIGestureRecognizerState.began {
             // Will be needed at the end
