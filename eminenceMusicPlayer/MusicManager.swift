@@ -17,7 +17,7 @@ class MusicManager: NSObject {
     //var sampler: MPMusicPlayerController
     var shuffleIsOn: Bool
 //    var repeatOneIsOn: Bool
-    
+    var volume = MPVolumeView().volumeSlider
     var itemNowPlaying: MPMediaItem? {
         get {
             return player.nowPlayingItem

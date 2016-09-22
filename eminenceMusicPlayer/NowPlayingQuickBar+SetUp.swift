@@ -32,8 +32,8 @@ extension NowPlayingQuickBar {
         
         songTitleLabel.leadingAnchor.constraint(equalTo: self.albumThumbnail.trailingAnchor, constant: 8).isActive = true
         songTitleLabel.trailingAnchor.constraint(equalTo: self.playButton.leadingAnchor, constant: -8).isActive = true
-        songTitleLabel.centerYAnchor.constraint(equalTo: self.albumThumbnail.centerYAnchor, constant: -5).isActive = true
-        songTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        songTitleLabel.centerYAnchor.constraint(equalTo: self.albumThumbnail.centerYAnchor, constant: -8).isActive = true
+        songTitleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
     }
     
     
@@ -48,7 +48,7 @@ extension NowPlayingQuickBar {
         artistLabel.leadingAnchor.constraint(equalTo: self.songTitleLabel.leadingAnchor).isActive = true
         artistLabel.trailingAnchor.constraint(equalTo: self.songTitleLabel.trailingAnchor).isActive = true
         artistLabel.topAnchor.constraint(equalTo: self.songTitleLabel.bottomAnchor).isActive = true
-        artistLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        artistLabel.heightAnchor.constraint(equalToConstant: 17).isActive = true
     }
     
     func setUpPlayButton() {

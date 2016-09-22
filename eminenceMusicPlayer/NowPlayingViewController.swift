@@ -29,7 +29,11 @@ class NowPlayingViewController: UIViewController {
     var musicManager = MusicManager.sharedManager
     var timer = Timer()
     var lastLocation: CGPoint = CGPoint(x: 0, y: 0)
-    var volume = MPVolumeView().volumeSlider
+    var volume: UISlider {
+        get {
+            return self.musicManager.volume
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

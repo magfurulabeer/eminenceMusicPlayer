@@ -9,7 +9,7 @@
 import UIKit
 import MediaPlayer
 
-class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, QuickBarDelegate {
     
     var musicManager = MusicManager.sharedManager
     var tableView = UITableView()
@@ -26,6 +26,7 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         view.backgroundColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
         setUpQuickBar()
         setUpTableView()
+        quickBar?.delegate = self
     }
     
     func setUpQuickBar() {
@@ -144,6 +145,10 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         selectedIndexPath = nil
         selectedCell = nil
         savedPlayerIsPlaying = nil
+    }
+    
+    func quickBarWasTapped(sender: NowPlayingQuickBar) {
+        performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
     }
     
 
