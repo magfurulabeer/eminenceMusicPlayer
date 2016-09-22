@@ -12,7 +12,7 @@ import MediaPlayer
 extension NowPlayingViewController {
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true) {
-            
+            self.timer.invalidate()
         }
     }
     
