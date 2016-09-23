@@ -26,7 +26,7 @@ class NowPlayingViewController: UIViewController {
     @IBOutlet weak var repeatButton: UIButton!
     @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    
+    @IBOutlet weak var fauxNavBar: UIView!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -49,7 +49,7 @@ class NowPlayingViewController: UIViewController {
         pauseButton.isHidden = true
         view.backgroundColor = UIColor.clear
         setUpGradient()
-        
+        setUpFauxNavBar()
         
         // Shuffle is turned off whenever a cell is selected to ensure current song was picked
         // This just turns it back on if needed
@@ -62,6 +62,32 @@ class NowPlayingViewController: UIViewController {
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(NowPlayingViewController.detectDrag(sender:)))
         view.addGestureRecognizer(panGestureRecognizer)
     }
+    
+    func setUpFauxNavBar() {
+        fauxNavBar.layer.shadowColor = UIColor.black.cgColor
+        fauxNavBar.layer.shadowOpacity = 1
+        fauxNavBar.layer.shadowOffset = CGSize.zero
+        fauxNavBar.layer.shadowRadius = 10
+        let rect = CGRect(x: 0, y: 0, width: view.frame.width, height: FauxBarHeight)
+        fauxNavBar.layer.shadowPath = UIBezierPath(rect: rect).cgPath
+        
+        let border = UIView()
+        border.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        fauxNavBar.addSubview(border)
+        border.translatesAutoresizingMaskIntoConstraints = false
+        border.bottomAnchor.constraint(equalTo: fauxNavBar.bottomAnchor).isActive = true
+        border.leadingAnchor.constraint(equalTo: fauxNavBar.leadingAnchor).isActive = true
+        border.trailingAnchor.constraint(equalTo: fauxNavBar.trailingAnchor).isActive = true
+        border.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
+    
+   
+    /*
+    func setUpTopBorder() {
+     
+     
+    }
+ */
     
     func setUpGradient() {
         

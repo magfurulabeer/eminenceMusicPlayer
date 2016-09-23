@@ -223,6 +223,7 @@
                         <outlet property="controlsStackView" destination="MUJ-Fg-W9a" id="HJc-HE-MfI"/>
                         <outlet property="currentTimeLabel" destination="CBu-Sm-xwh" id="Ckr-cs-cKs"/>
                         <outlet property="durationLabel" destination="rXy-mu-yMH" id="cV0-Dz-EAZ"/>
+                        <outlet property="fauxNavBar" destination="19O-rb-Wtx" id="sx4-0f-SFX"/>
                         <outlet property="pauseButton" destination="27c-bM-vw0" id="CRT-zs-kve"/>
                         <outlet property="playButton" destination="Rii-ep-KZS" id="EI4-sp-IQO"/>
                         <outlet property="repeatButton" destination="sfr-9O-bcU" id="nMa-9i-uP0"/>
