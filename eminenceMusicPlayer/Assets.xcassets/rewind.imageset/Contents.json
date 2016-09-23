@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "rewind.png",
+      "filename" : "rewind@2x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "rewind@2x.png",
       "scale" : "2x"
     },
     {

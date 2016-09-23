@@ -119,14 +119,19 @@
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="sfr-9O-bcU" secondAttribute="height" multiplier="1:1" id="9hC-df-lUn"/>
+                                            <constraint firstAttribute="width" constant="20" id="oES-HA-W2o"/>
                                         </constraints>
                                         <state key="normal" image="repeat"/>
                                         <connections>
                                             <action selector="repeatButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="WQg-rh-MR8"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ng-c2-2Iu">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ng-c2-2Iu">
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="2yq-a5-Qql"/>
+                                            <constraint firstAttribute="height" constant="50" id="ff6-du-n4D"/>
+                                        </constraints>
                                         <state key="normal" image="rewind"/>
                                         <connections>
                                             <action selector="rewindButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="MR5-Zq-j0R"/>
@@ -134,19 +139,31 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rii-ep-KZS">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="QO9-j3-zpE"/>
+                                            <constraint firstAttribute="width" secondItem="Rii-ep-KZS" secondAttribute="height" multiplier="1:1" id="Xkq-U1-aFW"/>
+                                        </constraints>
                                         <state key="normal" image="play"/>
                                         <connections>
                                             <action selector="playButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="NJX-y3-rbf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27c-bM-vw0">
-                                        <state key="normal" image="pause"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="4L3-U9-jHP"/>
+                                            <constraint firstAttribute="height" constant="50" id="AVm-sl-wQe"/>
+                                        </constraints>
+                                        <state key="normal" image="play"/>
                                         <connections>
                                             <action selector="pauseButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="aS8-do-1P8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBx-Sh-Z0u">
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="BIH-j1-N0f"/>
+                                            <constraint firstAttribute="height" constant="50" id="mQb-eU-ccr"/>
+                                        </constraints>
                                         <state key="normal" image="fast-forward"/>
                                         <connections>
                                             <action selector="fastForwardButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="9ZJ-ra-zm3"/>
@@ -155,6 +172,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cK8-Qd-OuL">
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="jsV-UC-wsg"/>
                                             <constraint firstAttribute="width" secondItem="cK8-Qd-OuL" secondAttribute="height" multiplier="1:1" id="z2K-kC-UcM"/>
                                         </constraints>
                                         <state key="normal" image="shuffle"/>
@@ -164,32 +182,30 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="cK8-Qd-OuL" firstAttribute="height" secondItem="gBx-Sh-Z0u" secondAttribute="height" multiplier="0.5" id="HyT-rt-Cjy"/>
-                                    <constraint firstItem="sfr-9O-bcU" firstAttribute="height" secondItem="4ng-c2-2Iu" secondAttribute="height" multiplier="0.5" id="oaC-FZ-sjq"/>
+                                    <constraint firstAttribute="height" constant="60" id="9ko-QR-G3E"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Y1u-4h-xeD" firstAttribute="top" secondItem="dnj-vV-YH6" secondAttribute="bottom" constant="8" id="0JN-WB-gFQ"/>
+                            <constraint firstItem="MUJ-Fg-W9a" firstAttribute="leading" secondItem="CCG-JH-dLr" secondAttribute="leading" id="1q5-Ry-1Le"/>
                             <constraint firstItem="rXy-mu-yMH" firstAttribute="centerY" secondItem="CBu-Sm-xwh" secondAttribute="centerY" id="2NN-sI-nwy"/>
+                            <constraint firstItem="MUJ-Fg-W9a" firstAttribute="width" secondItem="CCG-JH-dLr" secondAttribute="width" id="86L-Di-6Yo"/>
                             <constraint firstItem="rXy-mu-yMH" firstAttribute="trailing" secondItem="CCG-JH-dLr" secondAttribute="trailing" id="CLY-Bc-S8p"/>
                             <constraint firstItem="tba-eC-4ot" firstAttribute="trailing" secondItem="5SP-cS-dHy" secondAttribute="trailing" id="CMT-8R-WQl"/>
                             <constraint firstItem="Y1u-4h-xeD" firstAttribute="centerX" secondItem="5SP-cS-dHy" secondAttribute="centerX" id="EJk-bQ-dKv"/>
                             <constraint firstAttribute="trailing" secondItem="19O-rb-Wtx" secondAttribute="trailing" id="FaE-PH-MMr"/>
                             <constraint firstItem="Y1u-4h-xeD" firstAttribute="width" secondItem="5SP-cS-dHy" secondAttribute="width" id="MA2-SA-dBP"/>
                             <constraint firstItem="CBu-Sm-xwh" firstAttribute="top" secondItem="Y1u-4h-xeD" secondAttribute="bottom" constant="-5" id="MCj-EC-iVz"/>
-                            <constraint firstItem="MUJ-Fg-W9a" firstAttribute="width" secondItem="CCG-JH-dLr" secondAttribute="width" id="NBa-a5-hsp"/>
                             <constraint firstItem="dnj-vV-YH6" firstAttribute="leading" secondItem="tba-eC-4ot" secondAttribute="leading" id="Rxx-kK-jsg"/>
                             <constraint firstItem="dnj-vV-YH6" firstAttribute="top" secondItem="tba-eC-4ot" secondAttribute="bottom" constant="-1" id="URX-wy-N4I"/>
                             <constraint firstItem="19O-rb-Wtx" firstAttribute="leading" secondItem="ZW6-gF-jC8" secondAttribute="leading" id="Vtc-h8-TI9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5SP-cS-dHy" secondAttribute="trailing" constant="-7" id="WlJ-5S-rZG"/>
                             <constraint firstItem="dnj-vV-YH6" firstAttribute="trailing" secondItem="tba-eC-4ot" secondAttribute="trailing" id="YI8-29-Mis"/>
                             <constraint firstItem="19O-rb-Wtx" firstAttribute="top" secondItem="ZW6-gF-jC8" secondAttribute="top" id="YV9-Eo-KTl"/>
-                            <constraint firstItem="MUJ-Fg-W9a" firstAttribute="height" secondItem="CCG-JH-dLr" secondAttribute="height" multiplier="0.1:1" id="cCF-JD-vu0"/>
                             <constraint firstItem="tba-eC-4ot" firstAttribute="leading" secondItem="5SP-cS-dHy" secondAttribute="leading" id="eBI-R9-Db1"/>
                             <constraint firstItem="tba-eC-4ot" firstAttribute="top" secondItem="5SP-cS-dHy" secondAttribute="bottom" constant="-2" id="fEC-HE-idL"/>
-                            <constraint firstItem="MUJ-Fg-W9a" firstAttribute="leading" secondItem="CCG-JH-dLr" secondAttribute="leading" id="frz-LT-tP1"/>
                             <constraint firstAttribute="leadingMargin" secondItem="5SP-cS-dHy" secondAttribute="leading" id="i4c-bY-4a3"/>
                             <constraint firstItem="5SP-cS-dHy" firstAttribute="top" secondItem="CCG-JH-dLr" secondAttribute="bottom" constant="8" id="lvj-vW-tS6"/>
                             <constraint firstItem="CCG-JH-dLr" firstAttribute="centerX" secondItem="ZW6-gF-jC8" secondAttribute="centerX" id="mkB-2Q-ye5"/>
@@ -388,13 +404,12 @@
     </scenes>
     <resources>
         <image name="NoAlbumImage" width="500" height="500"/>
-        <image name="fast-forward" width="32" height="32"/>
+        <image name="fast-forward" width="64" height="64"/>
         <image name="first" width="30" height="30"/>
         <image name="left-arrow" width="38" height="64"/>
-        <image name="pause" width="32" height="32"/>
-        <image name="play" width="32" height="32"/>
+        <image name="play" width="64" height="64"/>
         <image name="repeat" width="32" height="32"/>
-        <image name="rewind" width="32" height="32"/>
+        <image name="rewind" width="64" height="64"/>
         <image name="second" width="30" height="30"/>
         <image name="shuffle" width="32" height="32"/>
     </resources>
