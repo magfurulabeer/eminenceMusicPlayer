@@ -61,6 +61,14 @@ class NowPlayingViewController: UIViewController {
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(NowPlayingViewController.detectDrag(sender:)))
         view.addGestureRecognizer(panGestureRecognizer)
+        
+        albumImageView.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
+        albumImageView.layer.borderWidth = 1
+        albumImageView.layer.shadowColor = UIColor.black.cgColor
+        albumImageView.layer.shadowOpacity = 1
+        albumImageView.layer.shadowOffset = CGSize.zero
+        albumImageView.layer.shadowRadius = 10
+        albumImageView.layer.shadowPath = UIBezierPath(rect: albumImageView.bounds).cgPath
     }
     
     func setUpFauxNavBar() {
