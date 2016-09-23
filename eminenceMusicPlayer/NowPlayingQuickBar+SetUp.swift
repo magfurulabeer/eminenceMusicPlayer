@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreGraphics
 
 extension NowPlayingQuickBar {
     func setUpAlbumThumbnail() {
@@ -94,5 +95,38 @@ extension NowPlayingQuickBar {
         blackOverlay.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         blackOverlay.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         blackOverlay.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
+    
+    func setUpGradient() {
+        let gradient = CAGradientLayer()
+        let startColor = UIColor(red: 73/255.0, green: 68/255.0, blue: 78/255.0, alpha: 1)
+//        let endColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
+        let endColor = UIColor(red: 54/255.0, green: 49/255.0, blue: 58/255.0, alpha: 1.0)
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        gradient.frame = frame
+        let points = (CGPoint(x: 0.5, y: 0), CGPoint(x: 0.5, y: 1))
+        gradient.startPoint = points.0
+        gradient.endPoint = points.1
+        layer.addSublayer(gradient)
+        gradient.zPosition = 5
+    }
+    
+    func setUpShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 1
+        layer.shadowOffset = CGSize.zero
+        layer.shadowRadius = 10
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+//        layer.shouldRasterize = true
+    }
+    
+    func setUpTopBorder() {
+        border.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        addSubview(border)
+        border.translatesAutoresizingMaskIntoConstraints = false
+        border.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        border.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        border.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        border.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
 }

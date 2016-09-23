@@ -15,6 +15,7 @@ protocol QuickBarDelegate {
 let timerInterval = 0.01
 class NowPlayingQuickBar: UIView {
 
+    var border = UIView()
     var musicManager = MusicManager.sharedManager
     var delegate: QuickBarDelegate?
     var albumThumbnail = UIImageView()
@@ -35,14 +36,13 @@ class NowPlayingQuickBar: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setUpAlbumThumbnail()
         setUpPlayButton()
         setUpPauseButton()
         setUpSongTitleLabel()
         setUpArtistLabel()
         setUpBlackOverlay()
-        
+//        setUpGradient()
         displayPlaybackButton()
 
         NotificationCenter.default.addObserver(self, selector: #selector(NowPlayingQuickBar.displayNowPlayingItemChanged), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
@@ -58,6 +58,9 @@ class NowPlayingQuickBar: UIView {
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(NowPlayingQuickBar.detectDrag(sender:)))
         addGestureRecognizer(panGestureRecognizer)
+        
+        setUpShadow()
+        setUpTopBorder()
     }
 
     
