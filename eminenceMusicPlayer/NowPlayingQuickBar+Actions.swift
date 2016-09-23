@@ -30,7 +30,6 @@ extension NowPlayingQuickBar {
         let translation  = sender.translation(in: self)
         let distance =  translation.x - lastLocation.x
         var delta = Float(distance / 250)
-        print(delta)
         if (delta > 0.1 || delta < -0.1) && initialDragBumpOver == false {
             initialDragBumpOver = true
             delta = 0.0
@@ -49,7 +48,6 @@ extension NowPlayingQuickBar {
     }
     
     func didTap(sender: UITapGestureRecognizer) {
-        print("tap")
         delegate?.quickBarWasTapped(sender: self)
     }
     

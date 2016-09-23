@@ -14,6 +14,8 @@ class OpenTabBarController: UITabBarController {
     var blackOverlay = UIView()
     var fadeTimer = Timer()
     var fadeAnimator = UIViewPropertyAnimator()
+    let deselectedColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
+    let selectedColor = UIColor.white.withAlphaComponent(0.8)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +23,10 @@ class OpenTabBarController: UITabBarController {
         self.tabBar.backgroundColor = QuickBarBackgroundColor
         self.tabBar.shadowImage = UIImage()
         self.tabBar.layer.zPosition = 0
+        self.tabBar.tintColor = UIColor.blue
         UITabBar.appearance().barTintColor = QuickBarBackgroundColor
         UITabBar.appearance().tintColor = UIColor.white
+        
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(OpenTabBarController.fadeOut), name: NSNotification.Name(rawValue: "SamplingDidBegin"), object: nil)
@@ -72,7 +76,6 @@ class OpenTabBarController: UITabBarController {
         fadeTimer = Timer.scheduledTimer(withTimeInterval: timerInterval, repeats: true, block: { (timer) in
             OperationQueue.main.addOperation {
                 self.fadeAnimator.fractionComplete += 0.05//CGFloat(timerInterval)
-                print("\(self.fadeAnimator.fractionComplete)")
                 if self.fadeAnimator.fractionComplete >= 0.99 {
                     
                     self.fadeTimer.invalidate()

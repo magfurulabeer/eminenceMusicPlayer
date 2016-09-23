@@ -24,9 +24,16 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var savedPlayerIsPlaying: MPMusicPlaybackState?
     var quickBar: NowPlayingQuickBar?
 
+    let menuBar: MenuBar = {
+        let mb = MenuBar()
+        mb.translatesAutoresizingMaskIntoConstraints = false
+        return mb
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clear
+        setUpMenuBar()
         setUpQuickBar()
         setUpTableView()
         quickBar?.delegate = self
@@ -73,6 +80,31 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        quickBar?.layer.zPosition = 9999
     }
     
+    func setUpMenuBar() {
+        view.addSubview(menuBar)
+        menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        menuBar.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        menuBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        menuBar.backgroundColor = QuickBarBackgroundColor
+        
+        menuBar.layer.shadowColor = UIColor.black.cgColor
+        menuBar.layer.shadowOpacity = 1
+        menuBar.layer.shadowOffset = CGSize.zero
+        menuBar.layer.shadowRadius = 10
+        let rect = CGRect(x: 0, y: 0, width: view.frame.width, height: 70)
+        menuBar.layer.shadowPath = UIBezierPath(rect: rect).cgPath
+        
+        let border = UIView()
+        border.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        menuBar.addSubview(border)
+        border.translatesAutoresizingMaskIntoConstraints = false
+        border.bottomAnchor.constraint(equalTo: menuBar.bottomAnchor).isActive = true
+        border.leadingAnchor.constraint(equalTo: menuBar.leadingAnchor).isActive = true
+        border.trailingAnchor.constraint(equalTo: menuBar.trailingAnchor).isActive = true
+        border.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
+    
     func setUpTableView() {
         tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
@@ -83,7 +115,8 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.register(UINib(nibName: "BasicSongCell", bundle: Bundle.main), forCellReuseIdentifier: "BasicCell")
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: menuBar.bottomAnchor).isActive = true
+//        tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         //tableView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true

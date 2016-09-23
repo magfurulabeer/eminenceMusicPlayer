@@ -12,7 +12,6 @@ import MediaPlayer
 extension NowPlayingViewController {
     func displayMediaData() {
         let song = musicManager.itemNowPlaying
-        print(song?.title)
         titleLabel.text = song?.title != nil ? song?.title! : "Unnamed"
         artistLabel.text = song?.artist != nil ? song?.artist! : "Unknown Artist"
         albumLabel.text = song?.albumTitle != nil ? song?.albumTitle! : "Unnamed Album"
@@ -22,7 +21,6 @@ extension NowPlayingViewController {
         } else {
             albumImageView.image = #imageLiteral(resourceName: "NoAlbumImage")
         }
-        print(song?.title)
     }
     
     func displayReplayStatus() {

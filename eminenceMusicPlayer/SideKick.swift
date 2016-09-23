@@ -25,6 +25,11 @@ extension TimeInterval {
     }
 }
 
+extension UIView {
+//    func addConstraints(withFormat format: String, view: UIView) {
+//        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions, metrics: nil, views: ["v" : view]))
+//    }
+}
 
 
 
