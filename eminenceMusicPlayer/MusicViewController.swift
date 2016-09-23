@@ -31,6 +31,7 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         setUpTableView()
         quickBar?.delegate = self
         setUpGradient()
+        
     }
     
     func setUpGradient() {
@@ -51,13 +52,14 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func setUpQuickBar() {
         quickBar = NowPlayingQuickBar(frame: CGRect(x: 0, y: view.frame.height - tabBarHeight - quickBarHeight, width: view.frame.width, height: quickBarHeight))
-        quickBar!.backgroundColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
+        quickBar!.backgroundColor = QuickBarBackgroundColor // UIColor.red.withAlphaComponent(0.5)
         view.addSubview(quickBar!)
         quickBar!.translatesAutoresizingMaskIntoConstraints = false
         quickBar!.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
         quickBar!.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         quickBar!.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         quickBar!.heightAnchor.constraint(equalToConstant: quickBarHeight).isActive = true
+//        quickBar?.layer.zPosition = 9999
     }
     
     func setUpTableView() {
