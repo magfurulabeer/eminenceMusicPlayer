@@ -12,6 +12,7 @@ import MediaPlayer
 protocol QuickBarDelegate {
     func quickBarWasTapped(sender: NowPlayingQuickBar)
 }
+
 let timerInterval = 0.01
 class NowPlayingQuickBar: UIView {
 
@@ -33,9 +34,6 @@ class NowPlayingQuickBar: UIView {
             return self.musicManager.volume
         }
     }
-    var fadeTimer = Timer()
-    var fadeAnimator = UIViewPropertyAnimator()
-    var blackOverlay = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,15 +42,12 @@ class NowPlayingQuickBar: UIView {
         setUpPauseButton()
         setUpSongTitleLabel()
         setUpArtistLabel()
-        setUpBlackOverlay()
 //        setUpGradient()
         displayPlaybackButton()
 
         NotificationCenter.default.addObserver(self, selector: #selector(NowPlayingQuickBar.displayNowPlayingItemChanged), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(NowPlayingQuickBar.displayPlaybackButton), name:NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(NowPlayingQuickBar.fadeIn), name: NSNotification.Name(rawValue: "SamplingDidEnd"), object: nil)
 
         isUserInteractionEnabled = true
 
@@ -83,8 +78,6 @@ class NowPlayingQuickBar: UIView {
                 playButton.isHidden = false
                 pauseButton.isHidden = true
             }
-        } else {
-            fadeOut()
         }
     }
 

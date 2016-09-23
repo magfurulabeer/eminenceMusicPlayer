@@ -118,7 +118,7 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func startSamplingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
-        NotificationCenter.default.post(name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidBegin"), object: nil)
         musicManager.currentlySampling = true
         selectedIndexPath = indexPath
         

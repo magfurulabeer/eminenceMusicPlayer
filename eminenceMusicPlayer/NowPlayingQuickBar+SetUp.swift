@@ -83,19 +83,6 @@ extension NowPlayingQuickBar {
         pauseButton.trailingAnchor.constraint(equalTo: self.playButton.trailingAnchor).isActive = true
     }
     
-    func setUpBlackOverlay() {
-        blackOverlay.backgroundColor = UIColor.black
-        blackOverlay.alpha = 0
-        
-        addSubview(blackOverlay)
-        
-        blackOverlay.translatesAutoresizingMaskIntoConstraints = false
-        blackOverlay.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        blackOverlay.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        blackOverlay.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        blackOverlay.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-    }
-    
     func setUpGradient() {
         let gradient = CAGradientLayer()
         let startColor = UIColor(red: 73/255.0, green: 68/255.0, blue: 78/255.0, alpha: 1)
