@@ -26,7 +26,6 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.backgroundColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
         view.backgroundColor = UIColor.clear
         setUpQuickBar()
         setUpTableView()
@@ -36,11 +35,14 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func setUpGradient() {
         let gradient = CAGradientLayer()
-        let startColor = UIColor(red: 47/255.0, green: 49/255.0, blue: 60/255.0, alpha: 1)
-        let endColor = UIColor(red: 75/255.0, green: 47/255.0, blue: 51/255.0, alpha: 1)
+//        let startColor = UIColor(red: 155/255.0, green: 107/255.0, blue: 98/255.0, alpha: 1)
+//        let endColor = UIColor(red: 75/255.0, green: 47/255.0, blue: 51/255.0, alpha: 1)
+//        let endColor = UIColor(red: 51/255.0, green: 32/255.0, blue: 35/255.0, alpha: 1)
+        let startColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
+        let endColor = UIColor(red: 54/255.0, green: 49/255.0, blue: 58/255.0, alpha: 1)
         gradient.colors = [startColor.cgColor, endColor.cgColor]
         gradient.frame = self.view.frame
-        let points = (CGPoint(x: 1, y: 1), CGPoint(x: 0, y: 0))
+        let points = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 1))
         gradient.startPoint = points.0
         gradient.endPoint = points.1
         view.layer.addSublayer(gradient)
@@ -49,7 +51,7 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func setUpQuickBar() {
         quickBar = NowPlayingQuickBar(frame: CGRect(x: 0, y: view.frame.height - tabBarHeight - quickBarHeight, width: view.frame.width, height: quickBarHeight))
-        quickBar!.backgroundColor = UIColor.red
+        quickBar!.backgroundColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
         view.addSubview(quickBar!)
         quickBar!.translatesAutoresizingMaskIntoConstraints = false
         quickBar!.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
