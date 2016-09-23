@@ -26,6 +26,9 @@ class NowPlayingViewController: UIViewController {
     @IBOutlet weak var repeatButton: UIButton!
     @IBOutlet weak var shuffleButton: UIButton!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     var musicManager = MusicManager.sharedManager
     var timer = Timer()
     var lastLocation: CGPoint = CGPoint(x: 0, y: 0)
@@ -40,6 +43,8 @@ class NowPlayingViewController: UIViewController {
         displayMediaData()
         playButton.isHidden = false
         pauseButton.isHidden = true
+        view.backgroundColor = UIColor.clear
+        setUpGradient()
         
         // Shuffle is turned off whenever a cell is selected to ensure current song was picked
         // This just turns it back on if needed
@@ -51,6 +56,20 @@ class NowPlayingViewController: UIViewController {
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(NowPlayingViewController.detectDrag(sender:)))
         view.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    func setUpGradient() {
+        
+        let gradient = CAGradientLayer()
+        let startColor = UIColor(red: 47/255.0, green: 49/255.0, blue: 60/255.0, alpha: 1)
+        let endColor = UIColor(red: 75/255.0, green: 47/255.0, blue: 51/255.0, alpha: 1)
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        gradient.frame = self.view.frame
+        let points = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 1))
+        gradient.startPoint = points.0
+        gradient.endPoint = points.1
+        view.layer.addSublayer(gradient)
+        gradient.zPosition = -5
     }
     
     func detectDrag(sender: UIPanGestureRecognizer) {

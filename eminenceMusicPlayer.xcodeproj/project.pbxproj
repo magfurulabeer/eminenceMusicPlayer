@@ -110,7 +110,6 @@
 				8BE7446C1D93CC160014DE31 /* Cells */,
 				8BB108701D93015800CD2238 /* Assets */,
 				8BE7446B1D93CC070014DE31 /* Helpers */,
-				8B2C54D81D94645C005E1481 /* Constants.swift */,
 			);
 			path = eminenceMusicPlayer;
 			sourceTree = "<group>";
@@ -172,6 +171,7 @@
 		8BE7446B1D93CC070014DE31 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				8B2C54D81D94645C005E1481 /* Constants.swift */,
 				8BE744691D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift */,
 				8BB108841D932CEC00CD2238 /* SideKick.swift */,
 			);

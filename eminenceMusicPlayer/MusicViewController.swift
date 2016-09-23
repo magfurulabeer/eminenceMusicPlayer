@@ -11,6 +11,9 @@ import MediaPlayer
 
 class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, QuickBarDelegate {
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     var musicManager = MusicManager.sharedManager
     var tableView = UITableView()
     var selectedCell: UITableViewCell?
@@ -23,10 +26,25 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
+        //view.backgroundColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
+        view.backgroundColor = UIColor.clear
         setUpQuickBar()
         setUpTableView()
         quickBar?.delegate = self
+        setUpGradient()
+    }
+    
+    func setUpGradient() {
+        let gradient = CAGradientLayer()
+        let startColor = UIColor(red: 47/255.0, green: 49/255.0, blue: 60/255.0, alpha: 1)
+        let endColor = UIColor(red: 75/255.0, green: 47/255.0, blue: 51/255.0, alpha: 1)
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        gradient.frame = self.view.frame
+        let points = (CGPoint(x: 1, y: 1), CGPoint(x: 0, y: 0))
+        gradient.startPoint = points.0
+        gradient.endPoint = points.1
+        view.layer.addSublayer(gradient)
+        gradient.zPosition = -5
     }
     
     func setUpQuickBar() {
@@ -73,6 +91,7 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if indexPath != selectedIndexPath {
                 musicManager.player.pause()
                 selectedCell?.backgroundColor = UIColor.clear
+                selectedCell?.contentView.backgroundColor = UIColor.clear
                 startSamplingMusic(atIndexPath: indexPath)
             }
         }
@@ -155,5 +174,5 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
     }
     
-
+    
 }
