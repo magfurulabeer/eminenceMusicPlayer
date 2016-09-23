@@ -25,6 +25,9 @@ class NowPlayingQuickBar: UIView {
     var pauseButton = UIButton(type: UIButtonType.custom)
     var lastLocation: CGPoint = CGPoint(x: 0, y: 0)
     var initialDragBumpOver = false
+    var fullHeightConstraint = NSLayoutConstraint()
+    var zeroHeightConstraint = NSLayoutConstraint()
+    
     var volume: UISlider {
         get {
             return self.musicManager.volume
@@ -61,6 +64,9 @@ class NowPlayingQuickBar: UIView {
         
         setUpShadow()
         setUpTopBorder()
+        
+        fullHeightConstraint = heightAnchor.constraint(equalToConstant: quickBarHeight)
+        zeroHeightConstraint = heightAnchor.constraint(equalToConstant: 0)
     }
 
     
@@ -90,84 +96,8 @@ class NowPlayingQuickBar: UIView {
         }
     }
     
-    func playButtonTapped(sender: UIButton) {
-        if musicManager.currentlySampling == false {
-            musicManager.player.play()
-        }
-    }
-    
-    func pauseButtonTapped(sender: UIButton) {
-        if musicManager.currentlySampling == false {
-            musicManager.player.pause()
-        }
-    }
-    
-    func detectDrag(sender: UIPanGestureRecognizer) {
-        if sender.state == UIGestureRecognizerState.ended {
-            initialDragBumpOver = false
-            return
-        }
-        
-        let translation  = sender.translation(in: self)
-        let distance =  translation.x - lastLocation.x
-        var delta = Float(distance / 250)
-        print(delta)
-        if (delta > 0.1 || delta < -0.1) && initialDragBumpOver == false {
-            initialDragBumpOver = true
-            delta = 0.0
-        }
-        lastLocation = translation
-        
-        let currentValue = volume.value
-        var newValue = currentValue + delta
-        if newValue > 1.0 {
-            newValue = 1.0
-        } else if newValue < 0.0 {
-            newValue = 0.0
-        }
-        
-        volume.value = newValue
-    }
-    
-    func didTap(sender: UITapGestureRecognizer) {
-        print("tap")
-        delegate?.quickBarWasTapped(sender: self)
-    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches[touches.startIndex]
         self.lastLocation = touch.preciseLocation(in: self)
     }
-    
-    func fadeOut() {
-        fadeTimer.invalidate()
-        let duration = fadeAnimator.fractionComplete
-        fadeAnimator = UIViewPropertyAnimator(duration: TimeInterval(duration), curve: .easeOut) {
-            self.blackOverlay.alpha = 0.3
-        }
-        fadeTimer = Timer.scheduledTimer(withTimeInterval: timerInterval, repeats: true, block: { (timer) in
-            OperationQueue.main.addOperation {
-                self.fadeAnimator.fractionComplete += 0.05 //CGFloat(timerInterval)
-                if self.fadeAnimator.fractionComplete == 1.0 {
-                    self.fadeTimer.invalidate()
-                }
-            }
-        })
-    }
-    
-    func fadeIn() {
-        fadeTimer.invalidate()
-        let duration = fadeAnimator.fractionComplete
-        fadeAnimator = UIViewPropertyAnimator(duration: TimeInterval(duration), curve: .easeOut) {
-            self.blackOverlay.alpha = 0.0
-        }
-        fadeTimer = Timer.scheduledTimer(withTimeInterval: timerInterval, repeats: true, block: { (timer) in
-            OperationQueue.main.addOperation {
-                self.fadeAnimator.fractionComplete += 0.05//CGFloat(timerInterval)
-                if self.fadeAnimator.fractionComplete == 1.0 {
-                    self.fadeTimer.invalidate()
-                }
-            }
-        })
-    }
-    
 }

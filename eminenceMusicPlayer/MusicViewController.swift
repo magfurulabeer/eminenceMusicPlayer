@@ -31,7 +31,17 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         setUpTableView()
         quickBar?.delegate = self
         setUpGradient()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if musicManager.itemNowPlaying == nil {
+            quickBar?.fullHeightConstraint.isActive = false
+            quickBar?.zeroHeightConstraint.isActive = true
+            view.layoutIfNeeded()
+        } else {
+            quickBar?.fullHeightConstraint.isActive = true
+            quickBar?.zeroHeightConstraint.isActive = false
+        }
     }
     
     func setUpGradient() {
@@ -58,7 +68,8 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         quickBar!.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
         quickBar!.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         quickBar!.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        quickBar!.heightAnchor.constraint(equalToConstant: quickBarHeight).isActive = true
+        quickBar!.fullHeightConstraint.isActive = true
+//        quickBar!.heightAnchor.constraint(equalToConstant: quickBarHeight).isActive = true
 //        quickBar?.layer.zPosition = 9999
     }
     

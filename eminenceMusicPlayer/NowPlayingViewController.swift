@@ -25,6 +25,8 @@ class NowPlayingViewController: UIViewController {
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var repeatButton: UIButton!
     @IBOutlet weak var shuffleButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -40,11 +42,14 @@ class NowPlayingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        backButton.contentMode = UIViewContentMode.scaleAspectFit
+        backButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         displayMediaData()
         playButton.isHidden = false
         pauseButton.isHidden = true
         view.backgroundColor = UIColor.clear
         setUpGradient()
+        
         
         // Shuffle is turned off whenever a cell is selected to ensure current song was picked
         // This just turns it back on if needed

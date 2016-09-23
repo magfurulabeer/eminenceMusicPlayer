@@ -58,7 +58,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KiG-sp-D0S">
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="KiG-sp-D0S" secondAttribute="height" multiplier="19:32" id="9k7-dB-TT8"/>
+                                            <constraint firstAttribute="width" constant="38" id="VGk-qG-JVF"/>
                                         </constraints>
                                         <state key="normal" image="left-arrow"/>
                                         <connections>
@@ -203,6 +203,7 @@
                         <outlet property="albumImageView" destination="CCG-JH-dLr" id="B5P-G7-AtC"/>
                         <outlet property="albumLabel" destination="dnj-vV-YH6" id="XLY-kD-5K6"/>
                         <outlet property="artistLabel" destination="tba-eC-4ot" id="a9P-a1-sG0"/>
+                        <outlet property="backButton" destination="KiG-sp-D0S" id="ICy-F6-10o"/>
                         <outlet property="controlsStackView" destination="MUJ-Fg-W9a" id="HJc-HE-MfI"/>
                         <outlet property="currentTimeLabel" destination="CBu-Sm-xwh" id="Ckr-cs-cKs"/>
                         <outlet property="durationLabel" destination="rXy-mu-yMH" id="cV0-Dz-EAZ"/>
@@ -255,7 +256,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="piz-1Q-x6n" id="1lj-ad-o3Q">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This Is The Title Of The Song" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zp-1E-Sy2">

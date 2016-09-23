@@ -64,7 +64,7 @@ extension NowPlayingQuickBar {
         playButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
         playButton.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
         playButton.centerYAnchor.constraint(equalTo: albumThumbnail.centerYAnchor, constant: -3).isActive = true
-        playButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+        playButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
     }
     
     func setUpPauseButton() {
