@@ -16,6 +16,7 @@ class MusicManager: NSObject {
     var shuffleIsOn: Bool
     var volume = MPVolumeView().volumeSlider
     var currentlySampling = false
+    var songListIsEmpty: Bool = false
     var itemNowPlaying: MPMediaItem? {
         get {
             return player.nowPlayingItem
@@ -31,6 +32,8 @@ class MusicManager: NSObject {
         }
     }
     
+    
+    // When not authorized?
     var originalSongList: [MPMediaItem] {
         get {
             var songItems = [MPMediaItem]()
@@ -38,6 +41,7 @@ class MusicManager: NSObject {
             
             guard let mediaItemCollections = songsQuery.collections else {
                 print("mediaItemCollections is nil")
+                songListIsEmpty = true
                 return []
             }
             
@@ -61,6 +65,10 @@ class MusicManager: NSObject {
         //self.repeatOneIsOn = player.repeatMode == MPMusicRepeatMode.one
         //self.sampler = MPMusicPlayerController.applicationMusicPlayer()
         super.init()
+        self.songList = self.originalSongList
+    }
+    
+    func refreshList() {
         self.songList = self.originalSongList
     }
 }

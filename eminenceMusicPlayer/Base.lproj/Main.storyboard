@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="e0u-Xy-2wP">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -9,6 +9,36 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Launch View Controller-->
+        <scene sceneID="Hsz-07-IK2">
+            <objects>
+                <viewController id="e0u-Xy-2wP" customClass="LaunchViewController" customModule="eminenceMusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Whv-zh-Jp8"/>
+                        <viewControllerLayoutGuide type="bottom" id="2pq-kz-Sek"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yfo-Tz-Crj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch Screen" translatesAutoresizingMaskIntoConstraints="NO" id="Yet-o7-Ghn"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2pq-kz-Sek" firstAttribute="top" secondItem="Yet-o7-Ghn" secondAttribute="bottom" constant="-5" id="93i-0a-D0n"/>
+                            <constraint firstItem="Yet-o7-Ghn" firstAttribute="leading" secondItem="yfo-Tz-Crj" secondAttribute="leading" id="Abx-Yo-8Ix"/>
+                            <constraint firstItem="Yet-o7-Ghn" firstAttribute="top" secondItem="yfo-Tz-Crj" secondAttribute="top" id="K2W-dk-eY1"/>
+                            <constraint firstAttribute="trailing" secondItem="Yet-o7-Ghn" secondAttribute="trailing" id="TAT-29-Sgs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="StartAppSegue" id="lv1-gU-UIk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gdN-dR-WOQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2348" y="913"/>
+        </scene>
         <!--Music-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
@@ -30,7 +60,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-697" y="81"/>
+            <point key="canvasLocation" x="-646" y="313"/>
         </scene>
         <!--Now Playing View Controller-->
         <scene sceneID="oH5-xl-sv0">
@@ -244,7 +274,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="168.80000000000001" y="80.50974512743629"/>
+            <point key="canvasLocation" x="802" y="-371"/>
         </scene>
         <!--Playlists-->
         <scene sceneID="wg7-f3-ORb">
@@ -273,7 +303,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="piz-1Q-x6n" id="1lj-ad-o3Q">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This Is The Title Of The Song" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zp-1E-Sy2">
@@ -397,6 +427,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Launch Screen" width="414" height="736"/>
         <image name="NoAlbumImage" width="500" height="500"/>
         <image name="fast-forward" width="64" height="64"/>
         <image name="first" width="30" height="30"/>

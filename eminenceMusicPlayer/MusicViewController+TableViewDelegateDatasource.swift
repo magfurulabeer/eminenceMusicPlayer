@@ -39,7 +39,8 @@ extension MusicViewController {
     @objc(tableView:didSelectRowAtIndexPath:)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
-        musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
+        musicManager.player.nowPlayingItem = musicManager.songList[indexPath.row]
+        musicManager.player.play()
         performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
     }
     
