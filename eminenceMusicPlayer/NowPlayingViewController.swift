@@ -76,7 +76,9 @@ class NowPlayingViewController: UIViewController {
         let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
         self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
         self.slider.value = Float(currentTime/duration)
-        
+    }
+    
+    override func viewWillLayoutSubviews() {
         if musicManager.player.playbackState == MPMusicPlaybackState.playing {
             playButton.isHidden = true
             pauseButton.isHidden = false
@@ -86,6 +88,8 @@ class NowPlayingViewController: UIViewController {
             pauseButton.isHidden = true
         }
     }
+    
+  
     
     
     func setUpFauxNavBar() {
@@ -105,14 +109,6 @@ class NowPlayingViewController: UIViewController {
         border.trailingAnchor.constraint(equalTo: fauxNavBar.trailingAnchor).isActive = true
         border.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
-    
-   
-    /*
-    func setUpTopBorder() {
-     
-     
-    }
- */
     
     func setUpGradient() {
         
