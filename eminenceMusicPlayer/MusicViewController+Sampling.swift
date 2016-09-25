@@ -25,6 +25,7 @@ extension MusicViewController {
             if indexPath != selectedIndexPath {
                 musicManager.player.pause()
                 selectedCell?.backgroundColor = UIColor.clear
+                selectedCell?.alpha = 0.5
                 selectedCell?.contentView.backgroundColor = UIColor.clear
                 changeSamplingMusic(atIndexPath: indexPath)
             }
@@ -46,11 +47,15 @@ extension MusicViewController {
         savedTime = musicManager.player.currentPlaybackTime
         savedRepeatMode = musicManager.player.repeatMode
         
-        
-        
         // Visuals
         selectedCell = tableView.cellForRow(at: indexPath)
         selectedCell?.backgroundColor = UIColor.black
+        
+        for cell in tableView.visibleCells {
+            if cell != selectedCell {
+                cell.alpha = 0.5
+            }
+        }
         
         // Audio
         let song = musicManager.songList[indexPath.row]
@@ -69,6 +74,7 @@ extension MusicViewController {
         // Visuals
         selectedCell = tableView.cellForRow(at: indexPath)
         selectedCell?.backgroundColor = UIColor.black
+        selectedCell?.alpha = 1
         
         // Audio
         let song = musicManager.songList[indexPath.row]
@@ -84,6 +90,10 @@ extension MusicViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidEnd"), object: nil)
         // Return visual to normal
         selectedCell?.backgroundColor = UIColor.clear
+        
+        for cell in tableView.visibleCells {
+            cell.alpha = 1
+        }
         
         // Return audio to normal
         musicManager.player.pause()
