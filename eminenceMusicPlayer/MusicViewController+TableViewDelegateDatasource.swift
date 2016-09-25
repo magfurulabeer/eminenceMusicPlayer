@@ -41,7 +41,11 @@ extension MusicViewController {
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         musicManager.player.nowPlayingItem = musicManager.songList[indexPath.row]
         musicManager.player.play()
-        performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
+//        performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
+        if let nowPlayingVC = storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
+            nowPlayingVC.transitioningDelegate = self
+            present(nowPlayingVC, animated: true, completion: nil)
+        }
     }
     
     @objc(tableView:heightForRowAtIndexPath:)

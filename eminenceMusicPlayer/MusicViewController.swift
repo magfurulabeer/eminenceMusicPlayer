@@ -40,7 +40,7 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         setUpGradient()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if musicManager.itemNowPlaying == nil {
             quickBar?.fullHeightConstraint.isActive = false
             quickBar?.zeroHeightConstraint.isActive = true

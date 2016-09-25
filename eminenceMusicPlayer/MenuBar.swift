@@ -11,7 +11,7 @@ import UIKit
 class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let deselectedColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
-    let imageIcons: [UIImage] = [#imageLiteral(resourceName: "songIcon"), #imageLiteral(resourceName: "artistIcon"), #imageLiteral(resourceName: "albumIcon"), #imageLiteral(resourceName: "genreIcon")]
+    let imageIcons: [UIImage] = [#imageLiteral(resourceName: "genreIcon"), #imageLiteral(resourceName: "songIcon"), #imageLiteral(resourceName: "artistIcon"), #imageLiteral(resourceName: "albumIcon")]
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -42,7 +42,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         
-        let selectedIndexPath = IndexPath(item: 0, section: 0)
+        let selectedIndexPath = IndexPath(item: 1, section: 0)
         collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
     }
     

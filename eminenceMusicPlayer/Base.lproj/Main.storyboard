@@ -65,7 +65,7 @@
         <!--Now Playing View Controller-->
         <scene sceneID="oH5-xl-sv0">
             <objects>
-                <viewController id="MBY-PI-pMD" customClass="NowPlayingViewController" customModule="eminenceMusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NowPlayingViewController" id="MBY-PI-pMD" customClass="NowPlayingViewController" customModule="eminenceMusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j1n-ab-ELF"/>
                         <viewControllerLayoutGuide type="bottom" id="zyx-r9-G2C"/>
