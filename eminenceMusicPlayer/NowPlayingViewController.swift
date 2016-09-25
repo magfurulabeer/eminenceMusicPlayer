@@ -64,12 +64,29 @@ class NowPlayingViewController: UIViewController {
         
         albumImageView.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
         albumImageView.layer.borderWidth = 1
-        albumImageView.layer.shadowColor = UIColor.black.cgColor
-        albumImageView.layer.shadowOpacity = 1
-        albumImageView.layer.shadowOffset = CGSize.zero
-        albumImageView.layer.shadowRadius = 10
-        albumImageView.layer.shadowPath = UIBezierPath(rect: albumImageView.bounds).cgPath
+//        albumImageView.layer.shadowColor = UIColor.black.cgColor
+//        albumImageView.layer.shadowOpacity = 1
+//        albumImageView.layer.shadowOffset = CGSize.zero
+//        albumImageView.layer.shadowRadius = 10
+//        albumImageView.layer.shadowPath = UIBezierPath(rect: albumImageView.bounds).cgPath
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let currentTime: Double = self.musicManager.player.currentPlaybackTime
+        let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
+        self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
+        self.slider.value = Float(currentTime/duration)
+        
+        if musicManager.player.playbackState == MPMusicPlaybackState.playing {
+            playButton.isHidden = true
+            pauseButton.isHidden = false
+            startTimer()
+        } else {
+            playButton.isHidden = false
+            pauseButton.isHidden = true
+        }
+    }
+    
     
     func setUpFauxNavBar() {
         fauxNavBar.layer.shadowColor = UIColor.black.cgColor
@@ -129,17 +146,6 @@ class NowPlayingViewController: UIViewController {
         }
         
         volume.value = newValue
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        if musicManager.player.playbackState == MPMusicPlaybackState.playing {
-            playButton.isHidden = true
-            pauseButton.isHidden = false
-            startTimer()
-        } else {
-            playButton.isHidden = false
-            pauseButton.isHidden = true
-        }
     }
     
     

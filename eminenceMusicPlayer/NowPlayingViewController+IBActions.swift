@@ -55,10 +55,12 @@ extension NowPlayingViewController {
     
     
     @IBAction func rewindButtonTapped(_ sender: UIButton) {
+        slider.value = 0
         musicManager.player.skipToPreviousItem()
     }
     
     @IBAction func fastForwardButtonTapped(_ sender: UIButton) {
+        slider.value = 0
         musicManager.player.skipToNextItem()
     }
     
