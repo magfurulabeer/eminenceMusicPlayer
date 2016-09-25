@@ -108,9 +108,12 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+//        tableView.separatorEffect = 
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MusicViewController.handleLongPress(sender:)))
         tableView.addGestureRecognizer(longPressGestureRecognizer)
-        tableView.register(UINib(nibName: "BasicSongCell", bundle: Bundle.main), forCellReuseIdentifier: "BasicCell")
+//        tableView.register(UINib(nibName: "BasicSongCell", bundle: Bundle.main), forCellReuseIdentifier: "BasicCell")
+        tableView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: menuBar.bottomAnchor).isActive = true

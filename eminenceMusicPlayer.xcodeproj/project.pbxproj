@@ -12,6 +12,8 @@
 		8B2C54DB1D94781F005E1481 /* NowPlayingQuickBar+SetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C54DA1D94781F005E1481 /* NowPlayingQuickBar+SetUp.swift */; };
 		8B53F7C11D94FC6400778403 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53F7C01D94FC6400778403 /* MenuBar.swift */; };
 		8B53F7C31D95273600778403 /* MusicViewController+Sampling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53F7C21D95273600778403 /* MusicViewController+Sampling.swift */; };
+		8B6964FC1D9784370037E13F /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6964FA1D9784370037E13F /* SongCell.swift */; };
+		8B6964FD1D9784370037E13F /* SongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B6964FB1D9784370037E13F /* SongCell.xib */; };
 		8B7B948C1D94BCEF005B9B63 /* OpenTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B948B1D94BCEF005B9B63 /* OpenTabBarController.swift */; };
 		8BB1083A1D92F39400CD2238 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB108391D92F39400CD2238 /* AppDelegate.swift */; };
 		8BB108411D92F39400CD2238 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB1083F1D92F39400CD2238 /* Main.storyboard */; };
@@ -54,6 +56,8 @@
 		8B2C54DA1D94781F005E1481 /* NowPlayingQuickBar+SetUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NowPlayingQuickBar+SetUp.swift"; sourceTree = "<group>"; };
 		8B53F7C01D94FC6400778403 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		8B53F7C21D95273600778403 /* MusicViewController+Sampling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MusicViewController+Sampling.swift"; sourceTree = "<group>"; };
+		8B6964FA1D9784370037E13F /* SongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
+		8B6964FB1D9784370037E13F /* SongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongCell.xib; sourceTree = "<group>"; };
 		8B7B948B1D94BCEF005B9B63 /* OpenTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenTabBarController.swift; sourceTree = "<group>"; };
 		8BB108361D92F39400CD2238 /* eminenceMusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eminenceMusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB108391D92F39400CD2238 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 			children = (
 				8BB1087D1D93084500CD2238 /* BasicSongCell.xib */,
 				8BB108801D93093C00CD2238 /* BasicSongCell.swift */,
+				8B6964FA1D9784370037E13F /* SongCell.swift */,
+				8B6964FB1D9784370037E13F /* SongCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BB108461D92F39500CD2238 /* LaunchScreen.storyboard in Resources */,
+				8B6964FD1D9784370037E13F /* SongCell.xib in Resources */,
 				8BB108431D92F39500CD2238 /* Assets.xcassets in Resources */,
 				8BB108411D92F39400CD2238 /* Main.storyboard in Resources */,
 				8BB1087F1D93084500CD2238 /* BasicSongCell.xib in Resources */,
@@ -289,6 +296,7 @@
 				8BB108751D9302D600CD2238 /* PlaylistsViewController.swift in Sources */,
 				8BB1086E1D92FF5100CD2238 /* MusicManager.swift in Sources */,
 				8BB108851D932CEC00CD2238 /* SideKick.swift in Sources */,
+				8B6964FC1D9784370037E13F /* SongCell.swift in Sources */,
 				8BB108791D9302E900CD2238 /* SettingsViewController.swift in Sources */,
 				8BB108811D93093C00CD2238 /* BasicSongCell.swift in Sources */,
 				8B2C54D91D94645C005E1481 /* Constants.swift in Sources */,

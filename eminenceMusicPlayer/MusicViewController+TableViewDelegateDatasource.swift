@@ -26,11 +26,12 @@ extension MusicViewController {
         
         let song = musicManager.songList[indexPath.row]
         
-        let cell =  tableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicSongCell
+        let cell =  tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongCell
         cell.titleLabel.text = song.title
         cell.artist = song.artist != nil ? song.artist! : ""
         cell.album = song.albumTitle != nil ? song.albumTitle! : ""
         cell.durationLabel.text = song.playbackDuration.stringFormat()
+        cell.albumImage = song.artwork?.image(at: CGSize(width: SongCellHeight, height: SongCellHeight))
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         return cell
     }
@@ -40,5 +41,10 @@ extension MusicViewController {
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
         performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
+    }
+    
+    @objc(tableView:heightForRowAtIndexPath:)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return SongCellHeight
     }
 }
