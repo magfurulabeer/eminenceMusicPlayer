@@ -44,6 +44,7 @@ extension MusicViewController {
 //        performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
         if let nowPlayingVC = storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
             nowPlayingVC.transitioningDelegate = self
+            nowPlayingVC.interactor = slideDownInteractor
             present(nowPlayingVC, animated: true, completion: nil)
         }
     }

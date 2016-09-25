@@ -23,7 +23,7 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var savedRepeatMode: MPMusicRepeatMode?
     var savedPlayerIsPlaying: MPMusicPlaybackState?
     var quickBar: NowPlayingQuickBar?
-
+    let slideDownInteractor = SlideDownInteractor()
     let menuBar: MenuBar = {
         let mb = MenuBar()
         mb.translatesAutoresizingMaskIntoConstraints = false
@@ -126,7 +126,19 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     func quickBarWasTapped(sender: NowPlayingQuickBar) {
-        performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
+        if let nowPlayingVC = storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
+            nowPlayingVC.transitioningDelegate = nowPlayingVC
+            nowPlayingVC.interactor = slideDownInteractor
+            present(nowPlayingVC, animated: true, completion: nil)
+        }
+//        performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
+    }
+    
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destinationVC = segue.destination as? NowPlayingViewController {
+            destinationVC.transitioningDelegate = destinationVC
+            destinationVC.interactor = slideDownInteractor
+        }
     }
     
     

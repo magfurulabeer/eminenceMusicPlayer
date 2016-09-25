@@ -97,6 +97,7 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.16470588235294117" green="0.17254901960784313" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="YIk-iE-P2e" firstAttribute="centerX" secondItem="19O-rb-Wtx" secondAttribute="centerX" id="2xd-99-lqu"/>
                                     <constraint firstItem="KiG-sp-D0S" firstAttribute="height" secondItem="YIk-iE-P2e" secondAttribute="height" multiplier="0.85" priority="999" id="7Nr-gN-2an"/>
@@ -105,6 +106,9 @@
                                     <constraint firstAttribute="bottom" secondItem="YIk-iE-P2e" secondAttribute="bottom" constant="8" id="VLH-Zd-opJ"/>
                                     <constraint firstItem="KiG-sp-D0S" firstAttribute="centerY" secondItem="YIk-iE-P2e" secondAttribute="centerY" id="oNQ-mF-G3c"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Vy6-Xi-pmP" appends="YES" id="p61-w9-eZf"/>
+                                </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Song Name Over Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SP-cS-dHy">
                                 <constraints>
@@ -273,6 +277,11 @@
                         <action selector="fastForwardButtonLongPressed:" destination="MBY-PI-pMD" id="XdB-rQ-xGd"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Vy6-Xi-pmP">
+                    <connections>
+                        <action selector="fauxNavBarWasDragged:" destination="MBY-PI-pMD" id="1eF-gg-Aoh"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="802" y="-371"/>
         </scene>

@@ -34,6 +34,7 @@ class NowPlayingViewController: UIViewController {
     var musicManager = MusicManager.sharedManager
     var timer = Timer()
     var lastLocation: CGPoint = CGPoint(x: 0, y: 0)
+    var interactor: SlideDownInteractor? //= SlideDownInteractor()
     var volume: UISlider {
         get {
             return self.musicManager.volume
@@ -64,11 +65,6 @@ class NowPlayingViewController: UIViewController {
         
         albumImageView.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
         albumImageView.layer.borderWidth = 1
-//        albumImageView.layer.shadowColor = UIColor.black.cgColor
-//        albumImageView.layer.shadowOpacity = 1
-//        albumImageView.layer.shadowOffset = CGSize.zero
-//        albumImageView.layer.shadowRadius = 10
-//        albumImageView.layer.shadowPath = UIBezierPath(rect: albumImageView.bounds).cgPath
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -149,4 +145,46 @@ class NowPlayingViewController: UIViewController {
         let touch = touches[touches.startIndex]
         self.lastLocation = touch.preciseLocation(in: view)
     }
+    
+    
+    @IBAction func fauxNavBarWasDragged(_ sender: UIPanGestureRecognizer) {
+        let threshold: CGFloat = 0.3
+        
+        // convert y-position to downward pull progress (percentage)
+        let translation = sender.translation(in: view)
+        let verticalDisplacement = translation.y / view.bounds.height
+        let downwardMovement = fmaxf(Float(verticalDisplacement), 0.0)
+        let downwardMovementPercent = fminf(downwardMovement, 1.0)
+        let progress = CGFloat(downwardMovementPercent)
+        
+        guard let interactor = interactor else {
+            return
+        }
+        
+        switch sender.state {
+        case .began:
+            interactor.hasStarted = true
+            dismiss(animated: true, completion: nil)
+            break
+        case .changed:
+            interactor.shouldFinish = progress > threshold
+            interactor.update(progress)
+            break
+        case .cancelled:
+            interactor.hasStarted = false
+            interactor.cancel()
+            break
+        case .ended:
+            interactor.hasStarted = false
+            interactor.shouldFinish
+                ? interactor.finish()
+                : interactor.cancel()
+            break
+            
+        default:
+            break
+        }
+    }
+    
+    
 }

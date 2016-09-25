@@ -34,6 +34,9 @@
 		8BB108891D936A8000CD2238 /* NowPlayingViewController+IBActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB108881D936A8000CD2238 /* NowPlayingViewController+IBActions.swift */; };
 		8BCBE62B1D9804170038AC74 /* SongTappedAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCBE62A1D9804170038AC74 /* SongTappedAnimator.swift */; };
 		8BCBE62D1D980C320038AC74 /* MusicViewController+Transitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCBE62C1D980C320038AC74 /* MusicViewController+Transitioning.swift */; };
+		8BCBE6351D9880490038AC74 /* SlideDownAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCBE6341D9880490038AC74 /* SlideDownAnimator.swift */; };
+		8BCBE6371D9883AE0038AC74 /* NowPlayingViewController+Transitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCBE6361D9883AE0038AC74 /* NowPlayingViewController+Transitioning.swift */; };
+		8BCBE6391D9885860038AC74 /* SlideDownInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCBE6381D9885860038AC74 /* SlideDownInteractor.swift */; };
 		8BDF965F1D94CC4700556AFB /* NowPlayingQuickBar+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF965E1D94CC4700556AFB /* NowPlayingQuickBar+Actions.swift */; };
 		8BE744641D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE744631D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift */; };
 		8BE744661D93B9CA0014DE31 /* NowPlayingViewController+DisplayMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE744651D93B9CA0014DE31 /* NowPlayingViewController+DisplayMethods.swift */; };
@@ -83,6 +86,9 @@
 		8BB108881D936A8000CD2238 /* NowPlayingViewController+IBActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NowPlayingViewController+IBActions.swift"; sourceTree = "<group>"; };
 		8BCBE62A1D9804170038AC74 /* SongTappedAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTappedAnimator.swift; sourceTree = "<group>"; };
 		8BCBE62C1D980C320038AC74 /* MusicViewController+Transitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MusicViewController+Transitioning.swift"; sourceTree = "<group>"; };
+		8BCBE6341D9880490038AC74 /* SlideDownAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideDownAnimator.swift; sourceTree = "<group>"; };
+		8BCBE6361D9883AE0038AC74 /* NowPlayingViewController+Transitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NowPlayingViewController+Transitioning.swift"; sourceTree = "<group>"; };
+		8BCBE6381D9885860038AC74 /* SlideDownInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideDownInteractor.swift; sourceTree = "<group>"; };
 		8BDF965E1D94CC4700556AFB /* NowPlayingQuickBar+Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NowPlayingQuickBar+Actions.swift"; sourceTree = "<group>"; };
 		8BE744631D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NowPlayingViewController+TimerMethods.swift"; sourceTree = "<group>"; };
 		8BE744651D93B9CA0014DE31 /* NowPlayingViewController+DisplayMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NowPlayingViewController+DisplayMethods.swift"; sourceTree = "<group>"; };
@@ -159,7 +165,6 @@
 			children = (
 				8BE744681D93BA060014DE31 /* MusicViewController */,
 				8BE744671D93B9F60014DE31 /* NowPlayingViewController */,
-				8BB108741D9302D600CD2238 /* PlaylistsViewController.swift */,
 				8BB108761D9302E200CD2238 /* EqualizerViewController.swift */,
 				8BB108781D9302E900CD2238 /* SettingsViewController.swift */,
 			);
@@ -170,6 +175,8 @@
 			isa = PBXGroup;
 			children = (
 				8BCBE62A1D9804170038AC74 /* SongTappedAnimator.swift */,
+				8BCBE6341D9880490038AC74 /* SlideDownAnimator.swift */,
+				8BCBE6381D9885860038AC74 /* SlideDownInteractor.swift */,
 			);
 			name = TransitionAnimators;
 			sourceTree = "<group>";
@@ -181,6 +188,8 @@
 				8BE744631D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift */,
 				8BE744651D93B9CA0014DE31 /* NowPlayingViewController+DisplayMethods.swift */,
 				8BB108881D936A8000CD2238 /* NowPlayingViewController+IBActions.swift */,
+				8BCBE6361D9883AE0038AC74 /* NowPlayingViewController+Transitioning.swift */,
+				8BB108741D9302D600CD2238 /* PlaylistsViewController.swift */,
 			);
 			name = NowPlayingViewController;
 			sourceTree = "<group>";
@@ -299,8 +308,10 @@
 				8BE744661D93B9CA0014DE31 /* NowPlayingViewController+DisplayMethods.swift in Sources */,
 				8BB108731D9302B400CD2238 /* MusicViewController.swift in Sources */,
 				8BB1084E1D92F3E700CD2238 /* SeekBar.swift in Sources */,
+				8BCBE6391D9885860038AC74 /* SlideDownInteractor.swift in Sources */,
 				8B7B948C1D94BCEF005B9B63 /* OpenTabBarController.swift in Sources */,
 				8B53F7C11D94FC6400778403 /* MenuBar.swift in Sources */,
+				8BCBE6371D9883AE0038AC74 /* NowPlayingViewController+Transitioning.swift in Sources */,
 				8BCBE62B1D9804170038AC74 /* SongTappedAnimator.swift in Sources */,
 				8BB108771D9302E200CD2238 /* EqualizerViewController.swift in Sources */,
 				8B6964FF1D97982D0037E13F /* LaunchViewController.swift in Sources */,
@@ -311,6 +322,7 @@
 				8BB108831D930C7700CD2238 /* MusicViewController+TableViewDelegateDatasource.swift in Sources */,
 				8BE744641D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift in Sources */,
 				8B53F7C31D95273600778403 /* MusicViewController+Sampling.swift in Sources */,
+				8BCBE6351D9880490038AC74 /* SlideDownAnimator.swift in Sources */,
 				8BCBE62D1D980C320038AC74 /* MusicViewController+Transitioning.swift in Sources */,
 				8BE7446A1D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift in Sources */,
 				8BB108751D9302D600CD2238 /* PlaylistsViewController.swift in Sources */,

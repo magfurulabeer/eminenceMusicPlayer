@@ -10,7 +10,7 @@ import UIKit
 
 class SongTappedAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    let duration = 0.4
+    let duration = 0.3
     var tableCellFrame = CGRect.zero
     var cell = SongCell()
     
@@ -42,7 +42,7 @@ class SongTappedAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let scale = newWidthHeight/albumHeightWidth
         
         
-        UIView.animate(withDuration: duration/3, delay: duration/3 * 2, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: duration/2, delay: duration/2, options: .curveEaseOut, animations: {
             toView.alpha = 1
             }, completion: nil)
         UIView.animate(withDuration: duration, delay: 0.0,
