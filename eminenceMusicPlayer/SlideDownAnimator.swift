@@ -28,8 +28,9 @@ class SlideDownAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let screenBounds = UIScreen.main.bounds
         let bottomCorner = CGPoint(x: 0, y: screenBounds.height)// - tabBarHeight - quickBarHeight)
         let finalFrame = CGRect(origin: bottomCorner, size: screenBounds.size)
-        
+        toVC.view.alpha = 0.2
         UIView.animate(withDuration: duration, animations: {
+            toVC.view.alpha = 1
             fromVC.view.frame = finalFrame
         }) { (_) in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
