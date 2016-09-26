@@ -24,7 +24,7 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var savedPlayerIsPlaying: MPMusicPlaybackState?
     var quickBar: NowPlayingQuickBar?
     let slideDownInteractor = SlideDownInteractor()
-    let menuBar: MenuBar = {
+    var menuBar: MenuBar = {
         let mb = MenuBar()
         mb.translatesAutoresizingMaskIntoConstraints = false
         return mb
@@ -76,12 +76,15 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         quickBar!.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         quickBar!.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         quickBar!.fullHeightConstraint.isActive = true
+        
     }
     
     func setUpMenuBar() {
+        
+        menuBar = MenuBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: FauxBarHeight))
         view.addSubview(menuBar)
         menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        menuBar.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        menuBar.heightAnchor.constraint(equalToConstant: FauxBarHeight).isActive = true
         menuBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         menuBar.backgroundColor = QuickBarBackgroundColor
@@ -101,6 +104,7 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         border.leadingAnchor.constraint(equalTo: menuBar.leadingAnchor).isActive = true
         border.trailingAnchor.constraint(equalTo: menuBar.trailingAnchor).isActive = true
         border.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
     }
     
     func setUpTableView() {

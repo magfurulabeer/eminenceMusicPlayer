@@ -10,6 +10,7 @@ import UIKit
 
 class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    var index = 1
     let deselectedColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
     let imageIcons: [UIImage] = [#imageLiteral(resourceName: "genreIcon"), #imageLiteral(resourceName: "songIcon"), #imageLiteral(resourceName: "artistIcon"), #imageLiteral(resourceName: "albumIcon")]
     
@@ -24,6 +25,8 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     let cellID = "cellID"
     let collectionViewHeight = 64 - 20
+    
+    var horizontalBarLeadingConstraint: NSLayoutConstraint?
     
     override var backgroundColor: UIColor? {
         didSet {
@@ -41,15 +44,20 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         collectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        
-        let selectedIndexPath = IndexPath(item: 1, section: 0)
-        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
-        
         setUpHorizontalBar()
+        selectItemAtIndex(index: 1)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // necessary??
+    func selectItemAtIndex(index: Int) {
+        if index < imageIcons.count {
+            let selectedIndexPath = IndexPath(item: index, section: 0)
+            collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
+        }
     }
     
     func setUpHorizontalBar() {
@@ -58,7 +66,11 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         addSubview(horizontalBarView)
         
         horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
-//        horizontalBarView
+        horizontalBarLeadingConstraint = horizontalBarView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: frame.width/4 + frame.width/16)
+        horizontalBarLeadingConstraint?.isActive = true
+        horizontalBarView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/8).isActive = true
+        horizontalBarView.heightAnchor.constraint(equalToConstant: HorizontalBarHeight).isActive = true
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -74,6 +86,15 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         cell.imageView.image = imageIcons[indexPath.row].withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         cell.tintColor = deselectedColor
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let x = CGFloat(indexPath.item) * frame.width/4 + frame.width/16
+        horizontalBarLeadingConstraint?.constant = x
+        UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { 
+            self.layoutIfNeeded()
+            }, completion: nil)
+        
     }
 
     
