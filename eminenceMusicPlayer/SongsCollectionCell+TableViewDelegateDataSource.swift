@@ -1,16 +1,15 @@
 //
-//  MusicViewController+TableViewDelegateDatasource.swift
+//  SongsCollectionCell+TableViewDelegateDataSource.swift
 //  eminenceMusicPlayer
 //
-//  Created by Magfurul Abeer on 9/21/16.
+//  Created by Magfurul Abeer on 9/26/16.
 //  Copyright © 2016 Magfurul Abeer. All rights reserved.
 //
 
 import UIKit
 import MediaPlayer
 
-extension MusicViewController {
-    
+extension SongsCollectionCell: UITableViewDelegate, UITableViewDataSource {
     @objc(numberOfSectionsInTableView:)
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -41,11 +40,14 @@ extension MusicViewController {
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         musicManager.player.nowPlayingItem = musicManager.songList[indexPath.row]
         musicManager.player.play()
-//        performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
-        if let nowPlayingVC = storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
+        //        performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
+        
+        guard let viewController = viewController else {    return  }
+        
+        if let nowPlayingVC = viewController.storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
             nowPlayingVC.transitioningDelegate = self
             nowPlayingVC.interactor = slideDownInteractor
-            present(nowPlayingVC, animated: true, completion: nil)
+            viewController.present(nowPlayingVC, animated: true, completion: nil)
         }
     }
     
@@ -53,4 +55,5 @@ extension MusicViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return SongCellHeight
     }
+
 }

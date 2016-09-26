@@ -17,23 +17,26 @@ extension NowPlayingQuickBar {
         albumThumbnail.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(self.albumThumbnail)
-        albumThumbnail.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9).isActive = true
+        
+        albumThumbnail.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8).isActive = true
+        
+//        albumThumbnail.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9).isActive = true
         albumThumbnail.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8).isActive = true
-        albumThumbnail.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        albumThumbnail.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         albumThumbnail.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
     }
     
     func setUpSongTitleLabel() {
         songTitleLabel.text = musicManager.itemNowPlaying?.title
         songTitleLabel.textColor = UIColor.white
-        songTitleLabel.font = UIFont(name: "Avenir", size: 18)
+        songTitleLabel.font = UIFont(name: "Avenir", size: 20)
         songTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(self.songTitleLabel)
         
         songTitleLabel.leadingAnchor.constraint(equalTo: self.albumThumbnail.trailingAnchor, constant: 8).isActive = true
         songTitleLabel.trailingAnchor.constraint(equalTo: self.playButton.leadingAnchor, constant: -8).isActive = true
-        songTitleLabel.bottomAnchor.constraint(equalTo: self.albumThumbnail.centerYAnchor, constant: 2).isActive = true
+        songTitleLabel.centerYAnchor.constraint(equalTo: self.albumThumbnail.centerYAnchor, constant: -8).isActive = true
         songTitleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
     }
     
@@ -64,7 +67,8 @@ extension NowPlayingQuickBar {
         
         playButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
         playButton.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
-        playButton.centerYAnchor.constraint(equalTo: albumThumbnail.centerYAnchor, constant: -3).isActive = true
+        playButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//        playButton.centerYAnchor.constraint(equalTo: albumThumbnail.centerYAnchor, constant: -3).isActive = true
         playButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
     }
     

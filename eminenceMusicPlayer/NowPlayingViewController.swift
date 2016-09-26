@@ -74,7 +74,7 @@ class NowPlayingViewController: UIViewController {
         self.slider.value = Float(currentTime/duration)
     }
     
-    override func viewWillLayoutSubviews() {
+    override func viewDidAppear(_ animated: Bool) {
         if musicManager.player.playbackState == MPMusicPlaybackState.playing {
             playButton.isHidden = true
             pauseButton.isHidden = false

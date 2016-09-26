@@ -11,6 +11,9 @@ import UIKit
 class LaunchViewController: UIViewController {
 
     let musicManager = MusicManager.sharedManager
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +28,8 @@ class LaunchViewController: UIViewController {
         while musicManager.songList.count == 0 {//&& !musicManager.songListIsEmpty {
             musicManager.refreshList()
         }
-        performSegue(withIdentifier: "StartAppSegue", sender: nil)
+//        performSegue(withIdentifier: "StartAppSegue", sender: nil)
+        performSegue(withIdentifier: "test", sender: nil)
     }
 
 

@@ -1,15 +1,15 @@
 //
-//  MusicViewController+Sampling.swift
+//  SongsCollectionCell+Sampling.swift
 //  eminenceMusicPlayer
 //
-//  Created by Magfurul Abeer on 9/23/16.
+//  Created by Magfurul Abeer on 9/26/16.
 //  Copyright © 2016 Magfurul Abeer. All rights reserved.
 //
 
-import UIKit
 import MediaPlayer
+import UIKit
 
-extension MusicViewController {
+extension SongsCollectionCell {
     func handleLongPress(sender: UILongPressGestureRecognizer) {
         if sender.state == UIGestureRecognizerState.began {
             // Will be needed at the end
@@ -116,4 +116,5 @@ extension MusicViewController {
         selectedCell = nil
         savedPlayerIsPlaying = nil
     }
+
 }
