@@ -44,10 +44,21 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         
         let selectedIndexPath = IndexPath(item: 1, section: 0)
         collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
+        
+        setUpHorizontalBar()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setUpHorizontalBar() {
+        let horizontalBarView = UIView()
+        horizontalBarView.backgroundColor = UIColor.white
+        addSubview(horizontalBarView)
+        
+        horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
+//        horizontalBarView
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
