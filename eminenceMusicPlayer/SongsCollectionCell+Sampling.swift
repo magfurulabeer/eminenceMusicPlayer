@@ -37,6 +37,8 @@ extension SongsCollectionCell {
     }
     
     func startSamplingMusic(atIndexPath indexPath: IndexPath) {
+//        print("start")
+
         //This is needed if touch moves to another cell
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidBegin"), object: nil)
         musicManager.currentlySampling = true
@@ -44,6 +46,7 @@ extension SongsCollectionCell {
         
         // These will be needed when the touch ends
         savedSong = musicManager.player.nowPlayingItem
+        print(savedSong?.title)
         savedTime = musicManager.player.currentPlaybackTime
         savedRepeatMode = musicManager.player.repeatMode
         
@@ -68,6 +71,8 @@ extension SongsCollectionCell {
     }
     
     func changeSamplingMusic(atIndexPath indexPath: IndexPath) {
+//        print("change")
+
         //This is needed if touch moves to another cell
         selectedIndexPath = indexPath
         
@@ -86,6 +91,7 @@ extension SongsCollectionCell {
     }
     
     func endSamplingMusic() {
+//        print("end")
         musicManager.currentlySampling = false
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidEnd"), object: nil)
         // Return visual to normal
@@ -97,9 +103,10 @@ extension SongsCollectionCell {
         
         // Return audio to normal
         musicManager.player.pause()
+        print(savedSong?.title)
+        musicManager.itemNowPlaying = savedSong
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
         musicManager.player.repeatMode = savedRepeatMode!
-        musicManager.player.nowPlayingItem = savedSong
         musicManager.player.currentPlaybackTime = savedTime!
         if savedPlayerIsPlaying == MPMusicPlaybackState.playing {
             musicManager.player.play()
@@ -107,6 +114,8 @@ extension SongsCollectionCell {
             musicManager.player.stop()
         }
         
+//        print(musicManager.player.nowPlayingItem?.title)
+//        print("\n\n\n")
         // Release all saved properties
         savedPlayerIsPlaying = nil
         savedRepeatMode = nil
