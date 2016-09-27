@@ -30,6 +30,8 @@ extension NowPlayingViewController {
             repeatButton.alpha = 0.5
         }
         func displayRepeatAll() {
+            repeatButton.imageView?.image = #imageLiteral(resourceName: "repeat")
+            repeatButton.setImage(#imageLiteral(resourceName: "repeat1"), for: UIControlState.normal)
             repeatButton.alpha = 1
         }
         func displayRepeatOne() {
