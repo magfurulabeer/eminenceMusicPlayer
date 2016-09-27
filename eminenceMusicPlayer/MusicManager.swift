@@ -12,6 +12,7 @@ import MediaPlayer
 class MusicManager: NSObject {
     static let sharedManager = MusicManager()
     var songList: [MPMediaItem]
+    var artistList: [MPMediaItemCollection]
     var player: MPMusicPlayerController
     var shuffleIsOn: Bool
     var volume = MPVolumeView().volumeSlider
@@ -57,13 +58,29 @@ class MusicManager: NSObject {
         }
     }
     
+    var originalArtistList: [MPMediaItemCollection] {
+        get {
+            let artistsQuery = MPMediaQuery.artists()
+            
+            guard let artistCollections = artistsQuery.collections else {
+                print("artistCollections is nil")
+                songListIsEmpty = true
+                return []
+            }
+            
+            return artistCollections
+        }
+    }
+    
     override init() {
         self.songList = [MPMediaItem]()
+        self.artistList = [MPMediaItemCollection]()
         self.player = MPMusicPlayerController.systemMusicPlayer()
         self.player.beginGeneratingPlaybackNotifications()
         self.shuffleIsOn = player.shuffleMode == MPMusicShuffleMode.songs
         super.init()
         self.songList = self.originalSongList
+        self.artistList = self.originalArtistList
     }
     
     func refreshList() {

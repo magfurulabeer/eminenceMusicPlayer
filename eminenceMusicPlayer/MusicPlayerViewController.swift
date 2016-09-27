@@ -10,6 +10,7 @@ import UIKit
 
 private let cellID = "cellID"
 private let songID = "songID"
+private let artistID = "artistID"
 
 class MusicPlayerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, QuickBarDelegate {
 
@@ -37,7 +38,6 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
         case 1:
             let cell = collectionView?.cellForItem(at: IndexPath(item: 1, section: 0)) as! SongsCollectionCell
             cell.tableView.reloadData()
-            print("reload")
             break
         case 2:
             break
@@ -74,6 +74,12 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
         let colors = [UIColor.red, UIColor.orange, UIColor.yellow, UIColor.green]
         if indexPath.row == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: songID, for: indexPath) as! SongsCollectionCell
+            cell.viewController = self
+            cell.backgroundColor = UIColor.clear
+            return cell
+        }
+        if indexPath.row == 2 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: artistID, for: indexPath) as! ArtistsCollectionCell
             cell.viewController = self
             cell.backgroundColor = UIColor.clear
             return cell

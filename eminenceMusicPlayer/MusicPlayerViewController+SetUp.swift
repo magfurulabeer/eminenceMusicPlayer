@@ -10,6 +10,7 @@ import UIKit
 
 private let cellID = "cellID"
 private let songID = "songID"
+private let artistID = "artistID"
 
 extension MusicPlayerViewController {
     func setUpMenuBar() {
@@ -62,6 +63,7 @@ extension MusicPlayerViewController {
         collectionView?.backgroundColor = UIColor.clear
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
         collectionView?.register(SongsCollectionCell.self, forCellWithReuseIdentifier: songID)
+        collectionView?.register(ArtistsCollectionCell.self, forCellWithReuseIdentifier: artistID)
         collectionView?.contentInset = UIEdgeInsets(top: FauxBarHeight, left: 0, bottom: quickBarHeight, right: 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: FauxBarHeight, left: 0, bottom: quickBarHeight, right: 0)
         collectionView?.isPagingEnabled = true

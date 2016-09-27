@@ -23,6 +23,10 @@
 		8B8FE46A1D99179000A9A85C /* SongsCollectionCell+Sampling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8FE4691D99179000A9A85C /* SongsCollectionCell+Sampling.swift */; };
 		8BAEC9C61D9A446D00F41A74 /* SelectedSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAEC9C41D9A446D00F41A74 /* SelectedSongCell.swift */; };
 		8BAEC9C71D9A446D00F41A74 /* SelectedSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BAEC9C51D9A446D00F41A74 /* SelectedSongCell.xib */; };
+		8BAEC9CD1D9A55AC00F41A74 /* ArtistsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAEC9CB1D9A55AC00F41A74 /* ArtistsCollectionCell.swift */; };
+		8BAEC9CE1D9A55AC00F41A74 /* ArtistCollectionCell+TableViewDelegateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAEC9CC1D9A55AC00F41A74 /* ArtistCollectionCell+TableViewDelegateDataSource.swift */; };
+		8BAEC9D11D9A55DB00F41A74 /* ArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAEC9CF1D9A55DB00F41A74 /* ArtistCell.swift */; };
+		8BAEC9D21D9A55DB00F41A74 /* ArtistCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BAEC9D01D9A55DB00F41A74 /* ArtistCell.xib */; };
 		8BB1083A1D92F39400CD2238 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB108391D92F39400CD2238 /* AppDelegate.swift */; };
 		8BB108411D92F39400CD2238 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB1083F1D92F39400CD2238 /* Main.storyboard */; };
 		8BB108431D92F39500CD2238 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BB108421D92F39500CD2238 /* Assets.xcassets */; };
@@ -75,6 +79,10 @@
 		8B8FE4691D99179000A9A85C /* SongsCollectionCell+Sampling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SongsCollectionCell+Sampling.swift"; sourceTree = "<group>"; };
 		8BAEC9C41D9A446D00F41A74 /* SelectedSongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedSongCell.swift; sourceTree = "<group>"; };
 		8BAEC9C51D9A446D00F41A74 /* SelectedSongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectedSongCell.xib; sourceTree = "<group>"; };
+		8BAEC9CB1D9A55AC00F41A74 /* ArtistsCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsCollectionCell.swift; sourceTree = "<group>"; };
+		8BAEC9CC1D9A55AC00F41A74 /* ArtistCollectionCell+TableViewDelegateDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ArtistCollectionCell+TableViewDelegateDataSource.swift"; sourceTree = "<group>"; };
+		8BAEC9CF1D9A55DB00F41A74 /* ArtistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistCell.swift; sourceTree = "<group>"; };
+		8BAEC9D01D9A55DB00F41A74 /* ArtistCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtistCell.xib; sourceTree = "<group>"; };
 		8BB108361D92F39400CD2238 /* eminenceMusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eminenceMusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB108391D92F39400CD2238 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BB108401D92F39400CD2238 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -140,6 +148,15 @@
 				8BE7446C1D93CC160014DE31 /* Cells */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		8BAEC9CA1D9A55A100F41A74 /* ArtistCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				8BAEC9CB1D9A55AC00F41A74 /* ArtistsCollectionCell.swift */,
+				8BAEC9CC1D9A55AC00F41A74 /* ArtistCollectionCell+TableViewDelegateDataSource.swift */,
+			);
+			name = ArtistCollectionCell;
 			sourceTree = "<group>";
 		};
 		8BB1082D1D92F39400CD2238 = {
@@ -231,6 +248,7 @@
 		8BE7446C1D93CC160014DE31 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				8BAEC9CA1D9A55A100F41A74 /* ArtistCollectionCell */,
 				8B4A20A11D991B9E00B8E26F /* SongsCollectionCell */,
 				8BB1087D1D93084500CD2238 /* BasicSongCell.xib */,
 				8BB108801D93093C00CD2238 /* BasicSongCell.swift */,
@@ -238,6 +256,8 @@
 				8B6964FB1D9784370037E13F /* SongCell.xib */,
 				8BAEC9C41D9A446D00F41A74 /* SelectedSongCell.swift */,
 				8BAEC9C51D9A446D00F41A74 /* SelectedSongCell.xib */,
+				8BAEC9CF1D9A55DB00F41A74 /* ArtistCell.swift */,
+				8BAEC9D01D9A55DB00F41A74 /* ArtistCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -303,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BAEC9D21D9A55DB00F41A74 /* ArtistCell.xib in Resources */,
 				8BB108461D92F39500CD2238 /* LaunchScreen.storyboard in Resources */,
 				8BAEC9C71D9A446D00F41A74 /* SelectedSongCell.xib in Resources */,
 				8B6964FD1D9784370037E13F /* SongCell.xib in Resources */,
@@ -327,8 +348,10 @@
 				8B8FE4641D990DDA00A9A85C /* SongsCollectionCell+TableViewDelegateDataSource.swift in Sources */,
 				8B7B948C1D94BCEF005B9B63 /* OpenTabBarController.swift in Sources */,
 				8B53F7C11D94FC6400778403 /* MenuBar.swift in Sources */,
+				8BAEC9CE1D9A55AC00F41A74 /* ArtistCollectionCell+TableViewDelegateDataSource.swift in Sources */,
 				8BCBE6371D9883AE0038AC74 /* NowPlayingViewController+Transitioning.swift in Sources */,
 				8BCBE62B1D9804170038AC74 /* SongTappedAnimator.swift in Sources */,
+				8BAEC9D11D9A55DB00F41A74 /* ArtistCell.swift in Sources */,
 				8B8FE4621D990C7D00A9A85C /* SongsCollectionCell.swift in Sources */,
 				8B6964FF1D97982D0037E13F /* LaunchViewController.swift in Sources */,
 				8B2C54D71D946307005E1481 /* NowPlayingQuickBar.swift in Sources */,
@@ -343,6 +366,7 @@
 				8BB1086E1D92FF5100CD2238 /* MusicManager.swift in Sources */,
 				8BB108851D932CEC00CD2238 /* SideKick.swift in Sources */,
 				8B8FE46A1D99179000A9A85C /* SongsCollectionCell+Sampling.swift in Sources */,
+				8BAEC9CD1D9A55AC00F41A74 /* ArtistsCollectionCell.swift in Sources */,
 				8B6964FC1D9784370037E13F /* SongCell.swift in Sources */,
 				8BAEC9C61D9A446D00F41A74 /* SelectedSongCell.swift in Sources */,
 				8BB108811D93093C00CD2238 /* BasicSongCell.swift in Sources */,
