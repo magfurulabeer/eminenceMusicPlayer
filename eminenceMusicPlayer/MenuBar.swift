@@ -11,7 +11,7 @@ import UIKit
 class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var index = 1
-    let deselectedColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
+    let deselectedColor = UIColor.white.withAlphaComponent(0.2)
     let imageIcons: [UIImage] = [#imageLiteral(resourceName: "genreIcon"), #imageLiteral(resourceName: "songIcon"), #imageLiteral(resourceName: "artistIcon"), #imageLiteral(resourceName: "albumIcon")]
     weak var viewController: MusicPlayerViewController?
 
@@ -127,7 +127,8 @@ class BaseCell: UICollectionViewCell {
 
 class MenuCell: BaseCell {
     
-    let deselectedColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
+//    let deselectedColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
+    let deselectedColor = UIColor.white.withAlphaComponent(0.2)
     let selectedColor = UIColor.white.withAlphaComponent(0.8)
     let imageView: UIImageView = {
         let iv = UIImageView()

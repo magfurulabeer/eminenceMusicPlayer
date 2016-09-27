@@ -28,12 +28,19 @@ class SongsCollectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpTableView()
+        NotificationCenter.default.addObserver(self, selector: #selector(SongsCollectionCell.songDidChange), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func songDidChange() {
+        if musicManager.currentlySampling == false {
+            tableView.reloadData()
+        }
+    }
     func setUpTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -43,6 +50,7 @@ class SongsCollectionCell: UICollectionViewCell {
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress(sender:)))
         tableView.addGestureRecognizer(longPressGestureRecognizer)
         tableView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
+        tableView.register(UINib(nibName: "SelectedSongCell", bundle: Bundle.main), forCellReuseIdentifier: "SelectedSongCell")
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -51,4 +59,5 @@ class SongsCollectionCell: UICollectionViewCell {
         tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         tableView.reloadData()
     }
+    
 }

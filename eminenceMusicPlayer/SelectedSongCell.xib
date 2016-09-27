@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectedSongCell" rowHeight="55" id="FAo-t9-qJL" customClass="SelectedSongCell" customModule="eminenceMusicPlayer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FAo-t9-qJL" id="lRZ-t5-da7">
+                <frame key="frameInset" width="320" height="54"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wnr-xa-7sd">
+                        <frame key="frameInset" minX="276" minY="17" width="36" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.54901960780000003" green="0.5450980392" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoAlbumImage" translatesAutoresizingMaskIntoConstraints="NO" id="ahD-xK-x4W">
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="ahD-xK-x4W" secondAttribute="height" multiplier="1:1" id="19e-TX-vEk"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This Is The Title Of The Song" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktQ-cM-hTo">
+                        <frame key="frameInset" minX="57" minY="8" width="222" height="21"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Artist - Album" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PtT-2g-VMs">
+                        <frame key="frameInset" minX="62" minY="26" width="137" height="13"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                        <color key="textColor" red="0.55029948559999997" green="0.54764103399999997" blue="0.55295793719999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="ahD-xK-x4W" firstAttribute="height" secondItem="lRZ-t5-da7" secondAttribute="height" multiplier="0.9" id="0AY-sb-1Sj"/>
+                    <constraint firstItem="Wnr-xa-7sd" firstAttribute="leading" secondItem="PtT-2g-VMs" secondAttribute="trailing" priority="998" constant="-3" id="1yC-hV-Pyv"/>
+                    <constraint firstItem="ktQ-cM-hTo" firstAttribute="centerY" secondItem="lRZ-t5-da7" secondAttribute="centerY" constant="-7" id="7hR-8v-GVx"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Wnr-xa-7sd" secondAttribute="trailing" id="CdL-b3-JjS"/>
+                    <constraint firstItem="Wnr-xa-7sd" firstAttribute="centerY" secondItem="lRZ-t5-da7" secondAttribute="centerY" id="E0V-WZ-4bV"/>
+                    <constraint firstItem="ktQ-cM-hTo" firstAttribute="leading" secondItem="ahD-xK-x4W" secondAttribute="trailing" constant="8" id="PGf-Tj-6Xe"/>
+                    <constraint firstItem="PtT-2g-VMs" firstAttribute="leading" secondItem="ktQ-cM-hTo" secondAttribute="leading" id="Wfc-PH-nRg"/>
+                    <constraint firstItem="Wnr-xa-7sd" firstAttribute="leading" secondItem="ktQ-cM-hTo" secondAttribute="trailing" priority="999" constant="-3" id="bju-0N-Vxw"/>
+                    <constraint firstItem="ahD-xK-x4W" firstAttribute="centerY" secondItem="lRZ-t5-da7" secondAttribute="centerY" id="ny4-8I-9yc"/>
+                    <constraint firstItem="PtT-2g-VMs" firstAttribute="top" secondItem="ktQ-cM-hTo" secondAttribute="bottom" constant="-3" id="xbC-aG-XWR"/>
+                    <constraint firstItem="ahD-xK-x4W" firstAttribute="leading" secondItem="lRZ-t5-da7" secondAttribute="leading" id="yuo-xO-0aL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="albumImageView" destination="ahD-xK-x4W" id="gy2-4W-GwK"/>
+                <outlet property="artistAlbumLabel" destination="PtT-2g-VMs" id="HxN-6s-wsx"/>
+                <outlet property="durationLabel" destination="Wnr-xa-7sd" id="srl-VP-oij"/>
+                <outlet property="titleLabel" destination="ktQ-cM-hTo" id="RLe-WN-sMO"/>
+            </connections>
+            <point key="canvasLocation" x="-286" y="-339"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="NoAlbumImage" width="500" height="500"/>
+    </resources>
+</document>

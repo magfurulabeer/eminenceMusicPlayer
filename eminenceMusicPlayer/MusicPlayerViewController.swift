@@ -30,6 +30,24 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
         collectionView?.reloadData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        switch menuBar.index {
+        case 0:
+            break
+        case 1:
+            let cell = collectionView?.cellForItem(at: IndexPath(item: 1, section: 0)) as! SongsCollectionCell
+            cell.tableView.reloadData()
+            print("reload")
+            break
+        case 2:
+            break
+        case 3:
+            break
+        default:
+            break
+        }
+    }
+    
     func scrollToMenuIndex(index: Int) {
         let path = IndexPath(item: index, section: 0)
         collectionView?.scrollToItem(at: path, at: .centeredHorizontally, animated: true)

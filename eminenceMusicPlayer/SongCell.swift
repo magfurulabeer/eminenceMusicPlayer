@@ -15,6 +15,8 @@ class SongCell: UITableViewCell {
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var albumImageView: UIImageView!
     
+    var hasGradient = false
+    
     var albumImage: UIImage? = #imageLiteral(resourceName: "NoAlbumImage") {
         didSet {
             if self.albumImage != nil {
@@ -24,7 +26,6 @@ class SongCell: UITableViewCell {
             }
         }
     }
-    
     
     var artist: String = "" {
         didSet {
