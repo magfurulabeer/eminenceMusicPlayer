@@ -69,8 +69,10 @@ extension SongsCollectionCell {
         print("song title is \(song.title)")
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         musicManager.player.repeatMode = MPMusicRepeatMode.one // In case held till end of song
-        musicManager.player = MPMusicPlayerController.systemMusicPlayer()
-
+//        musicManager.player = MPMusicPlayerController.systemMusicPlayer()
+//        musicManager.player.setQueue(with: MPMediaQuery.songs())
+//        musicManager.player.beginGeneratingPlaybackNotifications()
+        
         musicManager.player.nowPlayingItem = song
         musicManager.player.prepareToPlay()
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
@@ -112,6 +114,10 @@ extension SongsCollectionCell {
         }
         
         // Return audio to normal
+//        musicManager.player = MPMusicPlayerController.systemMusicPlayer()
+//        musicManager.player.setQueue(with: MPMediaQuery.songs())
+//        musicManager.player.beginGeneratingPlaybackNotifications()
+        
         musicManager.itemNowPlaying = savedSong
         musicManager.player.prepareToPlay()
         musicManager.player.nowPlayingItem = savedSong
