@@ -31,22 +31,26 @@ extension SongsCollectionCell {
             }
         }
         if sender.state == UIGestureRecognizerState.ended || sender.state == UIGestureRecognizerState.cancelled {
+            musicManager.player.pause()
             endSamplingMusic()
         }
         
     }
     
     func startSamplingMusic(atIndexPath indexPath: IndexPath) {
-//        print("start")
+        print("start")
 
         //This is needed if touch moves to another cell
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidBegin"), object: nil)
         musicManager.currentlySampling = true
         selectedIndexPath = indexPath
+        print("Row is \(indexPath.row)")
+        print(musicManager.songList[indexPath.row].title)
         
         // These will be needed when the touch ends
         savedSong = musicManager.player.nowPlayingItem
-        print(savedSong?.title)
+
+//        print(savedSong?.title)
         savedTime = musicManager.player.currentPlaybackTime
         savedRepeatMode = musicManager.player.repeatMode
         
@@ -62,16 +66,22 @@ extension SongsCollectionCell {
         
         // Audio
         let song = musicManager.songList[indexPath.row]
+//        print("song title is \(samplingSong?.title)")
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         musicManager.player.repeatMode = MPMusicRepeatMode.one // In case held till end of song
+        musicManager.player = MPMusicPlayerController.systemMusicPlayer()
+
         musicManager.player.nowPlayingItem = song
-        musicManager.player.currentPlaybackTime = song.playbackDuration/2
         musicManager.player.prepareToPlay()
+        musicManager.player.currentPlaybackTime = song.playbackDuration/2
         musicManager.player.play()
+        print("what's actually playing is \(musicManager.player.nowPlayingItem?.title)")
+        print("song title is \(song.title)")
+//        song
     }
     
     func changeSamplingMusic(atIndexPath indexPath: IndexPath) {
-//        print("change")
+        print("change")
 
         //This is needed if touch moves to another cell
         selectedIndexPath = indexPath
@@ -87,11 +97,12 @@ extension SongsCollectionCell {
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
         musicManager.player.prepareToPlay()
         musicManager.player.play()
-        
     }
     
     func endSamplingMusic() {
-//        print("end")
+        print("end")
+        musicManager.player.pause()
+
         musicManager.currentlySampling = false
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidEnd"), object: nil)
         // Return visual to normal
@@ -102,20 +113,21 @@ extension SongsCollectionCell {
         }
         
         // Return audio to normal
-        musicManager.player.pause()
-        print(savedSong?.title)
         musicManager.itemNowPlaying = savedSong
+        musicManager.player.prepareToPlay()
+//        musicManager.player.nowPlayingItem = savedSong
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
         musicManager.player.repeatMode = savedRepeatMode!
         musicManager.player.currentPlaybackTime = savedTime!
-        if savedPlayerIsPlaying == MPMusicPlaybackState.playing {
+        
+        if savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.playing.rawValue {
             musicManager.player.play()
-        } else if savedPlayerIsPlaying == MPMusicPlaybackState.stopped {
+        } else if savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.stopped.rawValue {
             musicManager.player.stop()
+        } else if savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.paused.rawValue {
+            musicManager.player.pause()
         }
         
-//        print(musicManager.player.nowPlayingItem?.title)
-//        print("\n\n\n")
         // Release all saved properties
         savedPlayerIsPlaying = nil
         savedRepeatMode = nil

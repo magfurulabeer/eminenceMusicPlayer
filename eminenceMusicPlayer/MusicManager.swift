@@ -76,11 +76,13 @@ class MusicManager: NSObject {
         self.songList = [MPMediaItem]()
         self.artistList = [MPMediaItemCollection]()
         self.player = MPMusicPlayerController.systemMusicPlayer()
-        self.player.beginGeneratingPlaybackNotifications()
         self.shuffleIsOn = player.shuffleMode == MPMusicShuffleMode.songs
         super.init()
         self.songList = self.originalSongList
         self.artistList = self.originalArtistList
+        self.player.setQueue(with: MPMediaQuery.songs())
+        self.player.beginGeneratingPlaybackNotifications()
+
     }
     
     func refreshList() {

@@ -20,6 +20,7 @@ class SongsCollectionCell: UICollectionViewCell {
     var selectedCell: UITableViewCell?
     var selectedIndexPath: IndexPath?
     var savedSong: MPMediaItem?
+//    var samplingSong: MPMediaItem?
     var savedTime: TimeInterval?
     var savedRepeatMode: MPMusicRepeatMode?
     var savedPlayerIsPlaying: MPMusicPlaybackState?
