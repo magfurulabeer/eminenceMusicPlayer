@@ -11,7 +11,7 @@ import MediaPlayer
 
 extension NowPlayingViewController {
     func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
             OperationQueue.main.addOperation {
                 let currentTime: Double = self.musicManager.player.currentPlaybackTime
                 let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!

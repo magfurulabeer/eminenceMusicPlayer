@@ -56,12 +56,23 @@ extension NowPlayingViewController {
     
     @IBAction func rewindButtonTapped(_ sender: UIButton) {
         slider.value = 0
-        musicManager.player.skipToPreviousItem()
+        let time = musicManager.player.currentPlaybackTime
+        let duration = musicManager.itemNowPlaying?.playbackDuration
+        let percent = time/duration!
+        if duration! >= 10 && time >= 5 {
+            musicManager.player.skipToBeginning()
+        } else if duration! < 10 && percent < 0.5 {
+            musicManager.player.skipToBeginning()
+        } else {
+            musicManager.player.skipToPreviousItem()
+        }
+        currentTimeLabel.text = musicManager.player.currentPlaybackTime.stringFormat()
     }
     
     @IBAction func fastForwardButtonTapped(_ sender: UIButton) {
         slider.value = 0
         musicManager.player.skipToNextItem()
+        currentTimeLabel.text = musicManager.player.currentPlaybackTime.stringFormat()
     }
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
