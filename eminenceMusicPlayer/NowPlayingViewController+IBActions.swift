@@ -79,6 +79,7 @@ extension NowPlayingViewController {
             startRewindTimer()
             timer.fire()
         } else if (sender.state == UIGestureRecognizerState.ended) {
+            musicManager.player.endSeeking()
             timer.invalidate()
             startTimer()
         }
@@ -90,6 +91,7 @@ extension NowPlayingViewController {
             startFastForwardTimer()
             timer.fire()
         } else if (sender.state == UIGestureRecognizerState.ended) {
+            musicManager.player.endSeeking()
             timer.invalidate()
             startTimer()
         }

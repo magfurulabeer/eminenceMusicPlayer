@@ -66,7 +66,7 @@ extension SongsCollectionCell {
         
         // Audio
         let song = musicManager.songList[indexPath.row]
-//        print("song title is \(samplingSong?.title)")
+        print("song title is \(song.title)")
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         musicManager.player.repeatMode = MPMusicRepeatMode.one // In case held till end of song
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
@@ -77,7 +77,6 @@ extension SongsCollectionCell {
         musicManager.player.play()
         print("what's actually playing is \(musicManager.player.nowPlayingItem?.title)")
         print("song title is \(song.title)")
-//        song
     }
     
     func changeSamplingMusic(atIndexPath indexPath: IndexPath) {
@@ -115,7 +114,7 @@ extension SongsCollectionCell {
         // Return audio to normal
         musicManager.itemNowPlaying = savedSong
         musicManager.player.prepareToPlay()
-//        musicManager.player.nowPlayingItem = savedSong
+        musicManager.player.nowPlayingItem = savedSong
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
         musicManager.player.repeatMode = savedRepeatMode!
         musicManager.player.currentPlaybackTime = savedTime!

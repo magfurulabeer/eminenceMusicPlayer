@@ -23,24 +23,26 @@ extension NowPlayingViewController {
     
     // TODO: DRY the portion of the codes that overlap with the Timer block
     func startRewindTimer() {
+        musicManager.player.beginSeekingBackward()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
+            self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
             var currentTime = self.musicManager.player.currentPlaybackTime
             let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
             currentTime = currentTime - 5 < 0 ? 0 : currentTime - 5
-            self.musicManager.player.currentPlaybackTime = currentTime
-            self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
+//            self.musicManager.player.currentPlaybackTime = currentTime
             self.slider.value = Float(currentTime/duration)
         })
     }
     
     // TODO: DRY the portion of the codes that overlap with the Timer block
     func startFastForwardTimer() {
+        musicManager.player.beginSeekingForward()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
+            self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
             var currentTime = self.musicManager.player.currentPlaybackTime
             let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
             currentTime = currentTime + 5 > duration ? duration : currentTime + 5
-            self.musicManager.player.currentPlaybackTime = currentTime
-            self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
+//            self.musicManager.player.currentPlaybackTime = currentTime
             self.slider.value = Float(currentTime/duration)
         })
     }
