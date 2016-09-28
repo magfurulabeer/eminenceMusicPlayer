@@ -17,6 +17,8 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
     var menuBar: MenuBar = MenuBar()
     var quickBar: NowPlayingQuickBar?
     let slideDownInteractor = SlideDownInteractor()
+    var musicManager = MusicManager.sharedManager
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -94,6 +96,9 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
     }
 
     func quickBarWasTapped(sender: NowPlayingQuickBar) {
+        if musicManager.itemNowPlaying == nil {
+            return
+        }
         if let nowPlayingVC = storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
             nowPlayingVC.transitioningDelegate = nowPlayingVC
             nowPlayingVC.interactor = slideDownInteractor

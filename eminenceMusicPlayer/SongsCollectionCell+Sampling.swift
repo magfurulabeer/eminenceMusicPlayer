@@ -44,11 +44,11 @@ extension SongsCollectionCell {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidBegin"), object: nil)
         musicManager.currentlySampling = true
         selectedIndexPath = indexPath
-        print("Row is \(indexPath.row)")
-        print(musicManager.songList[indexPath.row].title)
+//        print(musicManager.songList[indexPath.row].title)
         
         // These will be needed when the touch ends
         savedSong = musicManager.player.nowPlayingItem
+        print("what's saved is \(savedSong?.title)")
 
 //        print(savedSong?.title)
         savedTime = musicManager.player.currentPlaybackTime
@@ -79,6 +79,8 @@ extension SongsCollectionCell {
         musicManager.player.play()
         print("what's actually playing is \(musicManager.player.nowPlayingItem?.title)")
         print("song title is \(song.title)")
+        print("what's saved is \(savedSong?.title)")
+
     }
     
     func changeSamplingMusic(atIndexPath indexPath: IndexPath) {
@@ -94,6 +96,9 @@ extension SongsCollectionCell {
         
         // Audio
         let song = musicManager.songList[indexPath.row]
+        print("now the song is \(song.title)")
+        print("what's saved is \(savedSong?.title)")
+
         musicManager.player.nowPlayingItem = song
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
         musicManager.player.prepareToPlay()
@@ -118,9 +123,12 @@ extension SongsCollectionCell {
 //        musicManager.player.setQueue(with: MPMediaQuery.songs())
 //        musicManager.player.beginGeneratingPlaybackNotifications()
         
+        print("what's saved is \(savedSong?.title)")
         musicManager.itemNowPlaying = savedSong
-        musicManager.player.prepareToPlay()
         musicManager.player.nowPlayingItem = savedSong
+        musicManager.player.prepareToPlay()
+        print("now the song is back to \(musicManager.player.nowPlayingItem?.title)")
+
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
         musicManager.player.repeatMode = savedRepeatMode!
         musicManager.player.currentPlaybackTime = savedTime!

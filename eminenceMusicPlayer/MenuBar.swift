@@ -36,7 +36,6 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     override init(frame: CGRect) {
-        
         super.init(frame: frame)
         backgroundColor = UIColor.blue
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellID)
