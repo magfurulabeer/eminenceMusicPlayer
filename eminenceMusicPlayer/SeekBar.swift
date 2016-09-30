@@ -49,7 +49,7 @@ class SeekBar: UIControl {
         // Posted when the currently playing media item changes.
         public static let MPMusicPlayerControllerNowPlayingItemDidChange: NSNotification.Name
         
-        m
+        
         // Posted when the current volume changes.
         public static let MPMusicPlayerControllerVolumeDidChange: NSNotification.Name
  */

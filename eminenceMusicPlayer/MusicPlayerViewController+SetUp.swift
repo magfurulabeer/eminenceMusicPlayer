@@ -76,7 +76,7 @@ extension MusicPlayerViewController {
     
     func setUpQuickBar() {
         quickBar = NowPlayingQuickBar(frame: CGRect(x: 0, y: view.frame.height - tabBarHeight - quickBarHeight, width: view.frame.width, height: quickBarHeight))
-        quickBar!.backgroundColor = QuickBarBackgroundColor // UIColor.red.withAlphaComponent(0.5)
+        quickBar!.backgroundColor = QuickBarBackgroundColor
         view.addSubview(quickBar!)
         quickBar!.translatesAutoresizingMaskIntoConstraints = false
         quickBar!.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true

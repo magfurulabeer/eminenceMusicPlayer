@@ -42,7 +42,6 @@ class NowPlayingQuickBar: UIView {
         setUpPauseButton()
         setUpSongTitleLabel()
         setUpArtistLabel()
-//        setUpGradient()
         displayPlaybackButton()
 
         NotificationCenter.default.addObserver(self, selector: #selector(NowPlayingQuickBar.displayNowPlayingItemChanged), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)

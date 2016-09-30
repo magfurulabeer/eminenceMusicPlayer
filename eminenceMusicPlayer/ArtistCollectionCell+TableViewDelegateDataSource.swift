@@ -24,7 +24,6 @@ extension ArtistsCollectionCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let artist = musicManager.artistList[indexPath.row]
-//        print(artist.representativeItem?.artist)
         
         let cell =  tableView.dequeueReusableCell(withIdentifier: "ArtistCell", for: indexPath) as! ArtistCell
         cell.artistLabel?.text = artist.representativeItem?.artist

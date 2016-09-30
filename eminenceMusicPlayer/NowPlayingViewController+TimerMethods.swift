@@ -29,7 +29,6 @@ extension NowPlayingViewController {
             var currentTime = self.musicManager.player.currentPlaybackTime
             let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
             currentTime = currentTime - 5 < 0 ? 0 : currentTime - 5
-//            self.musicManager.player.currentPlaybackTime = currentTime
             self.slider.value = Float(currentTime/duration)
         })
     }
@@ -42,7 +41,6 @@ extension NowPlayingViewController {
             var currentTime = self.musicManager.player.currentPlaybackTime
             let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
             currentTime = currentTime + 5 > duration ? duration : currentTime + 5
-//            self.musicManager.player.currentPlaybackTime = currentTime
             self.slider.value = Float(currentTime/duration)
         })
     }

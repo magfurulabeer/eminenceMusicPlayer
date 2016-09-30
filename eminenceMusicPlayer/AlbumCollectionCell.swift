@@ -24,7 +24,6 @@ class AlbumCollectionCell: UICollectionViewCell, UICollectionViewDelegateFlowLay
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        self.collectionView = UICollectionView(frame: self.contentView.frame, collectionViewLayout: UICollectionViewLayout() )
         setUpCollectionView()
     }
     
@@ -46,7 +45,6 @@ class AlbumCollectionCell: UICollectionViewCell, UICollectionViewDelegateFlowLay
         collectionView.isPrefetchingEnabled = false
         collectionView.backgroundColor = UIColor.clear
         contentView.addSubview(collectionView)
-//        collectionView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         collectionView.register(UINib(nibName: "AlbumCell", bundle: Bundle.main), forCellWithReuseIdentifier: "AlbumCell")
         

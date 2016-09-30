@@ -48,34 +48,9 @@ extension SongsCollectionCell: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let song = musicManager.songList[indexPath.row]
-//        
-//        guard let cell = cell as? SongCell else {
-//            return
-//        }
-//        
-//        if song == musicManager.itemNowPlaying {
-//            cell.addGradient()
-//        }
-//    }
-//    
-//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        guard let cell = cell as? SongCell else {
-//            return
-//        }
-//        
-//        cell.removeGradientIfApplicable()
-//    }
-    
     
     @objc(tableView:didSelectRowAtIndexPath:)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        musicManager.player.shuffleMode = MPMusicShuffleMode.off
-//
-//        musicManager.player.nowPlayingItem =
-//        musicManager.player.prepareToPlay()
-//        musicManager.player.play()
         
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
         musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.originalSongList))

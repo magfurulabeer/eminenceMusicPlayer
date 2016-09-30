@@ -146,7 +146,6 @@ class BaseCell: UICollectionViewCell {
 
 class MenuCell: BaseCell {
     
-//    let deselectedColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
     let deselectedColor = UIColor.white.withAlphaComponent(0.2)
     let selectedColor = UIColor.white.withAlphaComponent(0.8)
     let imageView: UIImageView = {

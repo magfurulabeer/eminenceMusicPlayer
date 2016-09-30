@@ -34,8 +34,7 @@ class QuickQueueCell: UITableViewCell, UITableViewDataSource, UITableViewDelegat
     func setUpTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.backgroundColor = UIColor.clear
-        tableView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        tableView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         contentView.addSubview(tableView)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         tableView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
@@ -65,7 +64,6 @@ class QuickQueueCell: UITableViewCell, UITableViewDataSource, UITableViewDelegat
         cell.durationLabel.text = song.playbackDuration.stringFormat()
         cell.albumImage = song.artwork?.image(at: CGSize(width: SongCellHeight, height: SongCellHeight))
         cell.selectionStyle = UITableViewCellSelectionStyle.none
-//        cell.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         return cell
     }
     

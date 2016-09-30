@@ -22,8 +22,6 @@ extension NowPlayingQuickBar {
         addSubview(self.albumThumbnail)
         
         albumThumbnail.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8).isActive = true
-        
-//        albumThumbnail.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9).isActive = true
         albumThumbnail.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8).isActive = true
         albumThumbnail.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         albumThumbnail.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
@@ -71,7 +69,6 @@ extension NowPlayingQuickBar {
         playButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
         playButton.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
         playButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        playButton.centerYAnchor.constraint(equalTo: albumThumbnail.centerYAnchor, constant: -3).isActive = true
         playButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
     }
     
@@ -94,7 +91,6 @@ extension NowPlayingQuickBar {
     func setUpGradient() {
         let gradient = CAGradientLayer()
         let startColor = UIColor(red: 73/255.0, green: 68/255.0, blue: 78/255.0, alpha: 1)
-//        let endColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
         let endColor = UIColor(red: 54/255.0, green: 49/255.0, blue: 58/255.0, alpha: 1.0)
         gradient.colors = [startColor.cgColor, endColor.cgColor]
         gradient.frame = frame
@@ -111,7 +107,6 @@ extension NowPlayingQuickBar {
         layer.shadowOffset = CGSize.zero
         layer.shadowRadius = 10
         layer.shadowPath = UIBezierPath(rect: bounds).cgPath
-//        layer.shouldRasterize = true
     }
     
     func setUpTopBorder() {

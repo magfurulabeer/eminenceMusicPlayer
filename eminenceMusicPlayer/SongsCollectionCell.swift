@@ -15,12 +15,11 @@ class SongsCollectionCell: UICollectionViewCell {
     weak var viewController: UIViewController?
     var tableView: UITableView = UITableView()
     let slideDownInteractor = SlideDownInteractor()
-//    let transitionDelegate = SongTransitioningDelegate()
+    
     /////// SAMPLING PROPERTIES ////////
     var selectedCell: UITableViewCell?
     var selectedIndexPath: IndexPath?
     var savedSong: MPMediaItem?
-//    var samplingSong: MPMediaItem?
     var savedTime: TimeInterval?
     var savedRepeatMode: MPMusicRepeatMode?
     var savedPlayerIsPlaying: MPMusicPlaybackState?
@@ -51,7 +50,7 @@ class SongsCollectionCell: UICollectionViewCell {
         contentView.addSubview(tableView)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress(sender:)))
-        longPressGestureRecognizer.minimumPressDuration = 0.2
+        longPressGestureRecognizer.minimumPressDuration = 0.3
         tableView.addGestureRecognizer(longPressGestureRecognizer)
         tableView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
         tableView.register(UINib(nibName: "SelectedSongCell", bundle: Bundle.main), forCellReuseIdentifier: "SelectedSongCell")
