@@ -24,6 +24,8 @@ class SongsCollectionCell: UICollectionViewCell {
     var savedTime: TimeInterval?
     var savedRepeatMode: MPMusicRepeatMode?
     var savedPlayerIsPlaying: MPMusicPlaybackState?
+    var cellSnapshot = UIView()
+    var initialIndexPath = IndexPath()
     ///////////////////////////////////
     
     override init(frame: CGRect) {

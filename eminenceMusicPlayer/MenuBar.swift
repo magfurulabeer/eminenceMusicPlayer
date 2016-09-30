@@ -37,7 +37,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.blue
+        backgroundColor = UIColor.white
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellID)
         addSubview(collectionView)
         collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
@@ -100,6 +100,23 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         return 0
     }
     
+    func highlightCell(index: Int) {
+        let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0))
+        UIView.animate(withDuration: 0.2) { 
+            cell?.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        }
+    }
+    
+    func unhighlightCell(index: Int) {
+        let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0))
+        cell?.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
+            cell?.backgroundColor = UIColor.clear
+            }) { (bool) in
+                // Code?
+        }
+    }
     
 }
 

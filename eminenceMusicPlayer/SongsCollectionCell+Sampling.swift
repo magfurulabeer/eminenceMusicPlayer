@@ -12,11 +12,14 @@ import UIKit
 extension SongsCollectionCell {
     func handleLongPress(sender: UILongPressGestureRecognizer) {
         let point = sender.location(in: tableView)
-        let indexPath = tableView.indexPathForRow(at: point)!
-        if sender.state == UIGestureRecognizerState.began && point.x <= SongCellHeight {
-            // Implement dragging here
+        let indexPath = tableView.indexPathForRow(at: point)
+        
+        if sender.state == UIGestureRecognizerState.began && point.x <= SongCellHeight  {
+            handleLongPressDragging(sender: sender, indexPath: indexPath)
+        } else if sender.state != UIGestureRecognizerState.began && musicManager.currentlySampling == false {
+            handleLongPressDragging(sender: sender, indexPath: indexPath)
         } else {
-            handleLongPressSampling(sender: sender, indexPath: indexPath)
+            handleLongPressSampling(sender: sender, indexPath: indexPath!)
         }
         
     }
@@ -47,19 +50,14 @@ extension SongsCollectionCell {
 
 
     func startSamplingMusic(atIndexPath indexPath: IndexPath) {
-        print("start")
-
         //This is needed if touch moves to another cell
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidBegin"), object: nil)
         musicManager.currentlySampling = true
         selectedIndexPath = indexPath
-//        print(musicManager.songList[indexPath.row].title)
         
         // These will be needed when the touch ends
         savedSong = musicManager.player.nowPlayingItem
-        print("what's saved is \(savedSong?.title)")
 
-//        print(savedSong?.title)
         savedTime = musicManager.player.currentPlaybackTime
         savedRepeatMode = musicManager.player.repeatMode
         
@@ -75,7 +73,6 @@ extension SongsCollectionCell {
         
         // Audio
         let song = musicManager.songList[indexPath.row]
-        print("song title is \(song.title)")
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         musicManager.player.repeatMode = MPMusicRepeatMode.one // In case held till end of song
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
@@ -86,20 +83,9 @@ extension SongsCollectionCell {
         
         musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
-
-//        musicManager.player.nowPlayingItem = song
-//        musicManager.player.prepareToPlay()
-
-//        musicManager.player.play()
-        print("what's actually playing is \(musicManager.player.nowPlayingItem?.title)")
-        print("song title is \(song.title)")
-        print("what's saved is \(savedSong?.title)")
-
     }
     
     func changeSamplingMusic(atIndexPath indexPath: IndexPath) {
-        print("change")
-
         //This is needed if touch moves to another cell
         selectedIndexPath = indexPath
         
@@ -110,21 +96,11 @@ extension SongsCollectionCell {
         
         // Audio
         let song = musicManager.songList[indexPath.row]
-        print("now the song is \(song.title)")
-        print("what's saved is \(savedSong?.title)")
-
         musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
-
-//        musicManager.player.nowPlayingItem = nil
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
-//        musicManager.player.prepareToPlay()
-//        musicManager.player.play()
-        print("what's playing is \(musicManager.player.nowPlayingItem?.title)")
-
     }
     
     func endSamplingMusic() {
-        print("end")
         musicManager.player.pause()
 
         musicManager.currentlySampling = false
@@ -137,15 +113,8 @@ extension SongsCollectionCell {
         }
         
         // Return audio to normal
-//        musicManager.player = MPMusicPlayerController.systemMusicPlayer()
-//        musicManager.player.setQueue(with: MPMediaQuery.songs())
-//        musicManager.player.beginGeneratingPlaybackNotifications()
-        
-        print("what's saved is \(savedSong?.title)")
-//        musicManager.itemNowPlaying = savedSong
         musicManager.player.nowPlayingItem = savedSong
         musicManager.player.prepareToPlay()
-        print("now the song is back to \(musicManager.player.nowPlayingItem?.title)")
 
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
         musicManager.player.repeatMode = savedRepeatMode!

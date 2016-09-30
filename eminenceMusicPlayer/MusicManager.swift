@@ -87,6 +87,20 @@ class MusicManager: NSObject {
         }
     }
     
+    var originalPlaylistList: [MPMediaItemCollection] {
+        get {
+            let playlistQuery = MPMediaQuery.playlists()
+            
+            guard let playlistCollections = playlistQuery.collections else {
+                print("playlistCollections is nil")
+                songListIsEmpty = true
+                return []
+            }
+            
+            return playlistCollections
+        }
+    }
+    
     override init() {
         self.songList = [MPMediaItem]()
         self.artistList = [MPMediaItemCollection]()
