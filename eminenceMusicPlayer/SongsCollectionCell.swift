@@ -15,7 +15,7 @@ class SongsCollectionCell: UICollectionViewCell {
     weak var viewController: UIViewController?
     var tableView: UITableView = UITableView()
     let slideDownInteractor = SlideDownInteractor()
-
+//    let transitionDelegate = SongTransitioningDelegate()
     /////// SAMPLING PROPERTIES ////////
     var selectedCell: UITableViewCell?
     var selectedIndexPath: IndexPath?

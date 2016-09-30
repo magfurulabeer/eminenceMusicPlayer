@@ -58,12 +58,10 @@ class AlbumCollectionCell: UICollectionViewCell, UICollectionViewDelegateFlowLay
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        print("sect")
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("tems?")
         print(musicManager.albumList.count)
         return musicManager.albumList.count
     }
@@ -82,13 +80,20 @@ class AlbumCollectionCell: UICollectionViewCell, UICollectionViewDelegateFlowLay
         
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-////        let contentViewWidth = contentView.frame.width
-////        let dimension = (contentViewWidth - 10)/2
-//        return CGSize(width: 10, height: 10)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let size = contentView.frame.size
+        let rect = CGRect(x: size.width * 0.05, y: 0, width: size.width * 0.3, height: size.height)
+        let albumDetails = AlbumDetailsView(frame: rect)
+        albumDetails.album = musicManager.albumList[indexPath.item]
+        albumDetails.albumImageView.image = albumDetails.album!.representativeItem?.artwork?.image(at: CGSize(width: frame.width, height: frame.width)) ?? #imageLiteral(resourceName: "NoAlbumImage")
+        albumDetails.viewController = viewController
+        addSubview(albumDetails)
+        albumDetails.translatesAutoresizingMaskIntoConstraints = false
+        albumDetails.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        albumDetails.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        albumDetails.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9).isActive = true
+        albumDetails.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+
+    }
+
 }

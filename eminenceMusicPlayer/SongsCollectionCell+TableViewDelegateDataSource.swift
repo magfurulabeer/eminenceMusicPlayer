@@ -72,15 +72,17 @@ extension SongsCollectionCell: UITableViewDelegate, UITableViewDataSource {
     @objc(tableView:didSelectRowAtIndexPath:)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.originalSongList))
+
         musicManager.player.nowPlayingItem = musicManager.songList[indexPath.row]
+        musicManager.player.prepareToPlay()
         musicManager.player.play()
-        //        performSegue(withIdentifier: "NowPlayingSegue", sender: nil)
         
         guard let viewController = viewController else {    return  }
         
         if let nowPlayingVC = viewController.storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
-            nowPlayingVC.transitioningDelegate = self
-            nowPlayingVC.interactor = slideDownInteractor
+            nowPlayingVC.transitioningDelegate = self.viewController as! MusicPlayerViewController
+            nowPlayingVC.interactor = (self.viewController as! MusicPlayerViewController).slideDownInteractor
             viewController.present(nowPlayingVC, animated: true, completion: nil)
         }
     }
