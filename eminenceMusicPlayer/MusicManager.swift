@@ -117,7 +117,7 @@ class MusicManager: NSObject {
         self.albumList = self.originalAlbumList
         self.playlistList = self.originalPlaylistList
 
-        self.player.setQueue(with: MPMediaItemCollection(items: self.originalSongList))
+//        self.player.setQueue(with: MPMediaItemCollection(items: self.originalSongList))
         self.player.beginGeneratingPlaybackNotifications()
 
     }
