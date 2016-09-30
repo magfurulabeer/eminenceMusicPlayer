@@ -16,6 +16,7 @@ class AlbumCell: UICollectionViewCell {
     
     @IBOutlet weak var albumArtistLabel: UILabel!
 
+    var hasBorder = false
     
     var albumImage: UIImage {
         get {

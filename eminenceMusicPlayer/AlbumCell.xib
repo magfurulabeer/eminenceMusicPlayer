@@ -17,6 +17,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoAlbumImage" translatesAutoresizingMaskIntoConstraints="NO" id="5Gq-G2-aVq"/>
+                    <view alpha="0.45000000000000001" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VSx-X6-INt">
+                        <frame key="frameInset" minY="114" width="160" height="46"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This is an album title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v97-Pc-k4b">
                         <frame key="frameInset" minX="8" minY="124" width="146" height="16"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
@@ -38,10 +42,14 @@
                 <constraint firstItem="4CJ-MC-0kB" firstAttribute="trailing" secondItem="v97-Pc-k4b" secondAttribute="trailing" id="8fs-fV-SuN"/>
                 <constraint firstAttribute="bottom" secondItem="5Gq-G2-aVq" secondAttribute="bottom" id="8hW-gG-63p"/>
                 <constraint firstItem="5Gq-G2-aVq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="C31-ra-nPJ"/>
+                <constraint firstAttribute="trailing" secondItem="VSx-X6-INt" secondAttribute="trailing" id="LAm-0N-2VX"/>
                 <constraint firstItem="5Gq-G2-aVq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LJ7-1W-iTH"/>
                 <constraint firstAttribute="bottom" secondItem="4CJ-MC-0kB" secondAttribute="bottom" constant="8" id="RFv-1Z-1Zg"/>
                 <constraint firstAttribute="trailingMargin" secondItem="v97-Pc-k4b" secondAttribute="trailing" constant="-10" id="Tto-GR-5uz"/>
+                <constraint firstItem="VSx-X6-INt" firstAttribute="top" secondItem="v97-Pc-k4b" secondAttribute="bottom" constant="-26" id="aE5-yh-p7Y"/>
+                <constraint firstAttribute="bottom" secondItem="VSx-X6-INt" secondAttribute="bottom" id="jc7-1q-THC"/>
                 <constraint firstItem="4CJ-MC-0kB" firstAttribute="top" secondItem="v97-Pc-k4b" secondAttribute="bottom" constant="2" id="mAh-OZ-1QU"/>
+                <constraint firstItem="VSx-X6-INt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qhd-1g-7Pk"/>
                 <constraint firstAttribute="trailing" secondItem="5Gq-G2-aVq" secondAttribute="trailing" id="xVQ-31-5tA"/>
             </constraints>
             <size key="customSize" width="160" height="160"/>

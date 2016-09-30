@@ -49,6 +49,7 @@ class SongsCollectionCell: UICollectionViewCell {
         contentView.addSubview(tableView)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress(sender:)))
+        longPressGestureRecognizer.minimumPressDuration = 0.2
         tableView.addGestureRecognizer(longPressGestureRecognizer)
         tableView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
         tableView.register(UINib(nibName: "SelectedSongCell", bundle: Bundle.main), forCellReuseIdentifier: "SelectedSongCell")
