@@ -39,14 +39,20 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
     override func viewDidAppear(_ animated: Bool) {
         switch menuBar.index {
         case 0:
+            let cell = collectionView?.cellForItem(at: IndexPath(item: 0, section: 0)) as! PlaylistsCollectionCell
+            cell.tableView.reloadData()
             break
         case 1:
             let cell = collectionView?.cellForItem(at: IndexPath(item: 1, section: 0)) as! SongsCollectionCell
             cell.tableView.reloadData()
             break
         case 2:
+            let cell = collectionView?.cellForItem(at: IndexPath(item: 2, section: 0)) as! ArtistsCollectionCell
+            cell.tableView.reloadData()
             break
         case 3:
+            let cell = collectionView?.cellForItem(at: IndexPath(item: 3, section: 0)) as! AlbumCollectionCell
+            cell.collectionView.reloadData()
             break
         default:
             break
@@ -116,10 +122,12 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
             return
         }
         if let nowPlayingVC = storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
-            nowPlayingVC.transitioningDelegate = nowPlayingVC
+            nowPlayingVC.transitioningDelegate = self
             nowPlayingVC.interactor = slideDownInteractor
             present(nowPlayingVC, animated: true, completion: nil)
         }
+        
+        
     }
     
     

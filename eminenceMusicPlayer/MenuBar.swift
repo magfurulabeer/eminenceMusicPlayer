@@ -57,6 +57,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         if index < imageIcons.count {
             let selectedIndexPath = IndexPath(item: index, section: 0)
             collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
+            self.index = index
         }
     }
     
