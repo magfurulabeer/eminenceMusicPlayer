@@ -73,7 +73,9 @@ extension SongsCollectionCell {
             let cell = tableView.cellForRow(at: initialIndexPath)!
             cell.isHidden = false
             cell.alpha = 1.0
-            
+            let song = musicManager.songList[initialIndexPath.row]
+            musicManager.quickQueue.append(song)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddedToQueue"), object: nil)
         }
         
         if sender.state == UIGestureRecognizerState.cancelled {

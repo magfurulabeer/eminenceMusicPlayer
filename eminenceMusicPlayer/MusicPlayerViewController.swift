@@ -12,6 +12,7 @@ private let cellID = "cellID"
 private let songID = "songID"
 private let artistID = "artistID"
 private let albumID = "albumID"
+private let playlistID = "playlistID"
 
 
 class MusicPlayerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, QuickBarDelegate {
@@ -76,6 +77,13 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let colors = [UIColor.red, UIColor.orange, UIColor.yellow, UIColor.green]
+        if indexPath.row == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: playlistID, for: indexPath) as! PlaylistsCollectionCell
+            cell.viewController = self
+            cell.backgroundColor = UIColor.clear
+            return cell
+        }
+
         if indexPath.row == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: songID, for: indexPath) as! SongsCollectionCell
             cell.viewController = self
@@ -83,12 +91,6 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
             return cell
         }
         if indexPath.row == 2 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: artistID, for: indexPath) as! ArtistsCollectionCell
-            cell.viewController = self
-            cell.backgroundColor = UIColor.clear
-            return cell
-        }
-        if indexPath.row == 4 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: artistID, for: indexPath) as! ArtistsCollectionCell
             cell.viewController = self
             cell.backgroundColor = UIColor.clear

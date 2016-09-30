@@ -87,8 +87,8 @@ class NowPlayingQuickBar: UIView {
 
     func displayNowPlayingItemChanged() {
         if musicManager.currentlySampling == false {
-            songTitleLabel.text = musicManager.itemNowPlaying?.title
-            artistLabel.text = musicManager.itemNowPlaying?.artist
+            songTitleLabel.text = musicManager.itemNowPlaying?.title ?? ""
+            artistLabel.text = musicManager.itemNowPlaying?.artist ?? ""
             albumThumbnail.image = musicManager.itemNowPlaying?.artwork?.image(at: CGSize(width: self.bounds.height, height: self.bounds.height))
         }
     }

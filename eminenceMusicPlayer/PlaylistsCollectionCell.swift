@@ -9,7 +9,7 @@
 import UIKit
 
 class PlaylistsCollectionCell: UICollectionViewCell {
-    var tableView: UITableView = UITableView()
+    var tableView: UITableView = UITableView(frame: .zero, style: .grouped)
     let musicManager = MusicManager.sharedManager
     weak var viewController: UIViewController?
     
@@ -17,6 +17,7 @@ class PlaylistsCollectionCell: UICollectionViewCell {
         super.init(frame: frame)
         backgroundColor = UIColor.clear
         setUpTableView()
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -24,14 +25,15 @@ class PlaylistsCollectionCell: UICollectionViewCell {
     }
     
     func setUpTableView() {
+        tableView.frame = frame
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.clear
         contentView.addSubview(tableView)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        
-        tableView.register(UINib(nibName: "ArtistCell", bundle: Bundle.main), forCellReuseIdentifier: "ArtistCell")
-        
+        tableView.register(QuickQueueCell.self, forCellReuseIdentifier: "QuickQueueCell")
+        tableView.register(UINib(nibName: "BasicCell", bundle: Bundle.main), forCellReuseIdentifier: "BasicCell")
+
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true

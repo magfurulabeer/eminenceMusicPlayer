@@ -14,11 +14,13 @@ class MusicManager: NSObject {
     var songList: [MPMediaItem]
     var artistList: [MPMediaItemCollection]
     var albumList: [MPMediaItemCollection]
+    var playlistList: [MPMediaItemCollection]
     var player: MPMusicPlayerController
     var shuffleIsOn: Bool
     var volume = MPVolumeView().volumeSlider
     var currentlySampling = false
     var songListIsEmpty: Bool = false
+    var quickQueue = [MPMediaItem]()
     var itemNowPlaying: MPMediaItem? {
         get {
             return player.nowPlayingItem
@@ -91,13 +93,13 @@ class MusicManager: NSObject {
         get {
             let playlistQuery = MPMediaQuery.playlists()
             
-            guard let playlistCollections = playlistQuery.collections else {
+            guard let playlists = playlistQuery.collections else {
                 print("playlistCollections is nil")
                 songListIsEmpty = true
                 return []
             }
             
-            return playlistCollections
+            return playlists
         }
     }
     
@@ -105,6 +107,7 @@ class MusicManager: NSObject {
         self.songList = [MPMediaItem]()
         self.artistList = [MPMediaItemCollection]()
         self.albumList = [MPMediaItemCollection]()
+        self.playlistList = [MPMediaItemCollection]()
         self.player = MPMusicPlayerController.systemMusicPlayer()
 
         self.shuffleIsOn = player.shuffleMode == MPMusicShuffleMode.songs
@@ -112,6 +115,7 @@ class MusicManager: NSObject {
         self.songList = self.originalSongList
         self.artistList = self.originalArtistList
         self.albumList = self.originalAlbumList
+        self.playlistList = self.originalPlaylistList
 
         self.player.setQueue(with: MPMediaItemCollection(items: self.originalSongList))
         self.player.beginGeneratingPlaybackNotifications()
