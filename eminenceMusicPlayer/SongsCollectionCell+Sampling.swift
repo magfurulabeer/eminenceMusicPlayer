@@ -11,17 +11,25 @@ import UIKit
 
 extension SongsCollectionCell {
     func handleLongPress(sender: UILongPressGestureRecognizer) {
+        let point = sender.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: point)!
+        if sender.state == UIGestureRecognizerState.began && point.x <= SongCellHeight {
+            // Implement dragging here
+        } else {
+            handleLongPressSampling(sender: sender, indexPath: indexPath)
+        }
+        
+    }
+
+    func handleLongPressSampling(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
         if sender.state == UIGestureRecognizerState.began {
             // Will be needed at the end
             savedPlayerIsPlaying = musicManager.player.playbackState
             musicManager.player.pause()
-            let point = sender.location(in: tableView)
-            let indexPath = tableView.indexPathForRow(at: point)!
+            
             startSamplingMusic(atIndexPath: indexPath)
         }
         if sender.state == UIGestureRecognizerState.changed {
-            let point = sender.location(in: tableView)
-            let indexPath = tableView.indexPathForRow(at: point)!
             if indexPath != selectedIndexPath {
                 musicManager.player.pause()
                 selectedCell?.backgroundColor = UIColor.clear
@@ -34,9 +42,10 @@ extension SongsCollectionCell {
             musicManager.player.pause()
             endSamplingMusic()
         }
-        
+
     }
-    
+
+
     func startSamplingMusic(atIndexPath indexPath: IndexPath) {
         print("start")
 
