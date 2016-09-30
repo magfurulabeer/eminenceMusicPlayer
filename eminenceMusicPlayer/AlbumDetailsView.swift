@@ -90,16 +90,18 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
         musicManager.player.pause()
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         
-        musicManager.player.setQueue(with: MPMediaItemCollection(items: album!.items))
-
         let song = album?.items[indexPath.row]
         print(song?.title)
-        musicManager.player.nowPlayingItem = song
-        for _ in 0..<indexPath.row {
-            musicManager.player.skipToNextItem()
-        }
-        musicManager.player.prepareToPlay()
-        musicManager.player.play()
+        
+
+        
+        musicManager.player = MPMusicPlayerController.systemMusicPlayer()
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: album!.items))
+        musicManager.player.beginGeneratingPlaybackNotifications()
+        musicManager.player.stop()
+        musicManager.player.nowPlayingItem = nil
+        musicManager.itemNowPlaying = song
+
         
 //        guard let viewController = viewController else {    return  }
         
