@@ -32,6 +32,7 @@ extension NowPlayingViewController {
 
     @IBAction func repeatButtonTapped(_ sender: UIButton) {
         let repeatMode = musicManager.player.repeatMode
+        print(musicManager.player.repeatMode.rawValue)
         if repeatMode == MPMusicRepeatMode.none {
             musicManager.player.repeatMode = MPMusicRepeatMode.all
         } else if repeatMode == MPMusicRepeatMode.all {

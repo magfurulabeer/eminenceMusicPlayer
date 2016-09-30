@@ -31,12 +31,13 @@ extension NowPlayingViewController {
         }
         func displayRepeatAll() {
             repeatButton.imageView?.image = #imageLiteral(resourceName: "repeat")
-            repeatButton.setImage(#imageLiteral(resourceName: "repeat1"), for: UIControlState.normal)
+            repeatButton.setImage(#imageLiteral(resourceName: "repeat"), for: UIControlState.normal)
             repeatButton.alpha = 1
         }
         func displayRepeatOne() {
             repeatButton.imageView?.image = #imageLiteral(resourceName: "repeat1")
             repeatButton.setImage(#imageLiteral(resourceName: "repeat1"), for: UIControlState.normal)
+            repeatButton.alpha = 1
         }
         
         if musicManager.player.repeatMode == MPMusicRepeatMode.none {
