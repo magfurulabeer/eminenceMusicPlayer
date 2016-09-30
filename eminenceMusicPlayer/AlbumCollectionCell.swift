@@ -88,7 +88,7 @@ class AlbumCollectionCell: UICollectionViewCell, UICollectionViewDelegateFlowLay
         albumDetails.translatesAutoresizingMaskIntoConstraints = false
         albumDetails.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         albumDetails.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        albumDetails.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9).isActive = true
+        albumDetails.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1).isActive = true
         albumDetails.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
 
     }

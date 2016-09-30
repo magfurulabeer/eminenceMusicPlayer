@@ -58,8 +58,9 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
 
     func setUpTableView() {
         addSubview(tableView)
+        tableView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         tableView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
-        tableView.topAnchor.constraint(equalTo: albumImageView.bottomAnchor, constant: -100).isActive = true
+        tableView.topAnchor.constraint(equalTo: albumImageView.bottomAnchor, constant: 0).isActive = true
         tableView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         tableView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
