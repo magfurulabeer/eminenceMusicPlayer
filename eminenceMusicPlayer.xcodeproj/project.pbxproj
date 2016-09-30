@@ -139,6 +139,58 @@
 			name = NowPlayingQuickBar;
 			sourceTree = "<group>";
 		};
+		8B666C401D9E2B930011F78C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8B6964FE1D97982D0037E13F /* LaunchViewController.swift */,
+				8B8FE45C1D9901C300A9A85C /* MusicPlayerViewController.swift */,
+				8B8FE4671D99136900A9A85C /* MusicPlayerViewController+SetUp.swift */,
+				8BE744671D93B9F60014DE31 /* NowPlayingViewController */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		8B666C411D9E2BBA0011F78C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8BB1086D1D92FF5100CD2238 /* MusicManager.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		8B666C421D9E2BCB0011F78C /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				8BB108471D92F39500CD2238 /* Info.plist */,
+				8B2C54D81D94645C005E1481 /* Constants.swift */,
+				8B7B948B1D94BCEF005B9B63 /* OpenTabBarController.swift */,
+				8BB108391D92F39400CD2238 /* AppDelegate.swift */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		8B666C431D9E2BEF0011F78C /* Storyboards & Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				8BB1087D1D93084500CD2238 /* BasicSongCell.xib */,
+				8B6964FB1D9784370037E13F /* SongCell.xib */,
+				8BAEC9C51D9A446D00F41A74 /* SelectedSongCell.xib */,
+				8BAEC9D01D9A55DB00F41A74 /* ArtistCell.xib */,
+				8BB108441D92F39500CD2238 /* LaunchScreen.storyboard */,
+				8BB1083F1D92F39400CD2238 /* Main.storyboard */,
+			);
+			name = "Storyboards & Xibs";
+			sourceTree = "<group>";
+		};
+		8B666C441D9E2C200011F78C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8BE744691D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift */,
+				8BB108841D932CEC00CD2238 /* SideKick.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		8B8FE45E1D990C4600A9A85C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,13 +230,14 @@
 		8BB108381D92F39400CD2238 /* eminenceMusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				8BB108391D92F39400CD2238 /* AppDelegate.swift */,
-				8BB1086D1D92FF5100CD2238 /* MusicManager.swift */,
-				8B8FE45E1D990C4600A9A85C /* Views */,
-				8BB108711D93016B00CD2238 /* View Controllers */,
-				8BCBE6291D9803C20038AC74 /* TransitionAnimators */,
 				8BB108701D93015800CD2238 /* Assets */,
-				8BE7446B1D93CC070014DE31 /* Helpers */,
+				8B666C401D9E2B930011F78C /* Controllers */,
+				8B666C441D9E2C200011F78C /* Extensions */,
+				8B666C411D9E2BBA0011F78C /* Models */,
+				8B666C421D9E2BCB0011F78C /* Other */,
+				8B666C431D9E2BEF0011F78C /* Storyboards & Xibs */,
+				8BCBE6291D9803C20038AC74 /* Transitions */,
+				8B8FE45E1D990C4600A9A85C /* Views */,
 			);
 			path = eminenceMusicPlayer;
 			sourceTree = "<group>";
@@ -192,33 +245,19 @@
 		8BB108701D93015800CD2238 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				8BB1083F1D92F39400CD2238 /* Main.storyboard */,
 				8BB108421D92F39500CD2238 /* Assets.xcassets */,
-				8BB108441D92F39500CD2238 /* LaunchScreen.storyboard */,
-				8BB108471D92F39500CD2238 /* Info.plist */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
 		};
-		8BB108711D93016B00CD2238 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				8B6964FE1D97982D0037E13F /* LaunchViewController.swift */,
-				8B8FE45C1D9901C300A9A85C /* MusicPlayerViewController.swift */,
-				8B8FE4671D99136900A9A85C /* MusicPlayerViewController+SetUp.swift */,
-				8BE744671D93B9F60014DE31 /* NowPlayingViewController */,
-			);
-			name = "View Controllers";
-			sourceTree = "<group>";
-		};
-		8BCBE6291D9803C20038AC74 /* TransitionAnimators */ = {
+		8BCBE6291D9803C20038AC74 /* Transitions */ = {
 			isa = PBXGroup;
 			children = (
 				8BCBE62A1D9804170038AC74 /* SongTappedAnimator.swift */,
 				8BCBE6341D9880490038AC74 /* SlideDownAnimator.swift */,
 				8BCBE6381D9885860038AC74 /* SlideDownInteractor.swift */,
 			);
-			name = TransitionAnimators;
+			name = Transitions;
 			sourceTree = "<group>";
 		};
 		8BE744671D93B9F60014DE31 /* NowPlayingViewController */ = {
@@ -234,30 +273,15 @@
 			name = NowPlayingViewController;
 			sourceTree = "<group>";
 		};
-		8BE7446B1D93CC070014DE31 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				8B2C54D81D94645C005E1481 /* Constants.swift */,
-				8BE744691D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift */,
-				8B7B948B1D94BCEF005B9B63 /* OpenTabBarController.swift */,
-				8BB108841D932CEC00CD2238 /* SideKick.swift */,
-			);
-			name = Helpers;
-			sourceTree = "<group>";
-		};
 		8BE7446C1D93CC160014DE31 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				8BAEC9CA1D9A55A100F41A74 /* ArtistCollectionCell */,
 				8B4A20A11D991B9E00B8E26F /* SongsCollectionCell */,
-				8BB1087D1D93084500CD2238 /* BasicSongCell.xib */,
 				8BB108801D93093C00CD2238 /* BasicSongCell.swift */,
 				8B6964FA1D9784370037E13F /* SongCell.swift */,
-				8B6964FB1D9784370037E13F /* SongCell.xib */,
 				8BAEC9C41D9A446D00F41A74 /* SelectedSongCell.swift */,
-				8BAEC9C51D9A446D00F41A74 /* SelectedSongCell.xib */,
 				8BAEC9CF1D9A55DB00F41A74 /* ArtistCell.swift */,
-				8BAEC9D01D9A55DB00F41A74 /* ArtistCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -297,6 +321,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = TZJ7BHR5V6;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -500,7 +529,7 @@
 				DEVELOPMENT_TEAM = TZJ7BHR5V6;
 				INFOPLIST_FILE = eminenceMusicPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.magfurulabeer.eminenceMusicPlayerSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.magfurulabeer.eminence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -517,7 +546,7 @@
 				DEVELOPMENT_TEAM = TZJ7BHR5V6;
 				INFOPLIST_FILE = eminenceMusicPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.magfurulabeer.eminenceMusicPlayerSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.magfurulabeer.eminence;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

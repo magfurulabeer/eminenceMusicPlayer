@@ -69,14 +69,19 @@ extension SongsCollectionCell {
         print("song title is \(song.title)")
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         musicManager.player.repeatMode = MPMusicRepeatMode.one // In case held till end of song
-//        musicManager.player = MPMusicPlayerController.systemMusicPlayer()
-//        musicManager.player.setQueue(with: MPMediaQuery.songs())
-//        musicManager.player.beginGeneratingPlaybackNotifications()
+        musicManager.player = MPMusicPlayerController.systemMusicPlayer()
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.originalSongList))
+        musicManager.player.beginGeneratingPlaybackNotifications()
+        musicManager.player.stop()
+        musicManager.player.nowPlayingItem = nil
         
-        musicManager.player.nowPlayingItem = song
-        musicManager.player.prepareToPlay()
+        musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
-        musicManager.player.play()
+
+//        musicManager.player.nowPlayingItem = song
+//        musicManager.player.prepareToPlay()
+
+//        musicManager.player.play()
         print("what's actually playing is \(musicManager.player.nowPlayingItem?.title)")
         print("song title is \(song.title)")
         print("what's saved is \(savedSong?.title)")
@@ -99,10 +104,14 @@ extension SongsCollectionCell {
         print("now the song is \(song.title)")
         print("what's saved is \(savedSong?.title)")
 
-        musicManager.player.nowPlayingItem = song
+        musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
+
+//        musicManager.player.nowPlayingItem = nil
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
-        musicManager.player.prepareToPlay()
-        musicManager.player.play()
+//        musicManager.player.prepareToPlay()
+//        musicManager.player.play()
+        print("what's playing is \(musicManager.player.nowPlayingItem?.title)")
+
     }
     
     func endSamplingMusic() {
@@ -124,7 +133,7 @@ extension SongsCollectionCell {
 //        musicManager.player.beginGeneratingPlaybackNotifications()
         
         print("what's saved is \(savedSong?.title)")
-        musicManager.itemNowPlaying = savedSong
+//        musicManager.itemNowPlaying = savedSong
         musicManager.player.nowPlayingItem = savedSong
         musicManager.player.prepareToPlay()
         print("now the song is back to \(musicManager.player.nowPlayingItem?.title)")

@@ -13,6 +13,7 @@ class MusicManager: NSObject {
     static let sharedManager = MusicManager()
     var songList: [MPMediaItem]
     var artistList: [MPMediaItemCollection]
+    var albumList: [MPMediaItemCollection]
     var player: MPMusicPlayerController
     var shuffleIsOn: Bool
     var volume = MPVolumeView().volumeSlider
@@ -72,15 +73,31 @@ class MusicManager: NSObject {
         }
     }
     
+    var originalAlbumList: [MPMediaItemCollection] {
+        get {
+            let albumQuery = MPMediaQuery.albums()
+            
+            guard let albumCollections = albumQuery.collections else {
+                print("albumCollections is nil")
+                songListIsEmpty = true
+                return []
+            }
+            
+            return albumCollections
+        }
+    }
+    
     override init() {
         self.songList = [MPMediaItem]()
         self.artistList = [MPMediaItemCollection]()
+        self.albumList = [MPMediaItemCollection]()
         self.player = MPMusicPlayerController.systemMusicPlayer()
 
         self.shuffleIsOn = player.shuffleMode == MPMusicShuffleMode.songs
         super.init()
         self.songList = self.originalSongList
         self.artistList = self.originalArtistList
+        self.albumList = self.originalAlbumList
 
         self.player.setQueue(with: MPMediaItemCollection(items: self.originalSongList))
         self.player.beginGeneratingPlaybackNotifications()
