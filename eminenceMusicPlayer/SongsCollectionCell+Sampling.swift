@@ -14,7 +14,7 @@ extension SongsCollectionCell {
         let point = sender.location(in: tableView)
         let indexPath = tableView.indexPathForRow(at: point)
         
-        if sender.state == UIGestureRecognizerState.began && point.x <= SongCellHeight  {
+        if sender.state == UIGestureRecognizerState.began && point.x <= SongCellHeight * 0.9  {
             handleLongPressDragging(sender: sender, indexPath: indexPath)
         } else if sender.state != UIGestureRecognizerState.began && musicManager.currentlySampling == false {
             handleLongPressDragging(sender: sender, indexPath: indexPath)
