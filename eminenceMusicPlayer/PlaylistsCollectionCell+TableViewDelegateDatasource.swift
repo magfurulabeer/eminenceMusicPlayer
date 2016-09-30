@@ -72,7 +72,6 @@ extension PlaylistsCollectionCell: UITableViewDelegate, UITableViewDataSource {
         guard let header = view as? UITableViewHeaderFooterView else {
             return
         }
-        print("it works??")
         header.backgroundView?.backgroundColor = UIColor.white
         header.textLabel?.textColor = UIColor.black
         header.textLabel?.font = UIFont(name: "Avenir", size: 25)

@@ -107,14 +107,21 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         }
     }
     
-    func unhighlightCell(index: Int) {
+    func unhighlightCell(index: Int, wasSuccessful: Bool) {
         let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0))
-        cell?.backgroundColor = UIColor.white.withAlphaComponent(0.8)
-
-        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
-            cell?.backgroundColor = UIColor.clear
+        if wasSuccessful {
+            cell?.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+            
+            UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
+                cell?.backgroundColor = UIColor.clear
             }) { (bool) in
                 // Code?
+            }
+        } else {
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                cell?.backgroundColor = UIColor.clear
+            }) { (bool) in
+            }
         }
     }
     

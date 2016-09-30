@@ -59,7 +59,7 @@ extension SongsCollectionCell {
                 }
             } else {
                 if cellSnapshot.tag != 0 {
-                    (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0)
+                    (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: false)
                     cellSnapshot.tag = 0
                     UIView.animate(withDuration: 0.3, animations: {
                         self.cellSnapshot.transform = CGAffineTransform.identity
@@ -68,19 +68,22 @@ extension SongsCollectionCell {
             }
         }
         if sender.state == UIGestureRecognizerState.ended {
+            let wasSuccessful = cellSnapshot.center.y < FauxBarHeight + SongCellHeight/4
             cellSnapshot.removeFromSuperview()
-            (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0)
+            (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: wasSuccessful)
             let cell = tableView.cellForRow(at: initialIndexPath)!
             cell.isHidden = false
             cell.alpha = 1.0
-            let song = musicManager.songList[initialIndexPath.row]
-            musicManager.quickQueue.append(song)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddedToQueue"), object: nil)
+            if wasSuccessful {
+                let song = musicManager.songList[initialIndexPath.row]
+                musicManager.quickQueue.append(song)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddedToQueue"), object: nil)
+            }
         }
         
         if sender.state == UIGestureRecognizerState.cancelled {
             cellSnapshot.removeFromSuperview()
-            (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0)
+            (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: false)
             let cell = tableView.cellForRow(at: initialIndexPath)!
             cell.isHidden = false
             cell.alpha = 1.0
