@@ -12,7 +12,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     var index = 1
     let deselectedColor = UIColor.white.withAlphaComponent(0.2)
-    let imageIcons: [UIImage] = [#imageLiteral(resourceName: "genreIcon"), #imageLiteral(resourceName: "songIcon"), #imageLiteral(resourceName: "artistIcon"), #imageLiteral(resourceName: "albumIcon")]
+    let imageIcons: [UIImage] = [#imageLiteral(resourceName: "playlistIcon"), #imageLiteral(resourceName: "songIcon"), #imageLiteral(resourceName: "artistIcon"), #imageLiteral(resourceName: "albumIcon")]
     weak var viewController: MusicPlayerViewController?
 
     lazy var collectionView: UICollectionView = {

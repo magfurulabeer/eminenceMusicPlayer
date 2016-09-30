@@ -83,16 +83,6 @@ class MusicManager: NSObject {
                 return []
             }
             
-//            for collection in albumCollections {
-//                print(collection.representativeItem?.albumTitle)
-//                var i = 1
-//                for item in collection.items {
-//                    print("\(i). \(item.title): \(item.albumArtist) - \(item.artist)")
-//                    i += 1
-//                }
-//                print("\n\n\n")
-//            }
-            
             return albumCollections
         }
     }

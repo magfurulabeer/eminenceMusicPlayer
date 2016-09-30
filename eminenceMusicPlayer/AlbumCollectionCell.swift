@@ -62,7 +62,6 @@ class AlbumCollectionCell: UICollectionViewCell, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(musicManager.albumList.count)
         return musicManager.albumList.count
     }
     

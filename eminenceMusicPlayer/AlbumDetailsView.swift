@@ -91,9 +91,6 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         
         let song = album?.items[indexPath.row]
-        print(song?.title)
-        
-
         
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
         musicManager.player.setQueue(with: MPMediaItemCollection(items: album!.items))
