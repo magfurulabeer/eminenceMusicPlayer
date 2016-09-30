@@ -48,7 +48,7 @@ class SelectedSongCell: UITableViewCell {
         gradientLayer.locations = [0.25, 0.5, 0.75]
         gradientLayer.colors = [
             UIColor.white,
-            UIColor.black,
+            UIColor(red: 108/255.0, green: 46/255.0, blue: 48/255.0, alpha: 1),
             UIColor.white
             
             ].map { color in color.cgColor }

@@ -11,6 +11,8 @@ import UIKit
 private let cellID = "cellID"
 private let songID = "songID"
 private let artistID = "artistID"
+private let albumID = "albumID"
+
 
 class MusicPlayerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, QuickBarDelegate {
 
@@ -82,6 +84,18 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
         }
         if indexPath.row == 2 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: artistID, for: indexPath) as! ArtistsCollectionCell
+            cell.viewController = self
+            cell.backgroundColor = UIColor.clear
+            return cell
+        }
+        if indexPath.row == 4 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: artistID, for: indexPath) as! ArtistsCollectionCell
+            cell.viewController = self
+            cell.backgroundColor = UIColor.clear
+            return cell
+        }
+        if indexPath.row == 3 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: albumID, for: indexPath) as! AlbumCollectionCell
             cell.viewController = self
             cell.backgroundColor = UIColor.clear
             return cell
