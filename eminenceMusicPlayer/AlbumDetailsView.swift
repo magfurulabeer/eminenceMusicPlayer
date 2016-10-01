@@ -26,7 +26,6 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.black.withAlphaComponent(0.3)
         setUpTableView()
     }
     
@@ -38,7 +37,7 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
         addSubview(tableView)
         tableView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
         tableView.register(UINib(nibName: "AlbumImageCell", bundle: Bundle.main), forCellReuseIdentifier: "AlbumImageCell")
-        
+        tableView.separatorStyle = .none
         tableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
@@ -120,7 +119,6 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
                 let superView = self.superview
                 self.removeFromSuperview()
                 superView?.layoutIfNeeded()
-                print("removed")
             })
         }
     }
