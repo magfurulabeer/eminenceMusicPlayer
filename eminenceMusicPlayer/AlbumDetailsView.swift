@@ -15,8 +15,6 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
     var album: MPMediaItemCollection?
     weak var viewController: UIViewController?
 
-    
-//    var albumImageView = UIImageView(image: #imageLiteral(resourceName: "NoAlbumImage"))
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -29,28 +27,12 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.black.withAlphaComponent(0.3)
-//        setUpImageView()
         setUpTableView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    func setUpImageView() {
-//        addSubview(albumImageView)
-//        albumImageView.translatesAutoresizingMaskIntoConstraints = false
-//        albumImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-//        albumImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//        albumImageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-//        albumImageView.heightAnchor.constraint(equalTo: widthAnchor).isActive = true
-//        albumImageView.contentMode = .scaleAspectFill
-//        albumImageView.clipsToBounds = true
-////        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AlbumDetailsView.imageViewWasTapped))
-//        albumImageView.isUserInteractionEnabled = true
-//        albumImageView.addGestureRecognizer(tapGesture)
-//    }
-//
 
     func setUpTableView() {
         addSubview(tableView)
@@ -73,10 +55,9 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumImageCell", for: indexPath)
-            cell.backgroundColor = UIColor.blue
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumImageCell", for: indexPath) as! AlbumImageCell
             let width = viewController?.view.frame.width ?? 0
-            cell.imageView?.image = album?.representativeItem?.artwork?.image(at: CGSize(width: width, height: width)) ?? #imageLiteral(resourceName: "NoAlbumImage")
+            cell.albumImageView.image = album?.representativeItem?.artwork?.image(at: CGSize(width: width, height: width)) ?? #imageLiteral(resourceName: "NoAlbumImage")
             return cell
         } else {
             let song = album?.items[indexPath.item - 1]
@@ -117,7 +98,7 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
                 nowPlayingVC.interactor = (self.viewController as! MusicPlayerViewController).slideDownInteractor
                 viewController.present(nowPlayingVC, animated: true, completion: nil)
             }
-        }    
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

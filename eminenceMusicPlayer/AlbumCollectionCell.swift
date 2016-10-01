@@ -82,7 +82,6 @@ class AlbumCollectionCell: UICollectionViewCell, UICollectionViewDelegateFlowLay
         let rect = CGRect(x: size.width * 0.05, y: 0, width: size.width * 0.3, height: size.height)
         let albumDetails = AlbumDetailsView(frame: rect)
         albumDetails.album = musicManager.albumList[indexPath.item]
-//        albumDetails.albumImageView.image = albumDetails.album!.representativeItem?.artwork?.image(at: CGSize(width: frame.width, height: frame.width)) ?? #imageLiteral(resourceName: "NoAlbumImage")
         albumDetails.viewController = viewController
         addSubview(albumDetails)
         albumDetails.translatesAutoresizingMaskIntoConstraints = false
