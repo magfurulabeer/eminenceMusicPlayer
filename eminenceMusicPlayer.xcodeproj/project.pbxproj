@@ -10,6 +10,8 @@
 		8B2C54D71D946307005E1481 /* NowPlayingQuickBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C54D61D946307005E1481 /* NowPlayingQuickBar.swift */; };
 		8B2C54D91D94645C005E1481 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C54D81D94645C005E1481 /* Constants.swift */; };
 		8B2C54DB1D94781F005E1481 /* NowPlayingQuickBar+SetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C54DA1D94781F005E1481 /* NowPlayingQuickBar+SetUp.swift */; };
+		8B51DFAE1D9F11BA004B1526 /* AlbumImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B51DFAC1D9F11BA004B1526 /* AlbumImageCell.xib */; };
+		8B51DFB01D9F11D3004B1526 /* AlbumImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51DFAF1D9F11D3004B1526 /* AlbumImageCell.swift */; };
 		8B53F7C11D94FC6400778403 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53F7C01D94FC6400778403 /* MenuBar.swift */; };
 		8B666C461D9E2CB60011F78C /* AlbumCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B666C451D9E2CB60011F78C /* AlbumCollectionCell.swift */; };
 		8B666C491D9E2E6B0011F78C /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B666C471D9E2E6B0011F78C /* AlbumCell.swift */; };
@@ -77,6 +79,8 @@
 		8B2C54D61D946307005E1481 /* NowPlayingQuickBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayingQuickBar.swift; sourceTree = "<group>"; };
 		8B2C54D81D94645C005E1481 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8B2C54DA1D94781F005E1481 /* NowPlayingQuickBar+SetUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NowPlayingQuickBar+SetUp.swift"; sourceTree = "<group>"; };
+		8B51DFAC1D9F11BA004B1526 /* AlbumImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumImageCell.xib; sourceTree = "<group>"; };
+		8B51DFAF1D9F11D3004B1526 /* AlbumImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumImageCell.swift; sourceTree = "<group>"; };
 		8B53F7C01D94FC6400778403 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		8B666C451D9E2CB60011F78C /* AlbumCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCollectionCell.swift; sourceTree = "<group>"; };
 		8B666C471D9E2E6B0011F78C /* AlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 		8B666C431D9E2BEF0011F78C /* Storyboards & Xibs */ = {
 			isa = PBXGroup;
 			children = (
+				8B51DFAC1D9F11BA004B1526 /* AlbumImageCell.xib */,
 				8B666C481D9E2E6B0011F78C /* AlbumCell.xib */,
 				8BB1087D1D93084500CD2238 /* BasicSongCell.xib */,
 				8B6964FB1D9784370037E13F /* SongCell.xib */,
@@ -323,6 +328,7 @@
 				8B666C471D9E2E6B0011F78C /* AlbumCell.swift */,
 				8BB91E0E1D9E804800053D75 /* QuickQueueCell.swift */,
 				8BB91E121D9E88CF00053D75 /* BasicCell.swift */,
+				8B51DFAF1D9F11D3004B1526 /* AlbumImageCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -398,6 +404,7 @@
 				8BAEC9C71D9A446D00F41A74 /* SelectedSongCell.xib in Resources */,
 				8B6964FD1D9784370037E13F /* SongCell.xib in Resources */,
 				8BB91E151D9E88CF00053D75 /* BasicCell.xib in Resources */,
+				8B51DFAE1D9F11BA004B1526 /* AlbumImageCell.xib in Resources */,
 				8BB108431D92F39500CD2238 /* Assets.xcassets in Resources */,
 				8BB108411D92F39400CD2238 /* Main.storyboard in Resources */,
 				8BB1087F1D93084500CD2238 /* BasicSongCell.xib in Resources */,
@@ -412,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B51DFB01D9F11D3004B1526 /* AlbumImageCell.swift in Sources */,
 				8BDF965F1D94CC4700556AFB /* NowPlayingQuickBar+Actions.swift in Sources */,
 				8BB91E051D9E799B00053D75 /* PlaylistsCollectionCell+TableViewDelegateDatasource.swift in Sources */,
 				8BE744661D93B9CA0014DE31 /* NowPlayingViewController+DisplayMethods.swift in Sources */,

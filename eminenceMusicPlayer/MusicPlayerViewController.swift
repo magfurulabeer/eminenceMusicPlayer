@@ -37,6 +37,7 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print(menuBar.index)
         switch menuBar.index {
         case 0:
             let cell = collectionView?.cellForItem(at: IndexPath(item: 0, section: 0)) as! PlaylistsCollectionCell
