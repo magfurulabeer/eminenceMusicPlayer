@@ -12,10 +12,8 @@ import MediaPlayer
 
 extension NowPlayingQuickBar {
     func setUpAlbumThumbnail() {
-        albumThumbnail.image = musicManager.itemNowPlaying?.artwork?.image(at: CGSize(width: self.bounds.height, height: self.bounds.height))
-//        if musicManager.player.playbackState != MPMusicPlaybackState.stopped {
-//            albumThumbnail.image = albumThumbnail.image == nil ? #imageLiteral(resourceName: "NoAlbumImage") : albumThumbnail.image
-//        }
+        let artwork = musicManager.itemNowPlaying?.artwork?.image(at: CGSize(width: self.bounds.height, height: self.bounds.height))
+        albumThumbnail.image = musicManager.itemNowPlaying?.artwork != nil ? artwork! : #imageLiteral(resourceName: "NoAlbumImage")
         albumThumbnail.contentMode = UIViewContentMode.scaleAspectFill
         albumThumbnail.translatesAutoresizingMaskIntoConstraints = false
         

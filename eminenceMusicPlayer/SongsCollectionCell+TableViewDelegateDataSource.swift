@@ -52,6 +52,9 @@ extension SongsCollectionCell: UITableViewDelegate, UITableViewDataSource {
     @objc(tableView:didSelectRowAtIndexPath:)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let song = musicManager.songList[indexPath.row]
+        
+        print(song.artwork != nil)
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
         musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.originalSongList))
         musicManager.player.beginGeneratingPlaybackNotifications()

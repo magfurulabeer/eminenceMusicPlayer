@@ -71,10 +71,7 @@ class NowPlayingQuickBar: UIView {
     func displayPlaybackButton() {
         
         if musicManager.currentlySampling == false {
-            if musicManager.player.playbackState == MPMusicPlaybackState.stopped {
-                playButton.isHidden = true
-                pauseButton.isHidden = true
-            } else if musicManager.player.playbackState == MPMusicPlaybackState.playing {
+            if musicManager.player.playbackState == MPMusicPlaybackState.playing {
                 playButton.isHidden = true
                 pauseButton.isHidden = false
             } else {
@@ -88,6 +85,8 @@ class NowPlayingQuickBar: UIView {
         if musicManager.currentlySampling == false {
             songTitleLabel.text = musicManager.itemNowPlaying?.title ?? ""
             artistLabel.text = musicManager.itemNowPlaying?.artist ?? ""
+//            let artwork = musicManager.itemNowPlaying?.artwork?.image(at: CGSize(width: self.bounds.height, height: self.bounds.height))
+//            albumThumbnail.image = musicManager.itemNowPlaying?.artwork != nil ? artwork! : #imageLiteral(resourceName: "NoAlbumImage")
             albumThumbnail.image = musicManager.itemNowPlaying?.artwork?.image(at: CGSize(width: self.bounds.height, height: self.bounds.height))
         }
     }
