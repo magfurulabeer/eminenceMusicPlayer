@@ -233,6 +233,13 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		8B9325D61DA195B30016FD80 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		8BAEC9CA1D9A55A100F41A74 /* ArtistCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +273,7 @@
 				8B666C441D9E2C200011F78C /* Extensions */,
 				8B666C411D9E2BBA0011F78C /* Models */,
 				8B666C421D9E2BCB0011F78C /* Other */,
+				8B9325D61DA195B30016FD80 /* Protocols */,
 				8B666C431D9E2BEF0011F78C /* Storyboards & Xibs */,
 				8BCBE6291D9803C20038AC74 /* Transitions */,
 				8B8FE45E1D990C4600A9A85C /* Views */,
