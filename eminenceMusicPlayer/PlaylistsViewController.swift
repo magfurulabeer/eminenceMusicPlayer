@@ -11,17 +11,25 @@ import MediaPlayer
 
 class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
+    // MARK: Properties
+    
     let musicManager = MusicManager.sharedManager
     var indexView: IndexView = UITableView(frame: .zero, style: .grouped)
-
     override var storedIndexView: IndexView? {  get { return indexView }    }
     
+    
+    // MARK: View Management Method
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clear
         setUpIndexView()
     }
     
+    
+    // MARK: Setup Methods
+
     func setUpIndexView() {
         guard let indexView = indexView as? UITableView else { return }
         

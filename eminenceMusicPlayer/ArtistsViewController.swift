@@ -11,9 +11,13 @@ import MediaPlayer
 
 class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableViewDataSource, Previewable {
 
+    
+    // MARK: Properties 
+    
     let musicManager = MusicManager.sharedManager
     var indexView: IndexView = UITableView()
     override var storedIndexView: IndexView? {  get { return indexView }    }
+    
     
     // MARK: Previewable Properties
 
@@ -21,12 +25,17 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
     var selectedIndexPath: IndexPath?
     
     
+    // MARK: View Management Methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clear
         setUpIndexView()
     }
     
+    
+    // MARK: Setup Methods
+
     func setUpIndexView() {
         guard let indexView = indexView as? UITableView else { return }
         

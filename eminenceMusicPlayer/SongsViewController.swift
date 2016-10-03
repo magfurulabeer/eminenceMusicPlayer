@@ -10,12 +10,26 @@ import UIKit
 import MediaPlayer
 
 
-class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewDataSource {
+class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewDataSource, Previewable {
 
+    
+    // MARK: Properties
+    
     let musicManager = MusicManager.sharedManager
     var indexView: IndexView = UITableView()
     override var storedIndexView: IndexView? {  get { return indexView }    }
 
+    
+    // MARK: Previewable Properties
+    
+    var selectedCell: IndexViewCell?
+    var selectedIndexPath: IndexPath?
+    
+    
+    // MARK: Previewable Properties
+    
+   
+    // MARK: View Management Method
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +37,9 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         setUpIndexView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-    }
     
+    // MARK: Setup Methods
+
     func setUpIndexView() {
         guard let indexView = indexView as? UITableView else { return }
         
@@ -34,9 +48,9 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         indexView.backgroundColor = UIColor.clear
         indexView.separatorStyle = UITableViewCellSeparatorStyle.none
         
-//        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
-//        longPressGestureRecognizer.minimumPressDuration = 0.3
-//        indexView.addGestureRecognizer(longPressGestureRecognizer)
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
+        longPressGestureRecognizer.minimumPressDuration = 0.3
+        indexView.addGestureRecognizer(longPressGestureRecognizer)
         
         indexView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
         indexView.register(UINib(nibName: "SelectedSongCell", bundle: Bundle.main), forCellReuseIdentifier: "SelectedSongCell")
@@ -101,5 +115,25 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
     }
     
+    // MARK: Previewable Methods
+    
+    func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
+        let song = musicManager.songList[indexPath.row]
+        return song
+    }
+    
+    func setQueue(indexPath:IndexPath) {
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.originalSongList))
+        musicManager.player.beginGeneratingPlaybackNotifications()
+        musicManager.player.stop()
+    }
+    
+    func setNewQueue(indexPath:IndexPath) { }
+    
+    // MARK: Gesture Recognizer Methods
+    
+    func longPress(sender: UILongPressGestureRecognizer) {
+        handleLongPress(sender: sender)
+    }
 
 }

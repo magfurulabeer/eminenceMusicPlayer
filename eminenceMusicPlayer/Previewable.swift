@@ -34,7 +34,13 @@ extension Previewable {
         let point = sender.location(in: indexView.view)
         let indexPath = indexView.indexPathForCell(at: point)
         
-        guard indexPath != nil else { return }
+        guard indexPath != nil else {
+            if musicManager.currentlySampling {
+                musicManager.player.pause()
+                endSamplingMusic()
+            }
+            return
+        }
         
         handleLongPressSampling(sender: sender, indexPath: indexPath!)
     }
@@ -144,7 +150,7 @@ extension Previewable {
         musicManager.player.prepareToPlay()
         
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
-        musicManager.player.repeatMode = musicManager.savedRepeatMode!
+        musicManager.player.repeatMode = musicManager.savedRepeatMode ?? .none
         musicManager.player.currentPlaybackTime = musicManager.savedTime!
         
         if musicManager.savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.playing.rawValue {

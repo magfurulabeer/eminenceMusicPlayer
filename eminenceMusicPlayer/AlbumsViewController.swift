@@ -11,9 +11,18 @@ import MediaPlayer
 
 class AlbumsViewController: MenuViewController, UICollectionViewDelegateFlowLayout,UICollectionViewDataSource, UICollectionViewDelegate, Previewable {
 
-//    let musicManager = MusicManager.sharedManager
+    
+    // MARK: Properties
     
     weak var viewController: UIViewController?
+    var indexView: IndexView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        return cv
+    }()
+    override var storedIndexView: IndexView? {  get { return indexView }    }
+    
     
     // MARK: Previewable Properties
     
@@ -21,20 +30,16 @@ class AlbumsViewController: MenuViewController, UICollectionViewDelegateFlowLayo
     var selectedIndexPath: IndexPath?
     
     
-    var indexView: IndexView = {
-        let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
-    }()
-    
-    override var storedIndexView: IndexView? {  get { return indexView }    }
-    
+    // MARK: View Management Methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clear
         setUpIndexView()
     }
+    
+    
+    // MARK: Setup Methods
     
     func setUpIndexView() {
         guard let indexView = indexView as? UICollectionView else { return }
@@ -47,12 +52,15 @@ class AlbumsViewController: MenuViewController, UICollectionViewDelegateFlowLayo
             flowLayout.minimumLineSpacing = 10
             flowLayout.minimumInteritemSpacing = 10
             flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+            
         }
         
         indexView.isPrefetchingEnabled = false
         indexView.backgroundColor = UIColor.clear
         indexView.delegate = self
         indexView.dataSource = self
+        indexView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        indexView.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
         longPressGestureRecognizer.minimumPressDuration = 0.3

@@ -9,13 +9,13 @@
 import UIKit
 
 protocol PreviewableDraggable: Previewable {
-    func handleLongPress(sender: UILongPressGestureRecognizer)
-    func handleLongPressDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath?)
-    func snapshopOfCell(inputView: UIView) -> UIView
     weak var viewController: UIViewController? { get set }
     var cellSnapshot: UIView { get set }
     var initialIndexPath: IndexPath? { get set }
-
+    
+    func handleLongPress(sender: UILongPressGestureRecognizer)
+    func handleLongPressDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath?)
+    func snapshopOfCell(inputView: UIView) -> UIView
 }
 
 extension PreviewableDraggable {
