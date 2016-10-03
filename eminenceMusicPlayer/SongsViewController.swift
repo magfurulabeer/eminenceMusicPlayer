@@ -17,7 +17,7 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     override var storedIndexView: IndexView? {  get { return indexView }    }
     override var index: Int {
         get {
-            return 2
+            return 1
         }
     }
     

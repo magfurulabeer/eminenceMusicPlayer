@@ -20,7 +20,7 @@ class AlbumsViewController: MenuViewController, UICollectionViewDelegateFlowLayo
     override var storedIndexView: IndexView? {  get { return indexView }    }
     override var index: Int {
         get {
-            return 0
+            return 3
         }
     }
     

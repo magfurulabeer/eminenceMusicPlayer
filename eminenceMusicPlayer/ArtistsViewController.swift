@@ -16,7 +16,7 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
     
     override var index: Int {
         get {
-            return 1
+            return 2
         }
     }
     

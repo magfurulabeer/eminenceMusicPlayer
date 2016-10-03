@@ -67,8 +67,8 @@ class AMusicPlayerViewController: UICollectionViewController, UICollectionViewDe
     }
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let currentPageIndex = targetContentOffset.pointee.x / view.frame.width
-        menuBar.selectItemAtIndex(index: Int(currentPageIndex))
+//        let currentPageIndex = targetContentOffset.pointee.x / view.frame.width
+//        menuBar.selectItemAtIndex(index: Int(currentPageIndex))
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

@@ -18,7 +18,7 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
     
     override var index: Int {
         get {
-            return 3
+            return 0
         }
     }
     

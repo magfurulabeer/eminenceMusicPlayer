@@ -8,13 +8,14 @@
 
 import UIKit
 
-class MusicPlayerViewController: UIPageViewController {
+class MusicPlayerViewController: UIPageViewController, UIScrollViewDelegate {
 
     var menuPages = [UIViewController]()
     var menuBar: MenuBar = MenuBar()
     var quickBar: NowPlayingQuickBar?
     let slideDownInteractor = SlideDownInteractor()
     var musicManager = MusicManager.sharedManager
+    var currentIndex = 1
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -22,11 +23,12 @@ class MusicPlayerViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        menuPages.append(AlbumsViewController())
-        menuPages.append(ArtistsViewController())
-        menuPages.append(SongsViewController())
         menuPages.append(PlaylistsViewController())
+        menuPages.append(SongsViewController())
+        menuPages.append(ArtistsViewController())
+        menuPages.append(AlbumsViewController())
 
+        
         delegate = self
         dataSource = self
         
@@ -34,62 +36,51 @@ class MusicPlayerViewController: UIPageViewController {
         setUpGradient()
         setUpMenuBar()
         setUpQuickBar()
-        setViewControllers([menuPages[0]], direction: .forward, animated: false, completion: nil)
+        setViewControllers([menuPages[1]], direction: .forward, animated: false, completion: nil)
+        
+        for subview in view.subviews {
+            guard let page = subview as? UIScrollView else { continue }
+            page.delegate = self
+        }
         
     }
     
-    func setUpGradient() {
-        let gradient = CAGradientLayer()
-        let startColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
-        let endColor = UIColor(red: 54/255.0, green: 49/255.0, blue: 58/255.0, alpha: 1)
-        gradient.colors = [startColor.cgColor, endColor.cgColor]
-        gradient.frame = self.view.frame
-        let points = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 1))
-        gradient.startPoint = points.0
-        gradient.endPoint = points.1
-        view.layer.addSublayer(gradient)
-        gradient.zPosition = -5
-    }
-    
-    func setUpMenuBar() {
-        menuBar = MenuBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: FauxBarHeight))
-        view.addSubview(menuBar)
-        menuBar.translatesAutoresizingMaskIntoConstraints = false
-        menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        menuBar.heightAnchor.constraint(equalToConstant: FauxBarHeight).isActive = true
-        menuBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        menuBar.backgroundColor = QuickBarBackgroundColor
-        
-        menuBar.layer.shadowColor = UIColor.black.cgColor
-        menuBar.layer.shadowOpacity = 1
-        menuBar.layer.shadowOffset = CGSize.zero
-        menuBar.layer.shadowRadius = 10
-        let rect = CGRect(x: 0, y: 0, width: view.frame.width, height: 70)
-        menuBar.layer.shadowPath = UIBezierPath(rect: rect).cgPath
-        
-        let border = UIView()
-        border.backgroundColor = UIColor.white.withAlphaComponent(0.1)
-        menuBar.addSubview(border)
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.bottomAnchor.constraint(equalTo: menuBar.bottomAnchor).isActive = true
-        border.leadingAnchor.constraint(equalTo: menuBar.leadingAnchor).isActive = true
-        border.trailingAnchor.constraint(equalTo: menuBar.trailingAnchor).isActive = true
-        border.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    }
-    
-    func setUpQuickBar() {
-        quickBar = NowPlayingQuickBar(frame: CGRect(x: 0, y: view.frame.height - tabBarHeight - quickBarHeight, width: view.frame.width, height: quickBarHeight))
-        quickBar!.backgroundColor = QuickBarBackgroundColor
-        view.addSubview(quickBar!)
-        quickBar!.translatesAutoresizingMaskIntoConstraints = false
-        quickBar!.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
-        quickBar!.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        quickBar!.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        quickBar!.fullHeightConstraint.isActive = true
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let point = scrollView.contentOffset
+        let quarterWidth = view.frame.width/4
+        let correctionalOffset = view.frame.width/16
+        let percentComplete = (point.x - view.frame.size.width)/view.frame.size.width
+        if percentComplete != 0 {
+            menuBar.horizontalBarLeadingConstraint?.constant = (percentComplete * quarterWidth) + (quarterWidth * CGFloat(currentIndex)) + correctionalOffset
+        }
         
     }
     
-
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        print(targetContentOffset.pointee.x)
+//        print(menuBar.horizontalBarLeadingConstraint!.constant)
+//        let target = targetContentOffset.pointee.x
+//        let width = view.frame.width
+//        if target == width {
+//            menuBar.selectItemAtIndex(index: currentIndex)
+////            print("=")
+//        } else if target > width {
+//            menuBar.selectItemAtIndex(index: currentIndex + 1)
+////            currentIndex += 1
+////            print("+")
+//        } else if target < width {
+//            menuBar.selectItemAtIndex(index: currentIndex - 1)
+////            currentIndex -= 1
+////            print("-")
+//        }
+////        print(velocity.x)
+////        var index = velocity.x > 0 ? currentIndex + 1 : currentIndex - 1
+//////        if velocity.x == 0  {    index = currentIndex    }
+////        if fabs(velocity.x) < 0.33     {   index = currentIndex; print("less than")    }
+////        print(currentIndex)
+////        print(index)
+////        print("\n")
+////        menuBar.selectItemAtIndex(index: index)
+//    }
     
 }
