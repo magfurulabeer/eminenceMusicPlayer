@@ -8,7 +8,9 @@
 
 import UIKit
 
-class MusicPlayerViewController: UIPageViewController, UIScrollViewDelegate {
+private let reuseIdentifier = "Cell"
+
+class MusicPlayerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var menuPages = [UIViewController]()
     var menuBar: MenuBar = MenuBar()
@@ -28,47 +30,59 @@ class MusicPlayerViewController: UIPageViewController, UIScrollViewDelegate {
         menuPages.append(SongsViewController())
         menuPages.append(ArtistsViewController())
         menuPages.append(AlbumsViewController())
-
         
-        delegate = self
-        dataSource = self
-        
-        
+        setUpCollectionView()
         setUpGradient()
         setUpMenuBar()
         setUpQuickBar()
-        setViewControllers([menuPages[1]], direction: .forward, animated: false, completion: nil)
-        
-        for subview in view.subviews {
-            guard let page = subview as? UIScrollView else { continue }
-            page.delegate = self
-        }
-        
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(isAutoScrolling)
-        if isAutoScrolling == false {
-            let point = scrollView.contentOffset
-            let quarterWidth = view.frame.width/4
-            let correctionalOffset = view.frame.width/16
-            let percentComplete = (point.x - view.frame.size.width)/view.frame.size.width
-            if percentComplete != 0 {
-                print("should not print")
-                menuBar.horizontalBarLeadingConstraint?.constant = (percentComplete * quarterWidth) + (quarterWidth * CGFloat(currentIndex)) + correctionalOffset
-            }
-        }
+    func scrollToMenuIndex(index: Int) {
+        let path = IndexPath(item: index, section: 0)
+        collectionView?.scrollToItem(at: path, at: .centeredHorizontally, animated: true)
     }
     
-    func changePage(direction: UIPageViewControllerNavigationDirection) {
-        if direction == .forward {
-            currentIndex += 1
-        } else {
-            currentIndex -= 1
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        menuBar.horizontalBarLeadingConstraint?.constant = scrollView.contentOffset.x/4 + view.frame.width/16
+    }
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let currentPageIndex = targetContentOffset.pointee.x / view.frame.width
+        menuBar.selectItemAtIndex(index: Int(currentPageIndex))
+    }
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return menuPages.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FullScreenCell", for: indexPath) as! ViewControllerCollectionCell
+        cell.backgroundColor = UIColor.clear
+        cell.addView(view: menuPages[indexPath.item].view)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return view.frame.size
+    }
+    
+    
+    
+    func quickBarWasTapped(sender: NowPlayingQuickBar) {
+        if musicManager.itemNowPlaying == nil {
+            return
+        }
+        if let nowPlayingVC = storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
+            nowPlayingVC.transitioningDelegate = self
+            nowPlayingVC.interactor = slideDownInteractor
+            present(nowPlayingVC, animated: true, completion: nil)
         }
         
-        let vc = menuPages[currentIndex]
         
-        setViewControllers([vc], direction: direction, animated: true, completion: nil)
     }
+
 }

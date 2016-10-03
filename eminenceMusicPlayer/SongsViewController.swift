@@ -27,6 +27,10 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         setUpIndexView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("hey does this work?")
+    }
+    
     func setUpIndexView() {
         guard let indexView = indexView as? UITableView else { return }
         
@@ -87,6 +91,20 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return SongCellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let song = musicManager.songList[indexPath.row]
+        
+        print(song.artwork != nil)
+        musicManager.player = MPMusicPlayerController.systemMusicPlayer()
+        musicManager.currentQueue = MPMediaItemCollection(items: musicManager.originalSongList)
+        musicManager.player.setQueue(with: musicManager.currentQueue!)
+        musicManager.player.beginGeneratingPlaybackNotifications()
+        musicManager.player.stop()
+        musicManager.player.nowPlayingItem = nil
+        musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
+
     }
     
 

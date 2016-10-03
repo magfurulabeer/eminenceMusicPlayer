@@ -32,7 +32,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="ndv-PO-OuP" kind="show" identifier="StartAppSegue" id="V1o-Jt-RLh"/>
+                        <segue destination="ndv-PO-OuP" kind="show" identifier="test" id="V1o-Jt-RLh"/>
+                        <segue destination="6r0-gy-nVh" kind="show" identifier="StartAppSegue" id="7n0-Rx-iEu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdN-dR-WOQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -40,12 +41,46 @@
             <point key="canvasLocation" x="-3036" y="-64"/>
         </scene>
         <!--Music Player View Controller-->
+        <scene sceneID="wBD-wE-KwE">
+            <objects>
+                <collectionViewController id="6r0-gy-nVh" customClass="MusicPlayerViewController" customModule="eminenceMusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="iTb-4b-8Kn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oE2-RX-NgS">
+                            <size key="itemSize" width="375" height="669"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FullScreenCell" id="3g4-Y2-KGA" customClass="ViewControllerCollectionCell" customModule="eminenceMusicPlayer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="-1" width="375" height="669"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="669"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="6r0-gy-nVh" id="sRB-Gv-CfQ"/>
+                            <outlet property="delegate" destination="6r0-gy-nVh" id="Z8H-FL-AY5"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SSI-LK-Xcz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2215.1999999999998" y="-367.46626686656674"/>
+        </scene>
+        <!--Page View Controller-->
         <scene sceneID="aaX-Ig-KH5">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ndv-PO-OuP" customClass="MusicPlayerViewController" customModule="eminenceMusicPlayer" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ndv-PO-OuP" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMF-ph-et1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2202" y="-43"/>
+            <point key="canvasLocation" x="-2130" y="623"/>
         </scene>
         <!--Now Playing View Controller-->
         <scene sceneID="oH5-xl-sv0">

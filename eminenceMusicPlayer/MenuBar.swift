@@ -14,7 +14,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     let deselectedColor = UIColor.white.withAlphaComponent(0.2)
     let imageIcons: [UIImage] = [#imageLiteral(resourceName: "playlistIcon"), #imageLiteral(resourceName: "songIcon"), #imageLiteral(resourceName: "artistIcon"), #imageLiteral(resourceName: "albumIcon")]
     weak var viewController: MusicPlayerViewController?
-
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -90,32 +90,8 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        if indexPath.item != viewController!.currentIndex {
-            let direction: UIPageViewControllerNavigationDirection
-            print("test")
-            print(viewController!.isAutoScrolling)
-            viewController?.isAutoScrolling = true
-            print(viewController!.isAutoScrolling)
-            direction = indexPath.item < viewController!.currentIndex ? .reverse : .forward
-            print(viewController!.isAutoScrolling)
-
-            viewController!.setViewControllers([viewController!.menuPages[indexPath.item]],
-                                               direction: direction,
-                                               animated: true,
-                                               completion: { (bool) in
-                                                print("oh no")
-                                                print(self.viewController!.isAutoScrolling)
-                                                self.viewController?.isAutoScrolling = false
-                                                print(self.viewController!.isAutoScrolling)
-            })
-            
-        }
-        viewController?.currentIndex = indexPath.item
-
+        viewController?.scrollToMenuIndex(index: indexPath.item)
         selectItemAtIndex(index: indexPath.item)
-        viewController?.isAutoScrolling = false
-//        horizontalBarLeadingConstraint?.constant = (CGFloat(indexPath.item) * viewController!.view.frame.width/4) + viewController!.view.frame.width/16
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -128,7 +104,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     func highlightCell(index: Int) {
         let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0))
-        UIView.animate(withDuration: 0.2) { 
+        UIView.animate(withDuration: 0.2) {
             cell?.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         }
     }

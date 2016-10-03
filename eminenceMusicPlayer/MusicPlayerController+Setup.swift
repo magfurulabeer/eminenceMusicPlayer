@@ -1,5 +1,5 @@
 //
-//  MusicPlayerViewController+Setup.swift
+//  MusicPlayerController+Setup.swift
 //  eminenceMusicPlayer
 //
 //  Created by Magfurul Abeer on 10/3/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension MusicPlayerViewController {
+extension MusicPlayerViewController: QuickBarDelegate {
     func setUpGradient() {
         let gradient = CAGradientLayer()
         let startColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
@@ -53,6 +53,7 @@ extension MusicPlayerViewController {
     func setUpQuickBar() {
         quickBar = NowPlayingQuickBar(frame: CGRect(x: 0, y: view.frame.height - tabBarHeight - quickBarHeight, width: view.frame.width, height: quickBarHeight))
         quickBar!.backgroundColor = QuickBarBackgroundColor
+        quickBar?.delegate = self
         view.addSubview(quickBar!)
         quickBar!.translatesAutoresizingMaskIntoConstraints = false
         quickBar!.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
@@ -60,5 +61,16 @@ extension MusicPlayerViewController {
         quickBar!.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         quickBar!.fullHeightConstraint.isActive = true
         
+    }
+    
+    func setUpCollectionView() {
+        
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
+        }
+        collectionView?.backgroundColor = UIColor.clear
+        collectionView?.isPagingEnabled = true
+        collectionView?.scrollToItem(at: IndexPath(item: 1, section: 0), at: .centeredHorizontally, animated: false)
     }
 }
