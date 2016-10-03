@@ -83,7 +83,7 @@ class SongsCollectionCell: UICollectionViewCell, Previewable {
     
     func songDidChange() {
         guard let indexView = indexView as? UITableView else { return }
-        if musicManager.currentlySampling == false {
+        if musicManager.currentlyPreviewing == false {
             indexView.reloadData()
         }
     }

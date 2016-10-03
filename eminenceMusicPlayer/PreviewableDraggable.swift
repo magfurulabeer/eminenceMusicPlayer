@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PreviewableDraggable: Previewable {
+protocol Draggable: Previewable {
     weak var viewController: UIViewController? { get set }
     var cellSnapshot: UIView { get set }
     var initialIndexPath: IndexPath? { get set }
@@ -18,17 +18,17 @@ protocol PreviewableDraggable: Previewable {
     func snapshopOfCell(inputView: UIView) -> UIView
 }
 
-extension PreviewableDraggable {
+extension Draggable {
     func handleLongPress(sender: UILongPressGestureRecognizer) {
         let point = sender.location(in: indexView.view)
         let indexPath = indexView.indexPathForCell(at: point)
         
         if sender.state == UIGestureRecognizerState.began && point.x <= SongCellHeight * 0.9  {
             handleLongPressDragging(sender: sender, indexPath: indexPath)
-        } else if sender.state != UIGestureRecognizerState.began && musicManager.currentlySampling == false {
+        } else if sender.state != UIGestureRecognizerState.began && musicManager.currentlyPreviewing == false {
             handleLongPressDragging(sender: sender, indexPath: indexPath)
         } else {
-            handleLongPressSampling(sender: sender, indexPath: indexPath!)
+            handleLongPressPreviewing(sender: sender, indexPath: indexPath!)
         }
     }
     

@@ -18,7 +18,7 @@ class MusicManager: NSObject {
     var player: MPMusicPlayerController
     var shuffleIsOn: Bool
     var volume = MPVolumeView().volumeSlider
-    var currentlySampling = false
+    var currentlyPreviewing = false
     var songListIsEmpty: Bool = false
     var quickQueue = [MPMediaItem]()
     var currentQueue: MPMediaItemCollection?

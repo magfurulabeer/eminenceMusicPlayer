@@ -16,10 +16,10 @@ protocol Previewable: class {
     var selectedIndexPath: IndexPath? { get set }
 
     func handleLongPress(sender: UILongPressGestureRecognizer)
-    func handleLongPressSampling(sender: UILongPressGestureRecognizer, indexPath: IndexPath)
-    func startSamplingMusic(atIndexPath indexPath: IndexPath)
-    func changeSamplingMusic(atIndexPath indexPath: IndexPath)
-    func endSamplingMusic()
+    func handleLongPressPreviewing(sender: UILongPressGestureRecognizer, indexPath: IndexPath)
+    func startPreviewingMusic(atIndexPath indexPath: IndexPath)
+    func changePreviewingMusic(atIndexPath indexPath: IndexPath)
+    func endPreviewingMusic()
     func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem
     func setQueue(indexPath:IndexPath)
     func setNewQueue(indexPath:IndexPath)
@@ -35,23 +35,23 @@ extension Previewable {
         let indexPath = indexView.indexPathForCell(at: point)
         
         guard indexPath != nil else {
-            if musicManager.currentlySampling {
+            if musicManager.currentlyPreviewing {
                 musicManager.player.pause()
-                endSamplingMusic()
+                endPreviewingMusic()
             }
             return
         }
         
-        handleLongPressSampling(sender: sender, indexPath: indexPath!)
+        handleLongPressPreviewing(sender: sender, indexPath: indexPath!)
     }
     
-    func handleLongPressSampling(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
+    func handleLongPressPreviewing(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
         if sender.state == UIGestureRecognizerState.began {
             // Will be needed at the end
             musicManager.savedPlayerIsPlaying = musicManager.player.playbackState
             musicManager.player.pause()
             
-            startSamplingMusic(atIndexPath: indexPath)
+            startPreviewingMusic(atIndexPath: indexPath)
         }
         if sender.state == UIGestureRecognizerState.changed {
             if indexPath != selectedIndexPath {
@@ -59,19 +59,19 @@ extension Previewable {
                 selectedCell?.cell.backgroundColor = UIColor.clear
                 selectedCell?.cell.alpha = 0.5
                 selectedCell?.contentBackgroundColor = UIColor.clear
-                changeSamplingMusic(atIndexPath: indexPath)
+                changePreviewingMusic(atIndexPath: indexPath)
             }
         }
         if sender.state == UIGestureRecognizerState.ended || sender.state == UIGestureRecognizerState.cancelled {
             musicManager.player.pause()
-            endSamplingMusic()
+            endPreviewingMusic()
         }
     }
 
-    func startSamplingMusic(atIndexPath indexPath: IndexPath) {
+    func startPreviewingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidBegin"), object: nil)
-        musicManager.currentlySampling = true
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PreviewingDidBegin"), object: nil)
+        musicManager.currentlyPreviewing = true
         selectedIndexPath = indexPath
         
         // These will be needed when the touch ends
@@ -104,7 +104,7 @@ extension Previewable {
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
     }
 
-    func changeSamplingMusic(atIndexPath indexPath: IndexPath) {
+    func changePreviewingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
         selectedIndexPath = indexPath
         
@@ -123,11 +123,11 @@ extension Previewable {
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
     }
     
-    func endSamplingMusic() {
+    func endPreviewingMusic() {
         musicManager.player.pause()
         
-        musicManager.currentlySampling = false
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidEnd"), object: nil)
+        musicManager.currentlyPreviewing = false
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PreviewingDidEnd"), object: nil)
         // Return visual to normal
         selectedCell?.cell.backgroundColor = UIColor.clear
         

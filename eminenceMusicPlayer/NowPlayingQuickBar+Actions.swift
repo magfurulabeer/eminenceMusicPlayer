@@ -10,13 +10,13 @@ import UIKit
 
 extension NowPlayingQuickBar {
     func playButtonTapped(sender: UIButton) {
-        if musicManager.currentlySampling == false {
+        if musicManager.currentlyPreviewing == false {
             musicManager.player.play()
         }
     }
     
     func pauseButtonTapped(sender: UIButton) {
-        if musicManager.currentlySampling == false {
+        if musicManager.currentlyPreviewing == false {
             musicManager.player.pause()
         }
     }
