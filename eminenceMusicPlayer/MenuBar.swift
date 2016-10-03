@@ -90,7 +90,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewController?.scrollToMenuIndex(index: indexPath.item)
+//        viewController?.scrollToMenuIndex(index: indexPath.item)
         selectItemAtIndex(index: indexPath.item)
     }
     

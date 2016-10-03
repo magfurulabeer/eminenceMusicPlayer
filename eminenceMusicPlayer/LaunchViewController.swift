@@ -29,7 +29,7 @@ class LaunchViewController: UIViewController {
             musicManager.refreshList()
         }
 //        performSegue(withIdentifier: "StartAppSegue", sender: nil)
-        performSegue(withIdentifier: "test", sender: nil)
+        performSegue(withIdentifier: "StartAppSegue", sender: nil)
     }
 
 

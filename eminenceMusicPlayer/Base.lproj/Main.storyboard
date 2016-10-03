@@ -32,7 +32,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="Bp3-6m-AGV" kind="show" identifier="test" id="hVd-pV-879"/>
+                        <segue destination="ndv-PO-OuP" kind="show" identifier="StartAppSegue" id="V1o-Jt-RLh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdN-dR-WOQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -40,38 +40,12 @@
             <point key="canvasLocation" x="-3036" y="-64"/>
         </scene>
         <!--Music Player View Controller-->
-        <scene sceneID="GlP-ts-Wct">
+        <scene sceneID="aaX-Ig-KH5">
             <objects>
-                <collectionViewController id="Bp3-6m-AGV" customClass="MusicPlayerViewController" customModule="eminenceMusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="jqQ-lr-XQI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CsZ-Yk-3I6">
-                            <size key="itemSize" width="50" height="50"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="WxT-2k-CJU">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="Bp3-6m-AGV" id="7AK-rA-8Tv"/>
-                            <outlet property="delegate" destination="Bp3-6m-AGV" id="SFu-Mt-GOn"/>
-                        </connections>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="64P-5j-n7k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ndv-PO-OuP" customClass="MusicPlayerViewController" customModule="eminenceMusicPlayer" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dMF-ph-et1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2092" y="-64"/>
+            <point key="canvasLocation" x="-2202" y="-43"/>
         </scene>
         <!--Now Playing View Controller-->
         <scene sceneID="oH5-xl-sv0">
