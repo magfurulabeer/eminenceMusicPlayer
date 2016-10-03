@@ -10,6 +10,7 @@ import UIKit
 
 class MenuViewController: UIViewController {
 
+    weak var viewController: UIViewController?
     var topPadding = FauxBarHeight
     var bottomPadding = -quickBarHeight
     var storedIndexView: IndexView? {

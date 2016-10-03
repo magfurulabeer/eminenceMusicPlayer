@@ -12,7 +12,7 @@ private let reuseIdentifier = "Cell"
 
 class MusicPlayerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var menuPages = [UIViewController]()
+    var menuPages = [MenuViewController]()
     var menuBar: MenuBar = MenuBar()
     var quickBar: NowPlayingQuickBar?
     let slideDownInteractor = SlideDownInteractor()
@@ -31,6 +31,9 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
         menuPages.append(ArtistsViewController())
         menuPages.append(AlbumsViewController())
         
+        for menuVC in menuPages {
+            menuVC.viewController = self
+        }
         setUpCollectionView()
         setUpGradient()
         setUpMenuBar()

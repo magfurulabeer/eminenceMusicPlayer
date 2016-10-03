@@ -10,7 +10,7 @@ import UIKit
 import MediaPlayer
 
 
-class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewDataSource, Previewable {
+class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewDataSource, PreviewableDraggable {
 
     
     // MARK: Properties
@@ -26,8 +26,9 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     var selectedIndexPath: IndexPath?
     
     
-    // MARK: Previewable Properties
-    
+    // MARK: Draggable Properties
+    var cellSnapshot: UIView = UIView()
+    var initialIndexPath: IndexPath?
    
     // MARK: View Management Method
     
@@ -113,6 +114,14 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         musicManager.player.stop()
         musicManager.player.nowPlayingItem = nil
         musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
+        
+        guard let viewController = viewController else {    return  }
+        
+        if let nowPlayingVC = viewController.storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
+            nowPlayingVC.transitioningDelegate = self.viewController as! MusicPlayerViewController
+            nowPlayingVC.interactor = (self.viewController as! MusicPlayerViewController).slideDownInteractor
+            viewController.present(nowPlayingVC, animated: true, completion: nil)
+        }
     }
     
     // MARK: Previewable Methods
@@ -129,6 +138,12 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     }
     
     func setNewQueue(indexPath:IndexPath) { }
+    
+    // MARK: Draggable Methods
+    
+    func draggingOffset() -> CGFloat {
+        return SongCellHeight * 0.9
+    }
     
     // MARK: Gesture Recognizer Methods
     

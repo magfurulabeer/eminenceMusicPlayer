@@ -14,7 +14,6 @@ class AlbumsViewController: MenuViewController, UICollectionViewDelegateFlowLayo
     
     // MARK: Properties
     
-    weak var viewController: UIViewController?
     var indexView: IndexView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -52,7 +51,6 @@ class AlbumsViewController: MenuViewController, UICollectionViewDelegateFlowLayo
             flowLayout.minimumLineSpacing = 10
             flowLayout.minimumInteritemSpacing = 10
             flowLayout.itemSize = CGSize(width: dimension, height: dimension)
-            
         }
         
         indexView.isPrefetchingEnabled = false
