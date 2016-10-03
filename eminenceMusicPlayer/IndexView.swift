@@ -14,6 +14,7 @@ protocol IndexView {
     func indexPathForCell(at point: CGPoint) -> IndexPath?
     func cell(atIndexPath indexPath: IndexPath) -> IndexViewCell?
     func forEachVisibleCell(closure: (IndexViewCell) -> Void)
+    func reload()
 }
 
 extension IndexView where Self : UIView {
@@ -42,6 +43,9 @@ extension UITableView: IndexView {
         }
     }
 
+    func reload() {
+        self.reloadData()
+    }
 }
 
 extension UICollectionView: IndexView {
@@ -62,5 +66,9 @@ extension UICollectionView: IndexView {
         for cell in self.visibleCells {
             closure(cell)
         }
+    }
+    
+    func reload() {
+        self.reloadData()
     }
 }

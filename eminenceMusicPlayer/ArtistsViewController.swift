@@ -104,6 +104,10 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
         setQueue(indexPath: indexPath)
     }
     
+    func indexPathIsExcluded(indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
     // MARK: Gesture Recognizer Methods
     
     func longPress(sender: UILongPressGestureRecognizer) {

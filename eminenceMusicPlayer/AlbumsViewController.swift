@@ -133,6 +133,9 @@ class AlbumsViewController: MenuViewController, UICollectionViewDelegateFlowLayo
         setQueue(indexPath: indexPath)
     }
     
+    func indexPathIsExcluded(indexPath: IndexPath) -> Bool {
+        return false
+    }
     
     // MARK: Gesture Recognizer Methods
     

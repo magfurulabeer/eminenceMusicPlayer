@@ -49,7 +49,7 @@ extension PreviewableDraggable {
         }
         
         if sender.state == UIGestureRecognizerState.cancelled {
-            
+            cancelDragging()
         }
     }
     
@@ -108,7 +108,7 @@ extension PreviewableDraggable {
         cell.isHidden = false
         cell.alpha = 1.0
         if wasSuccessful {
-            let song = musicManager.songList[initialIndexPath!.row]
+            let song = selectedSongForPreview(indexPath: initialIndexPath!)
             musicManager.quickQueue.append(song)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddedToQueue"), object: nil)
         }
@@ -117,7 +117,6 @@ extension PreviewableDraggable {
     func cancelDragging() {
         cellSnapshot.removeFromSuperview()
         (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: false)
-//        let cell = indexView.cell(atIndexPath: indexPath!)
         let cell = indexView.cell(atIndexPath: initialIndexPath!)
         cell?.cell.isHidden = false
         cell?.cell.alpha = 1.0

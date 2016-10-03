@@ -1,8 +1,8 @@
 //
-//  SongsCollectionCell+TransitioningDelegate.swift
+//  MusicPlayerViewController+Transitioning.swift
 //  eminenceMusicPlayer
 //
-//  Created by Magfurul Abeer on 9/26/16.
+//  Created by Magfurul Abeer on 10/3/16.
 //  Copyright © 2016 Magfurul Abeer. All rights reserved.
 //
 

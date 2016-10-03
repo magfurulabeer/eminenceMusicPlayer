@@ -9,13 +9,15 @@
 import UIKit
 import MediaPlayer
 
-class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
+class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate, PreviewableDraggable {
 
+    // MARK: Properties
+    
     let musicManager = MusicManager.sharedManager
     var album: MPMediaItemCollection?
     weak var viewController: UIViewController?
 
-    lazy var tableView: UITableView = {
+    lazy var indexView: IndexView = {
         let tv = UITableView()
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = UIColor.clear
@@ -24,6 +26,20 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
         return tv
     }()
     
+    // MARK: Previewable Properties
+    
+    var selectedCell: IndexViewCell?
+    var selectedIndexPath: IndexPath?
+    
+    
+    // MARK: Draggable Properties
+    
+    var cellSnapshot: UIView = UIView()
+    var initialIndexPath: IndexPath?
+    
+    
+    // MARK: Init Methods
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpTableView()
@@ -32,17 +48,31 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    // MARK: Setup Methods
 
     func setUpTableView() {
-        addSubview(tableView)
-        tableView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
-        tableView.register(UINib(nibName: "AlbumImageCell", bundle: Bundle.main), forCellReuseIdentifier: "AlbumImageCell")
-        tableView.separatorStyle = .none
-        tableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        guard let indexView = indexView as? UITableView else { return }
+        
+        addSubview(indexView)
+        indexView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
+        indexView.register(UINib(nibName: "AlbumImageCell", bundle: Bundle.main), forCellReuseIdentifier: "AlbumImageCell")
+        indexView.separatorStyle = .none
+        
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
+        longPressGestureRecognizer.minimumPressDuration = 0.3
+        indexView.addGestureRecognizer(longPressGestureRecognizer)
+        
+        
+        indexView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        indexView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        indexView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        indexView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
+    
+    
+    // MARK: TableViewDataSource Methods
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -71,6 +101,9 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
             return cell
         }
     }
+    
+    
+    // MARK: TableViewDelegate Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
@@ -108,6 +141,9 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
         return SongCellHeight * 0.8
     }
     
+    
+    // MARK: ScrollViewDelegate Methods
+
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let width = viewController?.view.frame.width ?? 0
         if scrollView.contentOffset.y <= -width/4 {
@@ -119,6 +155,53 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
                 superView?.layoutIfNeeded()
             })
         }
+    }
+    
+    
+    // MARK: Previewable Methods
+    
+    func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
+        let song = album!.items[indexPath.item - 1]
+        return song
+    }
+    
+    func setQueue(indexPath:IndexPath) {
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: album!.items))
+        musicManager.player.beginGeneratingPlaybackNotifications()
+        musicManager.player.stop()
+    }
+    
+    func setNewQueue(indexPath:IndexPath) { }
+    
+    func indexPathIsExcluded(indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0 { return true }
+        return false
+    }
+    
+    func displayPreviewing(state: UIGestureRecognizerState, indexPath: IndexPath) {
+        selectedCell?.cell.backgroundColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
+    }
+    
+    func revertVisuals() {
+        selectedCell?.cell.backgroundColor = UIColor.black
+    }
+    
+    func prepareForChange() {
+        musicManager.player.pause()
+        selectedCell?.cell.backgroundColor = UIColor.black
+    }
+
+    
+    // MARK: Draggable Methods
+    
+    func draggingOffset() -> CGFloat {
+        return SongCellHeight * 0.8
+    }
+    
+    // MARK: Gesture Recognizer Methods
+    
+    func longPress(sender: UILongPressGestureRecognizer) {
+        handleLongPress(sender: sender)
     }
 
 }

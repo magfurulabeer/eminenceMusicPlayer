@@ -24,31 +24,10 @@ class MenuViewController: UIViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    override func viewDidAppear(_ animated: Bool) {
+        storedIndexView!.reload()
     }
-//    
-//    func setUpIndexView() {
-////        guard let indexView = indexView as? indexViewType else { return }
-//        
-//        indexView.delegate = self
-//        indexView.dataSource = self
-//        indexView.backgroundColor = UIColor.clear
-////        contentView.addSubview(indexView)
-//        indexView.separatorStyle = UITableViewCellSeparatorStyle.none
-//        
-//        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
-//        longPressGestureRecognizer.minimumPressDuration = 0.3
-//        indexView.addGestureRecognizer(longPressGestureRecognizer)
-//        
-//        indexView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
-//        indexView.register(UINib(nibName: "SelectedSongCell", bundle: Bundle.main), forCellReuseIdentifier: "SelectedSongCell")
-//        
-//        
-//        indexView.reloadData()
-//    }
+
     
     func constrainIndexView() {
         guard let storedIndexView = storedIndexView as? UIView else { return }

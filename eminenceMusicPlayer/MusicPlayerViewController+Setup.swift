@@ -1,5 +1,5 @@
 //
-//  MusicPlayerController+Setup.swift
+//  MusicPlayerViewController+Setup.swift
 //  eminenceMusicPlayer
 //
 //  Created by Magfurul Abeer on 10/3/16.

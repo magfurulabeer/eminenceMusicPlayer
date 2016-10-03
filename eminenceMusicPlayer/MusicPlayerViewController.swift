@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class MusicPlayerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var menuPages = [MenuViewController]()
@@ -17,8 +15,6 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
     var quickBar: NowPlayingQuickBar?
     let slideDownInteractor = SlideDownInteractor()
     var musicManager = MusicManager.sharedManager
-    var currentIndex = 1
-    var isAutoScrolling = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

@@ -38,7 +38,6 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         setUpIndexView()
     }
     
-    
     // MARK: Setup Methods
 
     func setUpIndexView() {
@@ -75,7 +74,7 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let song = musicManager.songList[indexPath.row]
         
-        if song == musicManager.itemNowPlaying && musicManager.currentQueue == MPMediaItemCollection(items: musicManager.songList) {
+        if song == musicManager.itemNowPlaying {
             let cell =  tableView.dequeueReusableCell(withIdentifier: "SelectedSongCell", for: indexPath) as! SelectedSongCell
             cell.titleLabel.text = song.title
             cell.artist = song.artist != nil ? song.artist! : ""
@@ -138,6 +137,10 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     }
     
     func setNewQueue(indexPath:IndexPath) { }
+    
+    func indexPathIsExcluded(indexPath: IndexPath) -> Bool {
+        return false
+    }
     
     // MARK: Draggable Methods
     

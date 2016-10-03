@@ -23,6 +23,10 @@ protocol Previewable: class {
     func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem
     func setQueue(indexPath:IndexPath)
     func setNewQueue(indexPath:IndexPath)
+    func indexPathIsExcluded(indexPath: IndexPath) -> Bool
+    func displayPreviewing(state: UIGestureRecognizerState, indexPath: IndexPath)
+    func revertVisuals()
+    func prepareForChange()
 }
 
 extension Previewable {
@@ -35,13 +39,21 @@ extension Previewable {
         let indexPath = indexView.indexPathForCell(at: point)
         
         guard indexPath != nil else {
-            if musicManager.currentlyPreviewing {
+            if musicManager.currentlyPreviewing && sender.state == .ended {
                 musicManager.player.pause()
                 endPreviewingMusic()
             }
             return
         }
         
+        guard !indexPathIsExcluded(indexPath: indexPath!) else {
+            if musicManager.currentlyPreviewing {
+                musicManager.player.pause()
+                endPreviewingMusic()
+            }
+            return
+        }
+                
         handleLongPressPreviewing(sender: sender, indexPath: indexPath!)
     }
     
@@ -55,10 +67,7 @@ extension Previewable {
         }
         if sender.state == UIGestureRecognizerState.changed {
             if indexPath != selectedIndexPath {
-                musicManager.player.pause()
-                selectedCell?.cell.backgroundColor = UIColor.clear
-                selectedCell?.cell.alpha = 0.5
-                selectedCell?.contentBackgroundColor = UIColor.clear
+                prepareForChange()
                 changePreviewingMusic(atIndexPath: indexPath)
             }
         }
@@ -80,17 +89,12 @@ extension Previewable {
         musicManager.savedTime = musicManager.player.currentPlaybackTime
         musicManager.savedRepeatMode = musicManager.player.repeatMode
 
-        indexView.forEachVisibleCell { (indexCell) in
-            indexCell.cell.alpha = 0.5
-        }
+        selectedCell = indexView.cell(atIndexPath: indexPath)
 
         // Visuals
-        selectedCell = indexView.cell(atIndexPath: indexPath)
-        selectedCell?.cell.backgroundColor = UIColor.black
-        selectedCell?.cell.alpha = 1
+        displayPreviewing(state: .began, indexPath: indexPath)
         
         // Audio
-//        let song = musicManager.songList[indexPath.row]
         let song = selectedSongForPreview(indexPath: indexPath)
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         musicManager.player.repeatMode = MPMusicRepeatMode.one // In case held till end of song
@@ -107,18 +111,18 @@ extension Previewable {
     func changePreviewingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
         selectedIndexPath = indexPath
-        
-        // Visuals
+
         selectedCell = indexView.cell(atIndexPath: indexPath)
-        selectedCell?.cell.backgroundColor = UIColor.black
-        selectedCell?.cell.alpha = 1
+
+        // Visuals
+        displayPreviewing(state: .changed, indexPath: indexPath)
         
         musicManager.player.pause()
         
         setNewQueue(indexPath: indexPath)
         
         // Audio
-        let song = musicManager.songList[indexPath.row]
+        let song = selectedSongForPreview(indexPath: indexPath)
         musicManager.itemNowPlaying = song
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
     }
@@ -128,12 +132,9 @@ extension Previewable {
         
         musicManager.currentlyPreviewing = false
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PreviewingDidEnd"), object: nil)
-        // Return visual to normal
-        selectedCell?.cell.backgroundColor = UIColor.clear
         
-        indexView.forEachVisibleCell { (indexCell) in
-            indexCell.cell.alpha = 1
-        }
+        // Return visual to normal
+        revertVisuals()
         
         // Return audio to normal
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
@@ -151,7 +152,7 @@ extension Previewable {
         
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
         musicManager.player.repeatMode = musicManager.savedRepeatMode ?? .none
-        musicManager.player.currentPlaybackTime = musicManager.savedTime!
+        musicManager.player.currentPlaybackTime = musicManager.savedTime ?? 0
         
         if musicManager.savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.playing.rawValue {
             musicManager.player.play()
@@ -169,5 +170,31 @@ extension Previewable {
         selectedIndexPath = nil
         selectedCell = nil
         musicManager.savedPlayerIsPlaying = nil
+    }
+    
+    func displayPreviewing(state: UIGestureRecognizerState, indexPath: IndexPath) {
+        if state == .began {
+            indexView.forEachVisibleCell { (indexCell) in
+                indexCell.cell.alpha = 0.5
+            }
+        }
+        
+        selectedCell?.cell.backgroundColor = UIColor.black
+        selectedCell?.cell.alpha = 1
+    }
+    
+    func revertVisuals() {
+        selectedCell?.cell.backgroundColor = UIColor.clear
+        
+        indexView.forEachVisibleCell { (indexCell) in
+            indexCell.cell.alpha = 1
+        }
+    }
+    
+    func prepareForChange() {
+        musicManager.player.pause()
+        selectedCell?.cell.backgroundColor = UIColor.clear
+        selectedCell?.cell.alpha = 0.5
+        selectedCell?.contentBackgroundColor = UIColor.clear
     }
 }
