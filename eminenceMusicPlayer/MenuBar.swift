@@ -90,8 +90,32 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        viewController?.scrollToMenuIndex(index: indexPath.item)
+
+        if indexPath.item != viewController!.currentIndex {
+            let direction: UIPageViewControllerNavigationDirection
+            print("test")
+            print(viewController!.isAutoScrolling)
+            viewController?.isAutoScrolling = true
+            print(viewController!.isAutoScrolling)
+            direction = indexPath.item < viewController!.currentIndex ? .reverse : .forward
+            print(viewController!.isAutoScrolling)
+
+            viewController!.setViewControllers([viewController!.menuPages[indexPath.item]],
+                                               direction: direction,
+                                               animated: true,
+                                               completion: { (bool) in
+                                                print("oh no")
+                                                print(self.viewController!.isAutoScrolling)
+                                                self.viewController?.isAutoScrolling = false
+                                                print(self.viewController!.isAutoScrolling)
+            })
+            
+        }
+        viewController?.currentIndex = indexPath.item
+
         selectItemAtIndex(index: indexPath.item)
+        viewController?.isAutoScrolling = false
+//        horizontalBarLeadingConstraint?.constant = (CGFloat(indexPath.item) * viewController!.view.frame.width/4) + viewController!.view.frame.width/16
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

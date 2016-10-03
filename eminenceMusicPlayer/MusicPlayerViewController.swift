@@ -16,7 +16,8 @@ class MusicPlayerViewController: UIPageViewController, UIScrollViewDelegate {
     let slideDownInteractor = SlideDownInteractor()
     var musicManager = MusicManager.sharedManager
     var currentIndex = 1
-
+    var isAutoScrolling = false
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -46,41 +47,28 @@ class MusicPlayerViewController: UIPageViewController, UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let point = scrollView.contentOffset
-        let quarterWidth = view.frame.width/4
-        let correctionalOffset = view.frame.width/16
-        let percentComplete = (point.x - view.frame.size.width)/view.frame.size.width
-        if percentComplete != 0 {
-            menuBar.horizontalBarLeadingConstraint?.constant = (percentComplete * quarterWidth) + (quarterWidth * CGFloat(currentIndex)) + correctionalOffset
+        print(isAutoScrolling)
+        if isAutoScrolling == false {
+            let point = scrollView.contentOffset
+            let quarterWidth = view.frame.width/4
+            let correctionalOffset = view.frame.width/16
+            let percentComplete = (point.x - view.frame.size.width)/view.frame.size.width
+            if percentComplete != 0 {
+                print("should not print")
+                menuBar.horizontalBarLeadingConstraint?.constant = (percentComplete * quarterWidth) + (quarterWidth * CGFloat(currentIndex)) + correctionalOffset
+            }
         }
-        
     }
     
-//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        print(targetContentOffset.pointee.x)
-//        print(menuBar.horizontalBarLeadingConstraint!.constant)
-//        let target = targetContentOffset.pointee.x
-//        let width = view.frame.width
-//        if target == width {
-//            menuBar.selectItemAtIndex(index: currentIndex)
-////            print("=")
-//        } else if target > width {
-//            menuBar.selectItemAtIndex(index: currentIndex + 1)
-////            currentIndex += 1
-////            print("+")
-//        } else if target < width {
-//            menuBar.selectItemAtIndex(index: currentIndex - 1)
-////            currentIndex -= 1
-////            print("-")
-//        }
-////        print(velocity.x)
-////        var index = velocity.x > 0 ? currentIndex + 1 : currentIndex - 1
-//////        if velocity.x == 0  {    index = currentIndex    }
-////        if fabs(velocity.x) < 0.33     {   index = currentIndex; print("less than")    }
-////        print(currentIndex)
-////        print(index)
-////        print("\n")
-////        menuBar.selectItemAtIndex(index: index)
-//    }
-    
+    func changePage(direction: UIPageViewControllerNavigationDirection) {
+        if direction == .forward {
+            currentIndex += 1
+        } else {
+            currentIndex -= 1
+        }
+        
+        let vc = menuPages[currentIndex]
+        
+        setViewControllers([vc], direction: direction, animated: true, completion: nil)
+    }
 }

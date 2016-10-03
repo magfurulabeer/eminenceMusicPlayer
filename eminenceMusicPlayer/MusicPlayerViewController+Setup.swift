@@ -24,6 +24,7 @@ extension MusicPlayerViewController {
     
     func setUpMenuBar() {
         menuBar = MenuBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: FauxBarHeight))
+        menuBar.viewController = self
         view.addSubview(menuBar)
         menuBar.translatesAutoresizingMaskIntoConstraints = false
         menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true

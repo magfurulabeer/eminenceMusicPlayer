@@ -36,6 +36,8 @@ extension MusicPlayerViewController: UIPageViewControllerDataSource, UIPageViewC
         let currentPage = self.viewControllers?.first as! MenuViewController
         currentIndex = currentPage.index
         menuBar.selectItemAtIndex(index: currentPage.index)
+//        menuBar.horizontalBarLeadingConstraint?.constant = (CGFloat(currentIndex) * view.frame.width/4) + view.frame.width/16
+
     }
     
     
