@@ -61,14 +61,14 @@ extension PreviewableDraggable {
             if cellSnapshot.center.y < FauxBarHeight + SongCellHeight/4 {
                 if cellSnapshot.tag == 0 {
                     cellSnapshot.tag = 5
-//                    (viewController as! MusicPlayerViewController).menuBar.highlightCell(index: 0)
+                    (viewController as! MusicPlayerViewController).menuBar.highlightCell(index: 0)
                     UIView.animate(withDuration: 0.3, animations: {
                         self.cellSnapshot.transform = CGAffineTransform.init(scaleX: 0.5, y: 0.5).concatenating(CGAffineTransform.init(translationX: -self.viewController!.view.frame.width/6, y: 0))
                     })
                 }
             } else {
                 if cellSnapshot.tag != 0 {
-//                    (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: false)
+                    (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: false)
                     cellSnapshot.tag = 0
                     UIView.animate(withDuration: 0.3, animations: {
                         self.cellSnapshot.transform = CGAffineTransform.identity
@@ -79,7 +79,7 @@ extension PreviewableDraggable {
         if sender.state == UIGestureRecognizerState.ended {
             let wasSuccessful = cellSnapshot.center.y < FauxBarHeight + SongCellHeight/4
             cellSnapshot.removeFromSuperview()
-//            (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: wasSuccessful)
+            (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: wasSuccessful)
             let cell = indexView.cell(atIndexPath: initialIndexPath!) as! UITableViewCell
 
             cell.isHidden = false
@@ -93,7 +93,7 @@ extension PreviewableDraggable {
         
         if sender.state == UIGestureRecognizerState.cancelled {
             cellSnapshot.removeFromSuperview()
-//            (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: false)
+            (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: false)
             let cell = indexView.cell(atIndexPath: indexPath!)
             cell?.cell.isHidden = false
             cell?.cell.alpha = 1.0

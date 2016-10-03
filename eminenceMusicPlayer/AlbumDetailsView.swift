@@ -55,8 +55,8 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumImageCell", for: indexPath) as! AlbumImageCell
-            let width = viewController?.view.frame.width ?? 0
-            cell.albumImageView.image = album?.representativeItem?.artwork?.image(at: CGSize(width: width, height: width)) ?? #imageLiteral(resourceName: "NoAlbumImage")
+            let albumImageSize = CGSize(width: frame.width, height: frame.width)
+            cell.albumImageView.image = album?.representativeItem?.artwork?.image(at: albumImageSize) ?? #imageLiteral(resourceName: "NoAlbumImage")
             return cell
         } else {
             let song = album?.items[indexPath.item - 1]
@@ -103,8 +103,7 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            let width = viewController?.view.frame.width ?? 0
-            return width
+            return frame.width
         }
         return SongCellHeight * 0.8
     }

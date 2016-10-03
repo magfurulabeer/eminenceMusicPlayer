@@ -28,7 +28,6 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("hey does this work?")
     }
     
     func setUpIndexView() {
@@ -104,7 +103,6 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         musicManager.player.stop()
         musicManager.player.nowPlayingItem = nil
         musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
-
     }
     
 
