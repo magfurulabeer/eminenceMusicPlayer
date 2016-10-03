@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import MediaPlayer
 
-class ArtistsCollectionCell: UICollectionViewCell {
-    var tableView: UITableView = UITableView()
-    let musicManager = MusicManager.sharedManager
+class ArtistsCollectionCell: UICollectionViewCell, Previewable {
+    
+    var indexView: IndexView = UITableView()
+    var selectedCell: IndexViewCell?
+    var selectedIndexPath: IndexPath?
+    
+//    var tableView: UITableView = UITableView()
     weak var viewController: UIViewController?
     
     override init(frame: CGRect) {
@@ -24,20 +29,52 @@ class ArtistsCollectionCell: UICollectionViewCell {
     }
     
     func setUpTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = UIColor.clear
-        contentView.addSubview(tableView)
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        guard let indexView = indexView as? UITableView else { return }
+        
+        indexView.delegate = self
+        indexView.dataSource = self
+        indexView.backgroundColor = UIColor.clear
+        contentView.addSubview(indexView)
+        indexView.separatorStyle = UITableViewCellSeparatorStyle.none
 
-        tableView.register(UINib(nibName: "ArtistCell", bundle: Bundle.main), forCellReuseIdentifier: "ArtistCell")
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
+        longPressGestureRecognizer.minimumPressDuration = 0.3
+        indexView.addGestureRecognizer(longPressGestureRecognizer)
+        
+        indexView.register(UINib(nibName: "ArtistCell", bundle: Bundle.main), forCellReuseIdentifier: "ArtistCell")
 
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        tableView.reloadData()
+        indexView.translatesAutoresizingMaskIntoConstraints = false
+        indexView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        indexView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        indexView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        indexView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        indexView.reloadData()
+    }
+    
+    // MARK: Previewable Methods
+    
+    func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
+        let artist = musicManager.artistList[indexPath.row]
+        let randomNumber = arc4random_uniform(UInt32(artist.count))
+        let song = artist.items[Int(randomNumber)]
+        return song
+    }
+    
+    func setQueue(indexPath:IndexPath) {
+        let artist = musicManager.artistList[indexPath.row]
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: artist.items))
+        musicManager.player.beginGeneratingPlaybackNotifications()
+        musicManager.player.stop()
+    }
+    
+    func setNewQueue(indexPath:IndexPath) {
+        setQueue(indexPath: indexPath)
+    }
+    
+    // MARK: Gesture Recognizer Methods
+    
+    func longPress(sender: UILongPressGestureRecognizer) {
+        handleLongPress(sender: sender)
     }
     
 }

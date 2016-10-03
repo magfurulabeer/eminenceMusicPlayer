@@ -17,16 +17,13 @@ class SongsCollectionCell: UICollectionViewCell, Previewable {
     let slideDownInteractor = SlideDownInteractor()
     
     // MARK: Previewable Properties
-    
+    var indexView: IndexView = UITableView()
     var selectedCell: IndexViewCell?
     var selectedIndexPath: IndexPath?
-    var savedSong: MPMediaItem?
-    var savedTime: TimeInterval?
-    var savedRepeatMode: MPMusicRepeatMode?
-    var savedPlayerIsPlaying: MPMusicPlaybackState?
+    
+    
     var cellSnapshot: UIView? = UIView()
     var initialIndexPath: IndexPath? = IndexPath()
-    var indexView: IndexView = UITableView()
     var savedQueue: MPMediaItemCollection?
     
     // MARK: Init Methods
@@ -51,9 +48,11 @@ class SongsCollectionCell: UICollectionViewCell, Previewable {
         indexView.backgroundColor = UIColor.clear
         contentView.addSubview(indexView)
         indexView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
         longPressGestureRecognizer.minimumPressDuration = 0.3
         indexView.addGestureRecognizer(longPressGestureRecognizer)
+        
         indexView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
         indexView.register(UINib(nibName: "SelectedSongCell", bundle: Bundle.main), forCellReuseIdentifier: "SelectedSongCell")
         

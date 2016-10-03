@@ -14,11 +14,6 @@ protocol Previewable: class {
     var indexView: IndexView { get set }
     var selectedCell: IndexViewCell? { get set }
     var selectedIndexPath: IndexPath? { get set }
-//    var savedSong: MPMediaItem? { get set }
-//    var savedTime: TimeInterval? { get set }
-//    var savedRepeatMode: MPMusicRepeatMode? { get set }
-//    var savedPlayerIsPlaying: MPMusicPlaybackState? { get set }
-//    var savedQueue: MPMediaItemCollection? { get set }
 
     func handleLongPress(sender: UILongPressGestureRecognizer)
     func handleLongPressSampling(sender: UILongPressGestureRecognizer, indexPath: IndexPath)

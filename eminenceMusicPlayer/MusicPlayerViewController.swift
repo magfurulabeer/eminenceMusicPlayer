@@ -48,7 +48,7 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
             break
         case 2:
             let cell = collectionView?.cellForItem(at: IndexPath(item: 2, section: 0)) as! ArtistsCollectionCell
-            cell.tableView.reloadData()
+            (cell.indexView as? UITableView)?.reloadData()
             break
         case 3:
             let cell = collectionView?.cellForItem(at: IndexPath(item: 3, section: 0)) as! AlbumCollectionCell
