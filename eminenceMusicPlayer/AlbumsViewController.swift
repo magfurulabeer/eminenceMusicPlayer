@@ -30,12 +30,6 @@ class AlbumsViewController: MenuViewController, UICollectionViewDelegateFlowLayo
     
     override var storedIndexView: IndexView? {  get { return indexView }    }
     
-    override var index: Int {
-        get {
-            return 3
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clear

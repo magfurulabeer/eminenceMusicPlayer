@@ -16,12 +16,6 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
 
     override var storedIndexView: IndexView? {  get { return indexView }    }
     
-    override var index: Int {
-        get {
-            return 0
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clear

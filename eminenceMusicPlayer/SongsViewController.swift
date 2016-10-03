@@ -15,11 +15,7 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     let musicManager = MusicManager.sharedManager
     var indexView: IndexView = UITableView()
     override var storedIndexView: IndexView? {  get { return indexView }    }
-    override var index: Int {
-        get {
-            return 1
-        }
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import MediaPlayer
 
-class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableViewDataSource {
+class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableViewDataSource, Previewable {
 
     let musicManager = MusicManager.sharedManager
     var indexView: IndexView = UITableView()
     override var storedIndexView: IndexView? {  get { return indexView }    }
     
-    override var index: Int {
-        get {
-            return 2
-        }
-    }
+    // MARK: Previewable Properties
+
+    var selectedCell: IndexViewCell?
+    var selectedIndexPath: IndexPath?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +35,9 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
         indexView.backgroundColor = UIColor.clear
         indexView.separatorStyle = UITableViewCellSeparatorStyle.none
         
-        //        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
-        //        longPressGestureRecognizer.minimumPressDuration = 0.3
-        //        indexView.addGestureRecognizer(longPressGestureRecognizer)
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
+        longPressGestureRecognizer.minimumPressDuration = 0.3
+        indexView.addGestureRecognizer(longPressGestureRecognizer)
         
         indexView.register(UINib(nibName: "ArtistCell", bundle: Bundle.main), forCellReuseIdentifier: "ArtistCell")
 
@@ -72,6 +73,32 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return SongCellHeight
+    }
+    
+    // MARK: Previewable Methods
+    
+    func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
+        let artist = musicManager.artistList[indexPath.row]
+        let randomNumber = arc4random_uniform(UInt32(artist.count))
+        let song = artist.items[Int(randomNumber)]
+        return song
+    }
+    
+    func setQueue(indexPath:IndexPath) {
+        let artist = musicManager.artistList[indexPath.row]
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: artist.items))
+        musicManager.player.beginGeneratingPlaybackNotifications()
+        musicManager.player.stop()
+    }
+    
+    func setNewQueue(indexPath:IndexPath) {
+        setQueue(indexPath: indexPath)
+    }
+    
+    // MARK: Gesture Recognizer Methods
+    
+    func longPress(sender: UILongPressGestureRecognizer) {
+        handleLongPress(sender: sender)
     }
 
 }
