@@ -9,24 +9,29 @@
 import UIKit
 import MediaPlayer
 
-class SongsCollectionCell: UICollectionViewCell {
+class SongsCollectionCell: UICollectionViewCell, Previewable {
+
+
+
     
-    var musicManager = MusicManager.sharedManager
+    
     weak var viewController: UIViewController?
-    var tableView: UITableView = UITableView()
     let slideDownInteractor = SlideDownInteractor()
     
-    /////// SAMPLING PROPERTIES ////////
-    var selectedCell: UITableViewCell?
+//    /////// SAMPLING PROPERTIES ////////
+    
+//    var musicManager = MusicManager.sharedManager
+    var selectedCell: IndexViewCell?
     var selectedIndexPath: IndexPath?
     var savedSong: MPMediaItem?
     var savedTime: TimeInterval?
     var savedRepeatMode: MPMusicRepeatMode?
     var savedPlayerIsPlaying: MPMusicPlaybackState?
-    var cellSnapshot = UIView()
-    var initialIndexPath = IndexPath()
-    ///////////////////////////////////
-    
+    var cellSnapshot: UIView? = UIView()
+    var initialIndexPath: IndexPath? = IndexPath()
+    var indexView: IndexView = UITableView()
+//    ///////////////////////////////////
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpTableView()
@@ -38,29 +43,40 @@ class SongsCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
+        let song = musicManager.songList[indexPath.row]
+        return song
+    }
+    
     func songDidChange() {
+        guard let indexView = indexView as? UITableView else { return }
         if musicManager.currentlySampling == false {
-            tableView.reloadData()
+            indexView.reloadData()
         }
     }
     func setUpTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = UIColor.clear
-        contentView.addSubview(tableView)
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress(sender:)))
+        guard let indexView = indexView as? UITableView else { return }
+
+        indexView.delegate = self
+        indexView.dataSource = self
+        indexView.backgroundColor = UIColor.clear
+        contentView.addSubview(indexView)
+        indexView.separatorStyle = UITableViewCellSeparatorStyle.none
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
         longPressGestureRecognizer.minimumPressDuration = 0.3
-        tableView.addGestureRecognizer(longPressGestureRecognizer)
-        tableView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
-        tableView.register(UINib(nibName: "SelectedSongCell", bundle: Bundle.main), forCellReuseIdentifier: "SelectedSongCell")
+        indexView.addGestureRecognizer(longPressGestureRecognizer)
+        indexView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
+        indexView.register(UINib(nibName: "SelectedSongCell", bundle: Bundle.main), forCellReuseIdentifier: "SelectedSongCell")
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        tableView.reloadData()
+        indexView.translatesAutoresizingMaskIntoConstraints = false
+        indexView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        indexView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        indexView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        indexView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        indexView.reloadData()
     }
-    
+ 
+    func longPress(sender: UILongPressGestureRecognizer) {
+        handleLongPress(sender: sender)
+    }
 }

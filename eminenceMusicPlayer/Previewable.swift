@@ -9,8 +9,8 @@
 import UIKit
 import MediaPlayer
 
-protocol Previewable {
-    var musicManager: MusicManager { get }
+protocol Previewable: class {
+//    var musicManager: MusicManager { get }
     var indexView: IndexView { get set }
     var selectedCell: IndexViewCell? { get set }
     var selectedIndexPath: IndexPath? { get set }
@@ -20,12 +20,12 @@ protocol Previewable {
     var savedPlayerIsPlaying: MPMusicPlaybackState? { get set }
     var cellSnapshot: UIView? { get set }
     var initialIndexPath: IndexPath? { get set }
-    
+
     func handleLongPress(sender: UILongPressGestureRecognizer)
     func handleLongPressSampling(sender: UILongPressGestureRecognizer, indexPath: IndexPath)
-    mutating func startSamplingMusic(atIndexPath indexPath: IndexPath)
-    mutating func changeSamplingMusic(atIndexPath indexPath: IndexPath)
-    mutating func endSamplingMusic()
+    func startSamplingMusic(atIndexPath indexPath: IndexPath)
+    func changeSamplingMusic(atIndexPath indexPath: IndexPath)
+    func endSamplingMusic()
     func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem
 }
 
@@ -41,7 +41,7 @@ extension Previewable {
         handleLongPressSampling(sender: sender, indexPath: indexPath!)
     }
     
-    mutating func handleLongPressSampling(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
+    func handleLongPressSampling(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
         if sender.state == UIGestureRecognizerState.began {
             // Will be needed at the end
             savedPlayerIsPlaying = musicManager.player.playbackState
@@ -63,8 +63,8 @@ extension Previewable {
             endSamplingMusic()
         }
     }
-    
-    mutating func startSamplingMusic(atIndexPath indexPath: IndexPath) {
+
+    func startSamplingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "SamplingDidBegin"), object: nil)
         musicManager.currentlySampling = true
@@ -100,7 +100,7 @@ extension Previewable {
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
     }
 
-    mutating func changeSamplingMusic(atIndexPath indexPath: IndexPath) {
+    func changeSamplingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
         selectedIndexPath = indexPath
         
@@ -115,7 +115,7 @@ extension Previewable {
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
     }
     
-    mutating func endSamplingMusic() {
+    func endSamplingMusic() {
         musicManager.player.pause()
         
         musicManager.currentlySampling = false
@@ -152,5 +152,4 @@ extension Previewable {
         selectedCell = nil
         savedPlayerIsPlaying = nil
     }
-    
 }

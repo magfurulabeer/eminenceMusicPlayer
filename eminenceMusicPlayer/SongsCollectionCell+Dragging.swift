@@ -8,6 +8,7 @@
 
 import UIKit
 
+/*
 extension SongsCollectionCell {
     func snapshopOfCell(inputView: UIView) -> UIView {
         UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, false, 0.0)
@@ -90,3 +91,4 @@ extension SongsCollectionCell {
         }
     }
 }
+ */
