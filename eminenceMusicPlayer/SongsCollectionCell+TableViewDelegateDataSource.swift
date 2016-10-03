@@ -56,7 +56,8 @@ extension SongsCollectionCell: UITableViewDelegate, UITableViewDataSource {
         
         print(song.artwork != nil)
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
-        musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.originalSongList))
+        musicManager.currentQueue = MPMediaItemCollection(items: musicManager.originalSongList)
+        musicManager.player.setQueue(with: musicManager.currentQueue!)
         musicManager.player.beginGeneratingPlaybackNotifications()
         musicManager.player.stop()
         musicManager.player.nowPlayingItem = nil

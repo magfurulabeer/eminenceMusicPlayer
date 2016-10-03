@@ -84,7 +84,8 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate {
             let song = album?.items[indexPath.row - 1]
             
             musicManager.player = MPMusicPlayerController.systemMusicPlayer()
-            musicManager.player.setQueue(with: MPMediaItemCollection(items: album!.items))
+            musicManager.currentQueue = MPMediaItemCollection(items: album!.items)
+            musicManager.player.setQueue(with: musicManager.currentQueue!)
             musicManager.player.beginGeneratingPlaybackNotifications()
             musicManager.player.stop()
             musicManager.player.nowPlayingItem = nil

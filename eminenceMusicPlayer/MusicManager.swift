@@ -21,6 +21,7 @@ class MusicManager: NSObject {
     var currentlySampling = false
     var songListIsEmpty: Bool = false
     var quickQueue = [MPMediaItem]()
+    var currentQueue: MPMediaItemCollection?
     var itemNowPlaying: MPMediaItem? {
         get {
             return player.nowPlayingItem

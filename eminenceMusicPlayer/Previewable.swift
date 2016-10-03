@@ -18,8 +18,8 @@ protocol Previewable: class {
     var savedTime: TimeInterval? { get set }
     var savedRepeatMode: MPMusicRepeatMode? { get set }
     var savedPlayerIsPlaying: MPMusicPlaybackState? { get set }
-    var cellSnapshot: UIView? { get set }
     var initialIndexPath: IndexPath? { get set }
+    var savedQueue: MPMediaItemCollection? { get set }
 
     func handleLongPress(sender: UILongPressGestureRecognizer)
     func handleLongPressSampling(sender: UILongPressGestureRecognizer, indexPath: IndexPath)
@@ -136,6 +136,10 @@ extension Previewable {
         }
         
         // Return audio to normal
+        musicManager.player = MPMusicPlayerController.systemMusicPlayer()
+        musicManager.player.setQueue(with: musicManager.currentQueue!)
+        musicManager.player.beginGeneratingPlaybackNotifications()
+        musicManager.player.stop()
         musicManager.player.nowPlayingItem = savedSong
         musicManager.player.prepareToPlay()
         

@@ -27,7 +27,8 @@ class SongsCollectionCell: UICollectionViewCell, Previewable {
     var cellSnapshot: UIView? = UIView()
     var initialIndexPath: IndexPath? = IndexPath()
     var indexView: IndexView = UITableView()
-
+    var savedQueue: MPMediaItemCollection?
+    
     // MARK: Init Methods
 
     override init(frame: CGRect) {

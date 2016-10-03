@@ -33,6 +33,7 @@ class AlbumCollectionCell: UICollectionViewCell, Previewable {
     var savedPlayerIsPlaying: MPMusicPlaybackState?
     var cellSnapshot: UIView? = UIView()
     var initialIndexPath: IndexPath? = IndexPath()
+    var savedQueue: MPMediaItemCollection?
     var indexView: IndexView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
