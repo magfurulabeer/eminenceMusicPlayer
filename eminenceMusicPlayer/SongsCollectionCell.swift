@@ -71,6 +71,14 @@ class SongsCollectionCell: UICollectionViewCell, Previewable {
         return song
     }
     
+    func setQueue(indexPath:IndexPath) {
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.originalSongList))
+        musicManager.player.beginGeneratingPlaybackNotifications()
+        musicManager.player.stop()
+    }
+    
+    func setNewQueue(indexPath:IndexPath) { }
+    
     // MARK: NotificationCenter Methods
     
     func songDidChange() {

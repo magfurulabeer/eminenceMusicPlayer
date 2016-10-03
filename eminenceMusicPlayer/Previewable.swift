@@ -27,6 +27,8 @@ protocol Previewable: class {
     func changeSamplingMusic(atIndexPath indexPath: IndexPath)
     func endSamplingMusic()
     func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem
+    func setQueue(indexPath:IndexPath)
+    func setNewQueue(indexPath:IndexPath)
 }
 
 extension Previewable {
@@ -37,6 +39,8 @@ extension Previewable {
     func handleLongPress(sender: UILongPressGestureRecognizer) {
         let point = sender.location(in: indexView.view)
         let indexPath = indexView.indexPathForCell(at: point)
+        
+        guard indexPath != nil else { return }
         
         handleLongPressSampling(sender: sender, indexPath: indexPath!)
     }
@@ -75,28 +79,28 @@ extension Previewable {
         
         savedTime = musicManager.player.currentPlaybackTime
         savedRepeatMode = musicManager.player.repeatMode
-        
-        // Visuals
-        selectedCell = indexView.cell(atIndexPath: indexPath)
-        selectedCell?.cell.backgroundColor = UIColor.black
-        
+
         indexView.forEachVisibleCell { (indexCell) in
             indexCell.cell.alpha = 0.5
         }
+
+        // Visuals
+        selectedCell = indexView.cell(atIndexPath: indexPath)
+        selectedCell?.cell.backgroundColor = UIColor.black
+        selectedCell?.cell.alpha = 1
         
         // Audio
 //        let song = musicManager.songList[indexPath.row]
         let song = selectedSongForPreview(indexPath: indexPath)
-        ////// CHANGE ABOVE LINE TO FUNCTION CALL //////
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         musicManager.player.repeatMode = MPMusicRepeatMode.one // In case held till end of song
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
-        musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.originalSongList))
-        musicManager.player.beginGeneratingPlaybackNotifications()
-        musicManager.player.stop()
+        
+        setQueue(indexPath: indexPath)
+        
         musicManager.player.nowPlayingItem = nil
         
-        musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
+        musicManager.itemNowPlaying = song
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
     }
 
@@ -109,9 +113,13 @@ extension Previewable {
         selectedCell?.cell.backgroundColor = UIColor.black
         selectedCell?.cell.alpha = 1
         
+        musicManager.player.pause()
+        
+        setNewQueue(indexPath: indexPath)
+        
         // Audio
         let song = musicManager.songList[indexPath.row]
-        musicManager.itemNowPlaying = musicManager.songList[indexPath.row]
+        musicManager.itemNowPlaying = song
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
     }
     

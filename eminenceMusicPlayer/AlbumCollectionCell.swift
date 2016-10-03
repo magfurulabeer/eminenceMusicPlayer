@@ -7,20 +7,40 @@
 //
 
 import UIKit
+import MediaPlayer
 
-class AlbumCollectionCell: UICollectionViewCell, UICollectionViewDelegateFlowLayout,UICollectionViewDataSource, UICollectionViewDelegate {
+class AlbumCollectionCell: UICollectionViewCell, Previewable {
     
-//    var collectionView: UICollectionView?
-    lazy var collectionView: UICollectionView = {
+    // MARK: Properties
+//    lazy var collectionView: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        cv.delegate = self
+//        cv.dataSource = self
+//        cv.translatesAutoresizingMaskIntoConstraints = false
+//        return cv
+//    }()
+//    let musicManager = MusicManager.sharedManager
+    weak var viewController: UIViewController?
+    
+    // MARK: Previewable Properties
+    
+    var selectedCell: IndexViewCell?
+    var selectedIndexPath: IndexPath?
+    var savedSong: MPMediaItem?
+    var savedTime: TimeInterval?
+    var savedRepeatMode: MPMusicRepeatMode?
+    var savedPlayerIsPlaying: MPMusicPlaybackState?
+    var cellSnapshot: UIView? = UIView()
+    var initialIndexPath: IndexPath? = IndexPath()
+    var indexView: IndexView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.delegate = self
-        cv.dataSource = self
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
-    let musicManager = MusicManager.sharedManager
-    weak var viewController: UIViewController?
+    
+    // MARK: Init Methods
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,65 +51,65 @@ class AlbumCollectionCell: UICollectionViewCell, UICollectionViewDelegateFlowLay
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: SetUp Methods
+    
     func setUpCollectionView() {
+        guard let indexView = indexView as? UICollectionView else { return }
+        
         let contentViewWidth = contentView.frame.width
         let dimension = (contentViewWidth - 10)/2
         
-        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let flowLayout = indexView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .vertical
             flowLayout.minimumLineSpacing = 10
             flowLayout.minimumInteritemSpacing = 10
             flowLayout.itemSize = CGSize(width: dimension, height: dimension)
         }
     
-        collectionView.isPrefetchingEnabled = false
-        collectionView.backgroundColor = UIColor.clear
-        contentView.addSubview(collectionView)
+        indexView.isPrefetchingEnabled = false
+        indexView.backgroundColor = UIColor.clear
+        indexView.delegate = self
+        indexView.dataSource = self
+        contentView.addSubview(indexView)
         
-        collectionView.register(UINib(nibName: "AlbumCell", bundle: Bundle.main), forCellWithReuseIdentifier: "AlbumCell")
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
+        longPressGestureRecognizer.minimumPressDuration = 0.3
+        indexView.addGestureRecognizer(longPressGestureRecognizer)
         
-        collectionView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        collectionView.reloadData()
+        indexView.register(UINib(nibName: "AlbumCell", bundle: Bundle.main), forCellWithReuseIdentifier: "AlbumCell")
+        
+        indexView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        indexView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        indexView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        indexView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        indexView.reloadData()
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+    // MARK: Previewable Methods
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return musicManager.albumList.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let contentViewWidth = contentView.frame.width
+    func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
         let album = musicManager.albumList[indexPath.item]
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlbumCell", for: indexPath) as! AlbumCell
-        cell.albumImage = album.representativeItem?.artwork?.image(at: CGSize(width: contentViewWidth/2, height: contentViewWidth/2)) ?? #imageLiteral(resourceName: "NoAlbumImage")
-        cell.albumTitle = album.representativeItem!.albumTitle ?? "Untitled Album"
-        cell.artist = album.representativeItem!.albumArtist ?? album.representativeItem!.artist ?? "Unknown Artist"
-        cell.contentView.layer.borderColor = UIColor.white.withAlphaComponent(0.3).cgColor
-        cell.contentView.layer.borderWidth = 1
-        return cell
-        
+        let randomNumber = arc4random_uniform(UInt32(album.count))
+        let song = album.items[Int(randomNumber)]
+        return song
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let size = contentView.frame.size
-        let rect = CGRect(x: size.width * 0.05, y: 0, width: size.width * 0.3, height: size.height)
-        let albumDetails = AlbumDetailsView(frame: rect)
-        albumDetails.album = musicManager.albumList[indexPath.item]
-        albumDetails.viewController = viewController
-        addSubview(albumDetails)
-        albumDetails.translatesAutoresizingMaskIntoConstraints = false
-        albumDetails.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        albumDetails.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        albumDetails.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        albumDetails.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+    func setQueue(indexPath:IndexPath) {
+        let album = musicManager.albumList[indexPath.item]
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: album.items))
+        musicManager.player.beginGeneratingPlaybackNotifications()
+        musicManager.player.stop()
+    }
+    
+    func setNewQueue(indexPath:IndexPath) {
+        setQueue(indexPath: indexPath)
+    }
 
+    
+    // MARK: Gesture Recognizer Methods
+    
+    func longPress(sender: UILongPressGestureRecognizer) {
+        handleLongPress(sender: sender)
     }
 
 }
