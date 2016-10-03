@@ -11,16 +11,13 @@ import MediaPlayer
 
 class SongsCollectionCell: UICollectionViewCell, Previewable {
 
+    // MARK: Properties
 
-
-    
-    
     weak var viewController: UIViewController?
     let slideDownInteractor = SlideDownInteractor()
     
-//    /////// SAMPLING PROPERTIES ////////
+    // MARK: Previewable Properties
     
-//    var musicManager = MusicManager.sharedManager
     var selectedCell: IndexViewCell?
     var selectedIndexPath: IndexPath?
     var savedSong: MPMediaItem?
@@ -30,30 +27,21 @@ class SongsCollectionCell: UICollectionViewCell, Previewable {
     var cellSnapshot: UIView? = UIView()
     var initialIndexPath: IndexPath? = IndexPath()
     var indexView: IndexView = UITableView()
-//    ///////////////////////////////////
+
+    // MARK: Init Methods
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpTableView()
         NotificationCenter.default.addObserver(self, selector: #selector(SongsCollectionCell.songDidChange), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
-
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
-        let song = musicManager.songList[indexPath.row]
-        return song
-    }
+    // MARK: Set Up Methods
     
-    func songDidChange() {
-        guard let indexView = indexView as? UITableView else { return }
-        if musicManager.currentlySampling == false {
-            indexView.reloadData()
-        }
-    }
     func setUpTableView() {
         guard let indexView = indexView as? UITableView else { return }
 
@@ -75,7 +63,25 @@ class SongsCollectionCell: UICollectionViewCell, Previewable {
         indexView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         indexView.reloadData()
     }
- 
+    
+    // MARK: Previewable Methods
+    
+    func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
+        let song = musicManager.songList[indexPath.row]
+        return song
+    }
+    
+    // MARK: NotificationCenter Methods
+    
+    func songDidChange() {
+        guard let indexView = indexView as? UITableView else { return }
+        if musicManager.currentlySampling == false {
+            indexView.reloadData()
+        }
+    }
+    
+    // MARK: Gesture Recognizer Methods
+    
     func longPress(sender: UILongPressGestureRecognizer) {
         handleLongPress(sender: sender)
     }

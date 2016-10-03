@@ -54,7 +54,6 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     // necessary??
     func selectItemAtIndex(index: Int) {
-        print(index)
         if index < imageIcons.count {
             let selectedIndexPath = IndexPath(item: index, section: 0)
             collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
