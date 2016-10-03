@@ -14,6 +14,8 @@ protocol PreviewableDraggable: Previewable {
     func snapshopOfCell(inputView: UIView) -> UIView
     weak var viewController: UIViewController? { get set }
     var cellSnapshot: UIView { get set }
+    var initialIndexPath: IndexPath? { get set }
+
 }
 
 extension PreviewableDraggable {

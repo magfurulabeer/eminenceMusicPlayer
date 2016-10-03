@@ -10,16 +10,15 @@ import UIKit
 import MediaPlayer
 
 protocol Previewable: class {
-//    var musicManager: MusicManager { get }
+    var musicManager: MusicManager { get }
     var indexView: IndexView { get set }
     var selectedCell: IndexViewCell? { get set }
     var selectedIndexPath: IndexPath? { get set }
-    var savedSong: MPMediaItem? { get set }
-    var savedTime: TimeInterval? { get set }
-    var savedRepeatMode: MPMusicRepeatMode? { get set }
-    var savedPlayerIsPlaying: MPMusicPlaybackState? { get set }
-    var initialIndexPath: IndexPath? { get set }
-    var savedQueue: MPMediaItemCollection? { get set }
+//    var savedSong: MPMediaItem? { get set }
+//    var savedTime: TimeInterval? { get set }
+//    var savedRepeatMode: MPMusicRepeatMode? { get set }
+//    var savedPlayerIsPlaying: MPMusicPlaybackState? { get set }
+//    var savedQueue: MPMediaItemCollection? { get set }
 
     func handleLongPress(sender: UILongPressGestureRecognizer)
     func handleLongPressSampling(sender: UILongPressGestureRecognizer, indexPath: IndexPath)
@@ -48,7 +47,7 @@ extension Previewable {
     func handleLongPressSampling(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
         if sender.state == UIGestureRecognizerState.began {
             // Will be needed at the end
-            savedPlayerIsPlaying = musicManager.player.playbackState
+            musicManager.savedPlayerIsPlaying = musicManager.player.playbackState
             musicManager.player.pause()
             
             startSamplingMusic(atIndexPath: indexPath)
@@ -75,10 +74,10 @@ extension Previewable {
         selectedIndexPath = indexPath
         
         // These will be needed when the touch ends
-        savedSong = musicManager.player.nowPlayingItem
+        musicManager.savedSong = musicManager.player.nowPlayingItem
         
-        savedTime = musicManager.player.currentPlaybackTime
-        savedRepeatMode = musicManager.player.repeatMode
+        musicManager.savedTime = musicManager.player.currentPlaybackTime
+        musicManager.savedRepeatMode = musicManager.player.repeatMode
 
         indexView.forEachVisibleCell { (indexCell) in
             indexCell.cell.alpha = 0.5
@@ -137,31 +136,37 @@ extension Previewable {
         
         // Return audio to normal
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
-        musicManager.player.setQueue(with: musicManager.currentQueue!)
+        if let currentQueue = musicManager.currentQueue {
+            musicManager.player.setQueue(with: currentQueue)
+        } else {
+            // TODO: If you start the app and don't choose a song, there's no saved current queue
+            // This means that there is no queue and can cause issues
+            musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.songList))
+        }
         musicManager.player.beginGeneratingPlaybackNotifications()
         musicManager.player.stop()
-        musicManager.player.nowPlayingItem = savedSong
+        musicManager.player.nowPlayingItem = musicManager.savedSong
         musicManager.player.prepareToPlay()
         
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
-        musicManager.player.repeatMode = savedRepeatMode!
-        musicManager.player.currentPlaybackTime = savedTime!
+        musicManager.player.repeatMode = musicManager.savedRepeatMode!
+        musicManager.player.currentPlaybackTime = musicManager.savedTime!
         
-        if savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.playing.rawValue {
+        if musicManager.savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.playing.rawValue {
             musicManager.player.play()
-        } else if savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.stopped.rawValue {
+        } else if musicManager.savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.stopped.rawValue {
             musicManager.player.stop()
-        } else if savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.paused.rawValue {
+        } else if musicManager.savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.paused.rawValue {
             musicManager.player.pause()
         }
         
         // Release all saved properties
-        savedPlayerIsPlaying = nil
-        savedRepeatMode = nil
-        savedTime = nil
-        savedSong = nil
+        musicManager.savedPlayerIsPlaying = nil
+        musicManager.savedRepeatMode = nil
+        musicManager.savedTime = nil
+        musicManager.savedSong = nil
         selectedIndexPath = nil
         selectedCell = nil
-        savedPlayerIsPlaying = nil
+        musicManager.savedPlayerIsPlaying = nil
     }
 }

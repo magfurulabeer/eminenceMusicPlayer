@@ -22,6 +22,17 @@ class MusicManager: NSObject {
     var songListIsEmpty: Bool = false
     var quickQueue = [MPMediaItem]()
     var currentQueue: MPMediaItemCollection?
+    
+    
+    // MARK: Previewable Properties
+    var savedSong: MPMediaItem?
+    var savedTime: TimeInterval?
+    var savedRepeatMode: MPMusicRepeatMode?
+    var savedPlayerIsPlaying: MPMusicPlaybackState?
+    var savedQueue: MPMediaItemCollection?
+    
+    
+    
     var itemNowPlaying: MPMediaItem? {
         get {
             return player.nowPlayingItem
@@ -117,7 +128,6 @@ class MusicManager: NSObject {
         self.artistList = self.originalArtistList
         self.albumList = self.originalAlbumList
         self.playlistList = self.originalPlaylistList
-
         self.player.beginGeneratingPlaybackNotifications()
 
     }
