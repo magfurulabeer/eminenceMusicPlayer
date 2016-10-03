@@ -148,7 +148,7 @@ class BaseCell: UICollectionViewCell {
 class MenuCell: BaseCell {
     
     let deselectedColor = UIColor.white.withAlphaComponent(0.2)
-    let selectedColor = UIColor.white.withAlphaComponent(0.8)
+    let selectedColor = #colorLiteral(red: 0.7422102094, green: 0.764362216, blue: 0.7821244597, alpha: 1)//UIColor.white.withAlphaComponent(0.8)
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "songIcon")

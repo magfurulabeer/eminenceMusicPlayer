@@ -37,6 +37,7 @@ class QuickQueueCell: UITableViewCell, UITableViewDataSource, UITableViewDelegat
         tableView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         contentView.addSubview(tableView)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.bounces = false
         tableView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,5 +82,4 @@ class QuickQueueCell: UITableViewCell, UITableViewDataSource, UITableViewDelegat
         musicManager.itemNowPlaying = song
         
     }
-
 }

@@ -86,7 +86,7 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return view.frame.height/2
+            return view.frame.height/2 - FauxBarHeight - quickBarHeight
         } else {
             return SongCellHeight
         }
