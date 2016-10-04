@@ -36,7 +36,7 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate, Pre
     
     var cellSnapshot: UIView = UIView()
     var initialIndexPath: IndexPath?
-    
+    var currentlyDragging: Bool = false
     
     // MARK: Init Methods
 
@@ -155,6 +155,17 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate, Pre
                 superView?.layoutIfNeeded()
             })
         }
+        print(scrollView.contentOffset.y)
+        
+//        if scrollView.contentOffset.y >= width/4 {
+//            UIView.animate(withDuration: 0.3, animations: {
+//                self.center.y -= self.frame.height
+//                }, completion: { (bool) in
+//                    let superView = self.superview
+//                    self.removeFromSuperview()
+//                    superView?.layoutIfNeeded()
+//            })
+//        }
     }
     
     
@@ -173,7 +184,8 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate, Pre
     
     func setNewQueue(indexPath:IndexPath) { }
     
-    func indexPathIsExcluded(indexPath: IndexPath) -> Bool {
+    func indexPathIsExcluded(indexPath: IndexPath?) -> Bool {
+        guard let indexPath = indexPath else {  return true }
         if indexPath.row == 0 { return true }
         return false
     }

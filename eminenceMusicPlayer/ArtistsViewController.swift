@@ -104,7 +104,7 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
         setQueue(indexPath: indexPath)
     }
     
-    func indexPathIsExcluded(indexPath: IndexPath) -> Bool {
+    func indexPathIsExcluded(indexPath: IndexPath?) -> Bool {
         return false
     }
     

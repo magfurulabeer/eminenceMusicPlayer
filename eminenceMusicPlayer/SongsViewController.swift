@@ -29,7 +29,8 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     // MARK: Draggable Properties
     var cellSnapshot: UIView = UIView()
     var initialIndexPath: IndexPath?
-   
+    var currentlyDragging: Bool = false
+    
     // MARK: View Management Method
     
     override func viewDidLoad() {
@@ -138,7 +139,7 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     
     func setNewQueue(indexPath:IndexPath) { }
     
-    func indexPathIsExcluded(indexPath: IndexPath) -> Bool {
+    func indexPathIsExcluded(indexPath: IndexPath?) -> Bool {
         return false
     }
     

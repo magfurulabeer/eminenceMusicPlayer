@@ -23,7 +23,7 @@ protocol Previewable: class {
     func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem
     func setQueue(indexPath:IndexPath)
     func setNewQueue(indexPath:IndexPath)
-    func indexPathIsExcluded(indexPath: IndexPath) -> Bool
+    func indexPathIsExcluded(indexPath: IndexPath?) -> Bool
     func displayPreviewing(state: UIGestureRecognizerState, indexPath: IndexPath)
     func revertVisuals()
     func prepareForChange()

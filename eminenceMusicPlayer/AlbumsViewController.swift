@@ -133,7 +133,7 @@ class AlbumsViewController: MenuViewController, UICollectionViewDelegateFlowLayo
         setQueue(indexPath: indexPath)
     }
     
-    func indexPathIsExcluded(indexPath: IndexPath) -> Bool {
+    func indexPathIsExcluded(indexPath: IndexPath?) -> Bool {
         return false
     }
     

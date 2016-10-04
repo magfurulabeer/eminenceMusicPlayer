@@ -12,7 +12,7 @@ protocol PreviewableDraggable: Previewable {
     weak var viewController: UIViewController? { get set }
     var cellSnapshot: UIView { get set }
     var initialIndexPath: IndexPath? { get set }
-    
+    var currentlyDragging: Bool { get set }
     func snapshopOfCell(inputView: UIView) -> UIView
     func handleLongPress(sender: UILongPressGestureRecognizer)
     func handleLongPressDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath?)
@@ -27,6 +27,21 @@ extension PreviewableDraggable {
     func handleLongPress(sender: UILongPressGestureRecognizer) {
         let point = sender.location(in: indexView.view)
         let indexPath = indexView.indexPathForCell(at: point)
+        
+        if indexPath == nil && !currentlyDragging {
+            return
+        }
+        
+        if indexPathIsExcluded(indexPath: indexPath) {
+            if !currentlyDragging {
+                return
+            }
+            if musicManager.currentlyPreviewing {
+                musicManager.player.pause()
+                endPreviewingMusic()
+                return
+            }
+        }
         
         if sender.state == UIGestureRecognizerState.began && point.x <= draggingOffset()  {
             handleLongPressDragging(sender: sender, indexPath: indexPath)
@@ -61,6 +76,7 @@ extension PreviewableDraggable {
         cellSnapshot.center = center
         cellSnapshot.alpha = 0.0
         viewController?.view.addSubview(cellSnapshot)
+        currentlyDragging = true
         
         UIView.animate(withDuration: 0.25, animations: { () -> Void in
             center.y = sender.location(in: self.viewController?.view).y
@@ -107,6 +123,8 @@ extension PreviewableDraggable {
         
         cell.isHidden = false
         cell.alpha = 1.0
+        currentlyDragging = false
+
         if wasSuccessful {
             let song = selectedSongForPreview(indexPath: initialIndexPath!)
             musicManager.quickQueue.append(song)
@@ -120,6 +138,7 @@ extension PreviewableDraggable {
         let cell = indexView.cell(atIndexPath: initialIndexPath!)
         cell?.cell.isHidden = false
         cell?.cell.alpha = 1.0
+        currentlyDragging = false
     }
     
     
