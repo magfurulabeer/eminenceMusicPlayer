@@ -8,11 +8,14 @@
 
 import UIKit
 
+let alpha: CGFloat = 1
+
+
 extension MusicPlayerViewController: QuickBarDelegate {
     func setUpGradient() {
         let gradient = CAGradientLayer()
-        let startColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
-        let endColor = UIColor(red: 54/255.0, green: 49/255.0, blue: 58/255.0, alpha: 1)
+        let startColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: alpha)
+        let endColor = UIColor(red: 54/255.0, green: 49/255.0, blue: 58/255.0, alpha: alpha)
         gradient.colors = [startColor.cgColor, endColor.cgColor]
         gradient.frame = self.view.frame
         let points = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 1))
@@ -20,7 +23,10 @@ extension MusicPlayerViewController: QuickBarDelegate {
         gradient.endPoint = points.1
         view.layer.addSublayer(gradient)
         gradient.zPosition = -5
+        
     }
+    
+    
     
     func setUpMenuBar() {
         menuBar = MenuBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: FauxBarHeight))

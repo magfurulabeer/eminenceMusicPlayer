@@ -179,16 +179,16 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate, Pre
     }
     
     func displayPreviewing(state: UIGestureRecognizerState, indexPath: IndexPath) {
-        selectedCell?.cell.backgroundColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
+        selectedCell?.cell.backgroundColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 0.9)
     }
     
     func revertVisuals() {
-        selectedCell?.cell.backgroundColor = UIColor.black
+        selectedCell?.cell.backgroundColor = UIColor.black.withAlphaComponent(0.8)
     }
     
     func prepareForChange() {
         musicManager.player.pause()
-        selectedCell?.cell.backgroundColor = UIColor.black
+        selectedCell?.cell.backgroundColor = UIColor.black.withAlphaComponent(0.8)
     }
 
     
