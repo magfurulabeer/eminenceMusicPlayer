@@ -28,21 +28,30 @@ extension PreviewableDraggable {
         let point = sender.location(in: indexView.view)
         let indexPath = indexView.indexPathForCell(at: point)
         
+        print("1")
         if indexPath == nil && !currentlyDragging {
-            return
-        }
-        
-        if indexPathIsExcluded(indexPath: indexPath) {
-            if !currentlyDragging {
-                return
-            }
             if musicManager.currentlyPreviewing {
                 musicManager.player.pause()
                 endPreviewingMusic()
                 return
             }
+            return
+        }
+        print("2")
+
+        if indexPathIsExcluded(indexPath: indexPath) {
+            if musicManager.currentlyPreviewing {
+                musicManager.player.pause()
+                endPreviewingMusic()
+                return
+            }
+            if !currentlyDragging {
+                return
+            }
         }
         
+        print("3")
+
         if sender.state == UIGestureRecognizerState.began && point.x <= draggingOffset()  {
             handleLongPressDragging(sender: sender, indexPath: indexPath)
         } else if sender.state != UIGestureRecognizerState.began && musicManager.currentlyPreviewing == false {

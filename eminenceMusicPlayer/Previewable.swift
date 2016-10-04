@@ -128,6 +128,7 @@ extension Previewable {
     }
     
     func endPreviewingMusic() {
+        print("\n\nend\n\n")
         musicManager.player.pause()
         
         musicManager.currentlyPreviewing = false
