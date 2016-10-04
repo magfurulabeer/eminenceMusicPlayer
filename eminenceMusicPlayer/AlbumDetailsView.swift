@@ -146,7 +146,9 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate, Pre
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let width = viewController?.view.frame.width ?? 0
-        if scrollView.contentOffset.y <= -width/4 {
+        let height = self.bounds.width
+
+        if scrollView.contentOffset.y <= -width * 0.215 {
             UIView.animate(withDuration: 0.3, animations: {
                 self.center.y += self.frame.height
             }, completion: { (bool) in
@@ -155,17 +157,25 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate, Pre
                 superView?.layoutIfNeeded()
             })
         }
-        print(scrollView.contentOffset.y)
-        
-//        if scrollView.contentOffset.y >= width/4 {
-//            UIView.animate(withDuration: 0.3, animations: {
-//                self.center.y -= self.frame.height
-//                }, completion: { (bool) in
-//                    let superView = self.superview
-//                    self.removeFromSuperview()
-//                    superView?.layoutIfNeeded()
-//            })
-//        }
+
+        let scrollViewHeight = scrollView.frame.size.height
+        let contentViewHeight = scrollView.contentSize.height
+        let yOffset = scrollView.contentOffset.y
+//        print(contentViewHeight)
+//        print(scrollViewHeight)
+//        print(yOffset)
+//        print(scrollViewHeight + yOffset)
+//        print(contentViewHeight + scrollViewHeight * 0.15)
+//        print("\n\n")
+        if scrollViewHeight + yOffset > contentViewHeight + width * 0.215 {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.center.y -= self.frame.height
+                }, completion: { (bool) in
+                    let superView = self.superview
+                    self.removeFromSuperview()
+                    superView?.layoutIfNeeded()
+            })
+        }
     }
     
     
