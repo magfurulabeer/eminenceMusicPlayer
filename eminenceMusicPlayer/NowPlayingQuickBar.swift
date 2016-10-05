@@ -69,7 +69,12 @@ class NowPlayingQuickBar: UIView {
     }
     
     func displayPlaybackButton() {
-        
+        guard musicManager.itemNowPlaying != nil else {
+            playButton.isHidden = true
+            pauseButton.isHidden = true
+            albumThumbnail.image = UIImage()
+            return
+        }
         if musicManager.currentlyPreviewing == false {
             if musicManager.player.playbackState == MPMusicPlaybackState.playing {
                 playButton.isHidden = true
