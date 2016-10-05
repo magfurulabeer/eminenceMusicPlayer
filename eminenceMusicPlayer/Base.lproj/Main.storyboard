@@ -206,7 +206,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rii-ep-KZS">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="QO9-j3-zpE"/>
+                                            <constraint firstAttribute="width" priority="999" constant="50" id="QO9-j3-zpE"/>
                                             <constraint firstAttribute="width" secondItem="Rii-ep-KZS" secondAttribute="height" multiplier="1:1" id="Xkq-U1-aFW"/>
                                         </constraints>
                                         <state key="normal" image="play"/>
@@ -216,7 +216,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27c-bM-vw0">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="4L3-U9-jHP"/>
+                                            <constraint firstAttribute="width" priority="999" constant="50" id="4L3-U9-jHP"/>
                                             <constraint firstAttribute="height" constant="50" id="AVm-sl-wQe"/>
                                         </constraints>
                                         <state key="normal" image="pause"/>
