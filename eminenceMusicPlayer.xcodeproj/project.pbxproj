@@ -17,6 +17,7 @@
 		8B51DFAE1D9F11BA004B1526 /* AlbumImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B51DFAC1D9F11BA004B1526 /* AlbumImageCell.xib */; };
 		8B51DFB01D9F11D3004B1526 /* AlbumImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51DFAF1D9F11D3004B1526 /* AlbumImageCell.swift */; };
 		8B53F7C11D94FC6400778403 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53F7C01D94FC6400778403 /* MenuBar.swift */; };
+		8B63035C1DA58C3C00B255F3 /* PlaylistDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B63035B1DA58C3C00B255F3 /* PlaylistDetailsView.swift */; };
 		8B666C491D9E2E6B0011F78C /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B666C471D9E2E6B0011F78C /* AlbumCell.swift */; };
 		8B666C4A1D9E2E6B0011F78C /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B666C481D9E2E6B0011F78C /* AlbumCell.xib */; };
 		8B666C4C1D9E4D260011F78C /* AlbumDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B666C4B1D9E4D260011F78C /* AlbumDetailsView.swift */; };
@@ -86,6 +87,7 @@
 		8B51DFAC1D9F11BA004B1526 /* AlbumImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumImageCell.xib; sourceTree = "<group>"; };
 		8B51DFAF1D9F11D3004B1526 /* AlbumImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumImageCell.swift; sourceTree = "<group>"; };
 		8B53F7C01D94FC6400778403 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		8B63035B1DA58C3C00B255F3 /* PlaylistDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDetailsView.swift; sourceTree = "<group>"; };
 		8B666C471D9E2E6B0011F78C /* AlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		8B666C481D9E2E6B0011F78C /* AlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
 		8B666C4B1D9E4D260011F78C /* AlbumDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailsView.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				8B53F7C01D94FC6400778403 /* MenuBar.swift */,
 				8BB1084D1D92F3E700CD2238 /* SeekBar.swift */,
 				8B666C4B1D9E4D260011F78C /* AlbumDetailsView.swift */,
+				8B63035B1DA58C3C00B255F3 /* PlaylistDetailsView.swift */,
 				8BE7446C1D93CC160014DE31 /* Cells */,
 			);
 			name = Views;
@@ -434,6 +437,7 @@
 				8B86D51D1DA2BD82000E03F5 /* MusicPlayerViewController.swift in Sources */,
 				8BE744641D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift in Sources */,
 				8BCBE6351D9880490038AC74 /* SlideDownAnimator.swift in Sources */,
+				8B63035C1DA58C3C00B255F3 /* PlaylistDetailsView.swift in Sources */,
 				8BE7446A1D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift in Sources */,
 				8BDA47FB1DA1B58800781755 /* IndexView.swift in Sources */,
 				8BB1086E1D92FF5100CD2238 /* MusicManager.swift in Sources */,

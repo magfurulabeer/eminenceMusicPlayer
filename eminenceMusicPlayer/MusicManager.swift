@@ -14,7 +14,7 @@ class MusicManager: NSObject {
     var songList: [MPMediaItem]
     var artistList: [MPMediaItemCollection]
     var albumList: [MPMediaItemCollection]
-    var playlistList: [MPMediaItemCollection]
+    var playlistList: [MPMediaPlaylist]
     var player: MPMusicPlayerController
     var shuffleIsOn: Bool
     var volume = MPVolumeView().volumeSlider
@@ -101,7 +101,7 @@ class MusicManager: NSObject {
         }
     }
     
-    var originalPlaylistList: [MPMediaItemCollection] {
+    var originalPlaylistList: [MPMediaPlaylist] {
         get {
             let playlistQuery = MPMediaQuery.playlists()
             
@@ -111,7 +111,7 @@ class MusicManager: NSObject {
                 return []
             }
             
-            return playlists
+            return playlists as! [MPMediaPlaylist]
         }
     }
     
@@ -119,7 +119,7 @@ class MusicManager: NSObject {
         self.songList = [MPMediaItem]()
         self.artistList = [MPMediaItemCollection]()
         self.albumList = [MPMediaItemCollection]()
-        self.playlistList = [MPMediaItemCollection]()
+        self.playlistList = [MPMediaPlaylist]()
         self.player = MPMusicPlayerController.systemMusicPlayer()
 
         self.shuffleIsOn = player.shuffleMode == MPMusicShuffleMode.songs

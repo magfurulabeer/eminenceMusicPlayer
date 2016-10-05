@@ -112,4 +112,30 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
         header.textLabel?.font = UIFont(name: "Avenir", size: 25)
 
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section != 0 else { return }
+        
+        let playlist = musicManager.playlistList[indexPath.row]
+        
+        if playlist.count > 0 {
+            let size = view.frame.size
+            let rect = CGRect(x: topPadding, y: 0, width: size.width, height: size.height - topPadding - bottomPadding)
+            let playlistDetails = PlaylistDetailsView(frame: rect)
+            playlistDetails.playlist = playlist
+            playlistDetails.viewController = viewController
+            view.addSubview(playlistDetails)
+            playlistDetails.translatesAutoresizingMaskIntoConstraints = false
+            playlistDetails.topAnchor.constraint(equalTo: view.topAnchor, constant: topPadding).isActive = true
+            playlistDetails.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottomPadding).isActive = true
+            playlistDetails.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            playlistDetails.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        } else {
+            let alertController = UIAlertController(title: "Playlist is Empty", message: "This playlist is empty", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(ok)
+            viewController!.present(alertController, animated: true, completion: nil)
+            return
+        }
+    }
 }
