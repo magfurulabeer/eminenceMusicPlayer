@@ -57,7 +57,7 @@ extension Previewable {
         handleLongPressPreviewing(sender: sender, indexPath: indexPath!)
     }
     
-    func handleLongPressPreviewing(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
+    final func handleLongPressPreviewing(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
         if sender.state == UIGestureRecognizerState.began {
             // Will be needed at the end
             musicManager.savedPlayerIsPlaying = musicManager.player.playbackState
@@ -77,7 +77,7 @@ extension Previewable {
         }
     }
 
-    func startPreviewingMusic(atIndexPath indexPath: IndexPath) {
+    final func startPreviewingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PreviewingDidBegin"), object: nil)
         musicManager.currentlyPreviewing = true
@@ -98,14 +98,12 @@ extension Previewable {
         musicManager.player.shuffleMode = MPMusicShuffleMode.off
         musicManager.player.repeatMode = MPMusicRepeatMode.one // In case held till end of song
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
-        print(musicManager.player.repeatMode == .one)
-        setQueue(indexPath: indexPath)
-        
+        setQueue(indexPath: indexPath)        
         musicManager.itemNowPlaying = song
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
     }
 
-    func changePreviewingMusic(atIndexPath indexPath: IndexPath) {
+    final func changePreviewingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
         selectedIndexPath = indexPath
 
@@ -124,7 +122,7 @@ extension Previewable {
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
     }
     
-    func endPreviewingMusic() {
+    final func endPreviewingMusic() {
         musicManager.player.pause()
         
         musicManager.currentlyPreviewing = false
@@ -176,7 +174,7 @@ extension Previewable {
             }
         }
         
-        selectedCell?.cell.backgroundColor = UIColor.black
+        selectedCell?.cell.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         selectedCell?.cell.alpha = 1
     }
     

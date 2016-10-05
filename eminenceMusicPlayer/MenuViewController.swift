@@ -11,16 +11,11 @@ import UIKit
 class MenuViewController: UIViewController {
 
     weak var viewController: UIViewController?
-    var topPadding = FauxBarHeight
-    var bottomPadding = -quickBarHeight
+    final var topPadding = FauxBarHeight
+    final var bottomPadding = -quickBarHeight
     var storedIndexView: IndexView? {
         get {
             return UITableView()
-        }
-    }
-    var index: Int {
-        get {
-            return -5
         }
     }
 
@@ -29,7 +24,7 @@ class MenuViewController: UIViewController {
     }
 
     
-    func constrainIndexView() {
+    final func constrainIndexView() {
         guard let storedIndexView = storedIndexView as? UIView else { return }
         
         view.addSubview(storedIndexView)

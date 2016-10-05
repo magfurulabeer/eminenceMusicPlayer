@@ -36,29 +36,6 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
         setUpQuickBar()
     }
     
-//    func updateBackgroundImage() {
-//        let image = musicManager.itemNowPlaying?.artwork?.image(at: view.frame.size) ?? #imageLiteral(resourceName: "NoAlbumImage")
-//        setBackgroundImage(image: image)
-//    }
-//    
-//    func setBackgroundImage(image: UIImage) {
-//        let context = CIContext(options: nil)
-//        
-//        if let currentFilter = CIFilter(name: "CIGaussianBlur") {
-//            let beginImage = CIImage(image: image)
-//            currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
-//            currentFilter.setValue(4, forKey: kCIInputRadiusKey)
-//            
-//            if let output = currentFilter.outputImage {
-//                if let cgimg = context.createCGImage(output, from: output.extent) {
-//                    let processedImage = UIImage(cgImage: cgimg)
-//                    view.backgroundColor = UIColor(patternImage: processedImage)
-//
-//                }
-//            }
-//        }
-//    }
-    
     func scrollToMenuIndex(index: Int) {
         let path = IndexPath(item: index, section: 0)
         collectionView?.scrollToItem(at: path, at: .centeredHorizontally, animated: true)
@@ -91,8 +68,6 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return view.frame.size
     }
-    
-    
     
     func quickBarWasTapped(sender: NowPlayingQuickBar) {
         if musicManager.itemNowPlaying == nil {

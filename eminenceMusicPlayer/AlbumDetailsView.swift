@@ -146,7 +146,7 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate, Pre
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let width = viewController?.view.frame.width ?? 0
-        let height = self.bounds.width
+//        let height = self.bounds.width
 
         if scrollView.contentOffset.y <= -width * 0.215 {
             UIView.animate(withDuration: 0.3, animations: {

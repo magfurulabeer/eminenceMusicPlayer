@@ -24,7 +24,7 @@ protocol PreviewableDraggable: Previewable {
 }
 
 extension PreviewableDraggable {
-    func handleLongPress(sender: UILongPressGestureRecognizer) {
+    final func handleLongPress(sender: UILongPressGestureRecognizer) {
         let point = sender.location(in: indexView.view)
         let indexPath = indexView.indexPathForCell(at: point)
         
@@ -57,7 +57,7 @@ extension PreviewableDraggable {
         }
     }
     
-    func handleLongPressDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath?) {
+    final func handleLongPressDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath?) {
         if sender.state == UIGestureRecognizerState.began {
             startDragging(sender: sender, indexPath: indexPath!)
         }
@@ -73,7 +73,7 @@ extension PreviewableDraggable {
         }
     }
     
-    func startDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
+    final func startDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
         initialIndexPath = indexPath
         let cell = indexView.cell(atIndexPath: indexPath) as! UITableViewCell
         cellSnapshot  = snapshopOfCell(inputView: cell)
@@ -98,7 +98,7 @@ extension PreviewableDraggable {
 
     }
     
-    func changeDragging(sender: UILongPressGestureRecognizer) {
+    final func changeDragging(sender: UILongPressGestureRecognizer) {
         cellSnapshot.center.y = sender.location(in: viewController?.view).y
         
         if cellSnapshot.center.y < FauxBarHeight + SongCellHeight/4 {
@@ -120,7 +120,7 @@ extension PreviewableDraggable {
         }
     }
     
-    func endDragging() {
+    final func endDragging() {
         let wasSuccessful = cellSnapshot.center.y < FauxBarHeight + SongCellHeight/4
         cellSnapshot.removeFromSuperview()
         (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: wasSuccessful)
@@ -137,7 +137,7 @@ extension PreviewableDraggable {
         }
     }
     
-    func cancelDragging() {
+    final func cancelDragging() {
         cellSnapshot.removeFromSuperview()
         (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: false)
         let cell = indexView.cell(atIndexPath: initialIndexPath!)
@@ -147,7 +147,7 @@ extension PreviewableDraggable {
     }
     
     
-    func snapshopOfCell(inputView: UIView) -> UIView {
+    final func snapshopOfCell(inputView: UIView) -> UIView {
         UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, false, 0.0)
         inputView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()! as UIImage

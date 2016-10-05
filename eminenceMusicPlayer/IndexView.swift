@@ -18,57 +18,57 @@ protocol IndexView {
 }
 
 extension IndexView where Self : UIView {
-    var view: UIView {
+    final var view: UIView {
         return self
     }
 }
 
 extension UITableView: IndexView {
 
-    var visibleIndexViewCells: [IndexViewCell] {
+    final var visibleIndexViewCells: [IndexViewCell] {
         return self.visibleCells
     }
     
-    func indexPathForCell(at point: CGPoint) -> IndexPath? {
+    final func indexPathForCell(at point: CGPoint) -> IndexPath? {
         return self.indexPathForRow(at: point)
     }
     
-    func cell(atIndexPath indexPath: IndexPath) -> IndexViewCell? {
+    final func cell(atIndexPath indexPath: IndexPath) -> IndexViewCell? {
         return self.cellForRow(at: indexPath)
     }
     
-    func forEachVisibleCell(closure: (IndexViewCell) -> Void) {
+    final func forEachVisibleCell(closure: (IndexViewCell) -> Void) {
         for cell in self.visibleCells {
             closure(cell)
         }
     }
 
-    func reload() {
+    final func reload() {
         self.reloadData()
     }
 }
 
 extension UICollectionView: IndexView {
     
-    var visibleIndexViewCells: [IndexViewCell] {
+    final var visibleIndexViewCells: [IndexViewCell] {
         return self.visibleCells
     }
     
-    func indexPathForCell(at point: CGPoint) -> IndexPath? {
+    final func indexPathForCell(at point: CGPoint) -> IndexPath? {
         return self.indexPathForItem(at: point)
     }
     
-    func cell(atIndexPath indexPath: IndexPath) -> IndexViewCell? {
+    final func cell(atIndexPath indexPath: IndexPath) -> IndexViewCell? {
         return self.cellForItem(at: indexPath)
     }
     
-    func forEachVisibleCell(closure: (IndexViewCell) -> Void) {
+    final func forEachVisibleCell(closure: (IndexViewCell) -> Void) {
         for cell in self.visibleCells {
             closure(cell)
         }
     }
     
-    func reload() {
+    final func reload() {
         self.reloadData()
     }
 }
