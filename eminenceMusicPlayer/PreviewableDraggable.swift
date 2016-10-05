@@ -28,7 +28,6 @@ extension PreviewableDraggable {
         let point = sender.location(in: indexView.view)
         let indexPath = indexView.indexPathForCell(at: point)
         
-        print("1")
         if indexPath == nil && !currentlyDragging {
             if musicManager.currentlyPreviewing {
                 musicManager.player.pause()
@@ -37,7 +36,6 @@ extension PreviewableDraggable {
             }
             return
         }
-        print("2")
 
         if indexPathIsExcluded(indexPath: indexPath) {
             if musicManager.currentlyPreviewing {
@@ -50,8 +48,6 @@ extension PreviewableDraggable {
             }
         }
         
-        print("3")
-
         if sender.state == UIGestureRecognizerState.began && point.x <= draggingOffset()  {
             handleLongPressDragging(sender: sender, indexPath: indexPath)
         } else if sender.state != UIGestureRecognizerState.began && musicManager.currentlyPreviewing == false {
