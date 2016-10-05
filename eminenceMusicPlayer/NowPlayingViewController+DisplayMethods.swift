@@ -58,5 +58,37 @@ extension NowPlayingViewController {
             print("Shuffle mode is on albums??")
         }
     }
+    
+    func blurredAlbumImage() -> UIImage? {
+        let context = CIContext(options: nil)
+
+//        CIGaussianBlur
+        if let currentFilter = CIFilter(name: "CIMotionBlur") {
+            
+            let beginImage = CIImage(image: albumImageView.image!)
+            currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+            currentFilter.setValue(8, forKey: kCIInputRadiusKey)
+
+            if let output = currentFilter.outputImage {
+                if let cgimg = context.createCGImage(output, from: beginImage!.extent) {
+                    let processedImage = UIImage(cgImage: cgimg)
+                    return processedImage
+                }
+            }
+        }
+        return nil
+    }
+    
+    func blurImage() {
+        UIView.transition(with: albumImageView, duration: 0.5, options: [.transitionCrossDissolve, .curveEaseOut], animations: {
+            self.albumImageView.image = self.blurredAlbumImage()
+            }, completion: nil)
+    }
+    
+    func unblurImage() {
+        UIView.transition(with: albumImageView, duration: 0.5, options: [.transitionCrossDissolve, .curveEaseOut], animations: {
+            self.albumImageView.image = self.musicManager.itemNowPlaying?.artwork?.image(at: CGSize(width: self.view.frame.width, height: self.view.frame.width))
+            }, completion: nil)
+    }
 
 }

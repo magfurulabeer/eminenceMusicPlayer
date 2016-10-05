@@ -40,7 +40,7 @@ class NowPlayingViewController: UIViewController {
             return self.musicManager.volume
         }
     }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         backButton.contentMode = UIViewContentMode.scaleAspectFit

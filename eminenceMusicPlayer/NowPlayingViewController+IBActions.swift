@@ -89,11 +89,12 @@ extension NowPlayingViewController {
         if (sender.state == UIGestureRecognizerState.began) {
             timer.invalidate()
             startRewindTimer()
-            timer.fire()
+            blurImage()
         } else if (sender.state == UIGestureRecognizerState.ended) {
             musicManager.player.endSeeking()
             timer.invalidate()
             startTimer()
+            unblurImage()
         }
     }
     
@@ -101,11 +102,12 @@ extension NowPlayingViewController {
         if (sender.state == UIGestureRecognizerState.began) {
             timer.invalidate()
             startFastForwardTimer()
-            timer.fire()
+            blurImage()
         } else if (sender.state == UIGestureRecognizerState.ended) {
             musicManager.player.endSeeking()
             timer.invalidate()
             startTimer()
+            unblurImage()
         }
     }
 }
