@@ -27,6 +27,18 @@ extension TimeInterval {
     }
 }
 
+extension UIButton {
+    var title: String {
+        get {
+            return self.titleLabel?.text ?? ""
+        }
+        set {
+            self.titleLabel?.text = newValue
+            self.setTitle(newValue, for: .normal)
+        }
+    }
+}
+
 
 
 

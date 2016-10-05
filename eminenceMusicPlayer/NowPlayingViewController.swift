@@ -73,9 +73,11 @@ class NowPlayingViewController: UIViewController {
         let duration: Double = (self.musicManager.itemNowPlaying?.playbackDuration)!
         self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
         self.slider.value = Float(currentTime/duration)
+        displayPlaybackButton()
+        displayPlaybackRate()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
+
+    func displayPlaybackButton() {
         if musicManager.player.playbackState == MPMusicPlaybackState.playing {
             playButton.isHidden = true
             pauseButton.isHidden = false
@@ -84,14 +86,26 @@ class NowPlayingViewController: UIViewController {
             playButton.isHidden = false
             pauseButton.isHidden = true
         }
-        // TODO: Update speed button to match current rate
-//        let rate = musicManager.player.currentPlaybackRate
-//        let speed = String(format: "%01dx", rate)
-//        speedButton.titleLabel?.text = speed
-//        speedButton.setTitle(speed, for: .normal)
-        
     }
     
+    func displayPlaybackRate() {
+        switch musicManager.player.currentPlaybackRate {
+        case 0.5:
+            speedButton.title = "0.5x"
+            break
+        case 1:
+            speedButton.title = "1x"
+            break
+        case 1.5:
+            speedButton.title = "1.5x"
+            break
+        case 2:
+            speedButton.title = "2x"
+            break
+        default:
+            break
+        }
+    }
   
     
     
@@ -196,23 +210,19 @@ class NowPlayingViewController: UIViewController {
     @IBAction func speedButtonWasTapped(_ sender: UIButton) {
         switch speedButton.titleLabel!.text! {
         case "1x":
-            speedButton.titleLabel?.text = "1.5x"
-            speedButton.setTitle("1.5x", for: .normal)
+            speedButton.title = "1.5x"
             musicManager.player.currentPlaybackRate = 1.5
             break
         case "1.5x":
-            speedButton.titleLabel?.text = "2x"
-            speedButton.setTitle("2x", for: .normal)
+            speedButton.title = "2x"
             musicManager.player.currentPlaybackRate = 2
             break
         case "2x":
-            speedButton.titleLabel?.text = "0.5x"
-            speedButton.setTitle("0.5x", for: .normal)
+            speedButton.title = "0.5x"
             musicManager.player.currentPlaybackRate = 0.5
             break
         case "0.5x":
-            speedButton.titleLabel?.text = "1x"
-            speedButton.setTitle("1x", for: .normal)
+            speedButton.title = "1x"
             musicManager.player.currentPlaybackRate = 1
             break
         default:
