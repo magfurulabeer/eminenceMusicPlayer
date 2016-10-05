@@ -27,6 +27,7 @@ class NowPlayingViewController: UIViewController {
     @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var fauxNavBar: UIView!
+    @IBOutlet weak var speedButton: UIButton!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -40,7 +41,7 @@ class NowPlayingViewController: UIViewController {
             return self.musicManager.volume
         }
     }
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         backButton.contentMode = UIViewContentMode.scaleAspectFit
@@ -83,6 +84,12 @@ class NowPlayingViewController: UIViewController {
             playButton.isHidden = false
             pauseButton.isHidden = true
         }
+        // TODO: Update speed button to match current rate
+//        let rate = musicManager.player.currentPlaybackRate
+//        let speed = String(format: "%01dx", rate)
+//        speedButton.titleLabel?.text = speed
+//        speedButton.setTitle(speed, for: .normal)
+        
     }
     
   
@@ -186,5 +193,31 @@ class NowPlayingViewController: UIViewController {
         }
     }
     
+    @IBAction func speedButtonWasTapped(_ sender: UIButton) {
+        switch speedButton.titleLabel!.text! {
+        case "1x":
+            speedButton.titleLabel?.text = "1.5x"
+            speedButton.setTitle("1.5x", for: .normal)
+            musicManager.player.currentPlaybackRate = 1.5
+            break
+        case "1.5x":
+            speedButton.titleLabel?.text = "2x"
+            speedButton.setTitle("2x", for: .normal)
+            musicManager.player.currentPlaybackRate = 2
+            break
+        case "2x":
+            speedButton.titleLabel?.text = "0.5x"
+            speedButton.setTitle("0.5x", for: .normal)
+            musicManager.player.currentPlaybackRate = 0.5
+            break
+        case "0.5x":
+            speedButton.titleLabel?.text = "1x"
+            speedButton.setTitle("1x", for: .normal)
+            musicManager.player.currentPlaybackRate = 1
+            break
+        default:
+            break
+        }
+    }
     
 }

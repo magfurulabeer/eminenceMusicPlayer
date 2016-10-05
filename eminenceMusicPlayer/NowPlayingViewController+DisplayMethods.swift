@@ -80,14 +80,14 @@ extension NowPlayingViewController {
     }
     
     func blurImage() {
-        UIView.transition(with: albumImageView, duration: 0.5, options: [.transitionCrossDissolve, .curveEaseOut], animations: {
+        UIView.transition(with: albumImageView, duration: 0.5, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
             self.albumImageView.image = self.blurredAlbumImage()
             }, completion: nil)
     }
     
     func unblurImage() {
         UIView.transition(with: albumImageView, duration: 0.5, options: [.transitionCrossDissolve, .curveEaseOut], animations: {
-            self.albumImageView.image = self.musicManager.itemNowPlaying?.artwork?.image(at: CGSize(width: self.view.frame.width, height: self.view.frame.width))
+            self.albumImageView.image = self.musicManager.itemNowPlaying?.artwork?.image(at: CGSize(width: self.view.frame.width, height: self.view.frame.width)) ?? #imageLiteral(resourceName: "NoAlbumImage")
             }, completion: nil)
     }
 

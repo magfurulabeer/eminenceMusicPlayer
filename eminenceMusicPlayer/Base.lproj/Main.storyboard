@@ -115,15 +115,27 @@
                                             <action selector="backButtonTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="XP7-BF-DnS"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBe-RP-8nW">
+                                        <frame key="frameInset" minX="323" minY="28" width="44" height="30"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="19"/>
+                                        <state key="normal" title="1x">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="speedButtonWasTapped:" destination="MBY-PI-pMD" eventType="touchUpInside" id="LdH-A2-jBV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.16470588235294117" green="0.17254901960784313" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="YIk-iE-P2e" firstAttribute="centerX" secondItem="19O-rb-Wtx" secondAttribute="centerX" id="2xd-99-lqu"/>
+                                    <constraint firstItem="PBe-RP-8nW" firstAttribute="centerY" secondItem="YIk-iE-P2e" secondAttribute="centerY" id="6wY-ly-WmB"/>
                                     <constraint firstItem="KiG-sp-D0S" firstAttribute="height" secondItem="YIk-iE-P2e" secondAttribute="height" multiplier="0.85" priority="999" id="7Nr-gN-2an"/>
                                     <constraint firstItem="KiG-sp-D0S" firstAttribute="leading" secondItem="19O-rb-Wtx" secondAttribute="leading" constant="12" id="9Ag-vq-0nZ"/>
                                     <constraint firstAttribute="height" constant="64" id="AbN-lq-4Dk"/>
                                     <constraint firstAttribute="bottom" secondItem="YIk-iE-P2e" secondAttribute="bottom" constant="8" id="VLH-Zd-opJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="PBe-RP-8nW" secondAttribute="trailing" constant="12" id="aBs-n6-mqg"/>
                                     <constraint firstItem="KiG-sp-D0S" firstAttribute="centerY" secondItem="YIk-iE-P2e" secondAttribute="centerY" id="oNQ-mF-G3c"/>
                                 </constraints>
                                 <connections>
@@ -283,6 +295,7 @@
                         <outlet property="repeatButton" destination="sfr-9O-bcU" id="nMa-9i-uP0"/>
                         <outlet property="shuffleButton" destination="cK8-Qd-OuL" id="4PQ-VQ-HzY"/>
                         <outlet property="slider" destination="Y1u-4h-xeD" id="fdz-4U-2b6"/>
+                        <outlet property="speedButton" destination="PBe-RP-8nW" id="eyb-3D-ouY"/>
                         <outlet property="titleLabel" destination="5SP-cS-dHy" id="iaH-L8-W9G"/>
                     </connections>
                 </viewController>
@@ -303,7 +316,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1278" y="-64"/>
+            <point key="canvasLocation" x="-1279.2" y="-64.31784107946028"/>
         </scene>
     </scenes>
     <resources>
