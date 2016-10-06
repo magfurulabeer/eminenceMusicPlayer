@@ -91,7 +91,8 @@ class NowPlayingQuickBar: UIView {
             songTitleLabel.text = musicManager.itemNowPlaying?.title ?? ""
             artistLabel.text = musicManager.itemNowPlaying?.artist ?? ""
             let artwork = musicManager.itemNowPlaying?.artwork?.image(at: CGSize(width: self.bounds.height, height: self.bounds.height))
-            albumThumbnail.image = musicManager.itemNowPlaying?.artwork != nil ? artwork! : #imageLiteral(resourceName: "NoAlbumImage")
+            let backupImage = musicManager.itemNowPlaying == nil ? UIImage() : #imageLiteral(resourceName: "NoAlbumImage")
+            albumThumbnail.image = musicManager.itemNowPlaying?.artwork != nil ? artwork! : backupImage
         }
     }
     
