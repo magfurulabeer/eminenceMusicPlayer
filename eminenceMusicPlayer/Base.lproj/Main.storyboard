@@ -32,7 +32,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="ndv-PO-OuP" kind="show" identifier="test" id="V1o-Jt-RLh"/>
                         <segue destination="6r0-gy-nVh" kind="show" identifier="StartAppSegue" id="7n0-Rx-iEu"/>
                     </connections>
                 </viewController>
@@ -73,14 +72,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SSI-LK-Xcz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2215.1999999999998" y="-367.46626686656674"/>
-        </scene>
-        <!--Page View Controller-->
-        <scene sceneID="aaX-Ig-KH5">
-            <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ndv-PO-OuP" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dMF-ph-et1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2130" y="623"/>
         </scene>
         <!--Now Playing View Controller-->
         <scene sceneID="oH5-xl-sv0">
@@ -251,23 +242,45 @@
                                     <constraint firstAttribute="height" constant="60" id="9ko-QR-G3E"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fHK-nb-pkn" customClass="SeekBar" customModule="eminenceMusicPlayer" customModuleProvider="target">
+                                <frame key="frameInset" minX="34" minY="481" width="240" height="33"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="value">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maximumValue">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="minimumValue">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="barColor">
+                                        <color key="value" red="0.0" green="1" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Y1u-4h-xeD" firstAttribute="top" secondItem="dnj-vV-YH6" secondAttribute="bottom" constant="8" id="0JN-WB-gFQ"/>
                             <constraint firstItem="rXy-mu-yMH" firstAttribute="centerY" secondItem="CBu-Sm-xwh" secondAttribute="centerY" id="2NN-sI-nwy"/>
                             <constraint firstItem="MUJ-Fg-W9a" firstAttribute="leading" secondItem="Y1u-4h-xeD" secondAttribute="leading" id="3Bg-vf-AK1"/>
+                            <constraint firstItem="fHK-nb-pkn" firstAttribute="centerX" secondItem="Y1u-4h-xeD" secondAttribute="centerX" id="3hc-Kd-YYH"/>
                             <constraint firstItem="tba-eC-4ot" firstAttribute="trailing" secondItem="5SP-cS-dHy" secondAttribute="trailing" id="CMT-8R-WQl"/>
                             <constraint firstItem="Y1u-4h-xeD" firstAttribute="centerX" secondItem="5SP-cS-dHy" secondAttribute="centerX" id="EJk-bQ-dKv"/>
                             <constraint firstAttribute="trailing" secondItem="19O-rb-Wtx" secondAttribute="trailing" id="FaE-PH-MMr"/>
                             <constraint firstItem="CBu-Sm-xwh" firstAttribute="top" secondItem="Y1u-4h-xeD" secondAttribute="bottom" constant="-5" id="MCj-EC-iVz"/>
                             <constraint firstItem="dnj-vV-YH6" firstAttribute="leading" secondItem="tba-eC-4ot" secondAttribute="leading" id="Rxx-kK-jsg"/>
+                            <constraint firstItem="fHK-nb-pkn" firstAttribute="height" secondItem="Y1u-4h-xeD" secondAttribute="height" id="UEV-Tk-KsU"/>
                             <constraint firstItem="dnj-vV-YH6" firstAttribute="top" secondItem="tba-eC-4ot" secondAttribute="bottom" constant="-1" id="URX-wy-N4I"/>
                             <constraint firstItem="19O-rb-Wtx" firstAttribute="leading" secondItem="ZW6-gF-jC8" secondAttribute="leading" id="Vtc-h8-TI9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5SP-cS-dHy" secondAttribute="trailing" constant="-7" id="WlJ-5S-rZG"/>
+                            <constraint firstItem="fHK-nb-pkn" firstAttribute="width" secondItem="Y1u-4h-xeD" secondAttribute="width" id="Wxp-iB-HqE"/>
                             <constraint firstItem="Y1u-4h-xeD" firstAttribute="width" secondItem="ZW6-gF-jC8" secondAttribute="width" multiplier="0.9" id="XCm-7E-PlV"/>
                             <constraint firstItem="dnj-vV-YH6" firstAttribute="trailing" secondItem="tba-eC-4ot" secondAttribute="trailing" id="YI8-29-Mis"/>
                             <constraint firstItem="19O-rb-Wtx" firstAttribute="top" secondItem="ZW6-gF-jC8" secondAttribute="top" id="YV9-Eo-KTl"/>
+                            <constraint firstItem="fHK-nb-pkn" firstAttribute="centerY" secondItem="Y1u-4h-xeD" secondAttribute="centerY" id="alJ-Fn-WSp"/>
                             <constraint firstItem="tba-eC-4ot" firstAttribute="leading" secondItem="5SP-cS-dHy" secondAttribute="leading" id="eBI-R9-Db1"/>
                             <constraint firstItem="tba-eC-4ot" firstAttribute="top" secondItem="5SP-cS-dHy" secondAttribute="bottom" constant="-2" id="fEC-HE-idL"/>
                             <constraint firstAttribute="leadingMargin" secondItem="5SP-cS-dHy" secondAttribute="leading" id="i4c-bY-4a3"/>

@@ -38,8 +38,14 @@ class SeekBar: UIControl {
         self.isUserInteractionEnabled = true
         
         bar.backgroundColor = barColor
-        bar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        bar.frame = frame//CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
         addSubview(bar)
+        
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        bar.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        bar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        bar.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
         /*
         // Posted when the playback state changes, either programatically or by the user.
@@ -56,6 +62,8 @@ class SeekBar: UIControl {
         
         //NotificationCenter.default.addObserver(self, selector: #selector(SeekBar.hi), name: , object: nil)
         
+        addTapGestureRecognizer()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -65,16 +73,17 @@ class SeekBar: UIControl {
     func hi() {
         
     }
-    /*
+    
     private func addTapGestureRecognizer() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleBarTapped:")
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleBarTapped(sender:)))
         addGestureRecognizer(tapGestureRecognizer)
     }
     
     func handleBarTapped(sender: UITapGestureRecognizer) {
+        print("tapped")
         sendActions(for: UIControlEvents.touchUpInside)
     }
- */
+ 
     
     
     

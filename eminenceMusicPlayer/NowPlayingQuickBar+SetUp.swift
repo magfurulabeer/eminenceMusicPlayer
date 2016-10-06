@@ -16,6 +16,7 @@ extension NowPlayingQuickBar {
         albumThumbnail.image = musicManager.itemNowPlaying?.artwork != nil ? artwork! : #imageLiteral(resourceName: "NoAlbumImage")
         albumThumbnail.contentMode = UIViewContentMode.scaleAspectFill
         albumThumbnail.translatesAutoresizingMaskIntoConstraints = false
+        albumThumbnail.clipsToBounds = true
         
         addSubview(self.albumThumbnail)
         

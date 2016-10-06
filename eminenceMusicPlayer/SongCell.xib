@@ -24,7 +24,7 @@
                         <color key="textColor" red="0.54901960780000003" green="0.5450980392" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoAlbumImage" translatesAutoresizingMaskIntoConstraints="NO" id="Y5B-ej-Okw">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoAlbumImage" translatesAutoresizingMaskIntoConstraints="NO" id="Y5B-ej-Okw">
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Y5B-ej-Okw" secondAttribute="height" multiplier="1:1" id="g6f-0n-wFd"/>
                         </constraints>
