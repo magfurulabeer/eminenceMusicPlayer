@@ -192,8 +192,6 @@ class PlaylistDetailsView: UIView, UITableViewDelegate, UITableViewDataSource, P
     func setNewQueue(indexPath:IndexPath) { }
     
     func indexPathIsExcluded(indexPath: IndexPath?) -> Bool {
-        guard let indexPath = indexPath else {  return true }
-        if indexPath.row == 0 { return true }
         return false
     }
     

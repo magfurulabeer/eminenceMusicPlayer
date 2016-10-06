@@ -228,6 +228,9 @@ class NowPlayingViewController: UIViewController {
         default:
             break
         }
+        if musicManager.player.playbackState != .playing {
+            musicManager.player.pause()
+        }
     }
     
 }

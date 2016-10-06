@@ -81,5 +81,12 @@ class QuickQueueCell: UITableViewCell, UITableViewDataSource, UITableViewDelegat
         musicManager.player.nowPlayingItem = nil
         musicManager.itemNowPlaying = song
         
+        guard let viewController = viewController else {    return  }
+        
+        if let nowPlayingVC = viewController.storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
+            nowPlayingVC.transitioningDelegate = self.viewController as! MusicPlayerViewController
+            nowPlayingVC.interactor = (self.viewController as! MusicPlayerViewController).slideDownInteractor
+            viewController.present(nowPlayingVC, animated: true, completion: nil)
+        }
     }
 }

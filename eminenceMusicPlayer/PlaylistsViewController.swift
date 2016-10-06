@@ -67,7 +67,8 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "QuickQueueCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "QuickQueueCell", for: indexPath) as! QuickQueueCell
+            cell.viewController = viewController
             return cell
         } else {
             let playlist = musicManager.playlistList[indexPath.row]
@@ -137,5 +138,16 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
             viewController!.present(alertController, animated: true, completion: nil)
             return
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.moveViewUp(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
+    
+    func moveViewUp(notification: NSNotification) {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardHeight = keyboardSize.cgRectValue.height
+        
+        view.frame.origin.y -= keyboardHeight
+    }
+    
 }
