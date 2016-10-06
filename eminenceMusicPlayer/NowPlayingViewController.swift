@@ -61,6 +61,8 @@ class NowPlayingViewController: UIViewController {
         displayShuffleStatus()
         NotificationCenter.default.addObserver(self, selector: #selector(NowPlayingViewController.displayMediaData), name:NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(NowPlayingViewController.displayPlaybackButton), name:NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
+
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(NowPlayingViewController.detectDrag(sender:)))
         view.addGestureRecognizer(panGestureRecognizer)
         
