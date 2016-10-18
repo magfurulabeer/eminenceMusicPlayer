@@ -127,7 +127,6 @@ extension PreviewableDraggable {
         } else if canDelete() && cellSnapshot.center.y > viewController!.view.frame.size.height - quickBarHeight {
             if cellSnapshot.tag == 0 {
                 cellSnapshot.tag = -5
-                (viewController as! MusicPlayerViewController).menuBar.highlightCell(index: 0)
                 UIView.animate(withDuration: 0.3, animations: {
                     self.deleteLabel!.backgroundColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
                     self.cellSnapshot.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform.init(translationX: self.viewController!.view.frame.width/4, y: 0))

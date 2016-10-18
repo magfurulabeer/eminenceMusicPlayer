@@ -70,7 +70,7 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
         
         let cell =  tableView.dequeueReusableCell(withIdentifier: "ArtistCell", for: indexPath) as! ArtistCell
         cell.artistLabel?.text = artist.representativeItem?.artist
-        cell.albumImageView?.image = artist.representativeItem?.artwork?.image(at: CGSize(width: SongCellHeight, height: SongCellHeight))
+        cell.albumImageView?.image = artist.representativeItem?.artwork?.image(at: CGSize(width: SongCellHeight, height: SongCellHeight)) ?? #imageLiteral(resourceName: "NoAlbumImage")
         
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         cell.backgroundColor = UIColor.clear
