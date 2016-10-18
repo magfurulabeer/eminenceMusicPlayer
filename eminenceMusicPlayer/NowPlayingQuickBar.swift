@@ -27,7 +27,6 @@ class NowPlayingQuickBar: UIView {
     var lastLocation: CGPoint = CGPoint(x: 0, y: 0)
     var initialDragBumpOver = false
     var fullHeightConstraint = NSLayoutConstraint()
-    var zeroHeightConstraint = NSLayoutConstraint()
     
     var volume: UISlider {
         get {
@@ -58,9 +57,6 @@ class NowPlayingQuickBar: UIView {
         
         setUpShadow()
         setUpTopBorder()
-        
-        fullHeightConstraint = heightAnchor.constraint(equalToConstant: quickBarHeight)
-        zeroHeightConstraint = heightAnchor.constraint(equalToConstant: 0)
     }
 
     

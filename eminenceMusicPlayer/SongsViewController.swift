@@ -27,9 +27,11 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     
     
     // MARK: Draggable Properties
+    
     var cellSnapshot: UIView = UIView()
     var initialIndexPath: IndexPath?
     var currentlyDragging: Bool = false
+    var deleteLabel: UILabel?
     
     // MARK: View Management Method
     

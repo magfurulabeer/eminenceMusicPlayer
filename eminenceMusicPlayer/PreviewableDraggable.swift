@@ -13,6 +13,7 @@ protocol PreviewableDraggable: Previewable {
     var cellSnapshot: UIView { get set }
     var initialIndexPath: IndexPath? { get set }
     var currentlyDragging: Bool { get set }
+    var deleteLabel: UILabel? { get set }
     func snapshopOfCell(inputView: UIView) -> UIView
     func handleLongPress(sender: UILongPressGestureRecognizer)
     func handleLongPressDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath?)
@@ -21,9 +22,19 @@ protocol PreviewableDraggable: Previewable {
     func endDragging()
     func cancelDragging()
     func draggingOffset() -> CGFloat
+    func canDelete() -> Bool
+    func didDeleteItemAtPath(indexPath: IndexPath)
 }
 
 extension PreviewableDraggable {
+    func canDelete() -> Bool {
+        return false
+    }
+    
+    func didDeleteItemAtPath(indexPath: IndexPath) {
+        
+    }
+    
     final func handleLongPress(sender: UILongPressGestureRecognizer) {
         let point = sender.location(in: indexView.view)
         let indexPath = indexView.indexPathForCell(at: point)
@@ -89,7 +100,10 @@ extension PreviewableDraggable {
             self.cellSnapshot.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
             self.cellSnapshot.alpha = 0.98
             cell.alpha = 0.0
-            
+            if self.canDelete() {
+                guard let deleteLabel = self.deleteLabel else { return }
+                deleteLabel.isHidden = false
+            }
             }, completion: { (finished) -> Void in
                 if finished {
                     cell.isHidden = true
@@ -109,19 +123,33 @@ extension PreviewableDraggable {
                     self.cellSnapshot.transform = CGAffineTransform.init(scaleX: 0.5, y: 0.5).concatenating(CGAffineTransform.init(translationX: -self.viewController!.view.frame.width/6, y: 0))
                 })
             }
+        } else if canDelete() && cellSnapshot.center.y > viewController!.view.frame.size.height - quickBarHeight {
+            if cellSnapshot.tag == 0 {
+                cellSnapshot.tag = -5
+                (viewController as! MusicPlayerViewController).menuBar.highlightCell(index: 0)
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.deleteLabel!.backgroundColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
+                    self.cellSnapshot.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform.init(translationX: self.viewController!.view.frame.width/4, y: 0))
+                })
+            }
         } else {
             if cellSnapshot.tag != 0 {
                 (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: false)
                 cellSnapshot.tag = 0
                 UIView.animate(withDuration: 0.3, animations: {
                     self.cellSnapshot.transform = CGAffineTransform.identity
+                    if let deleteLabel = self.deleteLabel, self.canDelete() == true {
+                        deleteLabel.backgroundColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1)
+                    }
                 })
             }
         }
+
     }
     
     final func endDragging() {
         let wasSuccessful = cellSnapshot.center.y < FauxBarHeight + SongCellHeight/4
+        let wasDeleted = cellSnapshot.center.y > (viewController?.view.frame.size.height)! - FauxBarHeight - SongCellHeight/4
         cellSnapshot.removeFromSuperview()
         (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: wasSuccessful)
         let cell = indexView.cell(atIndexPath: initialIndexPath!) as! UITableViewCell
@@ -135,6 +163,18 @@ extension PreviewableDraggable {
             musicManager.quickQueue.append(song)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddedToQueue"), object: nil)
         }
+        
+        if canDelete() {
+            if let deleteLabel = self.deleteLabel {
+                deleteLabel.isHidden = true
+            }
+            
+            if wasDeleted {
+                didDeleteItemAtPath(indexPath: initialIndexPath!)
+            }
+        }
+        
+        print(musicManager.quickQueue)
     }
     
     final func cancelDragging() {
@@ -144,6 +184,9 @@ extension PreviewableDraggable {
         cell?.cell.isHidden = false
         cell?.cell.alpha = 1.0
         currentlyDragging = false
+        if let deleteLabel = self.deleteLabel {
+            deleteLabel.isHidden = true
+        }
     }
     
     
@@ -160,5 +203,4 @@ extension PreviewableDraggable {
         cellSnapshot.layer.shadowOpacity = 0.4
         return cellSnapshot
     }
-
 }

@@ -71,6 +71,9 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
             cell.viewController = viewController
             return cell
         } else {
+            // TODO
+//            print(musicManager.playlistList.count)
+//            print(indexPath.row)
             let playlist = musicManager.playlistList[indexPath.row]
             
             let cell =  tableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell

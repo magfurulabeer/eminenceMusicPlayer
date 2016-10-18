@@ -37,6 +37,8 @@ class PlaylistDetailsView: UIView, UITableViewDelegate, UITableViewDataSource, P
     var cellSnapshot: UIView = UIView()
     var initialIndexPath: IndexPath?
     var currentlyDragging: Bool = false
+    var deleteLabel: UILabel?
+    
     
     // MARK: Init Methods
     

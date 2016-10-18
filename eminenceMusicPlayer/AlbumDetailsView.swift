@@ -37,6 +37,7 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate, Pre
     var cellSnapshot: UIView = UIView()
     var initialIndexPath: IndexPath?
     var currentlyDragging: Bool = false
+    var deleteLabel: UILabel?
     
     // MARK: Init Methods
 

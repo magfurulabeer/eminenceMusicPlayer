@@ -65,8 +65,7 @@ extension MusicPlayerViewController: QuickBarDelegate {
         quickBar!.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
         quickBar!.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         quickBar!.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        quickBar!.fullHeightConstraint.isActive = true
-        
+        quickBar!.heightAnchor.constraint(equalToConstant: quickBarHeight).isActive = true
     }
     
     func setUpCollectionView() {
