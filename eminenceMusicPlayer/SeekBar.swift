@@ -80,7 +80,6 @@ class SeekBar: UIControl {
     }
     
     func handleBarTapped(sender: UITapGestureRecognizer) {
-        print("tapped")
         sendActions(for: UIControlEvents.touchUpInside)
     }
  

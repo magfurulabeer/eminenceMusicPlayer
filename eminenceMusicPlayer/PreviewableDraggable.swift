@@ -69,6 +69,7 @@ extension PreviewableDraggable {
     }
     
     final func handleLongPressDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath?) {
+//        print(sender.state.rawValue)
         if sender.state == UIGestureRecognizerState.began {
             startDragging(sender: sender, indexPath: indexPath!)
         }
@@ -104,10 +105,10 @@ extension PreviewableDraggable {
                 guard let deleteLabel = self.deleteLabel else { return }
                 deleteLabel.isHidden = false
             }
-            }, completion: { (finished) -> Void in
-                if finished {
-                    cell.isHidden = true
-                }
+        }, completion: { (finished) -> Void in
+            if self.currentlyDragging {
+                cell.isHidden = true
+            }
         })
 
     }
@@ -148,6 +149,8 @@ extension PreviewableDraggable {
     }
     
     final func endDragging() {
+        currentlyDragging = false
+
         let wasSuccessful = cellSnapshot.center.y < FauxBarHeight + SongCellHeight/4
         let wasDeleted = cellSnapshot.center.y > (viewController?.view.frame.size.height)! - FauxBarHeight - SongCellHeight/4
         cellSnapshot.removeFromSuperview()
@@ -156,7 +159,6 @@ extension PreviewableDraggable {
         
         cell.isHidden = false
         cell.alpha = 1.0
-        currentlyDragging = false
 
         if wasSuccessful {
             let song = selectedSongForPreview(indexPath: initialIndexPath!)
@@ -173,14 +175,13 @@ extension PreviewableDraggable {
                 didDeleteItemAtPath(indexPath: initialIndexPath!)
             }
         }
-        
-        print(musicManager.quickQueue)
     }
     
     final func cancelDragging() {
         cellSnapshot.removeFromSuperview()
         (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: false)
         let cell = indexView.cell(atIndexPath: initialIndexPath!)
+        print(initialIndexPath?.row)
         cell?.cell.isHidden = false
         cell?.cell.alpha = 1.0
         currentlyDragging = false

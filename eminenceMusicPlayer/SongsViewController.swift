@@ -108,7 +108,7 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let song = musicManager.songList[indexPath.row]
         
-        print(song.artwork != nil)
+//        print(song.artwork != nil)
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
         musicManager.currentQueue = MPMediaItemCollection(items: musicManager.originalSongList)
         musicManager.player.setQueue(with: musicManager.currentQueue!)
