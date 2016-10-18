@@ -154,6 +154,7 @@ extension PreviewableDraggable {
         let wasDeleted = cellSnapshot.center.y > (viewController?.view.frame.size.height)! - FauxBarHeight - SongCellHeight/4
         cellSnapshot.removeFromSuperview()
         (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: wasSuccessful)
+        // TODO: When does this not exist
         let cell = indexView.cell(atIndexPath: initialIndexPath!) as! UITableViewCell
         
         cell.isHidden = false

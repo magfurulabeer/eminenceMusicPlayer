@@ -129,20 +129,21 @@ class PlaylistDetailsView: UIView, UITableViewDelegate, UITableViewDataSource, P
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return playlist!.value(forProperty: MPMediaPlaylistPropertyName) as? String ?? "Unnamed Playlist"
+        let title = playlist!.value(forProperty: MPMediaPlaylistPropertyName) as? String ?? "Unnamed Playlist"
+        return title
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 60
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else {
             return
         }
-        header.backgroundView?.backgroundColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
+        header.backgroundView?.backgroundColor = UIColor.black.withAlphaComponent(0.95) //UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: 1)
         header.textLabel?.textColor = UIColor.white
-        header.textLabel?.font = UIFont(name: "Avenir", size: 25)
+        header.textLabel?.font = UIFont(name: "Avenir", size: 20)
         
     }
     
