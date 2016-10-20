@@ -12,13 +12,17 @@ import MediaPlayer
 extension NowPlayingViewController {
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
-            guard let itemNotPlaying = self.musicManager.player.nowPlayingItem else { return }
-            let currentTime: Double = self.musicManager.player.currentPlaybackTime
-            let duration: Double = itemNotPlaying.playbackDuration
-            
-            OperationQueue.main.addOperation {
-                self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
-                self.slider.value = Float(currentTime/duration)
+            if self.sliderWasJustChanged {
+                self.sliderWasJustChanged = false
+            } else {
+                guard let itemNotPlaying = self.musicManager.player.nowPlayingItem else { return }
+                let currentTime: Double = self.musicManager.player.currentPlaybackTime
+                let duration: Double = itemNotPlaying.playbackDuration
+                
+                OperationQueue.main.addOperation {
+                    self.currentTimeLabel.text = self.musicManager.player.currentPlaybackTime.stringFormat()
+                    self.slider.value = Float(currentTime/duration)
+                }
             }
         })
     }

@@ -36,6 +36,7 @@ class NowPlayingViewController: UIViewController, SeekbarDelegate {
     var timer = Timer()
     var lastLocation: CGPoint = CGPoint(x: 0, y: 0)
     var interactor: SlideDownInteractor? //= SlideDownInteractor()
+    var sliderWasJustChanged = false
     var volume: UISlider {
         get {
             return self.musicManager.volume
@@ -235,6 +236,11 @@ class NowPlayingViewController: UIViewController, SeekbarDelegate {
         if musicManager.player.playbackState != .playing {
             musicManager.player.pause()
         }
+    }
+    
+    func seekbarWillChangeValue() {
+        timer.invalidate()
+        sliderWasJustChanged = true
     }
     
     func seekbarDidChangeValue() {

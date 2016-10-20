@@ -9,6 +9,7 @@
 import UIKit
 
 protocol SeekbarDelegate {
+    func seekbarWillChangeValue()
     func seekbarDidChangeValue()
 }
 
@@ -38,6 +39,7 @@ class Seekbar: UISlider {
     }
 
     func didTapSlider(sender: UITapGestureRecognizer) {
+        delegate?.seekbarWillChangeValue()
         let location = sender.location(in: self)
         let percent = location.x / frame.width
         value = Float(percent)
