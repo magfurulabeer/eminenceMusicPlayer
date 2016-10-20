@@ -151,11 +151,13 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y1u-4h-xeD">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y1u-4h-xeD" customClass="Seekbar" customModule="eminenceMusicPlayer" customModuleProvider="target">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="UIa-uz-94k"/>
                                 </constraints>
-                                <color key="thumbTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="minimumTrackTintColor" red="0.36078431370000003" green="0.18039215689999999" blue="0.18039215689999999" alpha="0.89997306030000002" colorSpace="calibratedRGB"/>
+                                <color key="maximumTrackTintColor" red="0.0" green="0.0" blue="0.0" alpha="0.37941810339999998" colorSpace="calibratedRGB"/>
+                                <color key="thumbTintColor" red="0.36078431372549019" green="0.1803921568627451" blue="0.1803921568627451" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="sliderValueChanged:" destination="MBY-PI-pMD" eventType="valueChanged" id="Acg-zE-vH7"/>
                                 </connections>
@@ -251,7 +253,7 @@
                             <constraint firstItem="tba-eC-4ot" firstAttribute="trailing" secondItem="5SP-cS-dHy" secondAttribute="trailing" id="CMT-8R-WQl"/>
                             <constraint firstItem="Y1u-4h-xeD" firstAttribute="centerX" secondItem="5SP-cS-dHy" secondAttribute="centerX" id="EJk-bQ-dKv"/>
                             <constraint firstAttribute="trailing" secondItem="19O-rb-Wtx" secondAttribute="trailing" id="FaE-PH-MMr"/>
-                            <constraint firstItem="CBu-Sm-xwh" firstAttribute="top" secondItem="Y1u-4h-xeD" secondAttribute="bottom" constant="-5" id="MCj-EC-iVz"/>
+                            <constraint firstItem="CBu-Sm-xwh" firstAttribute="top" secondItem="Y1u-4h-xeD" secondAttribute="bottom" id="MCj-EC-iVz"/>
                             <constraint firstItem="dnj-vV-YH6" firstAttribute="leading" secondItem="tba-eC-4ot" secondAttribute="leading" id="Rxx-kK-jsg"/>
                             <constraint firstItem="dnj-vV-YH6" firstAttribute="top" secondItem="tba-eC-4ot" secondAttribute="bottom" constant="-1" id="URX-wy-N4I"/>
                             <constraint firstItem="19O-rb-Wtx" firstAttribute="leading" secondItem="ZW6-gF-jC8" secondAttribute="leading" id="Vtc-h8-TI9"/>

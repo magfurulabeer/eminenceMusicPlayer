@@ -10,14 +10,14 @@ import UIKit
 import MediaPlayer
 
 // TODO: When song starts, 00:01 is skipped and the timer starts it at 00:00
-class NowPlayingViewController: UIViewController {
+class NowPlayingViewController: UIViewController, SeekbarDelegate {
 
     
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var albumLabel: UILabel!
-    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var slider: Seekbar!
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var controlsStackView: UIStackView!
@@ -52,7 +52,9 @@ class NowPlayingViewController: UIViewController {
         view.backgroundColor = UIColor.clear
         setUpGradient()
         setUpFauxNavBar()
-        
+        slider.setThumbImage(#imageLiteral(resourceName: "Thumb"), for: UIControlState.normal)
+        slider.setThumbImage(#imageLiteral(resourceName: "Thumb"), for: UIControlState.highlighted)
+        slider.delegate = self
         // Shuffle is turned off whenever a cell is selected to ensure current song was picked
         // This just turns it back on if needed
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
@@ -235,4 +237,7 @@ class NowPlayingViewController: UIViewController {
         }
     }
     
+    func seekbarDidChangeValue() {
+        sliderValueChanged(slider)
+    }
 }
