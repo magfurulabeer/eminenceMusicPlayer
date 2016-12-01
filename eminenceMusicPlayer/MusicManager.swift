@@ -9,9 +9,9 @@
 import UIKit
 import MediaPlayer
 
+
 // TODO: Consider changing shuffleIsOn's setter to actually change the music players shuffle setting
 // TODO: See if refreshList() is necessary. Scrap if not.
-
 
 
 /// This singleton manages the music, lists of media items, volume, etc.
@@ -177,6 +177,7 @@ class MusicManager: NSObject {
      - Returns: A new MusicManager object with all of it's lists created. The player should be set to the system player and should start sending notifications. Shuffle is set to songs.
      */
     private override init() {
+        // FIXME: 'self.songList' not initialized at super.init call  -- Find a better way to solve this
         self.songList = [MPMediaItem]()
         self.artistList = [MPMediaItemCollection]()
         self.albumList = [MPMediaItemCollection]()

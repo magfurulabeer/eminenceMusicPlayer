@@ -9,18 +9,90 @@
 import UIKit
 import MediaPlayer
 
+/// This protocol is for any class that ONLY needs it's displayed songs to be previewable. Holding onto the song should preview it. If it requires dragging as well, then the PreviewableDraggable protocol should be used instead.
 protocol Previewable: class {
+    
+    
+    
+    // MARK: Properties
+    
+    
+    
+    /// Reference to the MusicManager singleton instance.
     var musicManager: MusicManager { get }
+    
+    /// ndex View (TableView or CollectionView) that needs it's items to be previewable.
     var indexView: IndexView { get set }
+    
+    /// Cell/Item being previewed.
     var selectedCell: IndexViewCell? { get set }
+    
+    /// Index path of the cell/item being previewed.
     var selectedIndexPath: IndexPath? { get set }
 
+    
+    
+    // MARK: Methods
+    
+    
+    
+    /**
+     Handles whether to end previewing or to continute to next handler
+     
+     - Parameters:
+     - sender: Activated long press gesture recognizer
+     */
     func handleLongPress(sender: UILongPressGestureRecognizer)
+    
+    
+    /**
+     Decides and prepares for whether to begin, change, or end previewing.
+     
+     - Parameters:
+     - sender: Activated long press gesture recognizer
+     - indexPath: IndexPath of the selected cell/item
+     */
     func handleLongPressPreviewing(sender: UILongPressGestureRecognizer, indexPath: IndexPath)
+    
+    
+    /**
+     Starts previewing the song. Posts a PreviewingDidBegin notification.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func startPreviewingMusic(atIndexPath indexPath: IndexPath)
+    
+    
+    /**
+     Changes the song being previewed.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func changePreviewingMusic(atIndexPath indexPath: IndexPath)
+    
+    
+    /**
+     Ends previewing the song. Posts a PreviewingDidEnd notification.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func endPreviewingMusic()
+    
+    
+    /**
+     Returns the Media Item that is about to be previewed
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     
+     - Returns: The Media Item that is about to be previewed
+     */
     func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem
+    
+    
     func setQueue(indexPath:IndexPath)
     func setNewQueue(indexPath:IndexPath)
     func indexPathIsExcluded(indexPath: IndexPath?) -> Bool
@@ -34,6 +106,12 @@ extension Previewable {
         return MusicManager.sharedManager
     }
     
+    /**
+     Handles whether to end previewing or to continute to next handler
+     
+     - Parameters:
+     - sender: Activated long press gesture recognizer
+     */
     func handleLongPress(sender: UILongPressGestureRecognizer) {
         let point = sender.location(in: indexView.view)
         let indexPath = indexView.indexPathForCell(at: point)
@@ -57,6 +135,14 @@ extension Previewable {
         handleLongPressPreviewing(sender: sender, indexPath: indexPath!)
     }
     
+    
+    /**
+     Decides and prepares for whether to begin, change, or end previewing.
+     
+     - Parameters:
+     - sender: Activated long press gesture recognizer
+     - indexPath: IndexPath of the selected cell/item
+     */
     final func handleLongPressPreviewing(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
         if sender.state == UIGestureRecognizerState.began {
             // Will be needed at the end
@@ -77,6 +163,13 @@ extension Previewable {
         }
     }
 
+    
+    /**
+     Starts previewing the song. Posts a PreviewingDidBegin notification.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     final func startPreviewingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PreviewingDidBegin"), object: nil)
@@ -103,6 +196,13 @@ extension Previewable {
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
     }
 
+    
+    /**
+     Changes the song being previewed.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     final func changePreviewingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
         selectedIndexPath = indexPath
@@ -122,17 +222,29 @@ extension Previewable {
         musicManager.player.currentPlaybackTime = song.playbackDuration/2
     }
     
+    
+    /**
+      Ends previewing the song. Posts a PreviewingDidEnd notification.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     final func endPreviewingMusic() {
-        musicManager.player.pause()
-        
+        musicManager.player.pause()  // Prevents abrupt playing when changing songs
         musicManager.currentlyPreviewing = false
+        
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PreviewingDidEnd"), object: nil)
         
-        // Return visual to normal
         revertVisuals()
-        
-        // Return audio to normal
-        
+        revertPlayer()
+        releaseSavedProperties()
+    }
+    
+    
+    
+    // MARK: Helper Methods
+    
+    func revertPlayer() {
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
         musicManager.player.repeatMode = musicManager.savedRepeatMode ?? .none
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
@@ -150,18 +262,19 @@ extension Previewable {
         musicManager.player.nowPlayingItem = musicManager.savedSong
         musicManager.player.currentPlaybackTime = musicManager.savedTime ?? 0
         musicManager.player.prepareToPlay()
-
+        
         if musicManager.savedPlayerIsPlaying?.rawValue == MPMusicPlaybackState.playing.rawValue {
             musicManager.player.play()
         }else {
             musicManager.player.pause()
         }
-        
-        // Release all saved properties
+    }
+    
+    func releaseSavedProperties() {
         musicManager.savedPlayerIsPlaying = nil
         musicManager.savedRepeatMode = nil
         musicManager.savedTime = nil
-//        musicManager.savedSong = nil
+        //        musicManager.savedSong = nil
         selectedIndexPath = nil
         selectedCell = nil
         musicManager.savedPlayerIsPlaying = nil
