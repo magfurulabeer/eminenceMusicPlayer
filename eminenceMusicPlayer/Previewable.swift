@@ -83,7 +83,7 @@ protocol Previewable: class {
     
     
     /**
-     Returns the Media Item that is about to be previewed
+     Returns the Media Item that is about to be previewed.
      
      - Parameters:
      - indexPath: IndexPath of the selected cell/item
@@ -93,15 +93,62 @@ protocol Previewable: class {
     func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem
     
     
+    /**
+     Sets the queue for previewing. The queue would be unique to the Previewable object.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func setQueue(indexPath:IndexPath)
+    
+    
+    /**
+     Sets a new queue when changing the previewing song. Depending on the Previewable object, can be empty.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func setNewQueue(indexPath:IndexPath)
+    
+    
+    /**
+     Whether or not the given index path is nonpreviewable.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     
+     - Returns: Boolean representing whether or not the index path is exluded from previewing
+     */
     func indexPathIsExcluded(indexPath: IndexPath?) -> Bool
+    
+    
+    /**
+     Displays visual changes to show which cell/item is being previewed
+     
+     - Parameters:
+     - state: State of the activated long press gesture recognizer
+     - indexPath: IndexPath of the selected cell/item
+     */
     func displayPreviewing(state: UIGestureRecognizerState, indexPath: IndexPath)
+    
+    
+    /**
+     Go back to the visuals before previewing.
+    */
     func revertVisuals()
+    
+    
+    /**
+     Any necessary actions before changing preview songs can be taken here
+     */
     func prepareForChange()
 }
 
+
+/// This protocol contains the general template and defaults for handling Previewing.
 extension Previewable {
+    
+    /// Reference to the MusicManager singleton instance.
     var musicManager: MusicManager {
         return MusicManager.sharedManager
     }
@@ -244,6 +291,11 @@ extension Previewable {
     
     // MARK: Helper Methods
     
+    
+    
+    /**
+     Set all audio players settings back to pre-previewing settings.
+     */
     func revertPlayer() {
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
         musicManager.player.repeatMode = musicManager.savedRepeatMode ?? .none
@@ -270,6 +322,10 @@ extension Previewable {
         }
     }
     
+    
+    /**
+     Set all saved properties to nil
+     */
     func releaseSavedProperties() {
         musicManager.savedPlayerIsPlaying = nil
         musicManager.savedRepeatMode = nil
@@ -280,6 +336,14 @@ extension Previewable {
         musicManager.savedPlayerIsPlaying = nil
     }
     
+    
+    /**
+     Ends previewing the song. Posts a PreviewingDidEnd notification.
+     
+     - Parameters:
+     - state: State of the activated long press gesture recognizer
+     - indexPath: IndexPath of the selected cell/item
+     */
     func displayPreviewing(state: UIGestureRecognizerState, indexPath: IndexPath) {
         if state == .began {
             indexView.forEachVisibleCell { (indexCell) in
@@ -291,6 +355,10 @@ extension Previewable {
         selectedCell?.cell.alpha = 1
     }
     
+    
+    /**
+     Go back to the visuals before previewing.
+     */
     func revertVisuals() {
         selectedCell?.cell.backgroundColor = UIColor.clear
         
@@ -299,6 +367,10 @@ extension Previewable {
         }
     }
     
+    
+    /**
+     Any necessary actions before changing preview songs can be taken here
+     */
     func prepareForChange() {
         musicManager.player.pause()
         selectedCell?.cell.backgroundColor = UIColor.clear
