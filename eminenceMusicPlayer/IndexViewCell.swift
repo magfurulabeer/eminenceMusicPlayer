@@ -8,16 +8,24 @@
 
 import UIKit
 
+/// This protocol is the common denominator between TableViewCells and CollectionViewCells.
 protocol IndexViewCell {
+    
+    /// The actual view itself.
     var cell: UIView { get}
+    
+    
+    /// Background color of the content view
     var contentBackgroundColor: UIColor? { get set }
 }
 
 extension UITableViewCell: IndexViewCell {
+    /// The actual view itself.
     var cell: UIView {
         return self
     }
     
+    /// Background color of the content view
     var contentBackgroundColor: UIColor? {
         get {
             return self.contentView.backgroundColor
@@ -30,10 +38,12 @@ extension UITableViewCell: IndexViewCell {
 
 
 extension UICollectionViewCell: IndexViewCell {
+    /// The actual view itself.
     var cell: UIView {
         return self
     }
     
+    /// Background color of the content view
     var contentBackgroundColor: UIColor? {
         get {
             return self.contentView.backgroundColor

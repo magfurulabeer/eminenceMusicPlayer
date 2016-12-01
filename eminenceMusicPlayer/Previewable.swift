@@ -296,7 +296,7 @@ extension Previewable {
     /**
      Set all audio players settings back to pre-previewing settings.
      */
-    func revertPlayer() {
+    final func revertPlayer() {
         musicManager.player.shuffleMode = musicManager.shuffleIsOn ? .songs : .off
         musicManager.player.repeatMode = musicManager.savedRepeatMode ?? .none
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
@@ -326,7 +326,7 @@ extension Previewable {
     /**
      Set all saved properties to nil
      */
-    func releaseSavedProperties() {
+    final func releaseSavedProperties() {
         musicManager.savedPlayerIsPlaying = nil
         musicManager.savedRepeatMode = nil
         musicManager.savedTime = nil

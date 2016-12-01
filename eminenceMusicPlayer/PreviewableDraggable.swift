@@ -8,33 +8,150 @@
 
 import UIKit
 
+// TODO: Replace chains of if statements with switch statement. Consider refactoring further if possible.
+
+/// This protocol is for any class that needs it's displayed songs to be previewable AND draggable. Holding onto the cell/items album thumbnail should allow you to drag it and drop it onto the Playlist tab to add it to the quick queue it.
 protocol PreviewableDraggable: Previewable {
+    
+    
+    
+    // MARK: Properties
+    
+    
+    
+    /// Reference to the view controller upon which the PreviewableDraggable object sits (the view controller can be the object).
     weak var viewController: UIViewController? { get set }
+    
+    
+    /// A snapshot taken of the cell mainly to drag around.
     var cellSnapshot: UIView { get set }
+    
+    
+    /// The index path of cell being dragged.
     var initialIndexPath: IndexPath? { get set }
+    
+    
+    /// Whether or not a cell is being dragged.
     var currentlyDragging: Bool { get set }
+    
+    
+    /// A label that functions as a delete button.
     var deleteLabel: UILabel? { get set }
-    func snapshopOfCell(inputView: UIView) -> UIView
+    
+    
+    
+    // MARK: Properties
+    
+    
+    
+    /**
+     Handles whether to end previewing or send to the appropriate handler (previewing or dragging).
+     
+     - Parameters:
+     - sender: Activated long press gesture recognizer
+     */
     func handleLongPress(sender: UILongPressGestureRecognizer)
+    
+    
+    /**
+     Decides and prepares for whether to begin, change, end, or cancel dragging.
+     
+     - Parameters:
+     - sender: Activated long press gesture recognizer
+     - indexPath: IndexPath of the selected cell/item
+     */
     func handleLongPressDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath?)
+    
+    
+    /**
+     Starts dragging the cell.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func startDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath)
+    
+    
+    /**
+     Moves the dragged cell.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func changeDragging(sender: UILongPressGestureRecognizer)
+    
+    
+    /**
+     Ends dragging the cell. Any quick queueing or deleting is applied.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func endDragging()
+    
+    
+    /**
+     Cancels dragging the cell. No quick queueing or deleting considered.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func cancelDragging()
+    
+    
+    /**
+     Offset of the cell that can trigger a drag AKA contains the album image.
+
+     - Returns: CGFloat of the offset that contains the album image
+     */
     func draggingOffset() -> CGFloat
+    
+    
+    /**
+     Whether or not the item has a delete option.
+     
+     - Returns: Boolean representing whether or not selected item can be deleted
+     */
     func canDelete() -> Bool
+    
+    
+    /**
+     What happens when an item is deleted.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func didDeleteItemAtPath(indexPath: IndexPath)
 }
 
 extension PreviewableDraggable {
+    
+    
+    /**
+     Whether or not the item has a delete option. Only PreviewableDraggable objects that require the delete function should override this. Otherwise it defaults to false.
+     
+     - Returns: Boolean representing whether or not selected item can be deleted
+     */
     func canDelete() -> Bool {
         return false
     }
     
-    func didDeleteItemAtPath(indexPath: IndexPath) {
-        
-    }
     
+    /**
+     What happens when an item is deleted. Only PreviewableDraggable objects that require the delete function should override this. Otherwise it defaults to an empty function.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
+    func didDeleteItemAtPath(indexPath: IndexPath) {}
+    
+    
+    /**
+     Handles whether to end previewing or send to the appropriate handler (previewing or dragging).
+     
+     - Parameters:
+     - sender: Activated long press gesture recognizer
+     */
     final func handleLongPress(sender: UILongPressGestureRecognizer) {
         let point = sender.location(in: indexView.view)
         let indexPath = indexView.indexPathForCell(at: point)
@@ -68,8 +185,15 @@ extension PreviewableDraggable {
         }
     }
     
+    
+    /**
+     Decides and prepares for whether to begin, change, end, or cancel dragging.
+     
+     - Parameters:
+     - sender: Activated long press gesture recognizer
+     - indexPath: IndexPath of the selected cell/item
+     */
     final func handleLongPressDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath?) {
-//        print(sender.state.rawValue)
         if sender.state == UIGestureRecognizerState.began {
             startDragging(sender: sender, indexPath: indexPath!)
         }
@@ -85,6 +209,13 @@ extension PreviewableDraggable {
         }
     }
     
+    
+    /**
+     Starts dragging the cell.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     final func startDragging(sender: UILongPressGestureRecognizer, indexPath: IndexPath) {
         initialIndexPath = indexPath
         let cell = indexView.cell(atIndexPath: indexPath) as! UITableViewCell
@@ -113,6 +244,13 @@ extension PreviewableDraggable {
 
     }
     
+    
+    /**
+     Moves the dragged cell.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     final func changeDragging(sender: UILongPressGestureRecognizer) {
         cellSnapshot.center.y = sender.location(in: viewController?.view).y
         
@@ -147,6 +285,13 @@ extension PreviewableDraggable {
 
     }
     
+    
+    /**
+     Ends dragging the cell. Any quick queueing or deleting is applied.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     final func endDragging() {
         currentlyDragging = false
 
@@ -177,6 +322,13 @@ extension PreviewableDraggable {
         }
     }
     
+    
+    /**
+     Cancels dragging the cell. No quick queueing or deleting considered.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     final func cancelDragging() {
         cellSnapshot.removeFromSuperview()
         (viewController as! MusicPlayerViewController).menuBar.unhighlightCell(index: 0, wasSuccessful: false)
@@ -191,6 +343,14 @@ extension PreviewableDraggable {
     }
     
     
+    /**
+     Creates a snapshot of the cell at given indexPath.
+     
+     - Parameters:
+     - inputView: View to snapshot
+     
+     - Returns: Snapshot of cell
+     */
     final func snapshopOfCell(inputView: UIView) -> UIView {
         UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, false, 0.0)
         inputView.layer.render(in: UIGraphicsGetCurrentContext()!)
