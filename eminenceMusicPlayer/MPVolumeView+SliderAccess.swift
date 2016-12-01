@@ -9,7 +9,10 @@
 import UIKit
 import MediaPlayer
 
+/// This extension adds a slider interface to manage volume.
 extension MPVolumeView {
+    
+    /// This slider directly controls the AVAudioSessions volume.
     public var volumeSlider:UISlider {
         self.showsRouteButton = false
         self.showsVolumeSlider = false

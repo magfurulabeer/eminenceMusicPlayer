@@ -9,30 +9,78 @@
 import UIKit
 import MediaPlayer
 
+// TODO: Consider changing shuffleIsOn's setter to actually change the music players shuffle setting
+// TODO: See if refreshList() is necessary. Scrap if not.
+
+
+
+/// This singleton manages the music, lists of media items, volume, etc.
 class MusicManager: NSObject {
+    
+    
+    
+    // MARK: Properties
+    
+    
+    
+    /// This is the singleton shared instance.
     static let sharedManager = MusicManager()
+    
+    /// Returns all the songs.
     var songList: [MPMediaItem]
+    
+    /// Returns artists as collections of songs.
     var artistList: [MPMediaItemCollection]
+    
+    /// Returns albums as collections of songs.
     var albumList: [MPMediaItemCollection]
+    
+    /// Returns playlists.
     var playlistList: [MPMediaPlaylist]
+    
+    /// The audio player.
     var player: MPMusicPlayerController
+    
+    /// Whether or not shuffle is on.
     var shuffleIsOn: Bool
+    
+    /// A hidden UISlider representing the volume.
     var volume = MPVolumeView().volumeSlider
+    
+    /// Boolean representing whether the app is currently previewing a song.
     var currentlyPreviewing = false
+    
+    /// Boolean representing that the current queue is empty.
     var songListIsEmpty: Bool = false
+    
+    /// A collection of songs that acts as an on-the-fly playlist.
     var quickQueue = [MPMediaItem]()
+    
+    /// The current queue of songs playing.
     var currentQueue: MPMediaItemCollection?
     
     
+    
     // MARK: Previewable Properties
+    // These properties are relied upon by the Previewable Protocol.
+    
+    
+    /// The song playing before previewing.
     var savedSong: MPMediaItem?
+    
+    /// The time the song was at before previewing.
     var savedTime: TimeInterval?
+    
+    /// What the repeat setting was before previewing. This is necessary because repeat is changed to Repeat-One while previewing so that 1-3 second audio clips repeat rather than go to another media item.
     var savedRepeatMode: MPMusicRepeatMode?
+    
+    /// Whether or not a song was playing before previewing.
     var savedPlayerIsPlaying: MPMusicPlaybackState?
+    
+    /// The active queue before previewing.
     var savedQueue: MPMediaItemCollection?
-    
-    
-    
+
+    /// The currect song. Setting it also plays the song if it's not nil.
     var itemNowPlaying: MPMediaItem? {
         get {
             return player.nowPlayingItem
@@ -48,8 +96,7 @@ class MusicManager: NSObject {
         }
     }
     
-    
-    // When not authorized?
+    /// A freshly queried song list
     var originalSongList: [MPMediaItem] {
         get {
             var songItems = [MPMediaItem]()
@@ -73,6 +120,7 @@ class MusicManager: NSObject {
         }
     }
     
+    /// A freshly queried artist list
     var originalArtistList: [MPMediaItemCollection] {
         get {
             let artistsQuery = MPMediaQuery.artists()
@@ -87,6 +135,7 @@ class MusicManager: NSObject {
         }
     }
     
+    /// A freshly queried album list
     var originalAlbumList: [MPMediaItemCollection] {
         get {
             let albumQuery = MPMediaQuery.albums()
@@ -101,6 +150,7 @@ class MusicManager: NSObject {
         }
     }
     
+    /// A freshly queried playlist list
     var originalPlaylistList: [MPMediaPlaylist] {
         get {
             let playlistQuery = MPMediaQuery.playlists()
@@ -115,7 +165,18 @@ class MusicManager: NSObject {
         }
     }
     
-    override init() {
+    
+    
+    // MARK: Methods
+    
+    
+    
+    /**
+     Initializes a new MusicManager. Made private because only the singleton sharedInstance method should call it.
+     
+     - Returns: A new MusicManager object with all of it's lists created. The player should be set to the system player and should start sending notifications. Shuffle is set to songs.
+     */
+    private override init() {
         self.songList = [MPMediaItem]()
         self.artistList = [MPMediaItemCollection]()
         self.albumList = [MPMediaItemCollection]()
@@ -129,11 +190,10 @@ class MusicManager: NSObject {
         self.albumList = self.originalAlbumList
         self.playlistList = self.originalPlaylistList
         self.player.beginGeneratingPlaybackNotifications()
-        
-//        self.currentQueue = MPMediaItemCollection(items: [])
-
     }
     
+    
+    /// Replaces saved list of songs with the original list of songs.
     func refreshList() {
         self.songList = self.originalSongList
     }

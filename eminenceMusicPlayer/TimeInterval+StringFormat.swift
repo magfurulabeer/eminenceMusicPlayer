@@ -1,18 +1,17 @@
 //
-//  SideKicK.swift
-//  SideKicK Helper Methods
+//  TimeInterval+StringFormat.swift
+//  eminenceMusicPlayer
 //
-//  Created by Magfurul Abeer on 9/4/16.
+//  Created by Magfurul Abeer on 11/30/16.
 //  Copyright © 2016 Magfurul Abeer. All rights reserved.
 //
-// SideKicK is a collection of helper methods to speed up the development process
 
+import Foundation
 
-import UIKit
-import MediaPlayer
-
-
+/// This extension adds a convenience method for getting string values in HH:mm:SS format.
 extension TimeInterval {
+    
+    /// Returns the date as a String in HH:mm:SS format.
     func stringFormat() -> String {
         let interval = self
         let seconds = Int( interval.truncatingRemainder(dividingBy: 60).rounded() )
@@ -22,29 +21,5 @@ extension TimeInterval {
             return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
         }
         return String(format: "%02d:%02d", minutes, seconds)
-        
-        
     }
 }
-
-extension UIButton {
-    var title: String {
-        get {
-            return self.titleLabel?.text ?? ""
-        }
-        set {
-            self.titleLabel?.text = newValue
-            self.setTitle(newValue, for: .normal)
-        }
-    }
-}
-
-
-
-
-
-
-
-
-
-

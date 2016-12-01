@@ -8,8 +8,9 @@
 
 import UIKit
 
-// Todo: Capitalize the first two constants
+// Todo: Capitalize the first two constants or have all constants start with k. Need to be consistent.
 // Todo: Replace all magic numbers with constants
+
 public let tabBarHeight: CGFloat = 49
 public let quickBarHeight: CGFloat = 70
 public let FauxBarHeight: CGFloat = 70

@@ -106,7 +106,7 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let song = musicManager.songList[indexPath.row]
+//        let song = musicManager.songList[indexPath.row]
         
 //        print(song.artwork != nil)
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
