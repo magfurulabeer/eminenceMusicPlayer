@@ -9,31 +9,62 @@
 import UIKit
 import MediaPlayer
 
+// TODO: Share setUpIndexView code between the menuviewcontrollers
 
+
+/// View controller that shows a table of all the songs
 class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewDataSource, PreviewableDraggable {
 
     
+    
     // MARK: Properties
     
+    
+    
+    /// Reference to the MusicManager singleton instance.
     let musicManager = MusicManager.sharedManager
+    
+    /// The index View (TableView) that needs it's items to be previewable.    
     var indexView: IndexView = UITableView()
+    
+    /// Allows base class methods to have access to indexView
     override var storedIndexView: IndexView? {  get { return indexView }    }
 
     
+    
     // MARK: Previewable Properties
     
+    
+    
+    /// Cell/Item being previewed.
     var selectedCell: IndexViewCell?
+    
+    /// Index path of the cell/item being previewed.
     var selectedIndexPath: IndexPath?
+    
     
     
     // MARK: Draggable Properties
     
+    
+    
+    /// A snapshot taken of the cell mainly to drag around.
     var cellSnapshot: UIView = UIView()
+    
+    /// The index path of cell being dragged.
     var initialIndexPath: IndexPath?
+    
+    /// Whether or not a cell is being dragged.
     var currentlyDragging: Bool = false
+    
+    /// A label that functions as a delete button.
     var deleteLabel: UILabel?
     
+    
+    
     // MARK: View Management Method
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +72,15 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         setUpIndexView()
     }
     
+    
+    
     // MARK: Setup Methods
 
+    
+    
+    /**
+     Constrain index view. Sets its delegates, color, constraints, and gestures. Then reloads it.
+     */
     func setUpIndexView() {
         guard let indexView = indexView as? UITableView else { return }
         
@@ -63,7 +101,11 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         indexView.reloadData()
     }
     
+    
+    
     // MARK: UITableViewDataSource
+    
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -99,8 +141,12 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    
+    
     // MARK: UITableViewDelegate
 
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return SongCellHeight
     }
@@ -126,32 +172,78 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    
+    
     // MARK: Previewable Methods
     
+    
+    
+    /**
+     Returns the Media Item that is about to be previewed.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     
+     - Returns: The Media Item that is about to be previewed
+     */
     func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
         let song = musicManager.songList[indexPath.row]
         return song
     }
     
+    
+    /**
+     Sets the queue for previewing. The queue would be unique to the Previewable object.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func setQueue(indexPath:IndexPath) {
         musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.originalSongList))
         musicManager.player.beginGeneratingPlaybackNotifications()
         musicManager.player.stop()
     }
     
+    
+    /**
+     Sets a new queue when changing the previewing song. Depending on the Previewable object, can be empty.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func setNewQueue(indexPath:IndexPath) { }
     
-    func indexPathIsExcluded(indexPath: IndexPath?) -> Bool {
-        return false
-    }
+    
+    /**
+     Whether or not the given index path is nonpreviewable. No index paths are excluded.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     
+     - Returns: Boolean representing whether or not the index path is exluded from previewing
+     */
+    func indexPathIsExcluded(indexPath: IndexPath?) -> Bool { return false }
+    
+    
     
     // MARK: Draggable Methods
     
+    
+    
+    /**
+     Offset of the cell that can trigger a drag AKA contains the album image.
+     
+     - Returns: CGFloat of the offset that contains the album image
+     */
     func draggingOffset() -> CGFloat {
         return SongCellHeight * 0.9
     }
     
+    
+    
     // MARK: Gesture Recognizer Methods
+    
+    
     
     func longPress(sender: UILongPressGestureRecognizer) {
         handleLongPress(sender: sender)

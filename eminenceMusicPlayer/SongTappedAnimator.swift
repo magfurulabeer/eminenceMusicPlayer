@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// CURRENTLY UNUSED
 class SongTappedAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     let duration = 0.3

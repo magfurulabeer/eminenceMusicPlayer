@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// CURRENTLY UNUSED
 class SongTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
     let slideDownInteractor = SlideDownInteractor()

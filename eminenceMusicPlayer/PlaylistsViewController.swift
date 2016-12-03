@@ -9,18 +9,33 @@
 import UIKit
 import MediaPlayer
 
+// TODO: Share setUpIndexView code between the menuviewcontrollers
+
+
+/// View controller that shows the quick queue and a table of all the playlists
 class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableViewDataSource {
 
     
+    
     // MARK: Properties
     
+    
+    
+    /// Reference to the MusicManager singleton instance.
     let musicManager = MusicManager.sharedManager
+    
+    /// Allows base class methods to have access to indexView
     var indexView: IndexView = UITableView(frame: .zero, style: .grouped)
+    
+    /// Allows base class methods to have access to indexView
     override var storedIndexView: IndexView? {  get { return indexView }    }
+    
     
     
     // MARK: View Management Method
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clear
@@ -28,21 +43,21 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
     }
     
     
+    
     // MARK: Setup Methods
 
+    
+    
+    /**
+     Constrain index view. Sets its delegates, color, constraints, and gestures. Then reloads it.
+     */
     func setUpIndexView() {
         guard let indexView = indexView as? UITableView else { return }
         
-//        tableView.frame = frame
         indexView.delegate = self
         indexView.dataSource = self
         indexView.backgroundColor = UIColor.clear
         indexView.separatorStyle = UITableViewCellSeparatorStyle.none
-        
-        //        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
-        //        longPressGestureRecognizer.minimumPressDuration = 0.3
-        //        indexView.addGestureRecognizer(longPressGestureRecognizer)
-        
         indexView.register(QuickQueueCell.self, forCellReuseIdentifier: "QuickQueueCell")
         indexView.register(UINib(nibName: "BasicCell", bundle: Bundle.main), forCellReuseIdentifier: "BasicCell")
         
@@ -51,7 +66,11 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
         indexView.reloadData()
     }
     
+    
+    
     // MARK: UITableViewDataSource
+    
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -71,13 +90,10 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
             cell.viewController = viewController
             return cell
         } else {
-            // TODO
-//            print(musicManager.playlistList.count)
-//            print(indexPath.row)
+
             let playlist = musicManager.playlistList[indexPath.row]
             
             let cell =  tableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell
-            //            cell.backgroundColor = UIColor.white.withAlphaComponent(0.5)
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.backgroundColor = UIColor.clear
             cell.textLabel?.text = playlist.value(forProperty: MPMediaPlaylistPropertyName) as? String
@@ -86,7 +102,11 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
         }
     }
     
+    
+    
     // MARK: UITableViewDelegate
+    
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {

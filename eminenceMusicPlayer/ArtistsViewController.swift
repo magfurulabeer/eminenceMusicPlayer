@@ -9,19 +9,37 @@
 import UIKit
 import MediaPlayer
 
+// TODO: Share setUpIndexView code between the menuviewcontrollers
+// TODO: Have gesture point directly to handleLongPress
+
+/// View controller that shows a table of all the artists
 class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableViewDataSource, Previewable {
 
     
+    
     // MARK: Properties 
     
+    
+    
+    /// Reference to the MusicManager singleton instance.
     let musicManager = MusicManager.sharedManager
+    
+    /// Allows base class methods to have access to indexView
     var indexView: IndexView = UITableView()
+    
+    /// Allows base class methods to have access to indexView
     override var storedIndexView: IndexView? {  get { return indexView }    }
+    
     
     
     // MARK: Previewable Properties
 
+    
+    
+    /// Cell/Item being previewed.
     var selectedCell: IndexViewCell?
+    
+    /// Index path of the cell/item being previewed.
     var selectedIndexPath: IndexPath?
     
     
@@ -34,8 +52,14 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
     }
     
     
+    
     // MARK: Setup Methods
 
+    
+    
+    /**
+     Constrain index view. Sets its delegates, color, constraints, and gestures. Then reloads it.
+     */
     func setUpIndexView() {
         guard let indexView = indexView as? UITableView else { return }
         
@@ -54,8 +78,6 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
         
         indexView.reloadData()
     }
-    
-    // MARK: UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -78,14 +100,30 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
+    
+    
     // MARK: UITableViewDelegate
+    
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return SongCellHeight
     }
     
+    
+    
     // MARK: Previewable Methods
     
+    
+    
+    /**
+     Returns the Media Item that is about to be previewed.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     
+     - Returns: The Media Item that is about to be previewed
+     */
     func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
         let artist = musicManager.artistList[indexPath.row]
         let randomNumber = arc4random_uniform(UInt32(artist.count))
@@ -93,6 +131,13 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
         return song
     }
     
+    
+    /**
+     Sets the queue for previewing. The queue would be unique to the Previewable object.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func setQueue(indexPath:IndexPath) {
         let artist = musicManager.artistList[indexPath.row]
         musicManager.player.setQueue(with: MPMediaItemCollection(items: artist.items))
@@ -100,10 +145,26 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
         musicManager.player.stop()
     }
     
+    
+    /**
+     Sets a new queue when changing the previewing song. Depending on the Previewable object, can be empty.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     */
     func setNewQueue(indexPath:IndexPath) {
         setQueue(indexPath: indexPath)
     }
     
+    
+    /**
+     Whether or not the given index path is nonpreviewable. No index paths are excluded.
+     
+     - Parameters:
+     - indexPath: IndexPath of the selected cell/item
+     
+     - Returns: Boolean representing whether or not the index path is exluded from previewing
+     */
     func indexPathIsExcluded(indexPath: IndexPath?) -> Bool {
         return false
     }

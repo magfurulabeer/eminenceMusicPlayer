@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// The animated transition when dragging the NowPlayingViewController down. Works with the SlideDownInteractor.
 class SlideDownAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
+    /// Duration of the transition.
     let duration = 0.5
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {

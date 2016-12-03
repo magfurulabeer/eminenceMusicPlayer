@@ -9,23 +9,35 @@
 import UIKit
 import MediaPlayer
 
+// TODO: Share setUpIndexView code between the menuviewcontrollers
+
+
+/// View controller that shows a table of all the albums
 class AlbumsViewController: MenuViewController, UICollectionViewDelegateFlowLayout,UICollectionViewDataSource, UICollectionViewDelegate, Previewable {
 
     
+    
     // MARK: Properties
     
+    
+    /// The index View (CollectionView) that needs it's items to be previewable.
     var indexView: IndexView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
+    
+    /// Allows base class methods to have access to indexView
     override var storedIndexView: IndexView? {  get { return indexView }    }
     
     
     // MARK: Previewable Properties
     
+    /// Cell/Item being previewed.
     var selectedCell: IndexViewCell?
+    
+    /// Index path of the cell/item being previewed.
     var selectedIndexPath: IndexPath?
     
     

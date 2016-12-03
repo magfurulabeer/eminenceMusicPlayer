@@ -21,7 +21,7 @@ protocol Previewable: class {
     /// Reference to the MusicManager singleton instance.
     var musicManager: MusicManager { get }
     
-    /// ndex View (TableView or CollectionView) that needs it's items to be previewable.
+    /// The index View (TableView or CollectionView) that needs it's items to be previewable.
     var indexView: IndexView { get set }
     
     /// Cell/Item being previewed.
@@ -37,7 +37,7 @@ protocol Previewable: class {
     
     
     /**
-     Handles whether to end previewing or to continute to next handler
+     Handles whether to end previewing or to continute to next handler.
      
      - Parameters:
      - sender: Activated long press gesture recognizer
