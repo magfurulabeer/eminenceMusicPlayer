@@ -10,8 +10,12 @@ import UIKit
 
 let alpha: CGFloat = 1
 
-
-extension MusicPlayerViewController: QuickBarDelegate {
+/// This extension adds all the setup methods that should be called in ViewDidLoad
+extension MusicPlayerViewController {
+    
+    /**
+     Prepares the red to black gradient background
+     */
     func setUpGradient() {
         let gradient = CAGradientLayer()
         let startColor = UIColor(red: 92/255.0, green: 46/255.0, blue: 46/255.0, alpha: alpha)
@@ -27,7 +31,9 @@ extension MusicPlayerViewController: QuickBarDelegate {
     }
     
     
-    
+    /**
+     Prepares the Menu Bar (nav bar) on top
+     */
     func setUpMenuBar() {
         menuBar = MenuBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: FauxBarHeight))
         menuBar.viewController = self
@@ -56,6 +62,10 @@ extension MusicPlayerViewController: QuickBarDelegate {
         border.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
+    
+    /**
+     Prepares the quick bar on the bottom
+     */
     func setUpQuickBar() {
         quickBar = NowPlayingQuickBar(frame: CGRect(x: 0, y: view.frame.height - tabBarHeight - quickBarHeight, width: view.frame.width, height: quickBarHeight))
         quickBar!.backgroundColor = QuickBarBackgroundColor
@@ -68,6 +78,10 @@ extension MusicPlayerViewController: QuickBarDelegate {
         quickBar!.heightAnchor.constraint(equalToConstant: quickBarHeight).isActive = true
     }
     
+    
+    /**
+     Prepares the collection view and starts it at the Songs View Controllers
+     */
     func setUpCollectionView() {
         
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {

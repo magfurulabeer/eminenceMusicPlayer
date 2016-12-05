@@ -11,6 +11,12 @@ import UIKit
 /// This view controller simulates an extension of the LaunchScreen. It segues into the actual music player view controller once the songs are loaded
 class LaunchViewController: UIViewController {
     
+    
+    
+    // MARK: Properties
+    
+    
+    
     /// Whether or not the view controller timed out
     var timedOut = false
     
@@ -21,6 +27,12 @@ class LaunchViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    
+    
+    // MARK: Methods
+    
+    
     
     /// Uses a while loop to attempt to get songs. If it gets the songs, it segues to the music player. If no songs after a certain time, an alert is shown.
     override func viewDidAppear(_ animated: Bool) {

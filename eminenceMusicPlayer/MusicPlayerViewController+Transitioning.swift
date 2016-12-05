@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// This extension makes sure that the NowPlayingViewController can slide down to be dismissed
 extension MusicPlayerViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return nil
