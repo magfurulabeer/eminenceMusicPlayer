@@ -219,6 +219,7 @@ extension Previewable {
      */
     final func startPreviewingMusic(atIndexPath indexPath: IndexPath) {
         //This is needed if touch moves to another cell
+        // TODO: Is this still being used?
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PreviewingDidBegin"), object: nil)
         musicManager.currentlyPreviewing = true
         selectedIndexPath = indexPath

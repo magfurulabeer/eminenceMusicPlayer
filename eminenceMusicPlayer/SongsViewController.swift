@@ -71,7 +71,15 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         view.backgroundColor = UIColor.clear
         setUpIndexView()
         NotificationCenter.default.addObserver(self, selector: #selector(itemDidChange), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(viewDidAppear(_:)), name: NSNotification.Name(rawValue: "DidBecomeActive"), object: nil)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        indexView.reload()
+    }
+    
+    
     
     
     
