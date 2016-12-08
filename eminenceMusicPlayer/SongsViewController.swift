@@ -70,7 +70,6 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         view.backgroundColor = UIColor.clear
         setUpIndexView()
-        NotificationCenter.default.addObserver(self, selector: #selector(itemDidChange), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(viewDidAppear(_:)), name: NSNotification.Name(rawValue: "DidBecomeActive"), object: nil)
     }
     
@@ -248,11 +247,7 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     
     
     
-    // MARK: Gesture Recognizer & Notification Methods
-    
-    func itemDidChange() {
-        indexView.reload()
-    }
+    // MARK: Gesture Recognizer Methods
     
     func longPress(sender: UILongPressGestureRecognizer) {
         handleLongPress(sender: sender)
