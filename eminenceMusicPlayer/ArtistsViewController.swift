@@ -25,7 +25,7 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
     let musicManager = MusicManager.sharedManager
     
     /// Allows base class methods to have access to indexView
-    var indexView: IndexView = UITableView()
+    var indexView: IndexView = VolumeControllableTableView()
     
     /// Allows base class methods to have access to indexView
     override var storedIndexView: IndexView? {  get { return indexView }    }

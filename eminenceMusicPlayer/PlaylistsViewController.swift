@@ -25,7 +25,7 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
     let musicManager = MusicManager.sharedManager
     
     /// Allows base class methods to have access to indexView
-    var indexView: IndexView = UITableView(frame: .zero, style: .grouped)
+    var indexView: IndexView = VolumeControllableTableView(frame: .zero, style: .grouped)
     
     /// Allows base class methods to have access to indexView
     override var storedIndexView: IndexView? {  get { return indexView }    }

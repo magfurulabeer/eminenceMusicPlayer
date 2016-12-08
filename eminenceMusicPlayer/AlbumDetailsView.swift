@@ -18,7 +18,8 @@ class AlbumDetailsView: UIView , UITableViewDataSource, UITableViewDelegate, Pre
     weak var viewController: UIViewController?
 
     lazy var indexView: IndexView = {
-        let tv = UITableView()
+        let tv = VolumeControllableTableView()
+        tv.disableTwoFingerScroll()
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = UIColor.clear
         tv.delegate = self

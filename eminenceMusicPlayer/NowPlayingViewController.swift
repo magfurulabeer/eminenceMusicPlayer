@@ -10,7 +10,7 @@ import UIKit
 import MediaPlayer
 
 // TODO: When song starts, 00:01 is skipped and the timer starts it at 00:00
-class NowPlayingViewController: UIViewController, SeekbarDelegate {
+class NowPlayingViewController: UIViewController, SeekbarDelegate, VolumeControllable {
 
     
     @IBOutlet weak var albumImageView: UIImageView!
@@ -34,14 +34,21 @@ class NowPlayingViewController: UIViewController, SeekbarDelegate {
     }
     var musicManager = MusicManager.sharedManager
     var timer = Timer()
-    var lastLocation: CGPoint = CGPoint(x: 0, y: 0)
     var interactor: SlideDownInteractor? //= SlideDownInteractor()
     var sliderWasJustChanged = false
-    var volume: UISlider {
-        get {
-            return self.musicManager.volume
-        }
-    }
+    
+    
+    
+    // MARK: VolumeControllable Properties
+    
+    
+    
+    /// Reference to view
+    var controllableView: UIView { get { return view } }
+    
+    /// The last location of the drag
+    var lastLocation: CGPoint = CGPoint(x: 0, y: 0)
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +74,7 @@ class NowPlayingViewController: UIViewController, SeekbarDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(NowPlayingViewController.displayPlaybackButton), name:NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
 
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(NowPlayingViewController.detectDrag(sender:)))
+        panGestureRecognizer.minimumNumberOfTouches = 2;
         view.addGestureRecognizer(panGestureRecognizer)
         
         albumImageView.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
@@ -147,23 +155,7 @@ class NowPlayingViewController: UIViewController, SeekbarDelegate {
     }
     
     func detectDrag(sender: UIPanGestureRecognizer) {
-        let translation  = sender.translation(in: view)
-        let distance = lastLocation.y - translation.y
-        var delta = Float(distance / 250)
-        if delta > 0.5 {
-            delta = 0.0
-        }
-        lastLocation = translation
- 
-        let currentValue = volume.value
-        var newValue = currentValue + delta
-        if newValue > 1.0 {
-            newValue = 1.0
-        } else if newValue < 0.0 {
-            newValue = 0.0
-        }
-        
-        volume.value = newValue
+        didTwoFingerDrag(sender: sender)
     }
     
     

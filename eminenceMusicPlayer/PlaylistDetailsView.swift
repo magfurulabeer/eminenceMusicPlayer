@@ -18,7 +18,8 @@ class PlaylistDetailsView: UIView, UITableViewDelegate, UITableViewDataSource, P
     weak var viewController: UIViewController?
     
     lazy var indexView: IndexView = {
-        let tv = UITableView(frame: .zero, style: .grouped)
+        let tv = VolumeControllableTableView(frame: .zero, style: .grouped)
+        tv.disableTwoFingerScroll()
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = UIColor.clear
         tv.delegate = self

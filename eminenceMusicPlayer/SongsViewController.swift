@@ -25,7 +25,7 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
     let musicManager = MusicManager.sharedManager
     
     /// The index View (TableView) that needs it's items to be previewable.    
-    var indexView: IndexView = UITableView()
+    var indexView: IndexView = VolumeControllableTableView()
     
     /// Allows base class methods to have access to indexView
     override var storedIndexView: IndexView? {  get { return indexView }    }

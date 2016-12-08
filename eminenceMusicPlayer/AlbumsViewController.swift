@@ -23,7 +23,7 @@ class AlbumsViewController: MenuViewController, UICollectionViewDelegateFlowLayo
     /// The index View (CollectionView) that needs it's items to be previewable.
     var indexView: IndexView = {
         let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let cv = VolumeControllableCollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()

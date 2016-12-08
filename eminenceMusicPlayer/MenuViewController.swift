@@ -37,7 +37,15 @@ class MenuViewController: UIViewController {
     
     // MARK: Methods
 
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let index = storedIndexView as? VolumeControllableTableView {
+            index.disableTwoFingerScroll()
+        }
+        if let index = storedIndexView as? VolumeControllableCollectionView {
+            index.disableTwoFingerScroll()
+        }
+    }
     
     /**
      Whenever the view appears, it's index view gets reloaded.
