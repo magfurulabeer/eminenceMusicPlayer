@@ -52,8 +52,13 @@ class NowPlayingQuickBar: UIView {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(NowPlayingQuickBar.didTap(sender:)))
         addGestureRecognizer(tapGestureRecognizer)
         
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(NowPlayingQuickBar.detectDrag(sender:)))
-        addGestureRecognizer(panGestureRecognizer)
+        let leftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(NowPlayingQuickBar.swipeLeft(sender:)))
+        leftGestureRecognizer.direction = .left
+        addGestureRecognizer(leftGestureRecognizer)
+        
+        let rightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(NowPlayingQuickBar.swipeRight(sender:)))
+        rightGestureRecognizer.direction = .right
+        addGestureRecognizer(rightGestureRecognizer)
         
         setUpShadow()
         setUpTopBorder()

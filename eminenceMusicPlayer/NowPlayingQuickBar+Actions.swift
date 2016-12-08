@@ -21,34 +21,20 @@ extension NowPlayingQuickBar {
         }
     }
     
-    func detectDrag(sender: UIPanGestureRecognizer) {
-        if sender.state == UIGestureRecognizerState.ended {
-            initialDragBumpOver = false
-            return
-        }
-        
-        let translation  = sender.translation(in: self)
-        let distance =  translation.x - lastLocation.x
-        var delta = Float(distance / 250)
-        if (delta > 0.1 || delta < -0.1) && initialDragBumpOver == false {
-            initialDragBumpOver = true
-            delta = 0.0
-        }
-        lastLocation = translation
-        
-        let currentValue = volume.value
-        var newValue = currentValue + delta
-        if newValue > 1.0 {
-            newValue = 1.0
-        } else if newValue < 0.0 {
-            newValue = 0.0
-        }
-        
-        volume.value = newValue
-    }
-    
     func didTap(sender: UITapGestureRecognizer) {
         delegate?.quickBarWasTapped(sender: self)
+    }
+    
+    func swipeLeft(sender: UISwipeGestureRecognizer) {
+        if musicManager.currentlyPreviewing == false {
+            musicManager.player.skipToNextItem()
+        }
+    }
+    
+    func swipeRight(sender: UISwipeGestureRecognizer) {
+        if musicManager.currentlyPreviewing == false {
+            musicManager.player.skipToPreviousItem()
+        }
     }
     
 }
