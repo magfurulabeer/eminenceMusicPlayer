@@ -110,6 +110,23 @@ class ArtistsViewController: MenuViewController, UITableViewDelegate, UITableVie
         return SongCellHeight
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let artist = musicManager.artistList[indexPath.row]
+        
+        let size = view.frame.size
+        let rect = CGRect(x: topPadding, y: 0, width: size.width, height: size.height - topPadding - bottomPadding)
+        let artistDetailsView = ArtistDetailsView(frame: rect)
+        artistDetailsView.artist = artist
+        artistDetailsView.viewController = viewController
+        view.addSubview(artistDetailsView)
+
+        artistDetailsView.translatesAutoresizingMaskIntoConstraints = false
+        artistDetailsView.topAnchor.constraint(equalTo: view.topAnchor, constant: topPadding).isActive = true
+        artistDetailsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottomPadding).isActive = true
+        artistDetailsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        artistDetailsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+
+    }
     
     
     // MARK: Previewable Methods

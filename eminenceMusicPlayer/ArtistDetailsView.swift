@@ -1,22 +1,22 @@
 //
-//  AlbumDetailsView.swift
+//  ArtistDetailsView.swift
 //  eminenceMusicPlayer
 //
-//  Created by Magfurul Abeer on 9/30/16.
-//  Copyright © 2016 Magfurul Abeer. All rights reserved.
+//  Created by Magfurul Abeer on 1/12/17.
+//  Copyright © 2017 Magfurul Abeer. All rights reserved.
 //
 
 import UIKit
 import MediaPlayer
 
-class AlbumDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, PreviewableDraggable {
+class ArtistDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, PreviewableDraggable {
 
     // MARK: Properties
     
     let musicManager = MusicManager.sharedManager
-    var album: MPMediaItemCollection?
+    var artist: MPMediaItemCollection?
     weak var viewController: UIViewController?
-
+    
     lazy var indexView: IndexView = {
         let tv = VolumeControllableTableView()
         tv.disableTwoFingerScroll()
@@ -41,7 +41,7 @@ class AlbumDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Prev
     var deleteLabel: UILabel?
     
     // MARK: Init Methods
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpTableView()
@@ -53,7 +53,7 @@ class AlbumDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Prev
     
     
     // MARK: Setup Methods
-
+    
     func setUpTableView() {
         guard let indexView = indexView as? UITableView else { return }
         
@@ -81,17 +81,17 @@ class AlbumDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Prev
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (album?.count ?? 0) + 1
+        return (artist?.count ?? 0) + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumImageCell", for: indexPath) as! AlbumImageCell
             let albumImageSize = CGSize(width: frame.width, height: frame.width)
-            cell.albumImageView.image = album?.representativeItem?.artwork?.image(at: albumImageSize) ?? #imageLiteral(resourceName: "NoAlbumImage")
+            cell.albumImageView.image = artist?.representativeItem?.artwork?.image(at: albumImageSize) ?? #imageLiteral(resourceName: "NoAlbumImage")
             return cell
         } else {
-            let song = album?.items[indexPath.item - 1]
+            let song = artist?.items[indexPath.item - 1]
             let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongCell
             cell.titleLabel.text = song?.title ?? "Unknown name"
             cell.artist = song?.artist ?? ""
@@ -116,16 +116,16 @@ class AlbumDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Prev
             musicManager.player.pause()
             musicManager.player.shuffleMode = MPMusicShuffleMode.off
             
-            let song = album?.items[indexPath.row - 1]
+            let song = artist?.items[indexPath.row - 1]
             
             musicManager.player = MPMusicPlayerController.systemMusicPlayer()
-            musicManager.currentQueue = MPMediaItemCollection(items: album!.items)
+            musicManager.currentQueue = MPMediaItemCollection(items: artist!.items)
             musicManager.player.setQueue(with: musicManager.currentQueue!)
             musicManager.player.beginGeneratingPlaybackNotifications()
             musicManager.player.stop()
             musicManager.player.nowPlayingItem = nil
             musicManager.itemNowPlaying = song
-
+            
             guard let viewController = viewController else {    return  }
             
             if let nowPlayingVC = viewController.storyboard!.instantiateViewController(withIdentifier: "NowPlayingViewController") as? NowPlayingViewController {
@@ -145,30 +145,30 @@ class AlbumDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Prev
     
     
     // MARK: ScrollViewDelegate Methods
-
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let width = viewController?.view.frame.width ?? 0
-//        let height = self.bounds.width
-
+        //        let height = self.bounds.width
+        
         if scrollView.contentOffset.y <= -width * 0.215 {
             UIView.animate(withDuration: 0.3, animations: {
                 self.center.y += self.frame.height
-            }, completion: { (bool) in
-                let superView = self.superview
-                self.removeFromSuperview()
-                superView?.layoutIfNeeded()
+                }, completion: { (bool) in
+                    let superView = self.superview
+                    self.removeFromSuperview()
+                    superView?.layoutIfNeeded()
             })
         }
-
+        
         let scrollViewHeight = scrollView.frame.size.height
         let contentViewHeight = scrollView.contentSize.height
         let yOffset = scrollView.contentOffset.y
-//        print(contentViewHeight)
-//        print(scrollViewHeight)
-//        print(yOffset)
-//        print(scrollViewHeight + yOffset)
-//        print(contentViewHeight + scrollViewHeight * 0.15)
-//        print("\n\n")
+        //        print(contentViewHeight)
+        //        print(scrollViewHeight)
+        //        print(yOffset)
+        //        print(scrollViewHeight + yOffset)
+        //        print(contentViewHeight + scrollViewHeight * 0.15)
+        //        print("\n\n")
         if scrollViewHeight + yOffset > contentViewHeight + width * 0.215 {
             UIView.animate(withDuration: 0.3, animations: {
                 self.center.y -= self.frame.height
@@ -184,12 +184,12 @@ class AlbumDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Prev
     // MARK: Previewable Methods
     
     func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
-        let song = album!.items[indexPath.item - 1]
+        let song = artist!.items[indexPath.item - 1]
         return song
     }
     
     func setQueue(indexPath:IndexPath) {
-        musicManager.player.setQueue(with: MPMediaItemCollection(items: album!.items))
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: artist!.items))
         musicManager.player.beginGeneratingPlaybackNotifications()
         musicManager.player.stop()
     }
@@ -214,7 +214,7 @@ class AlbumDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Prev
         musicManager.player.pause()
         selectedCell?.cell.backgroundColor = UIColor.black.withAlphaComponent(0.8)
     }
-
+    
     
     // MARK: Draggable Methods
     
