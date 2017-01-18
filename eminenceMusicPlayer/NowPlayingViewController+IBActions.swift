@@ -65,13 +65,16 @@ extension NowPlayingViewController {
         } else if duration! < 10 && percent < 0.5 {
             musicManager.player.skipToBeginning()
         } else {
+            resetPlaybackSpeed()
             musicManager.player.skipToPreviousItem()
+            
         }
         currentTimeLabel.text = musicManager.player.currentPlaybackTime.stringFormat()
     }
     
     @IBAction func fastForwardButtonTapped(_ sender: UIButton) {
         slider.value = 0
+        resetPlaybackSpeed()
         musicManager.player.skipToNextItem()
         currentTimeLabel.text = musicManager.player.currentPlaybackTime.stringFormat()
     }
@@ -109,5 +112,14 @@ extension NowPlayingViewController {
             startTimer()
             unblurImage()
         }
+    }
+    
+    
+    
+    // MARK: Helper Methods
+    
+    func resetPlaybackSpeed() {
+        speedButton.title = "1x"
+        musicManager.player.currentPlaybackRate = 1
     }
 }

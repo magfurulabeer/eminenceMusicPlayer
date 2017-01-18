@@ -80,7 +80,7 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
         if section == 0 {
             return 1
         } else {
-            return musicManager.originalPlaylistList.count
+            return musicManager.playlistList.count
         }
     }
     
@@ -92,7 +92,6 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
         } else {
 
             let playlist = musicManager.playlistList[indexPath.row]
-            
             let cell =  tableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.backgroundColor = UIColor.clear

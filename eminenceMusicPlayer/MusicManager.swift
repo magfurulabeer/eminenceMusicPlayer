@@ -29,14 +29,9 @@ class MusicManager: NSObject {
     /// Returns all the songs.
     var songList: [MPMediaItem]
     
-    /// Returns artists as collections of songs.
-    var artistList: [MPMediaItemCollection]
     
-    /// Returns albums as collections of songs.
-    var albumList: [MPMediaItemCollection]
     
-    /// Returns playlists.
-    var playlistList: [MPMediaPlaylist]
+    
     
     /// The audio player.
     var player: MPMusicPlayerController
@@ -96,6 +91,14 @@ class MusicManager: NSObject {
         }
     }
     
+    var playbackSpeed: Float {
+        didSet {
+            player.currentPlaybackRate = self.playbackSpeed
+        }
+    }
+    
+    
+    
     /// A freshly queried song list
     var originalSongList: [MPMediaItem] {
         get {
@@ -120,8 +123,8 @@ class MusicManager: NSObject {
         }
     }
     
-    /// A freshly queried artist list
-    var originalArtistList: [MPMediaItemCollection] {
+    /// Returns artists as collections of songs.
+    var artistList: [MPMediaItemCollection] {
         get {
             let artistsQuery = MPMediaQuery.artists()
             
@@ -135,8 +138,8 @@ class MusicManager: NSObject {
         }
     }
     
-    /// A freshly queried album list
-    var originalAlbumList: [MPMediaItemCollection] {
+    /// Returns albums as collections of songs.
+    var albumList: [MPMediaItemCollection] {
         get {
             let albumQuery = MPMediaQuery.albums()
             
@@ -150,8 +153,8 @@ class MusicManager: NSObject {
         }
     }
     
-    /// A freshly queried playlist list
-    var originalPlaylistList: [MPMediaPlaylist] {
+    /// Returns playlists.
+    var playlistList: [MPMediaPlaylist] {
         get {
             let playlistQuery = MPMediaQuery.playlists()
             
@@ -179,17 +182,12 @@ class MusicManager: NSObject {
     private override init() {
         // FIXME: 'self.songList' not initialized at super.init call  -- Find a better way to solve this
         self.songList = [MPMediaItem]()
-        self.artistList = [MPMediaItemCollection]()
-        self.albumList = [MPMediaItemCollection]()
-        self.playlistList = [MPMediaPlaylist]()
         self.player = MPMusicPlayerController.systemMusicPlayer()
-
+        self.playbackSpeed = 1.0
         self.shuffleIsOn = player.shuffleMode == MPMusicShuffleMode.songs
         super.init()
+        
         self.songList = self.originalSongList
-        self.artistList = self.originalArtistList
-        self.albumList = self.originalAlbumList
-        self.playlistList = self.originalPlaylistList
         self.player.beginGeneratingPlaybackNotifications()
     }
     
