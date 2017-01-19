@@ -39,10 +39,7 @@ class LaunchViewController: UIViewController {
         if MPMediaLibrary.authorizationStatus() == MPMediaLibraryAuthorizationStatus.authorized {
             performSegue(withIdentifier: "StartAppSegue", sender: nil)
         } else {
-            let controller = UIAlertController(title: "Error", message: "Cannot access music. Did you allow access to your music library?", preferredStyle: UIAlertControllerStyle.alert)
-            let ok = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
-            controller.addAction(ok)
-            present(controller, animated: true, completion: nil)
+            performSegue(withIdentifier: "MediaAccessSegue", sender: nil)
         }
         
 

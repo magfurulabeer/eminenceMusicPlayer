@@ -38,6 +38,7 @@
 		8B86D51F1DA2C57D000E03F5 /* ViewControllerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B86D51E1DA2C57D000E03F5 /* ViewControllerCollectionCell.swift */; };
 		8B86D5211DA2C863000E03F5 /* MusicPlayerViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B86D5201DA2C863000E03F5 /* MusicPlayerViewController+Setup.swift */; };
 		8B86D5231DA2DC03000E03F5 /* MusicPlayerViewController+Transitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B86D5221DA2DC03000E03F5 /* MusicPlayerViewController+Transitioning.swift */; };
+		8BA8489D1E303CA000EE07EF /* MediaAccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8489C1E303CA000EE07EF /* MediaAccessViewController.swift */; };
 		8BAEC9C61D9A446D00F41A74 /* SelectedSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAEC9C41D9A446D00F41A74 /* SelectedSongCell.swift */; };
 		8BAEC9C71D9A446D00F41A74 /* SelectedSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BAEC9C51D9A446D00F41A74 /* SelectedSongCell.xib */; };
 		8BAEC9D11D9A55DB00F41A74 /* ArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAEC9CF1D9A55DB00F41A74 /* ArtistCell.swift */; };
@@ -112,6 +113,7 @@
 		8B86D51E1DA2C57D000E03F5 /* ViewControllerCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerCollectionCell.swift; sourceTree = "<group>"; };
 		8B86D5201DA2C863000E03F5 /* MusicPlayerViewController+Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MusicPlayerViewController+Setup.swift"; sourceTree = "<group>"; };
 		8B86D5221DA2DC03000E03F5 /* MusicPlayerViewController+Transitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MusicPlayerViewController+Transitioning.swift"; sourceTree = "<group>"; };
+		8BA8489C1E303CA000EE07EF /* MediaAccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaAccessViewController.swift; sourceTree = "<group>"; };
 		8BAEC9C41D9A446D00F41A74 /* SelectedSongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedSongCell.swift; sourceTree = "<group>"; };
 		8BAEC9C51D9A446D00F41A74 /* SelectedSongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectedSongCell.xib; sourceTree = "<group>"; };
 		8BAEC9CF1D9A55DB00F41A74 /* ArtistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistCell.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				8B6964FE1D97982D0037E13F /* LaunchViewController.swift */,
+				8BA8489C1E303CA000EE07EF /* MediaAccessViewController.swift */,
 				8B86D51C1DA2BD82000E03F5 /* MusicPlayerViewController.swift */,
 				8B86D5201DA2C863000E03F5 /* MusicPlayerViewController+Setup.swift */,
 				8B86D5221DA2DC03000E03F5 /* MusicPlayerViewController+Transitioning.swift */,
@@ -453,6 +456,7 @@
 				8BB108891D936A8000CD2238 /* NowPlayingViewController+IBActions.swift in Sources */,
 				8B86D51D1DA2BD82000E03F5 /* MusicPlayerViewController.swift in Sources */,
 				8BE744641D93B96E0014DE31 /* NowPlayingViewController+TimerMethods.swift in Sources */,
+				8BA8489D1E303CA000EE07EF /* MediaAccessViewController.swift in Sources */,
 				8BCBE6351D9880490038AC74 /* SlideDownAnimator.swift in Sources */,
 				8B63035C1DA58C3C00B255F3 /* PlaylistDetailsView.swift in Sources */,
 				8BE7446A1D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift in Sources */,

@@ -33,11 +33,110 @@
                     </view>
                     <connections>
                         <segue destination="6r0-gy-nVh" kind="show" identifier="StartAppSegue" id="7n0-Rx-iEu"/>
+                        <segue destination="Omw-sl-wMY" kind="show" identifier="MediaAccessSegue" id="O5g-FP-HGO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdN-dR-WOQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3036" y="-64"/>
+        </scene>
+        <!--Media Access View Controller-->
+        <scene sceneID="cEa-KF-9QE">
+            <objects>
+                <viewController id="Omw-sl-wMY" customClass="MediaAccessViewController" customModule="eminenceMusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JX7-10-69n"/>
+                        <viewControllerLayoutGuide type="bottom" id="Uez-Q5-8AZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BZm-Vq-RZS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCB-73-1IP">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This allows the app to load your songs and playlists so that you can play them in the app." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JdS-Ih-JuT">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="85" id="suE-ll-zQM"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" red="0.68888300657272339" green="0.71366006135940552" blue="0.73448425531387329" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Tap eminence Music Player" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvo-mR-G1S">
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Set Media Library to ON" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPU-4j-dfe">
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings-app-icon" translatesAutoresizingMaskIntoConstraints="NO" id="jwh-Gg-R2J">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="ZKH-ki-kCU"/>
+                                            <constraint firstAttribute="height" constant="30" id="aIq-vM-JOE"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music-app-icon" translatesAutoresizingMaskIntoConstraints="NO" id="ssS-gC-eP3">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="mrr-ZQ-NCR"/>
+                                            <constraint firstAttribute="height" constant="30" id="uTw-b4-uuh"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="em-app-icon" translatesAutoresizingMaskIntoConstraints="NO" id="4FW-mY-Maa">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="UQX-42-VQd"/>
+                                            <constraint firstAttribute="width" secondItem="4FW-mY-Maa" secondAttribute="height" multiplier="1:1" id="mAQ-Qg-DSb"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Open iPhone Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykg-W0-6wS">
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="uPU-4j-dfe" firstAttribute="leading" secondItem="ykg-W0-6wS" secondAttribute="leading" priority="999" id="0jo-Re-tzq"/>
+                                    <constraint firstItem="qvo-mR-G1S" firstAttribute="centerY" secondItem="ssS-gC-eP3" secondAttribute="centerY" id="3lz-Fk-8m8"/>
+                                    <constraint firstItem="ssS-gC-eP3" firstAttribute="top" secondItem="jwh-Gg-R2J" secondAttribute="bottom" constant="8" id="807-5C-nie"/>
+                                    <constraint firstItem="ssS-gC-eP3" firstAttribute="leading" secondItem="jwh-Gg-R2J" secondAttribute="leading" id="Hvd-gx-Ybg"/>
+                                    <constraint firstItem="ykg-W0-6wS" firstAttribute="leading" secondItem="jwh-Gg-R2J" secondAttribute="trailing" constant="8" id="LMt-AS-2Ii"/>
+                                    <constraint firstItem="uPU-4j-dfe" firstAttribute="centerY" secondItem="4FW-mY-Maa" secondAttribute="centerY" id="MuD-68-Yzm"/>
+                                    <constraint firstItem="ykg-W0-6wS" firstAttribute="centerY" secondItem="jwh-Gg-R2J" secondAttribute="centerY" id="Of0-Hm-Qmf"/>
+                                    <constraint firstItem="JdS-Ih-JuT" firstAttribute="centerX" secondItem="rCB-73-1IP" secondAttribute="centerX" id="QkL-9C-LVj"/>
+                                    <constraint firstItem="JdS-Ih-JuT" firstAttribute="width" secondItem="rCB-73-1IP" secondAttribute="width" multiplier="0.8" id="Qpl-0F-goI"/>
+                                    <constraint firstItem="jwh-Gg-R2J" firstAttribute="top" secondItem="JdS-Ih-JuT" secondAttribute="bottom" constant="8" id="SGf-4E-Omf"/>
+                                    <constraint firstItem="qvo-mR-G1S" firstAttribute="leading" secondItem="ykg-W0-6wS" secondAttribute="leading" priority="999" id="Vqd-oU-CjV"/>
+                                    <constraint firstItem="4FW-mY-Maa" firstAttribute="leading" secondItem="ssS-gC-eP3" secondAttribute="leading" id="Z9q-7I-Clh"/>
+                                    <constraint firstItem="jwh-Gg-R2J" firstAttribute="leading" secondItem="JdS-Ih-JuT" secondAttribute="leading" constant="15" id="oZw-jG-XA0"/>
+                                    <constraint firstItem="4FW-mY-Maa" firstAttribute="top" secondItem="ssS-gC-eP3" secondAttribute="bottom" constant="8" id="yKI-M4-6Pd"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Allow Media Library Access" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzT-kQ-6kY">
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="rCB-73-1IP" firstAttribute="height" secondItem="BZm-Vq-RZS" secondAttribute="height" multiplier="0.5" id="0As-Pt-QgN"/>
+                            <constraint firstItem="rCB-73-1IP" firstAttribute="centerY" secondItem="BZm-Vq-RZS" secondAttribute="centerY" id="2dl-S1-uVk"/>
+                            <constraint firstItem="rCB-73-1IP" firstAttribute="width" secondItem="BZm-Vq-RZS" secondAttribute="width" id="Nd7-uY-Buc"/>
+                            <constraint firstItem="vzT-kQ-6kY" firstAttribute="centerX" secondItem="BZm-Vq-RZS" secondAttribute="centerX" id="PNa-5l-iif"/>
+                            <constraint firstItem="JdS-Ih-JuT" firstAttribute="top" secondItem="vzT-kQ-6kY" secondAttribute="bottom" constant="8" id="SR1-o4-I9u"/>
+                            <constraint firstItem="rCB-73-1IP" firstAttribute="centerX" secondItem="BZm-Vq-RZS" secondAttribute="centerX" id="eTa-tU-rdQ"/>
+                            <constraint firstItem="rCB-73-1IP" firstAttribute="top" secondItem="vzT-kQ-6kY" secondAttribute="bottom" constant="-60" id="gbh-rE-jZm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="6r0-gy-nVh" kind="show" identifier="GetSongsSegue" id="xdF-xr-LGZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PQH-iX-n18" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2093.5999999999999" y="265.81709145427288"/>
         </scene>
         <!--Music Player View Controller-->
         <scene sceneID="wBD-wE-KwE">
@@ -71,7 +170,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SSI-LK-Xcz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2215.1999999999998" y="-367.46626686656674"/>
+            <point key="canvasLocation" x="-2086" y="-473"/>
         </scene>
         <!--Now Playing View Controller-->
         <scene sceneID="oH5-xl-sv0">
@@ -309,18 +408,24 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1279.2" y="-64.31784107946028"/>
+            <point key="canvasLocation" x="-799" y="-313"/>
         </scene>
     </scenes>
     <resources>
         <image name="Launch Screen" width="414" height="736"/>
         <image name="NoAlbumImage" width="500" height="500"/>
+        <image name="em-app-icon" width="180" height="180"/>
         <image name="fast-forward" width="64" height="64"/>
         <image name="left-arrow" width="38" height="64"/>
+        <image name="music-app-icon" width="434" height="434"/>
         <image name="pause" width="64" height="64"/>
         <image name="play" width="64" height="64"/>
         <image name="repeat" width="32" height="32"/>
         <image name="rewind" width="64" height="64"/>
+        <image name="settings-app-icon" width="960" height="960"/>
         <image name="shuffle" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="xdF-xr-LGZ"/>
+    </inferredMetricsTieBreakers>
 </document>
