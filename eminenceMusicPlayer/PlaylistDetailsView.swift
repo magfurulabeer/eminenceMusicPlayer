@@ -81,12 +81,26 @@ class PlaylistDetailsView: UIView, UITableViewDelegate, UITableViewDataSource, P
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return playlist?.count ?? 0
+        var count = 0
+        if let mediaPlaylist = playlist as? MediaPlaylist {
+            count = mediaPlaylist.playlistCount
+        } else {
+            count = playlist?.count ?? 0
+        }
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-            let song = playlist?.items[indexPath.item]
+            var song: MPMediaItem? = MPMediaItem()
+        
+            if let mediaPlaylist = playlist as? MediaPlaylist {
+                song = mediaPlaylist.songs[indexPath.row]
+            } else {
+                song = playlist?.items[indexPath.row]
+            }
+        
+        
             let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongCell
             cell.titleLabel.text = song?.title ?? "Unknown name"
             cell.artist = song?.artist ?? ""
@@ -106,10 +120,22 @@ class PlaylistDetailsView: UIView, UITableViewDelegate, UITableViewDataSource, P
             musicManager.player.pause()
             musicManager.player.shuffleMode = MPMusicShuffleMode.off
             
-            let song = playlist?.items[indexPath.row]
+            var song: MPMediaItem? = MPMediaItem()
             
+            if let mediaPlaylist = playlist as? MediaPlaylist {
+                song = mediaPlaylist.songs[indexPath.row]
+            } else {
+                song = playlist?.items[indexPath.row]
+            }
+
+        
             musicManager.player = MPMusicPlayerController.systemMusicPlayer()
-            musicManager.currentQueue = playlist! //MPMediaItemCollection(items: playlist!.items)
+            if let mediaPlaylist = playlist as? MediaPlaylist {
+                musicManager.currentQueue = MPMediaItemCollection(items: mediaPlaylist.songs)
+            } else {
+                musicManager.currentQueue = playlist! //MPMediaItemCollection(items: playlist!.items)
+                
+            }
             musicManager.player.setQueue(with: musicManager.currentQueue!)
             musicManager.player.beginGeneratingPlaybackNotifications()
             musicManager.player.stop()
@@ -130,7 +156,14 @@ class PlaylistDetailsView: UIView, UITableViewDelegate, UITableViewDataSource, P
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let title = playlist!.value(forProperty: MPMediaPlaylistPropertyName) as? String ?? "Unnamed Playlist"
+        var title = "Unnamed Playlist"
+        
+        if let mediaPlaylist = playlist as? MediaPlaylist {
+            title = mediaPlaylist.playlistName
+        } else {
+            title = playlist?.value(forProperty: MPMediaPlaylistPropertyName) as? String ?? "Unnamed Playlist"
+        }
+        
         return title
     }
     
@@ -183,12 +216,23 @@ class PlaylistDetailsView: UIView, UITableViewDelegate, UITableViewDataSource, P
     // MARK: Previewable Methods
     
     func selectedSongForPreview(indexPath: IndexPath) -> MPMediaItem {
-        let song = playlist!.items[indexPath.item]
-        return song
+        var song: MPMediaItem? = MPMediaItem()
+        
+        if let mediaPlaylist = playlist as? MediaPlaylist {
+            song = mediaPlaylist.songs[indexPath.row]
+        } else {
+            song = playlist?.items[indexPath.row]
+        }
+        
+        return song!
     }
     
     func setQueue(indexPath:IndexPath) {
-        musicManager.player.setQueue(with: playlist!)//MPMediaItemCollection(items: album!.items))
+        if let mediaPlaylist = playlist as? MediaPlaylist {
+            musicManager.player.setQueue(with: MPMediaItemCollection(items: mediaPlaylist.songs))
+        } else {
+            musicManager.player.setQueue(with: playlist!)//MPMediaItemCollection(items: album!.items))
+        }
         musicManager.player.beginGeneratingPlaybackNotifications()
         musicManager.player.stop()
     }

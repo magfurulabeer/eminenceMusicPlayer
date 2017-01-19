@@ -8,7 +8,7 @@
 
 import UIKit
 import MediaPlayer
-
+import CoreData
 
 // TODO: Consider changing shuffleIsOn's setter to actually change the music players shuffle setting
 // TODO: See if refreshList() is necessary. Scrap if not.
@@ -98,6 +98,7 @@ class MusicManager: NSObject {
             var songItems = [MPMediaItem]()
             let songsQuery = MPMediaQuery.songs()
             
+            
             guard let mediaItemCollections = songsQuery.collections else {
                 songListIsEmpty = true
                 return []
@@ -145,7 +146,7 @@ class MusicManager: NSObject {
         }
     }
     
-    /// Returns playlists.
+    /// Returns playlists including playlists from core data
     var playlistList: [MPMediaPlaylist] {
         get {
             let playlistQuery = MPMediaQuery.playlists()
@@ -153,13 +154,35 @@ class MusicManager: NSObject {
             guard let playlists = playlistQuery.collections else {
                 print("playlistCollections is nil")
                 songListIsEmpty = true
-                return []
+                return savedPlaylists
             }
             
-            return playlists as! [MPMediaPlaylist]
+            let list: [MPMediaPlaylist] = playlists as! [MPMediaPlaylist] + savedPlaylists
+            
+            return list
         }
     }
     
+    
+    var savedPlaylists: [MPMediaPlaylist] {
+        get {
+            var userMadePlaylists = [MPMediaPlaylist]()
+            
+            let playlistsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EMMediaPlaylist")
+            
+            do {
+                let fetchedPlaylists = try persistentContainer.viewContext.fetch(playlistsFetchRequest) as! [EMMediaPlaylist]
+                for playlist in fetchedPlaylists {
+                    userMadePlaylists.append(playlist.playlist())
+                }
+                
+            } catch {
+                fatalError("Failed to fetch employees: \(error)")
+            }
+
+            return userMadePlaylists
+        }
+    }
     
     
     // MARK: Methods
@@ -172,13 +195,94 @@ class MusicManager: NSObject {
      - Returns: A new MusicManager object with all of it's lists created. The player should be set to the system player and should start sending notifications. Shuffle is set to songs.
      */
     private override init() {
-        // FIXME: 'self.songList' not initialized at super.init call  -- Find a better way to solve this
         self.player = MPMusicPlayerController.systemMusicPlayer()
         self.playbackSpeed = 1.0
         self.shuffleIsOn = player.shuffleMode == MPMusicShuffleMode.songs
         super.init()
         
+        // This is for when a core data mistake is made by the developer
+//        deleteContextData()
         self.player.beginGeneratingPlaybackNotifications()
     }
+    
+    
+    
+    // MARK: - Core Data stack
+    
+    
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        /*
+         The persistent container for the application. This implementation
+         creates and returns a container, having loaded the store for the
+         application to it. This property is optional since there are legitimate
+         error conditions that could cause the creation of the store to fail.
+         */
+        let container = NSPersistentContainer(name: "DataModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    
+    
+    // MARK: - Core Data Saving support
+    
+    
+    
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
+    
+    func deleteContextData() {
+        let context = persistentContainer.viewContext
+
+        let playlistsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EMMediaPlaylist")
+        
+        do {
+            let fetchedPlaylists = try context.fetch(playlistsFetchRequest) as! [EMMediaPlaylist]
+            
+            for playlist in fetchedPlaylists {
+                context.delete(playlist)
+                print("DELETING PLAYLIST")
+            }
+            
+        } catch {
+            fatalError("Failed to fetch playlists: \(error)")
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print("\n\n COULDN'T SAVE CONTEXT \n\n")
+        }
+        
+    }
+
 
 }

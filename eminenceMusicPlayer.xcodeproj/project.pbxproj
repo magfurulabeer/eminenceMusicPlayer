@@ -20,6 +20,11 @@
 		8B51DFAE1D9F11BA004B1526 /* AlbumImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B51DFAC1D9F11BA004B1526 /* AlbumImageCell.xib */; };
 		8B51DFB01D9F11D3004B1526 /* AlbumImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B51DFAF1D9F11D3004B1526 /* AlbumImageCell.swift */; };
 		8B53F7C11D94FC6400778403 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53F7C01D94FC6400778403 /* MenuBar.swift */; };
+		8B5B2BE01E30B14300FCD155 /* MediaPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B2BDF1E30B14300FCD155 /* MediaPlaylist.swift */; };
+		8B5B2BE51E30B6A700FCD155 /* EMMediaItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B2BE11E30B6A700FCD155 /* EMMediaItem+CoreDataClass.swift */; };
+		8B5B2BE61E30B6A700FCD155 /* EMMediaItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B2BE21E30B6A700FCD155 /* EMMediaItem+CoreDataProperties.swift */; };
+		8B5B2BE71E30B6A700FCD155 /* EMMediaPlaylist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B2BE31E30B6A700FCD155 /* EMMediaPlaylist+CoreDataClass.swift */; };
+		8B5B2BE81E30B6A700FCD155 /* EMMediaPlaylist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B2BE41E30B6A700FCD155 /* EMMediaPlaylist+CoreDataProperties.swift */; };
 		8B63035C1DA58C3C00B255F3 /* PlaylistDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B63035B1DA58C3C00B255F3 /* PlaylistDetailsView.swift */; };
 		8B666C491D9E2E6B0011F78C /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B666C471D9E2E6B0011F78C /* AlbumCell.swift */; };
 		8B666C4A1D9E2E6B0011F78C /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B666C481D9E2E6B0011F78C /* AlbumCell.xib */; };
@@ -39,6 +44,7 @@
 		8B86D5211DA2C863000E03F5 /* MusicPlayerViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B86D5201DA2C863000E03F5 /* MusicPlayerViewController+Setup.swift */; };
 		8B86D5231DA2DC03000E03F5 /* MusicPlayerViewController+Transitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B86D5221DA2DC03000E03F5 /* MusicPlayerViewController+Transitioning.swift */; };
 		8BA8489D1E303CA000EE07EF /* MediaAccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8489C1E303CA000EE07EF /* MediaAccessViewController.swift */; };
+		8BA848C31E30953E00EE07EF /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8BA848C11E30953E00EE07EF /* DataModel.xcdatamodeld */; };
 		8BAEC9C61D9A446D00F41A74 /* SelectedSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAEC9C41D9A446D00F41A74 /* SelectedSongCell.swift */; };
 		8BAEC9C71D9A446D00F41A74 /* SelectedSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BAEC9C51D9A446D00F41A74 /* SelectedSongCell.xib */; };
 		8BAEC9D11D9A55DB00F41A74 /* ArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAEC9CF1D9A55DB00F41A74 /* ArtistCell.swift */; };
@@ -95,6 +101,11 @@
 		8B51DFAC1D9F11BA004B1526 /* AlbumImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumImageCell.xib; sourceTree = "<group>"; };
 		8B51DFAF1D9F11D3004B1526 /* AlbumImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumImageCell.swift; sourceTree = "<group>"; };
 		8B53F7C01D94FC6400778403 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		8B5B2BDF1E30B14300FCD155 /* MediaPlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaPlaylist.swift; sourceTree = "<group>"; };
+		8B5B2BE11E30B6A700FCD155 /* EMMediaItem+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EMMediaItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8B5B2BE21E30B6A700FCD155 /* EMMediaItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EMMediaItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8B5B2BE31E30B6A700FCD155 /* EMMediaPlaylist+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EMMediaPlaylist+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8B5B2BE41E30B6A700FCD155 /* EMMediaPlaylist+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EMMediaPlaylist+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8B63035B1DA58C3C00B255F3 /* PlaylistDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDetailsView.swift; sourceTree = "<group>"; };
 		8B666C471D9E2E6B0011F78C /* AlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		8B666C481D9E2E6B0011F78C /* AlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
@@ -114,6 +125,7 @@
 		8B86D5201DA2C863000E03F5 /* MusicPlayerViewController+Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MusicPlayerViewController+Setup.swift"; sourceTree = "<group>"; };
 		8B86D5221DA2DC03000E03F5 /* MusicPlayerViewController+Transitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MusicPlayerViewController+Transitioning.swift"; sourceTree = "<group>"; };
 		8BA8489C1E303CA000EE07EF /* MediaAccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaAccessViewController.swift; sourceTree = "<group>"; };
+		8BA848C21E30953E00EE07EF /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		8BAEC9C41D9A446D00F41A74 /* SelectedSongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedSongCell.swift; sourceTree = "<group>"; };
 		8BAEC9C51D9A446D00F41A74 /* SelectedSongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectedSongCell.xib; sourceTree = "<group>"; };
 		8BAEC9CF1D9A55DB00F41A74 /* ArtistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistCell.swift; sourceTree = "<group>"; };
@@ -188,6 +200,11 @@
 			isa = PBXGroup;
 			children = (
 				8BB1086D1D92FF5100CD2238 /* MusicManager.swift */,
+				8B5B2BE11E30B6A700FCD155 /* EMMediaItem+CoreDataClass.swift */,
+				8B5B2BE21E30B6A700FCD155 /* EMMediaItem+CoreDataProperties.swift */,
+				8B5B2BE31E30B6A700FCD155 /* EMMediaPlaylist+CoreDataClass.swift */,
+				8B5B2BE41E30B6A700FCD155 /* EMMediaPlaylist+CoreDataProperties.swift */,
+				8BA848C11E30953E00EE07EF /* DataModel.xcdatamodeld */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -198,6 +215,7 @@
 				8BB108471D92F39500CD2238 /* Info.plist */,
 				8B2C54D81D94645C005E1481 /* Constants.swift */,
 				8BB108391D92F39400CD2238 /* AppDelegate.swift */,
+				8B5B2BDF1E30B14300FCD155 /* MediaPlaylist.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -423,6 +441,7 @@
 			files = (
 				8B0BCC3B1DEF9B2700E40342 /* UIButton+title.swift in Sources */,
 				8B7DF8471DF94AAE006B8678 /* NowPlayingViewController.swift in Sources */,
+				8B5B2BE01E30B14300FCD155 /* MediaPlaylist.swift in Sources */,
 				8B51DFB01D9F11D3004B1526 /* AlbumImageCell.swift in Sources */,
 				8BDF965F1D94CC4700556AFB /* NowPlayingQuickBar+Actions.swift in Sources */,
 				8B6B0E6F1DA1EFF800B5FDA6 /* PreviewableDraggable.swift in Sources */,
@@ -441,7 +460,10 @@
 				8BAEC9D11D9A55DB00F41A74 /* ArtistCell.swift in Sources */,
 				8B32CAAA1DA24A6E00FF9FD3 /* AlbumsViewController.swift in Sources */,
 				8B6964FF1D97982D0037E13F /* LaunchViewController.swift in Sources */,
+				8B5B2BE81E30B6A700FCD155 /* EMMediaPlaylist+CoreDataProperties.swift in Sources */,
 				8B86D5231DA2DC03000E03F5 /* MusicPlayerViewController+Transitioning.swift in Sources */,
+				8B5B2BE61E30B6A700FCD155 /* EMMediaItem+CoreDataProperties.swift in Sources */,
+				8BA848C31E30953E00EE07EF /* DataModel.xcdatamodeld in Sources */,
 				8B2C54D71D946307005E1481 /* NowPlayingQuickBar.swift in Sources */,
 				8BDA47F71DA1A25800781755 /* Previewable.swift in Sources */,
 				8B32CAA61DA2404700FF9FD3 /* SongsViewController.swift in Sources */,
@@ -452,6 +474,7 @@
 				8B666C491D9E2E6B0011F78C /* AlbumCell.swift in Sources */,
 				8B32CAA41DA23C3E00FF9FD3 /* MenuViewController.swift in Sources */,
 				8B0BCC391DEF9AFE00E40342 /* TimeInterval+StringFormat.swift in Sources */,
+				8B5B2BE71E30B6A700FCD155 /* EMMediaPlaylist+CoreDataClass.swift in Sources */,
 				8B7DF8451DF94A9F006B8678 /* VolumeControllable.swift in Sources */,
 				8BB108891D936A8000CD2238 /* NowPlayingViewController+IBActions.swift in Sources */,
 				8B86D51D1DA2BD82000E03F5 /* MusicPlayerViewController.swift in Sources */,
@@ -462,6 +485,7 @@
 				8BE7446A1D93CBDF0014DE31 /* MPVolumeView+SliderAccess.swift in Sources */,
 				8BDA47FB1DA1B58800781755 /* IndexView.swift in Sources */,
 				8BB1086E1D92FF5100CD2238 /* MusicManager.swift in Sources */,
+				8B5B2BE51E30B6A700FCD155 /* EMMediaItem+CoreDataClass.swift in Sources */,
 				8B6964FC1D9784370037E13F /* SongCell.swift in Sources */,
 				8B86D51F1DA2C57D000E03F5 /* ViewControllerCollectionCell.swift in Sources */,
 				8BAEC9C61D9A446D00F41A74 /* SelectedSongCell.swift in Sources */,
@@ -643,6 +667,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8BA848C11E30953E00EE07EF /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8BA848C21E30953E00EE07EF /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 8BA848C21E30953E00EE07EF /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8BB1082E1D92F39400CD2238 /* Project object */;
 }

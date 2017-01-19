@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G31" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="EMMediaItem" representedClassName=".EMMediaItem" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EMMediaPlaylist" inverseName="items" inverseEntity="EMMediaPlaylist" syncable="YES"/>
+    </entity>
+    <entity name="EMMediaPlaylist" representedClassName=".EMMediaPlaylist" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="EMMediaItem" inverseName="playlist" inverseEntity="EMMediaItem" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="EMMediaItem" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="EMMediaPlaylist" positionX="-63" positionY="-18" width="128" height="75"/>
+    </elements>
+</model>

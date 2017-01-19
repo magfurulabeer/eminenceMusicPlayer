@@ -92,11 +92,25 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
         } else {
 
             let playlist = musicManager.playlistList[indexPath.row]
+            
+            var name = "Unnamed Playlist"
+            
+            if let mediaPlaylist = playlist as? MediaPlaylist {
+                name = mediaPlaylist.playlistName
+            } else {
+                name = playlist.value(forProperty: MPMediaPlaylistPropertyName) as? String ?? "Unnamed Playlist"
+            }
+            
             let cell =  tableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.backgroundColor = UIColor.clear
-            cell.textLabel?.text = playlist.value(forProperty: MPMediaPlaylistPropertyName) as? String
-            cell.detailTextLabel?.text = "\(playlist.count)"
+            cell.textLabel?.text = name
+            
+            if let mediaPlaylist = playlist as? MediaPlaylist {
+                cell.detailTextLabel?.text = "\(mediaPlaylist.playlistCount)"
+            } else {
+                cell.detailTextLabel?.text = "\(playlist.count)"
+            }
             return cell
         }
     }
@@ -121,7 +135,7 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
         }
         return "Playlists"
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
@@ -133,6 +147,27 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
         header.backgroundView?.backgroundColor = UIColor.clear
         header.textLabel?.textColor = UIColor.white
         header.textLabel?.font = UIFont(name: "Avenir", size: 25)
+        
+        if section == 0 {
+            let addButton = UIButton(type: UIButtonType.custom)
+            addButton.setImage(UIImage(named: "add"), for: UIControlState.normal)
+            addButton.setImage(UIImage(named: "add"), for: UIControlState.highlighted)
+            addButton.addTarget(self, action: #selector(addButtonTapped(sender:)), for: UIControlEvents.touchUpInside)
+            addButton.tag = 5
+            header.addSubview(addButton)
+            
+            addButton.translatesAutoresizingMaskIntoConstraints = false
+            addButton.centerYAnchor.constraint(equalTo: header.centerYAnchor).isActive = true
+            addButton.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -8).isActive = true
+            addButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            addButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        } else {
+            for subview in header.subviews {
+                if subview.tag == 5 {
+                    subview.removeFromSuperview()
+                }
+            }
+        }
 
     }
     
@@ -141,7 +176,15 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
         
         let playlist = musicManager.playlistList[indexPath.row]
         
-        if playlist.count > 0 {
+        var count = 0
+        
+        if let mediaPlaylist = playlist as? MediaPlaylist {
+            count = mediaPlaylist.playlistCount
+        } else {
+            count = playlist.count
+        }
+        
+        if count > 0 {
             let size = view.frame.size
             let rect = CGRect(x: topPadding, y: 0, width: size.width, height: size.height - topPadding - bottomPadding)
             let playlistDetails = PlaylistDetailsView(frame: rect)
@@ -170,6 +213,48 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
         let keyboardHeight = keyboardSize.cgRectValue.height
         
         view.frame.origin.y -= keyboardHeight
+    }
+    
+    func addButtonTapped(sender: UIButton) {
+        let alert = UIAlertController(title: "New Playlist", message: "What would you like to name this playlist?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addTextField(configurationHandler: nil)
+        
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (action) in
+            guard let textField = alert.textFields?.first else { return }
+            
+            if textField.text?.characters.count == 0 {
+                self.addButtonTapped(sender: sender)
+            } else {
+                var persistentItems = [EMMediaItem]()
+                
+                for (index, mediaItem) in self.musicManager.quickQueue.enumerated() {
+                    let item = EMMediaItem(context: self.musicManager.persistentContainer.viewContext)
+                    item.id = Int64(mediaItem.persistentID)
+                    item.index = Int32(index)
+                    
+                    persistentItems.append(item)
+                }
+                
+                let newPlaylist = EMMediaPlaylist(context: self.musicManager.persistentContainer.viewContext)
+                newPlaylist.items = NSOrderedSet(array: persistentItems)
+                newPlaylist.name = textField.text ?? "Unnamed Playlist"
+                
+                self.musicManager.saveContext()
+                
+                OperationQueue.main.addOperation {
+                    self.indexView.reload()
+                }
+            }
+            
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
     }
     
 }

@@ -61,6 +61,7 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
         setUpGradient()
         setUpMenuBar()
         setUpQuickBar()
+        
     }
     
     
