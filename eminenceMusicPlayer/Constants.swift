@@ -17,4 +17,4 @@ public let FauxBarHeight: CGFloat = 70
 public let QuickBarBackgroundColor: UIColor = UIColor(red: 42/255.0, green: 44/255.0, blue: 56/255.0, alpha: 1.0)
 public let SongCellHeight: CGFloat = 75
 public let HorizontalBarHeight: CGFloat = 2
-public let TimeOutDuration = 10.0
+public let TimeOutDuration = 5.0

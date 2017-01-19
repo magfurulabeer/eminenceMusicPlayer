@@ -139,7 +139,7 @@ class QuickQueueCell: UITableViewCell, UITableViewDataSource, UITableViewDelegat
     }
     
     func setQueue(indexPath:IndexPath) {
-        musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.originalSongList))
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.songList))
         musicManager.player.beginGeneratingPlaybackNotifications()
         musicManager.player.stop()
     }

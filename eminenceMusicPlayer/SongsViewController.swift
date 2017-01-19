@@ -162,7 +162,7 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
         
 //        print(song.artwork != nil)
         musicManager.player = MPMusicPlayerController.systemMusicPlayer()
-        musicManager.currentQueue = MPMediaItemCollection(items: musicManager.originalSongList)
+        musicManager.currentQueue = MPMediaItemCollection(items: musicManager.songList)
         musicManager.player.setQueue(with: musicManager.currentQueue!)
         musicManager.player.beginGeneratingPlaybackNotifications()
         musicManager.player.stop()
@@ -205,7 +205,7 @@ class SongsViewController: MenuViewController, UITableViewDelegate, UITableViewD
      - indexPath: IndexPath of the selected cell/item
      */
     func setQueue(indexPath:IndexPath) {
-        musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.originalSongList))
+        musicManager.player.setQueue(with: MPMediaItemCollection(items: musicManager.songList))
         musicManager.player.beginGeneratingPlaybackNotifications()
         musicManager.player.stop()
     }

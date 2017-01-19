@@ -25,14 +25,7 @@ class MusicManager: NSObject {
     
     /// This is the singleton shared instance.
     static let sharedManager = MusicManager()
-    
-    /// Returns all the songs.
-    var songList: [MPMediaItem]
-    
-    
-    
-    
-    
+
     /// The audio player.
     var player: MPMusicPlayerController
     
@@ -99,14 +92,13 @@ class MusicManager: NSObject {
     
     
     
-    /// A freshly queried song list
-    var originalSongList: [MPMediaItem] {
+    /// Returns all the songs.
+    var songList: [MPMediaItem] {
         get {
             var songItems = [MPMediaItem]()
             let songsQuery = MPMediaQuery.songs()
             
             guard let mediaItemCollections = songsQuery.collections else {
-                print("mediaItemCollections is nil")
                 songListIsEmpty = true
                 return []
             }
@@ -181,19 +173,12 @@ class MusicManager: NSObject {
      */
     private override init() {
         // FIXME: 'self.songList' not initialized at super.init call  -- Find a better way to solve this
-        self.songList = [MPMediaItem]()
         self.player = MPMusicPlayerController.systemMusicPlayer()
         self.playbackSpeed = 1.0
         self.shuffleIsOn = player.shuffleMode == MPMusicShuffleMode.songs
         super.init()
         
-        self.songList = self.originalSongList
         self.player.beginGeneratingPlaybackNotifications()
     }
-    
-    
-    /// Replaces saved list of songs with the original list of songs.
-    func refreshList() {
-        self.songList = self.originalSongList
-    }
+
 }

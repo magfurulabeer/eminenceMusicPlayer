@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MediaPlayer
 
 /// This view controller simulates an extension of the LaunchScreen. It segues into the actual music player view controller once the songs are loaded
 class LaunchViewController: UIViewController {
@@ -14,11 +15,6 @@ class LaunchViewController: UIViewController {
     
     
     // MARK: Properties
-    
-    
-    
-    /// Whether or not the view controller timed out
-    var timedOut = false
     
     // Reference to MusicManager singleton's shared instance
     let musicManager = MusicManager.sharedManager
@@ -36,21 +32,20 @@ class LaunchViewController: UIViewController {
     
     /// Uses a while loop to attempt to get songs. If it gets the songs, it segues to the music player. If no songs after a certain time, an alert is shown.
     override func viewDidAppear(_ animated: Bool) {
-        Timer.scheduledTimer(withTimeInterval: TimeOutDuration, repeats: false) { (timer) in
-            self.timedOut = true
-        }
-        while musicManager.songList.count == 0 && !timedOut {
-            musicManager.refreshList()
-        }
+
+        let _ = musicManager.songList // Asks for authorization on first launch
+        while MPMediaLibrary.authorizationStatus() == .notDetermined  {}
         
-        if timedOut {
-            let controller = UIAlertController(title: "Timed Out", message: "Error: No songs were found. Did you allow access to your songs?", preferredStyle: UIAlertControllerStyle.alert)
+        if MPMediaLibrary.authorizationStatus() == MPMediaLibraryAuthorizationStatus.authorized {
+            performSegue(withIdentifier: "StartAppSegue", sender: nil)
+        } else {
+            let controller = UIAlertController(title: "Error", message: "Cannot access music. Did you allow access to your music library?", preferredStyle: UIAlertControllerStyle.alert)
             let ok = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
             controller.addAction(ok)
             present(controller, animated: true, completion: nil)
-        } else {
-            performSegue(withIdentifier: "StartAppSegue", sender: nil)
         }
+        
+
     }
 
 
