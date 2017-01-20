@@ -13,4 +13,5 @@ class MediaPlaylist: MPMediaPlaylist {
     var playlistName = "Unnamed Playlist"
     var playlistCount = 0
     var songs = [MPMediaItem]()
+    var id: Int64 = 0
 }

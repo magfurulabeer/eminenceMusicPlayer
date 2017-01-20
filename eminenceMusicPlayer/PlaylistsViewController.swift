@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import CoreData
 
 // TODO: Share setUpIndexView code between the menuviewcontrollers
 
@@ -111,6 +112,14 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
             } else {
                 cell.detailTextLabel?.text = "\(playlist.count)"
             }
+            
+            if cell.tag == 0 {
+                let longpress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
+                longpress.minimumPressDuration = 0.5
+                cell.addGestureRecognizer(longpress)
+                cell.tag = 5
+            }
+            
             return cell
         }
     }
@@ -230,6 +239,7 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
                 
                 for (index, mediaItem) in self.musicManager.quickQueue.enumerated() {
                     let item = EMMediaItem(context: self.musicManager.persistentContainer.viewContext)
+                    print("PERSISTENT ID: \(mediaItem.persistentID)")
                     item.id = Int64(mediaItem.persistentID)
                     item.index = Int32(index)
                     
@@ -237,6 +247,7 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
                 }
                 
                 let newPlaylist = EMMediaPlaylist(context: self.musicManager.persistentContainer.viewContext)
+                newPlaylist.id = Int64(exactly: newPlaylist.hash)!
                 newPlaylist.items = NSOrderedSet(array: persistentItems)
                 newPlaylist.name = textField.text ?? "Unnamed Playlist"
                 
@@ -255,6 +266,56 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
         alert.addAction(cancel)
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    func handleLongPress(sender: UILongPressGestureRecognizer) {
+        print("HANDLE LONG PRESS");
+        let point = sender.location(in: indexView.view)
+        let indexPath = indexView.indexPathForCell(at: point)
+        let selectedPlaylist = musicManager.playlistList[indexPath!.row]
+        guard selectedPlaylist is MediaPlaylist else { return }
+
+        
+        let sheet = UIAlertController(title: "Actions", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let delete = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
+            guard let mediaPlaylist = selectedPlaylist as? MediaPlaylist else { return }
+            
+            let context = self.musicManager.persistentContainer.viewContext
+            
+            let playlistFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EMMediaPlaylist")
+            
+            print(mediaPlaylist.id)
+            playlistFetchRequest.predicate = NSPredicate(format: "id == %lli", mediaPlaylist.id)
+
+            
+            do {
+                let fetchedPlaylists = try context.fetch(playlistFetchRequest) as? [EMMediaPlaylist]
+
+                for list in fetchedPlaylists! {
+                    context.delete(list)
+                    print("DELETING PLAYLIST")
+                }
+            } catch {
+                fatalError("Failed to fetch playlists: \(error)")
+            }
+            
+            do {
+                try context.save()
+            } catch {
+                print("\n\n COULDN'T SAVE CONTEXT \n\n")
+            }
+            
+            OperationQueue.main.addOperation {
+                self.indexView.reload()
+            }
+        })
+        
+        sheet.addAction(delete)
+        
+        if selectedPlaylist is MediaPlaylist {
+            viewController?.present(sheet, animated: true, completion: nil)
+        }
+
     }
     
 }

@@ -172,6 +172,7 @@ class MusicManager: NSObject {
             
             do {
                 let fetchedPlaylists = try persistentContainer.viewContext.fetch(playlistsFetchRequest) as! [EMMediaPlaylist]
+
                 for playlist in fetchedPlaylists {
                     userMadePlaylists.append(playlist.playlist())
                 }

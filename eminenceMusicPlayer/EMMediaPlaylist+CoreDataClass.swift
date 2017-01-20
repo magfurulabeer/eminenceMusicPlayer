@@ -29,7 +29,7 @@ public class EMMediaPlaylist: NSManagedObject {
             
         }
         let list = MediaPlaylist(items: songs)
-
+        list.id = self.id
         list.playlistName = self.name ?? "Unnamed Playlist"
         list.playlistCount = self.items?.count ?? 0
         list.songs = songs
@@ -47,4 +47,5 @@ public class EMMediaPlaylist: NSManagedObject {
         }
         return song
     }
+
 }

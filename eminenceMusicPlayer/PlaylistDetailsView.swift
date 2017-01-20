@@ -109,6 +109,7 @@ class PlaylistDetailsView: UIView, UITableViewDelegate, UITableViewDataSource, P
             cell.albumImage = song?.artwork?.image(at: CGSize(width: SongCellHeight, height: SongCellHeight)) ?? #imageLiteral(resourceName: "NoAlbumImage")
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        
             return cell
     }
     
@@ -268,5 +269,7 @@ class PlaylistDetailsView: UIView, UITableViewDelegate, UITableViewDataSource, P
     func longPress(sender: UILongPressGestureRecognizer) {
         handleLongPress(sender: sender)
     }
+    
+    
 
 }
