@@ -255,6 +255,8 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
                 
                 OperationQueue.main.addOperation {
                     self.indexView.reload()
+                    self.musicManager.quickQueue.removeAll()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddedToQueue"), object: nil)
                 }
             }
             
@@ -269,9 +271,10 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
     }
     
     func handleLongPress(sender: UILongPressGestureRecognizer) {
-        print("HANDLE LONG PRESS");
         let point = sender.location(in: indexView.view)
         let indexPath = indexView.indexPathForCell(at: point)
+        
+        guard indexPath != nil else { return }
         let selectedPlaylist = musicManager.playlistList[indexPath!.row]
         guard selectedPlaylist is MediaPlaylist else { return }
 
@@ -293,7 +296,6 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
 
                 for list in fetchedPlaylists! {
                     context.delete(list)
-                    print("DELETING PLAYLIST")
                 }
             } catch {
                 fatalError("Failed to fetch playlists: \(error)")
@@ -310,8 +312,50 @@ class PlaylistsViewController: MenuViewController, UITableViewDelegate, UITableV
             }
         })
         
-        sheet.addAction(delete)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
+        let addToQuickQueue = UIAlertAction(title: "Add to Quick Queue", style: .default) { (action) in
+            
+            if let mediaPlaylist = selectedPlaylist as? MediaPlaylist {
+                self.musicManager.quickQueue.append(contentsOf: mediaPlaylist.songs)
+            } else {
+                self.musicManager.quickQueue.append(contentsOf: selectedPlaylist.items)
+            }
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddedToQueue"), object: nil)
+            
+            OperationQueue.main.addOperation {
+                self.indexView.reload()
+                if let tableView = self.indexView as? UITableView {
+                    tableView.setContentOffset(CGPoint.zero, animated: true)
+                }
+            }
+        }
+        
+        let replaceQuickQueue = UIAlertAction(title: "Replace Quick Queue", style: .default) { (action) in
+            
+            self.musicManager.quickQueue.removeAll()
+            if let mediaPlaylist = selectedPlaylist as? MediaPlaylist {
+                self.musicManager.quickQueue = mediaPlaylist.songs
+            } else {
+                self.musicManager.quickQueue = selectedPlaylist.items
+            }
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddedToQueue"), object: nil)
+            
+            OperationQueue.main.addOperation {
+                self.indexView.reload()
+                if let tableView = self.indexView as? UITableView {
+                    tableView.setContentOffset(CGPoint.zero, animated: true)
+                }
+                
+            }
+        }
+        
+        sheet.addAction(addToQuickQueue)
+        sheet.addAction(replaceQuickQueue)
+        sheet.addAction(delete)
+        sheet.addAction(cancel)
         if selectedPlaylist is MediaPlaylist {
             viewController?.present(sheet, animated: true, completion: nil)
         }
