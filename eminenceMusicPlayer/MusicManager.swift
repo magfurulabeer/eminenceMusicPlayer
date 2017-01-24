@@ -47,7 +47,8 @@ class MusicManager: NSObject {
     /// The current queue of songs playing.
     var currentQueue: MPMediaItemCollection?
     
-    
+    /// This cache contains images for artists
+    let cache = NSCache<NSString, UIImage>()
     
     // MARK: Previewable Properties
     // These properties are relied upon by the Previewable Protocol.
@@ -203,6 +204,7 @@ class MusicManager: NSObject {
         
         // This is for when a core data mistake is made by the developer
 //        deleteContextData()
+//        deleteContextArtists()
         self.player.beginGeneratingPlaybackNotifications()
     }
     
@@ -262,9 +264,8 @@ class MusicManager: NSObject {
     
     func deleteContextData() {
         let context = persistentContainer.viewContext
-
-        let playlistsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EMMediaPlaylist")
         
+        let playlistsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EMMediaPlaylist")
         do {
             let fetchedPlaylists = try context.fetch(playlistsFetchRequest) as! [EMMediaPlaylist]
             
@@ -277,6 +278,37 @@ class MusicManager: NSObject {
             fatalError("Failed to fetch playlists: \(error)")
         }
         
+        
+        
+        
+        let artistsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EMArtist")
+        do {
+            let fetchedArtists = try context.fetch(artistsFetchRequest) as! [EMArtist]
+            
+            for playlist in fetchedArtists {
+                context.delete(playlist)
+                print("DELETING ARTIST")
+            }
+            
+        } catch {
+            fatalError("Failed to fetch playlists: \(error)")
+        }
+        
+        let itemsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EMMediaItem")
+        
+        do {
+            let fetchedItems = try context.fetch(itemsFetchRequest) as! [EMArtist]
+            
+            for playlist in fetchedItems {
+                context.delete(playlist)
+                print("DELETING ITEM")
+            }
+            
+        } catch {
+            fatalError("Failed to fetch playlists: \(error)")
+        }
+        
+        
         do {
             try context.save()
         } catch {
@@ -284,6 +316,19 @@ class MusicManager: NSObject {
         }
         
     }
+//    
+//    func deleteContextArtists() {
+//        let context = persistentContainer.viewContext
+//        
+//        
+//        
+//        do {
+//            try context.save()
+//        } catch {
+//            print("\n\n COULDN'T SAVE CONTEXT \n\n")
+//        }
+//        
+//    }
 
 
 }

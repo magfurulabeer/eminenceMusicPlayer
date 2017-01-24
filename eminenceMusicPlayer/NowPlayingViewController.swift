@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import CoreData
 
 // TODO: When song starts, 00:01 is skipped and the timer starts it at 00:00
 class NowPlayingViewController: UIViewController, SeekbarDelegate, VolumeControllable {
@@ -79,6 +80,19 @@ class NowPlayingViewController: UIViewController, SeekbarDelegate, VolumeControl
         
         albumImageView.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
         albumImageView.layer.borderWidth = 1
+        
+        let artistFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EMArtist")
+        
+        do {
+            print("do statement")
+            let fetchedArtists = try musicManager.persistentContainer.viewContext.fetch(artistFetchRequest) as! [EMArtist]
+            for artist in fetchedArtists {
+                print("ARTIST: \(artist.id)")
+            }
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

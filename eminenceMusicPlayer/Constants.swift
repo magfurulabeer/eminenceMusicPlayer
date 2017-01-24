@@ -20,3 +20,9 @@ public let QuickBarBackgroundColor: UIColor = UIColor(red: 42/255.0, green: 44/2
 public let SongCellHeight: CGFloat = 75
 public let HorizontalBarHeight: CGFloat = 2
 public let TimeOutDuration = 5.0
+
+public func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
+}

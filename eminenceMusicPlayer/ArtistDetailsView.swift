@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import CoreData
 
 class ArtistDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, PreviewableDraggable {
 
@@ -16,6 +17,7 @@ class ArtistDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Pre
     let musicManager = MusicManager.sharedManager
     var artist: MPMediaItemCollection?
     weak var viewController: UIViewController?
+    var summaryIsHidden = true
     
     lazy var indexView: IndexView = {
         let tv = VolumeControllableTableView()
@@ -60,6 +62,7 @@ class ArtistDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Pre
         addSubview(indexView)
         indexView.register(UINib(nibName: "SongCell", bundle: Bundle.main), forCellReuseIdentifier: "SongCell")
         indexView.register(UINib(nibName: "AlbumImageCell", bundle: Bundle.main), forCellReuseIdentifier: "AlbumImageCell")
+        indexView.register(UINib(nibName: "ArtistHeaderCell", bundle: Bundle.main), forCellReuseIdentifier: "ArtistHeaderCell")
         indexView.separatorStyle = .none
         
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress(sender:)))
@@ -85,11 +88,61 @@ class ArtistDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Pre
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+//        ArtistHeaderCell
         if indexPath.row == 0 {
+            print(artist?.representativeItem?.artistPersistentID)
+            if let id = artist?.representativeItem?.artistPersistentID {
+                let artistFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EMArtist")
+                artistFetchRequest.predicate = NSPredicate(format: "id == %llu", id)
+                
+                do {
+                    let fetchedArtists = try musicManager.persistentContainer.viewContext.fetch(artistFetchRequest) as! [EMArtist]
+                    
+                    if let fetchedArtist = fetchedArtists.first {
+                        print("IF LET STATEMENT")
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "ArtistHeaderCell", for: indexPath) as! ArtistHeaderCell
+    
+//                        if let cachedImage = musicManager.cache.object(forKey: "\(id)" as NSString) {
+//                            print("CACHED IMAGE")
+//                            cell.artistImageView.image = cachedImage
+//                        }
+//
+                        print(id)
+                        let filename = getDocumentsDirectory().appendingPathComponent("\(id).png")
+                        if let data = try? Data(contentsOf: filename) {
+                            cell.artistImageView.image = UIImage(data: data)!
+                        } else {
+                            print("NO CACHED IMAGE")
+                            let albumImageSize = CGSize(width: frame.width, height: frame.width)
+                            cell.artistImageView.image = artist?.representativeItem?.artwork?.image(at: albumImageSize) ?? #imageLiteral(resourceName: "NoAlbumImage")
+                        }
+                        
+                        cell.bioLabel.text = fetchedArtist.summary ?? "NO SUMMARY FOUND"
+
+                        if summaryIsHidden {
+                            cell.bioLabel.isHidden = true
+                        } else {
+                            cell.bioLabel.isHidden = false
+                        }
+                        cell.bioLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+                        return cell
+                    } 
+                    
+                    
+                } catch {
+                    fatalError("Failed to fetch artist: \(error)")
+                }
+
+            }
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumImageCell", for: indexPath) as! AlbumImageCell
             let albumImageSize = CGSize(width: frame.width, height: frame.width)
             cell.albumImageView.image = artist?.representativeItem?.artwork?.image(at: albumImageSize) ?? #imageLiteral(resourceName: "NoAlbumImage")
             return cell
+            
+            
+            
         } else {
             let song = artist?.items[indexPath.item - 1]
             let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongCell
@@ -109,9 +162,11 @@ class ArtistDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Pre
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            let superView = superview
-            self.removeFromSuperview()
-            superView?.layoutIfNeeded()
+//            let superView = superview
+//            self.removeFromSuperview()
+//            superView?.layoutIfNeeded()
+            summaryIsHidden = !summaryIsHidden
+            tableView.reloadData()
         } else {
             musicManager.player.pause()
             musicManager.player.shuffleMode = MPMusicShuffleMode.off

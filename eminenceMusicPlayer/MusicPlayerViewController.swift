@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import CoreData
 
 /// This view controller is the main interface which the user will interact with. It's simply a collection view controller with the views of the 4 menu view controllers on each cell.
 class MusicPlayerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, QuickBarDelegate {
@@ -62,14 +63,18 @@ class MusicPlayerViewController: UICollectionViewController, UICollectionViewDel
         setUpMenuBar()
         setUpQuickBar()
         
+        let client = APIClient.shared
+        client.checkForUnexploredArtists()
+        client.downloadArtistData()
+
     }
-    
-    
-    
+
+
+
     // MARK: UIScrollViewDelegate Methods
-    
-    
-    
+
+
+
     /**
      Returns the Media Item that is about to be previewed.
      */
