@@ -81,17 +81,29 @@ class NowPlayingViewController: UIViewController, SeekbarDelegate, VolumeControl
         albumImageView.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
         albumImageView.layer.borderWidth = 1
         
-        let artistFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EMArtist")
+        albumImageView.isUserInteractionEnabled = true
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(albumImageWasDoubleTapped(sender:)))
+        doubleTap.numberOfTapsRequired = 2
+        albumImageView.addGestureRecognizer(doubleTap)
         
-        do {
-            print("do statement")
-            let fetchedArtists = try musicManager.persistentContainer.viewContext.fetch(artistFetchRequest) as! [EMArtist]
-            for artist in fetchedArtists {
-                print("ARTIST: \(artist.id)")
-            }
-        } catch {
-            fatalError("Failed to fetch employees: \(error)")
-        }
+//        let artistFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "EMArtist")
+//        
+//        do {
+//            print("do statement")
+//            let fetchedArtists = try musicManager.persistentContainer.viewContext.fetch(artistFetchRequest) as! [EMArtist]
+//            for artist in fetchedArtists {
+//                print("ARTIST: \(artist.id)")
+//            }
+//        } catch {
+//            fatalError("Failed to fetch employees: \(error)")
+//        }
+
+    }
+    
+    func albumImageWasDoubleTapped(sender: UITapGestureRecognizer) {
+        print("DOUBLE TAP")
+        guard let item = musicManager.itemNowPlaying else { return }
+        let artwork = item.artwork?.image(at: albumImageView.frame.size)
 
     }
     

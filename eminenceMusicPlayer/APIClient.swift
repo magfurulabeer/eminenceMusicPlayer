@@ -122,12 +122,18 @@ class APIClient {
         
         }
         
-        guard let summary = artistSummary as? String else {
+        guard let bio = artistSummary as? String else {
             return false
         }
         
 //        print("GUARD SUMMARY PASSED")
         
+        var summary = bio.replacingOccurrences(of: "<[^>]+>", with: "", options: String.CompareOptions.regularExpression, range: nil)
+        summary = summary.replacingOccurrences(of: "Read more on Last.fm", with: "")
+        
+        if summary.replacingOccurrences(of: " ", with: "") != "" {
+            summary = summary + "Read more on Last.fm"
+        }
         let artist = EMArtist(context: self.musicManager.persistentContainer.viewContext)
         artist.id = "\(persistentId)"
         artist.summary = summary
