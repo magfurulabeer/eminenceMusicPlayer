@@ -100,11 +100,11 @@ class NowPlayingViewController: UIViewController, SeekbarDelegate, VolumeControl
 
     }
     
+    // TODO: In the future, consider adding a lyrics api and showing lyrics here
     func albumImageWasDoubleTapped(sender: UITapGestureRecognizer) {
         print("DOUBLE TAP")
-        guard let item = musicManager.itemNowPlaying else { return }
-        let artwork = item.artwork?.image(at: albumImageView.frame.size)
-
+//        guard let item = musicManager.itemNowPlaying else { return }
+//        let artwork = item.artwork?.image(at: albumImageView.frame.size)
     }
     
     override func viewWillAppear(_ animated: Bool) {
