@@ -100,20 +100,12 @@ class ArtistDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, Pre
                     let fetchedArtists = try musicManager.persistentContainer.viewContext.fetch(artistFetchRequest) as! [EMArtist]
                     
                     if let fetchedArtist = fetchedArtists.first {
-                        print("IF LET STATEMENT")
                         let cell = tableView.dequeueReusableCell(withIdentifier: "ArtistHeaderCell", for: indexPath) as! ArtistHeaderCell
     
-//                        if let cachedImage = musicManager.cache.object(forKey: "\(id)" as NSString) {
-//                            print("CACHED IMAGE")
-//                            cell.artistImageView.image = cachedImage
-//                        }
-//
-                        print(id)
                         let filename = getDocumentsDirectory().appendingPathComponent("\(id).png")
                         if let data = try? Data(contentsOf: filename) {
                             cell.artistImageView.image = UIImage(data: data)!
                         } else {
-                            print("NO CACHED IMAGE")
                             let albumImageSize = CGSize(width: frame.width, height: frame.width)
                             cell.artistImageView.image = artist?.representativeItem?.artwork?.image(at: albumImageSize) ?? #imageLiteral(resourceName: "NoAlbumImage")
                         }
