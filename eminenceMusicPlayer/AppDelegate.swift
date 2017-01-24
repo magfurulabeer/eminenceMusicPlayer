@@ -22,7 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        } catch {
 //            print("AVAudioSession setup error")
 //        }
-        
+        if UserDefaults.standard.array(forKey: "ArtistsWithNoInformation") == nil {
+            UserDefaults.standard.set([String](), forKey: "ArtistsWithNoInformation")
+        }
+        UserDefaults.standard.synchronize()
         return true
     }
 

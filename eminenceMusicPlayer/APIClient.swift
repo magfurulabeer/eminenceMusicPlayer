@@ -18,7 +18,14 @@ class APIClient {
     static let shared = APIClient()
     
     var unexploredArtists = [MPMediaItemCollection]()
-
+    var unknownArtists = UserDefaults.standard.array(forKey: "ArtistsWithNoInformation") ?? [String]() {
+        didSet {
+            print("DID SET")
+            UserDefaults.standard.set(unknownArtists, forKey: "ArtistsWithNoInformation")
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
     func getArtistData(artistName: String, persistentId: UInt64) {
         print("getting artist \(artistName)")
         
@@ -36,7 +43,6 @@ class APIClient {
         }
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            print("In task")
             
             
             guard error == nil  else {
@@ -66,7 +72,9 @@ class APIClient {
             
             guard let json = jsonData as? [String : Any] else { return }
 
-            let savingWasSuccessful = self.saveArtistData(json: json, persistentId: persistentId)
+            let _ = self.saveArtistData(json: json, persistentId: persistentId)
+                
+
             self.unexploredArtists.removeFirst()
             self.downloadArtistData()
         }
@@ -75,8 +83,17 @@ class APIClient {
     }
     
     func saveArtistData(json: [String : Any], persistentId: UInt64) -> Bool {
-//        print("Saving artist")
-        guard let artistData = json["artist"] as? [String: Any] else { return false }
+        guard let artistData = json["artist"] as? [String: Any] else {
+            if let error = json["error"] as? Int {
+                if error == 6 {
+                    print("Adding \(persistentId) to Unknown Artists")
+                    var unknowns = unknownArtists
+                    unknowns.append("\(persistentId)")
+                    unknownArtists = unknowns
+                }
+            }
+            return false
+        }
         
         let artistBio = artistData["bio"] as? [String: Any]
         
@@ -113,13 +130,11 @@ class APIClient {
         artist.id = "\(persistentId)"
         artist.summary = summary
         
-        print("SUMMARY: \(artist.summary)")
         
         OperationQueue.main.addOperation {
             self.musicManager.saveContext()
         }
         
-        print("Saved \(persistentId)")
         return true
     }
     
@@ -139,8 +154,7 @@ class APIClient {
                 
                 let isSaved = fetchedArtists.contains(where: { (artist) -> Bool in
                     if let artist = artist as? EMArtist {
-                        print("ARTIST ID: \(artist.id)")
-                        print("REAL ID: \(id)")
+
                         return artist.id! == "\(id)"
                     } else {
                         return false
@@ -148,8 +162,12 @@ class APIClient {
                 })
                 
                 if !isSaved {
-                    print("ADDED ARTIST")
-                    self.unexploredArtists.append(artistCollection)
+                    let noInfoArray = UserDefaults.standard.array(forKey: "ArtistsWithNoInformation") as! [String]
+                    if !noInfoArray.contains("\(id)") {
+                        print("Added Artist")
+                        self.unexploredArtists.append(artistCollection)
+                    }
+                    
                 }
                 
             }
@@ -161,13 +179,11 @@ class APIClient {
     }
     
     func downloadArtistData() {
-        print(unexploredArtists)
         guard let artist = unexploredArtists.first else { return }
         
         let id = artist.representativeItem?.artistPersistentID
         
-        print(artist.representativeItem?.artist)
-        print(artist.representativeItem?.artistPersistentID)
+
         guard id != nil else { return }
 
         let artistName = artist.representativeItem?.artist ?? ""

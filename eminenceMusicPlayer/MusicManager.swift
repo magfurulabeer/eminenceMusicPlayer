@@ -204,7 +204,7 @@ class MusicManager: NSObject {
         
         // This is for when a core data mistake is made by the developer
 //        deleteContextData()
-//        deleteContextArtists()
+//        UserDefaults.standard.set([String](), forKey: "ArtistsWithNoInformation")
         self.player.beginGeneratingPlaybackNotifications()
     }
     
@@ -316,19 +316,7 @@ class MusicManager: NSObject {
         }
         
     }
-//    
-//    func deleteContextArtists() {
-//        let context = persistentContainer.viewContext
-//        
-//        
-//        
-//        do {
-//            try context.save()
-//        } catch {
-//            print("\n\n COULDN'T SAVE CONTEXT \n\n")
-//        }
-//        
-//    }
+
 
 
 }
