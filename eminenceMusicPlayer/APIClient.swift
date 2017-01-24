@@ -26,11 +26,18 @@ class APIClient {
         }
     }
     
+    func prepareArtistName(artistName: String) -> String {
+        var name = artistName.lowercased().folding(options: .diacriticInsensitive, locale: Locale.current)
+        name = name.replacingOccurrences(of: "lil ", with: "lil' ")
+        name = name.replacingOccurrences(of: " ", with: "")
+        return name
+    }
+    
     func getArtistData(artistName: String, persistentId: UInt64) {
         print("getting artist \(artistName)")
         
         // TODO: Figure out how to trim other characters like umlauts
-        let name = artistName.replacingOccurrences(of: " ", with: "")
+        let name = prepareArtistName(artistName: artistName)
         
         let urlComponent = "?method=artist.getinfo&artist=\(name)&format=json"
         let urlString = baseURL + urlComponent + "&api_key=\(apiKey)"
@@ -58,11 +65,6 @@ class APIClient {
             guard httpResponse.statusCode == 200 else {
                 print("Status code: (\(httpResponse.statusCode))")
                 
-//                if httpResponse.statusCode == 404 {
-//                    var updatedUnknowns = self.dataManager.unknownArtists
-//                    updatedUnknowns.append("\(persistentId)")
-//                    self.dataManager.unknownArtists = updatedUnknowns
-//                }
                 return
             }
             
